@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+:root {
+  --color-undip-blue: #003366;
+  --color-undip-light: #4A90D9;
+  --color-undip-accent: #0066CC;
+  --color-gold: #FFD700;
+  --color-tier-s: #FFD700;
+  --color-tier-a: #4CAF50;
+  --color-tier-b: #2196F3;
+  --color-tier-c: #FF9800;
+  --color-tier-d: #9E9E9E;
+  --color-bg: #F8FAFC;
+  --color-card: #FFFFFF;
+}
+
+@theme inline {
+  --color-undip-blue: #003366;
+  --color-undip-light: #4A90D9;
+  --color-undip-accent: #0066CC;
+  --color-gold: #FFD700;
+  --color-tier-s: #FFD700;
+  --color-tier-a: #4CAF50;
+  --color-tier-b: #2196F3;
+  --color-tier-c: #FF9800;
+  --color-tier-d: #9E9E9E;
+  --color-bg: #F8FAFC;
+  --color-card: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: #1a1a2e;
+}
+
+/* Tier Badge Styles */
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.025em;
+}
+
+.tier-s { background-color: #FFF8E1; color: #B8860B; border: 2px solid #FFD700; }
+.tier-a { background-color: #E8F5E9; color: #2E7D32; border: 2px solid #4CAF50; }
+.tier-b { background-color: #E3F2FD; color: #1565C0; border: 2px solid #2196F3; }
+.tier-c { background-color: #FFF3E0; color: #E65100; border: 2px solid #FF9800; }
+.tier-d { background-color: #F5F5F5; color: #616161; border: 2px solid #9E9E9E; }
+
+/* Progress bar animation */
+.progress-bar-fill {
+  transition: width 0.4s ease-in-out;
+}
+
+/* Card hover effects */
+.program-card {
+  transition: all 0.2s ease-in-out;
+}
+.program-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Score bar animation */
+.score-bar {
+  transition: width 0.6s ease-out;
+}
+
+/* Likert scale buttons */
+.likert-option {
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+.likert-option:hover {
+  transform: scale(1.05);
+}
+.likert-option.selected {
+  transform: scale(1.1);
+}
+
+/* Faculty accordion */
+.faculty-accordion-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
