@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
-    "test": "tsx src/lib/engine.test.ts"
+    "test": "tsx src/lib/engine.test.ts",
+    "test:navbar": "node scripts/test-navbar.js"
   },
   "dependencies": {
     "@capacitor/android": "7.6.10",

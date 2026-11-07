@@ -1,3 +1,6 @@
+@import "tailwindcss";
+@source "../**/*.{ts,tsx}";
+
 @font-face {
   font-family: 'Press Start 2P';
   font-style: normal;
@@ -21,8 +24,6 @@
   font-display: swap;
   src: url('/fonts/silkscreen-700.woff2') format('woff2');
 }
-
-@import "tailwindcss";
 
 :root {
   --navbar-h: 56px;
@@ -324,6 +325,109 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Navbar responsive priority rules and layout constraints */
+.navbar-desktop-nav {
+  display: none;
+}
+@media (min-width: 1200px) {
+  .navbar-desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+}
+@media (min-width: 1360px) {
+  .navbar-desktop-nav {
+    gap: 0.375rem;
+  }
+}
+
+.navbar-nav-link {
+  font-family: var(--font-pixel), monospace;
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  border-width: 2px;
+  transition: all 0.15s ease;
+  padding: 0.25rem 0.375rem;
+  font-size: 7.5px;
+  letter-spacing: -0.025em;
+}
+@media (min-width: 1536px) {
+  .navbar-nav-link {
+    padding: 0.3125rem 0.5rem;
+    font-size: 8px;
+    letter-spacing: normal;
+  }
+}
+
+.navbar-mobile-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 1200px) {
+  .navbar-mobile-toggle {
+    display: none !important;
+  }
+}
+
+.navbar-mobile-menu {
+  display: block;
+}
+@media (min-width: 1200px) {
+  .navbar-mobile-menu {
+    display: none !important;
+  }
+}
+
+.navbar-restart-text {
+  display: none;
+}
+@media (min-width: 1540px) {
+  .navbar-restart-text {
+    display: inline;
+  }
+}
+
+.navbar-sfx-text {
+  display: none;
+}
+@media (min-width: 1480px) {
+  .navbar-sfx-text {
+    display: inline;
+  }
+}
+
+.navbar-tagline {
+  display: none;
+}
+@media (min-width: 1680px) {
+  .navbar-tagline {
+    display: block;
+  }
+}
+
+.navbar-brand-mobile {
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 520px) {
+  .navbar-brand-mobile {
+    display: none !important;
+  }
+}
+
+.navbar-brand-desktop {
+  display: none;
+}
+@media (min-width: 520px) {
+  .navbar-brand-desktop {
+    display: flex;
+    align-items: center;
   }
 }
 
