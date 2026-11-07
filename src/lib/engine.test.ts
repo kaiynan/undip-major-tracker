@@ -7,7 +7,6 @@ import {
   calculateDimensionScores,
   getTier,
   cosineSimilarity,
-  DEFAULT_CONFIG,
 } from './engine';
 import { questions } from '../data/questions';
 import { faculties } from '../data/faculties';

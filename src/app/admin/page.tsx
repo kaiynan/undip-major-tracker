@@ -9,27 +9,35 @@ import { algorithmConfig } from '@/data/config';
 import { StudyProgram } from '@/data/types';
 import { TierBadge } from '@/components/ui/TierBadge';
 import {
-  Settings,
-  Database,
   HelpCircle,
   Search,
   ExternalLink,
-  ChevronRight,
   Code,
   Layers,
   Sliders,
-  CheckCircle2,
   AlertTriangle,
   Building2,
   GraduationCap,
   Download,
-  Info,
-  Sparkles,
-  BookOpen,
-  Compass,
+  Lock,
+  LogOut,
+  KeyRound,
 } from 'lucide-react';
 
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        return sessionStorage.getItem('admin_authenticated') === 'true';
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  });
+  const [passkeyInput, setPasskeyInput] = useState('');
+  const [passkeyError, setPasskeyError] = useState(false);
+
   const [activeTab, setActiveTab] = useState<'overview' | 'programs' | 'faculties' | 'questions' | 'weights'>('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFaculty, setSelectedFaculty] = useState('all');
@@ -68,6 +76,99 @@ export default function AdminPage() {
     URL.revokeObjectURL(url);
   };
 
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const correctKey = process.env.NEXT_PUBLIC_ADMIN_PASSKEY || 'undip2027';
+    if (passkeyInput.trim() === correctKey) {
+      try {
+        sessionStorage.setItem('admin_authenticated', 'true');
+      } catch {
+        // ignore
+      }
+      setIsAuthenticated(true);
+      setPasskeyError(false);
+    } else {
+      setPasskeyError(true);
+    }
+  };
+
+  const handleLogout = () => {
+    try {
+      sessionStorage.removeItem('admin_authenticated');
+    } catch {
+      // ignore
+    }
+    setIsAuthenticated(false);
+    setPasskeyInput('');
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-[#190E08] flex items-center justify-center p-4 border-t-2 border-[#78350F]">
+        <div className="w-full max-w-md bg-[#24130C] border-2 border-[#78350F] rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.6)] text-center space-y-6">
+          <div className="mx-auto w-16 h-16 rounded-2xl bg-[#78350F]/40 border-2 border-[#F59E0B] flex items-center justify-center text-[#FDE68A]">
+            <Lock className="w-8 h-8" />
+          </div>
+
+          <div>
+            <span className="text-[11px] font-bold text-[#FDE68A] bg-[#78350F] border border-[#F59E0B] px-3 py-1 rounded-full uppercase tracking-wider">
+              Akses Terbatas
+            </span>
+            <h1 className="text-xl sm:text-2xl font-extrabold text-[#FFFBEB] mt-3">
+              Admin & Data Registry
+            </h1>
+            <p className="text-xs text-amber-200/80 mt-1.5 leading-relaxed">
+              Masukkan kunci akses administrator untuk mengelola konfigurasi HMIM dan basis data prodi.
+            </p>
+          </div>
+
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="relative">
+              <KeyRound className="w-4 h-4 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="password"
+                value={passkeyInput}
+                onChange={(e) => {
+                  setPasskeyInput(e.target.value);
+                  if (passkeyError) setPasskeyError(false);
+                }}
+                placeholder="Kunci Akses Admin (default: undip2027)"
+                aria-label="Kunci Akses Admin"
+                className={`w-full bg-[#190E08] border ${
+                  passkeyError ? 'border-red-500 ring-1 ring-red-500' : 'border-[#78350F]'
+                } text-slate-100 placeholder:text-amber-200/40 text-xs sm:text-sm rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:border-[#F59E0B] focus:ring-1 focus:ring-[#F59E0B]`}
+                autoFocus
+              />
+            </div>
+
+            {passkeyError && (
+              <p className="text-xs text-red-400 flex items-center justify-center gap-1.5">
+                <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                <span>Kunci akses tidak sesuai. Silakan coba lagi.</span>
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full py-3 px-4 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-slate-950 font-bold text-xs sm:text-sm rounded-xl transition-all shadow-[0_4px_12px_rgba(245,158,11,0.3)] min-h-[44px] cursor-pointer"
+            >
+              Buka Akses Admin
+            </button>
+          </form>
+
+          <div className="pt-2 border-t border-[#78350F]/60">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center text-xs font-semibold text-amber-300 hover:text-amber-200 transition-colors py-2"
+            >
+              ← Kembali ke Beranda
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#190E08] pb-24 pt-6 text-slate-100 border-t-2 border-[#78350F]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
@@ -94,10 +195,20 @@ export default function AdminPage() {
           <div className="flex items-center gap-2.5 shrink-0">
             <button
               onClick={handleExportJSON}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] rounded-xl text-xs font-bold transition-colors cursor-pointer border border-[#78350F]"
+              aria-label="Ekspor Database JSON"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] rounded-xl text-xs font-bold transition-colors cursor-pointer border border-[#78350F] min-h-[44px]"
             >
               <Download className="w-3.5 h-3.5 text-[#F59E0B]" />
               <span>Ekspor Database (JSON)</span>
+            </button>
+            <button
+              onClick={handleLogout}
+              aria-label="Kunci Akses Admin"
+              className="inline-flex items-center gap-1.5 px-3 py-2.5 bg-[#190E08] hover:bg-red-950/60 text-amber-200/90 hover:text-red-300 rounded-xl text-xs font-bold transition-colors cursor-pointer border border-[#78350F] min-h-[44px]"
+              title="Kunci Akses Admin"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>Keluar</span>
             </button>
           </div>
         </div>

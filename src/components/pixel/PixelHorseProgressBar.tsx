@@ -1,7 +1,23 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useSyncExternalStore } from 'react';
 import { PixelDiponegoroStatue } from './PixelDiponegoroStatue';
+
+function subscribeReducedMotion(callback: () => void) {
+  if (typeof window === 'undefined') return () => {};
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', callback);
+  return () => mq.removeEventListener('change', callback);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
 
 interface PixelHorseProgressBarProps {
   answeredCount: number;
@@ -24,17 +40,11 @@ export function PixelHorseProgressBar({
   isAdvancing = false,
   isGallopingAway = false,
 }: PixelHorseProgressBarProps) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mq.matches);
-      const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-      mq.addEventListener('change', listener);
-      return () => mq.removeEventListener('change', listener);
-    }
-  }, []);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
 
   // Calculate actual completion percentage strictly: (Answered / 36) * 100
   const progressPercentage = Math.min(100, Math.max(0, Math.round((answeredCount / totalQuestions) * 100)));

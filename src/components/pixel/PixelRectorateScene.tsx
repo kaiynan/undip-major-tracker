@@ -2,13 +2,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { retroAudio } from '@/lib/retroAudio';
 import { PixelButton } from './PixelUiComponents';
 import {
-  Compass,
   ArrowRight,
-  Sparkles,
   ChevronDown,
   Layers,
   CheckCircle2,
@@ -20,7 +17,6 @@ import {
   Anchor,
   BookOpen,
 } from 'lucide-react';
-import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 
 const ACADEMIC_DOMAINS = [
   {
@@ -93,8 +89,6 @@ interface PixelRectorateSceneProps {
 }
 
 export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProps) {
-  const router = useRouter();
-  const { answeredCount, totalQuestions } = useQuestionnaire();
   const [activeDomainTab, setActiveDomainTab] = useState(0);
   const [showDomainExplorer, setShowDomainExplorer] = useState(false);
 
@@ -235,7 +229,7 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
             {/* Left Wing Horizontal Floor Bands & Vertical Colonnade */}
             {Array.from({ length: 4 }).map((_, r) => (
               <g key={`l-win-row-${r}`}>
-                <rect x="150" y="222 + r * 25" width="290" height="2" fill="#CBD5E1" />
+                <rect x="150" y={222 + r * 25} width="290" height="2" fill="#CBD5E1" />
                 {Array.from({ length: 9 }).map((_, c) => (
                   <rect
                     key={`l-win-${r}-${c}`}
@@ -259,7 +253,7 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
             {/* Right Wing Horizontal Floor Bands & Windows */}
             {Array.from({ length: 4 }).map((_, r) => (
               <g key={`r-win-row-${r}`}>
-                <rect x="760" y="222 + r * 25" width="290" height="2" fill="#CBD5E1" />
+                <rect x="760" y={222 + r * 25} width="290" height="2" fill="#CBD5E1" />
                 {Array.from({ length: 9 }).map((_, c) => (
                   <rect
                     key={`r-win-${r}-${c}`}

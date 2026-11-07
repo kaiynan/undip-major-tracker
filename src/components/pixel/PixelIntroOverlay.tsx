@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import { PixelGateScene } from './PixelGateScene';
 import { retroAudio } from '@/lib/retroAudio';
 import { FastForward } from 'lucide-react';
@@ -12,7 +13,6 @@ interface PixelIntroOverlayProps {
 
 export function PixelIntroOverlay({
   onComplete,
-  forcePlay = false,
 }: PixelIntroOverlayProps) {
   // Step 0: Loading
   // Step 1: Wide establishing shot (Gate with distant Horse Statue centered)
@@ -21,6 +21,22 @@ export function PixelIntroOverlay({
   const [frame, setFrame] = useState<0 | 1 | 2 | 3>(0);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [loadingProgress, setLoadingProgress] = useState(0);
+
+  const handleComplete = useCallback(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        sessionStorage.setItem('undip_intro_seen', 'true');
+      } catch {
+        // Sandboxed WebView fallback
+      }
+    }
+    onComplete();
+  }, [onComplete]);
+
+  const handleSkip = useCallback(() => {
+    retroAudio.playSelect();
+    handleComplete();
+  }, [handleComplete]);
 
   useEffect(() => {
     // Keyboard Escape or Space to skip intro
@@ -32,7 +48,7 @@ export function PixelIntroOverlay({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [handleSkip]);
 
   useEffect(() => {
     // Frame 0: Loading bar (0 to 1.1s)
@@ -78,23 +94,7 @@ export function PixelIntroOverlay({
       clearTimeout(t3);
       clearTimeout(t4);
     };
-  }, []);
-
-  const handleSkip = () => {
-    retroAudio.playSelect();
-    handleComplete();
-  };
-
-  const handleComplete = () => {
-    if (typeof window !== 'undefined') {
-      try {
-        sessionStorage.setItem('undip_intro_seen', 'true');
-      } catch {
-        // Sandboxed WebView fallback
-      }
-    }
-    onComplete();
-  };
+  }, [handleComplete]);
 
   return (
     <div
@@ -135,27 +135,36 @@ export function PixelIntroOverlay({
             <div className="flex items-center justify-center gap-4 sm:gap-7 mb-2">
               {/* 1. Universitas Diponegoro (UNDIP) */}
               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-                <img
+                <Image
                   src="/images/logos/undip.png"
                   alt="Universitas Diponegoro"
+                  width={96}
+                  height={96}
+                  priority
                   className="max-w-full max-h-full object-contain"
                 />
               </div>
 
               {/* 2. Sedulur Serang Diponegoro */}
               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-                <img
+                <Image
                   src="/images/logos/sedulur-serang-diponegoro.png"
                   alt="Sedulur Serang Diponegoro"
+                  width={96}
+                  height={96}
+                  priority
                   className="max-w-full max-h-full object-contain"
                 />
               </div>
 
               {/* 3. Gema Saujana */}
               <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-                <img
+                <Image
                   src="/images/logos/gema-saujana.png"
                   alt="Gema Saujana"
+                  width={96}
+                  height={96}
+                  priority
                   className="max-w-full max-h-full object-contain"
                 />
               </div>

@@ -22,7 +22,6 @@ export function PixelDiponegoroStatue({
   // Unified Full-White Stone Monument Palette
   // Pure highlights, warm ivory golden-hour rim, light grays, medium slate shadows for form depth
   const stoneWhite = '#FFFFFF';
-  const stoneIvory = '#FFFBEB';
   const stoneLight = '#F8FAFC';
   const stoneMid = '#E2E8F0';
   const stoneShade = '#CBD5E1';
@@ -32,7 +31,6 @@ export function PixelDiponegoroStatue({
   // Golden-hour sunset specular rim & ambient reflection
   const goldenRim = '#FEF3C7';
   const goldenHighlight = '#FDE68A';
-  const goldenGlow = '#F59E0B';
 
   return (
     <g className={`pixel-diponegoro-statue ${className}`}>

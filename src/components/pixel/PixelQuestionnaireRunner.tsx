@@ -1,7 +1,23 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useSyncExternalStore } from 'react';
 import { PixelDiponegoroStatue } from './PixelDiponegoroStatue';
+
+function subscribeReducedMotion(callback: () => void) {
+  if (typeof window === 'undefined') return () => {};
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', callback);
+  return () => mq.removeEventListener('change', callback);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
 
 interface PixelQuestionnaireBackgroundProps {
   isAdvancing?: boolean;
@@ -15,17 +31,11 @@ interface PixelQuestionnaireBackgroundProps {
  * High visual contrast and dark vignette overlay ensure zero disturbance to text readability.
  */
 export function PixelQuestionnaireBackground({ isAdvancing = false }: PixelQuestionnaireBackgroundProps) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mq.matches);
-      const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-      mq.addEventListener('change', listener);
-      return () => mq.removeEventListener('change', listener);
-    }
-  }, []);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
 
   return (
     <div
@@ -197,17 +207,11 @@ export function PixelQuestionnaireHorseHeader({
   totalQuestions,
   isAdvancing = false,
 }: PixelQuestionnaireHorseHeaderProps) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mq.matches);
-      const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-      mq.addEventListener('change', listener);
-      return () => mq.removeEventListener('change', listener);
-    }
-  }, []);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
 
   return (
     <div className="w-full h-24 sm:h-28 rounded-2xl sm:rounded-3xl border-2 border-[#78350F] bg-[#1A0E08] overflow-hidden relative shadow-[0_4px_20px_rgba(0,0,0,0.5)] mb-6 select-none pixelated">

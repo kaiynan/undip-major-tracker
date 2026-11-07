@@ -1,25 +1,16 @@
 'use client';
 
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import {
   campusFacultyLocations,
-  campusLandmarks,
-  CampusFacultyLocation,
 } from '@/data/campusLocations';
 import { FacultyBuildingIllustration } from './PixelFacultyBuildings';
-import { faculties } from '@/data/faculties';
 import { FacultyScore } from '@/data/types';
 import {
   Compass,
-  Maximize2,
-  Minimize2,
   ZoomIn,
   ZoomOut,
   RotateCcw,
-  Building2,
-  MapPin,
-  Sparkles,
-  Info,
 } from 'lucide-react';
 
 interface PixelCampusMapProps {
@@ -35,7 +26,6 @@ export function PixelCampusMap({
   selectedFacultyId,
   onSelectFaculty,
   facultyScores = [],
-  mode = 'overview',
   className = '',
   heightClass = 'h-[440px] sm:h-[540px] md:h-[620px]',
 }: PixelCampusMapProps) {
@@ -43,6 +33,14 @@ export function PixelCampusMap({
   const [userZoom, setUserZoom] = useState<number>(1);
   const [manualPan, setManualPan] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [hoveredFacultyId, setHoveredFacultyId] = useState<string | null>(null);
+
+  // Reset zoom & pan during render when faculty changes
+  const [prevFacultyId, setPrevFacultyId] = useState<string | null>(selectedFacultyId);
+  if (prevFacultyId !== selectedFacultyId) {
+    setPrevFacultyId(selectedFacultyId);
+    setUserZoom(1);
+    setManualPan({ x: 0, y: 0 });
+  }
 
   // Score lookup map
   const scoreMap = useMemo(() => {
@@ -57,12 +55,6 @@ export function PixelCampusMap({
   const selectedLocation = useMemo(() => {
     if (!selectedFacultyId) return null;
     return campusFacultyLocations.find((loc) => loc.id === selectedFacultyId) || null;
-  }, [selectedFacultyId]);
-
-  // Reset zoom & pan when faculty changes or cleared
-  useEffect(() => {
-    setUserZoom(1);
-    setManualPan({ x: 0, y: 0 });
   }, [selectedFacultyId]);
 
   // Map dimensions
