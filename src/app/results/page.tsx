@@ -92,8 +92,16 @@ export default function ResultsPage() {
   const dragStartYRef = useRef(0);
   const dragStartPosRef = useRef<SheetPosition>('half');
 
-  // Initial state modal (when answeredCount === 0 or incomplete)
-  const [isIncompleteModalOpen, setIsIncompleteModalOpen] = useState(true);
+  // Initial state modal (when answeredCount === 0 or incomplete; bypassed if viewing next-steps guide)
+  const [isIncompleteModalOpen, setIsIncompleteModalOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('tab') === 'next-steps' || window.location.hash === '#langkah-selanjutnya') {
+        return false;
+      }
+    }
+    return true;
+  });
 
   // Retake confirmation modal state
   const [isRetakeModalOpen, setIsRetakeModalOpen] = useState(false);
@@ -190,8 +198,9 @@ export default function ResultsPage() {
   // =========================================================================
   // INITIAL STATE: When user has not completed questionnaire (answeredCount === 0)
   // Display the Full-Screen Campus Map immediately with the Redesigned Incomplete Pop-Up
+  // (Bypassed if user is viewing Langkah Selanjutnya tab)
   // =========================================================================
-  if (answeredCount === 0 || programScores.length === 0) {
+  if ((answeredCount === 0 || programScores.length === 0) && activeTab !== 'next-steps') {
     return (
       <div className="relative w-full max-w-full h-screen overflow-hidden bg-slate-900 select-none">
         {/* Full-Screen Interactive Campus Map as the Living Environment */}
