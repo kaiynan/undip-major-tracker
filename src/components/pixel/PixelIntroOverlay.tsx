@@ -88,9 +88,9 @@ export function PixelIntroOverlay({
   }, [handleSkip]);
 
   useEffect(() => {
-    // Frame 0: Loading bar with ease-out timing, reaches 100% around ~2.1s
+    // Frame 1: Loading bar with ease-out timing, reaches 100% at ~1.5s (total duration 1.65s)
     const startTime = Date.now();
-    const loadDuration = 2100;
+    const loadDuration = 1500;
 
     const loadInterval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -103,31 +103,31 @@ export function PixelIntroOverlay({
         const progress = Math.min(99, Math.floor(100 * Math.pow(factor, 0.75)));
         setLoadingProgress(progress);
       }
-    }, 40);
+    }, 30);
 
-    // Frame 1: Gate reveal at 2.3s (Frame 1 lasts ~2.3s >= 2.2s required)
+    // Frame 2: Gate reveal at 1.65s (Frame 1 reduced ~28% to 1.65s, within 1.5-1.8s)
     const t1 = setTimeout(() => {
       setFrame(1);
       setZoomLevel(1);
       retroAudio.playBlip(520);
-    }, 2300);
+    }, 1650);
 
-    // Frame 2: Smooth camera tracking push towards the horse statue at 3.7s
+    // Frame 3: Smooth camera tracking push towards the horse statue (duration 1.4s unchanged)
     const t2 = setTimeout(() => {
       setFrame(2);
       setZoomLevel(2.8);
       retroAudio.playWarp();
-    }, 3700);
+    }, 3050);
 
-    // Frame 3: Transition Wipe at 5.7s
+    // Transition Wipe into landing page (duration 2.0s unchanged)
     const t3 = setTimeout(() => {
       setFrame(3);
-    }, 5700);
+    }, 5050);
 
-    // Complete at 6.4s
+    // Complete intro at 5.75s
     const t4 = setTimeout(() => {
       handleComplete();
-    }, 6400);
+    }, 5750);
 
     return () => {
       clearInterval(loadInterval);
