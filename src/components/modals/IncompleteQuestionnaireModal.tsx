@@ -10,7 +10,6 @@ interface IncompleteQuestionnaireModalProps {
   onClose: () => void;
   answeredCount: number;
   totalQuestions: number;
-  onLoadSampleProfile?: (category: 'engineering' | 'medical' | 'business' | 'humanities') => void;
 }
 
 /**
@@ -22,7 +21,6 @@ interface IncompleteQuestionnaireModalProps {
  * - Description adapts depending on whether respondent has started or has 0 answers.
  * - Primary Button: "Mulai Kuisioner" or "Lanjutkan Kuisioner (X/36 Soal)".
  * - Secondary Button: "Jelajahi Peta Dahulu (Tutup Panel)" to explore the full-screen campus map.
- * - Instant profile simulation triggers.
  * - Zero fabricated scores or ranking cards.
  */
 export function IncompleteQuestionnaireModal({
@@ -30,7 +28,6 @@ export function IncompleteQuestionnaireModal({
   onClose,
   answeredCount,
   totalQuestions,
-  onLoadSampleProfile,
 }: IncompleteQuestionnaireModalProps) {
   const hasStarted = answeredCount > 0;
 
@@ -107,45 +104,6 @@ export function IncompleteQuestionnaireModal({
           <Eye className="w-4 h-4 text-[#F59E0B]" />
           <span>Jelajahi Peta Dahulu (Tutup Panel)</span>
         </button>
-
-        {/* Instant Sample Profile Simulators */}
-        {onLoadSampleProfile && (
-          <div className="pt-4 border-t border-[#78350F]/70">
-            <span className="text-[11px] font-bold text-amber-200/70 uppercase tracking-wider block mb-2.5">
-              Atau Coba Simulasi Instan Profil Minat:
-            </span>
-            <div className="flex flex-wrap justify-center gap-2">
-              <button
-                onClick={() => onLoadSampleProfile('engineering')}
-                aria-label="Coba profil minat teknik"
-                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-blue-300 rounded-xl border border-blue-500/50 hover:bg-blue-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
-              >
-                Teknik
-              </button>
-              <button
-                onClick={() => onLoadSampleProfile('medical')}
-                aria-label="Coba profil minat kedokteran"
-                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-emerald-300 rounded-xl border border-emerald-500/50 hover:bg-emerald-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
-              >
-                Kedokteran
-              </button>
-              <button
-                onClick={() => onLoadSampleProfile('business')}
-                aria-label="Coba profil minat bisnis"
-                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-amber-300 rounded-xl border border-amber-500/50 hover:bg-amber-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
-              >
-                Bisnis
-              </button>
-              <button
-                onClick={() => onLoadSampleProfile('humanities')}
-                aria-label="Coba profil minat humaniora"
-                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-purple-300 rounded-xl border border-purple-500/50 hover:bg-purple-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
-              >
-                Humaniora
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </Modal>
   );

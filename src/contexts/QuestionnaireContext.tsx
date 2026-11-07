@@ -22,7 +22,6 @@ interface QuestionnaireContextType {
   answers: UserAnswers;
   setAnswer: (questionId: number, value: number) => void;
   resetAnswers: () => void;
-  loadSampleProfile: (type: 'engineering' | 'medical' | 'business' | 'humanities' | 'marine') => void;
   answeredCount: number;
   totalQuestions: number;
   progressPercentage: number;
@@ -238,58 +237,12 @@ export function QuestionnaireProvider({ children }: { children: ReactNode }) {
     return programScores.find((p) => p.programId === programId);
   };
 
-  const loadSampleProfile = (type: 'engineering' | 'medical' | 'business' | 'humanities' | 'marine') => {
-    const sample: UserAnswers = {};
-
-    questions.forEach((q) => {
-      let score = 3; // neutral default
-      if (type === 'engineering') {
-        if (q.subdimension === 'R' || q.subdimension === 'I') score = 5;
-        else if (q.subdimension === 'D1' || q.subdimension === 'D5') score = 5;
-        else if (q.subdimension === 'D4') score = 4;
-        else if (q.subdimension === 'analytical' || q.subdimension === 'experimental' || q.subdimension === 'design') score = 5;
-        else if (q.subdimension === 'lab_engineering' || q.subdimension === 'computation') score = 5;
-        else score = 2;
-      } else if (type === 'medical') {
-        if (q.subdimension === 'I' || q.subdimension === 'S') score = 5;
-        else if (q.subdimension === 'D3') score = 5;
-        else if (q.subdimension === 'D2') score = 4;
-        else if (q.subdimension === 'human' || q.subdimension === 'experimental' || q.subdimension === 'research') score = 5;
-        else if (q.subdimension === 'health_clinical') score = 5;
-        else score = 2;
-      } else if (type === 'business') {
-        if (q.subdimension === 'E' || q.subdimension === 'C') score = 5;
-        else if (q.subdimension === 'D6') score = 5;
-        else if (q.subdimension === 'D4') score = 4;
-        else if (q.subdimension === 'business' || q.subdimension === 'communication') score = 5;
-        else if (q.subdimension === 'business_finance') score = 5;
-        else score = 2;
-      } else if (type === 'humanities') {
-        if (q.subdimension === 'A' || q.subdimension === 'S') score = 5;
-        else if (q.subdimension === 'D12' || q.subdimension === 'D8') score = 5;
-        else if (q.subdimension === 'communication' || q.subdimension === 'human' || q.subdimension === 'research') score = 5;
-        else if (q.subdimension === 'creative_cultural' || q.subdimension === 'social_research') score = 5;
-        else score = 2;
-      } else if (type === 'marine') {
-        if (q.subdimension === 'R' || q.subdimension === 'I') score = 5;
-        else if (q.subdimension === 'D11' || q.subdimension === 'D2') score = 5;
-        else if (q.subdimension === 'field' || q.subdimension === 'experimental') score = 5;
-        else if (q.subdimension === 'env_marine') score = 5;
-        else score = 2;
-      }
-      sample[q.id] = score;
-    });
-
-    setAnswers(sample);
-  };
-
   return (
     <QuestionnaireContext.Provider
       value={{
         answers,
         setAnswer,
         resetAnswers,
-        loadSampleProfile,
         answeredCount,
         totalQuestions,
         progressPercentage,

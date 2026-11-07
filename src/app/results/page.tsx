@@ -53,7 +53,6 @@ export default function ResultsPage() {
     toggleComparison,
     clearComparison,
     getScoreForProgram,
-    loadSampleProfile,
   } = useQuestionnaire();
 
   // Active view tab: Output 1 (all majors) vs Output 2 (faculties)
@@ -187,7 +186,6 @@ export default function ResultsPage() {
           onClose={() => setIsIncompleteModalOpen(false)}
           answeredCount={answeredCount}
           totalQuestions={totalQuestions}
-          onLoadSampleProfile={loadSampleProfile}
         />
 
         {/* Minimized floating pill when pop-up is dismissed to explore map */}
