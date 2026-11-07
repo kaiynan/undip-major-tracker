@@ -6,7 +6,7 @@ const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 async function runNavbarTests() {
   console.log(`🚀 Running automated Navbar overlap & responsiveness verification (320px to 2560px, step 20px) against ${BASE_URL}...`);
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
-  const routes = ['/', '/results'];
+  const routes = ['/', '/results', '/program-studi'];
   let totalChecks = 0;
   let failures = 0;
 

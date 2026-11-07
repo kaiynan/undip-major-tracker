@@ -18,7 +18,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'patung-kuda', label: 'PATUNG KUDA', href: '/#patung-kuda' },
   { id: 'cara-kerja', label: 'CARA KERJA', href: '/#cara-kerja' },
   { id: 'tentang-kami', label: 'TENTANG KAMI', href: '/#tentang-kami' },
-  { id: 'jelajahi', label: '67 PRODI', href: '/results' },
+  { id: 'jelajahi', label: 'DAFTAR PROGRAM STUDI', href: '/program-studi' },
   { id: 'admin', label: 'ALGORITMA HMIM', href: '/admin' },
 ];
 
@@ -73,7 +73,7 @@ export function Navbar() {
   };
 
   const getInitialActive = (path: string): 'beranda' | 'patung-kuda' | 'cara-kerja' | 'jelajahi' | 'tentang-kami' | 'admin' => {
-    if (path === '/results' || path.startsWith('/program/')) return 'jelajahi';
+    if (path === '/program-studi' || path.startsWith('/program/')) return 'jelajahi';
     if (path === '/admin') return 'admin';
     if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash.replace('#', '');
@@ -225,7 +225,14 @@ export function Navbar() {
                         : 'bg-[#2A160E] text-amber-100/80 border-[#78350F] hover:text-white hover:bg-[#3D1F13]'
                     }`}
                   >
-                    {item.label}
+                    {item.id === 'jelajahi' ? (
+                      <span>
+                        <span className="hidden min-[1380px]:inline">DAFTAR </span>
+                        PROGRAM STUDI
+                      </span>
+                    ) : (
+                      item.label
+                    )}
                   </Link>
                 );
               })}

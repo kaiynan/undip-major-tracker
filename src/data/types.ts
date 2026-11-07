@@ -70,6 +70,7 @@ export interface StudyProgram {
   id: string;
   name: string;
   facultyId: string;
+  department?: string; // Departemen resmi di bawah Fakultas/Sekolah
   degreeLevel: 'S1' | 'D4' | 'S2' | 'S3' | 'Profesi' | 'Spesialis';
   campusLocation?: string; // e.g., 'Semarang (Kampus Utama)', 'Batang', 'Rembang'
   description: string;
