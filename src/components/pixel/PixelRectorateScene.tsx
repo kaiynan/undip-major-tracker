@@ -458,48 +458,52 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
       {/* (Cleanly separated so the primary hero stays spacious & minimal) */}
       {/* ============================================================== */}
       {showDomainExplorer && (
-        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 pb-12 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="bg-[#1A0E08]/95 border-4 border-[#F59E0B] p-5 sm:p-7 pixelated shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b-2 border-[#78350F]">
-              <div>
-                <span className="font-pixel text-[10px] text-[#F59E0B] tracking-wider uppercase">
+        <div className="relative z-20 w-full max-w-5xl mx-auto px-3 sm:px-6 pb-12 animate-in fade-in slide-in-from-bottom-4 duration-300 min-w-0">
+          <div className="w-full max-w-full min-w-0 bg-[#1A0E08]/95 border-4 border-[#F59E0B] p-4 sm:p-7 pixelated shadow-[0_10px_35px_rgba(0,0,0,0.8)] mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b-2 border-[#78350F] min-w-0">
+              <div className="min-w-0">
+                <span className="font-pixel text-[10px] text-[#F59E0B] tracking-wider uppercase block">
                   PANDUAN EKSPLORASI AKADEMIK
                 </span>
-                <h3 className="font-pixel text-xs sm:text-sm text-white mt-1">
+                <h3 className="font-pixel text-xs sm:text-sm text-white mt-1 break-words">
                   7 Rumpun Bidang Ilmu Universitas Diponegoro
                 </h3>
               </div>
               <Link
-                href="/results"
-                className="font-pixel text-[9px] sm:text-[10px] text-[#FDE68A] hover:text-white inline-flex items-center gap-1.5"
+                href="/program-studi"
+                className="font-pixel text-[9px] sm:text-[10px] text-[#FDE68A] hover:text-white inline-flex items-center gap-1.5 shrink-0 break-words min-h-[44px]"
               >
-                <span>LIHAT 67 PRODI LENGKAP</span>
+                <span>Lihat Daftar Program Studi</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            {/* Domain Tabs */}
-            <div className="flex overflow-x-auto gap-2 pb-3 scrollbar-none">
-              {ACADEMIC_DOMAINS.map((domain, idx) => {
-                const IconComponent = domain.Icon;
-                return (
-                  <button
-                    key={domain.id}
-                    onClick={() => {
-                      retroAudio.playBlip(600);
-                      setActiveDomainTab(idx);
-                    }}
-                    className={`font-pixel text-[9px] sm:text-[10px] py-2 px-3 whitespace-nowrap border-2 transition-all cursor-pointer flex items-center gap-2 ${
-                      activeDomainTab === idx
-                        ? 'bg-[#9A3412] text-[#FDE68A] border-[#FDE68A] shadow-[2px_2px_0_0_#F59E0B]'
-                        : 'bg-[#2A160E] text-amber-200/70 border-[#78350F] hover:text-white hover:bg-[#3D1F13]'
-                    }`}
-                  >
-                    <IconComponent className="w-3.5 h-3.5 shrink-0" />
-                    <span>{domain.name}</span>
-                  </button>
-                );
-              })}
+            {/* Domain Tabs with Edge Fades */}
+            <div className="relative w-full max-w-full min-w-0 mb-3">
+              <div className="absolute left-0 top-0 bottom-0 w-6 bg-gradient-to-r from-[#1A0E08] to-transparent pointer-events-none z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-[#1A0E08] to-transparent pointer-events-none z-10" />
+              <div className="flex overflow-x-auto gap-2 pb-2 px-1 scrollbar-none w-full min-w-0">
+                {ACADEMIC_DOMAINS.map((domain, idx) => {
+                  const IconComponent = domain.Icon;
+                  return (
+                    <button
+                      key={domain.id}
+                      onClick={() => {
+                        retroAudio.playBlip(600);
+                        setActiveDomainTab(idx);
+                      }}
+                      className={`font-pixel text-[9px] sm:text-[10px] py-2.5 px-3 whitespace-nowrap border-2 transition-all cursor-pointer flex items-center gap-2 shrink-0 min-h-[44px] ${
+                        activeDomainTab === idx
+                          ? 'bg-[#9A3412] text-[#FDE68A] border-[#FDE68A] shadow-[2px_2px_0_0_#F59E0B]'
+                          : 'bg-[#2A160E] text-amber-200/70 border-[#78350F] hover:text-white hover:bg-[#3D1F13]'
+                      }`}
+                    >
+                      <IconComponent className="w-3.5 h-3.5 shrink-0" />
+                      <span>{domain.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Active Domain Details */}
@@ -507,20 +511,20 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
               const current = ACADEMIC_DOMAINS[activeDomainTab];
               const DomainIcon = current.Icon;
               return (
-                <div className="bg-[#24130C] border-2 border-[#78350F] p-4 sm:p-5 mt-2">
-                  <div className="flex items-center gap-3 mb-3">
+                <div className="w-full max-w-full min-w-0 bg-[#24130C] border-2 border-[#78350F] p-4 sm:p-5 mt-2">
+                  <div className="flex items-center gap-3 mb-3 min-w-0">
                     <div className="w-9 h-9 bg-[#1A0E08] border border-[#78350F] flex items-center justify-center text-[#FDE68A] shrink-0">
                       <DomainIcon className="w-5 h-5" />
                     </div>
-                    <div>
-                      <h4 className="font-pixel text-xs sm:text-sm text-[#FDE68A]">{current.name}</h4>
-                      <p className="text-xs text-amber-200/80 font-mono">{current.faculty}</p>
+                    <div className="min-w-0">
+                      <h4 className="font-pixel text-xs sm:text-sm text-[#FDE68A] break-words">{current.name}</h4>
+                      <p className="text-xs text-amber-200/80 font-mono break-words">{current.faculty}</p>
                     </div>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-4">
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-4 break-words">
                     {current.description}
                   </p>
-                  <div>
+                  <div className="min-w-0">
                     <span className="font-pixel text-[9px] text-[#F59E0B] block mb-2 uppercase">
                       Contoh Program Studi:
                     </span>
@@ -528,7 +532,7 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
                       {current.majors.map((m, i) => (
                         <span
                           key={i}
-                          className="font-mono text-xs px-2.5 py-1 bg-[#1A0E08] border border-[#78350F] text-amber-100"
+                          className="font-mono text-xs px-2.5 py-1 bg-[#1A0E08] border border-[#78350F] text-amber-100 break-words"
                         >
                           {m}
                         </span>
