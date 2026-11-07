@@ -5,6 +5,7 @@ interface TierBadgeProps {
   tier: 'S' | 'A' | 'B' | 'C' | 'D';
   size?: 'sm' | 'md' | 'lg';
   showLabel?: boolean;
+  showHelpText?: boolean;
 }
 
 const TIER_CONFIG: Record<
@@ -42,15 +43,16 @@ const TIER_CONFIG: Record<
   },
   D: {
     badgeClass: 'bg-stone-800 text-stone-300 border-stone-600 font-medium',
-    label: 'Kurang Relevan',
+    label: 'Eksplorasi Alternatif',
     icon: Minus,
     iconColor: 'text-stone-400',
   },
 };
 
-export function TierBadge({ tier, size = 'md', showLabel = true }: TierBadgeProps) {
+export function TierBadge({ tier, size = 'md', showLabel = true, showHelpText = false }: TierBadgeProps) {
   const config = TIER_CONFIG[tier] || TIER_CONFIG.D;
   const Icon = config.icon;
+  const helpText = tier === 'D' ? 'Bukan berarti tidak bisa — jelajahi alasan dan pilihan lainnya.' : undefined;
 
   const sizeClasses = {
     sm: 'text-[11px] px-2 py-0.5 gap-1 font-semibold',
@@ -65,16 +67,24 @@ export function TierBadge({ tier, size = 'md', showLabel = true }: TierBadgeProp
   }[size];
 
   return (
-    <span
-      className={`inline-flex items-center rounded-lg border transition-all ${config.badgeClass} ${sizeClasses}`}
-    >
-      <Icon className={`${iconSizes} ${config.iconColor} shrink-0`} />
-      <span className="tracking-wide uppercase font-black">Tier {tier}</span>
-      {showLabel && (
-        <>
-          <span className="opacity-40">•</span>
-          <span className="font-medium text-[0.9em]">{config.label}</span>
-        </>
+    <span className="inline-flex flex-col">
+      <span
+        title={helpText}
+        className={`inline-flex items-center rounded-lg border transition-all ${config.badgeClass} ${sizeClasses}`}
+      >
+        <Icon className={`${iconSizes} ${config.iconColor} shrink-0`} />
+        <span className="tracking-wide uppercase font-black">Tier {tier}</span>
+        {showLabel && (
+          <>
+            <span className="opacity-40">•</span>
+            <span className="font-medium text-[0.9em]">{config.label}</span>
+          </>
+        )}
+      </span>
+      {showHelpText && helpText && (
+        <span className="text-[10px] text-amber-200/70 italic mt-0.5 max-w-[220px] leading-tight">
+          {helpText}
+        </span>
       )}
     </span>
   );

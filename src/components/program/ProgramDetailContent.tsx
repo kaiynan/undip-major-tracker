@@ -164,8 +164,8 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
                     {score.totalScore}%
                   </div>
                 </div>
-                <div className="sm:mt-3 flex justify-center">
-                  <TierBadge tier={score.tier} size="md" />
+                <div className="sm:mt-3 flex flex-col items-center justify-center">
+                  <TierBadge tier={score.tier} size="md" showHelpText={score.tier === 'D'} />
                 </div>
               </div>
             ) : (

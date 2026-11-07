@@ -465,6 +465,7 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
             <button
               key={t}
               onClick={() => setSelectedTier(t)}
+              title={t === 'D' ? 'Tier D: Eksplorasi Alternatif — Bukan berarti tidak bisa, jelajahi alasan dan pilihan lainnya.' : `Filter Tier ${t}`}
               aria-label={`Filter berdasarkan Tier ${t} (${tierCounts[t]} program studi)`}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer border min-h-[44px] ${
                 selectedTier === t
@@ -485,6 +486,13 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
             </button>
           ))}
         </div>
+
+        {selectedTier === 'D' && (
+          <div className="bg-[#24130C] border border-[#78350F] rounded-xl p-3 flex items-center gap-2.5 text-xs text-amber-200">
+            <span className="font-bold text-[#FDE68A]">Tier D (Eksplorasi Alternatif):</span>
+            <span className="italic">Bukan berarti tidak bisa — jelajahi alasan dan pilihan lainnya.</span>
+          </div>
+        )}
 
         {/* Search & Select Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">

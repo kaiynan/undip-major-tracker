@@ -96,7 +96,7 @@ export const DEFAULT_CONFIG: AlgorithmConfig = {
       tier: 'D',
       min: 0,
       max: 49,
-      label: 'Tidak Cocok',
+      label: 'Eksplorasi Alternatif',
       color: '#dc2626',
       bgColor: '#fee2e2',
     },

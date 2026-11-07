@@ -106,8 +106,8 @@ export function ProgramComparisonModal({
                 <div className="my-4 p-4 bg-[#24130C] rounded-2xl border border-[#78350F] text-center shadow-inner">
                   <div className="text-[10px] uppercase font-bold text-amber-300/80">Skor Kecocokan</div>
                   <div className="text-3xl font-black text-amber-400 mt-0.5">{score.totalScore}%</div>
-                  <div className="mt-2 flex justify-center">
-                    <TierBadge tier={score.tier} size="sm" />
+                  <div className="mt-2 flex flex-col items-center justify-center">
+                    <TierBadge tier={score.tier} size="sm" showHelpText={score.tier === 'D'} />
                   </div>
                 </div>
 

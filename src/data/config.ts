@@ -51,7 +51,7 @@ export const algorithmConfig: AlgorithmConfig = {
       tier: 'D',
       min: 0,
       max: 49,
-      label: 'Tidak Sesuai',
+      label: 'Eksplorasi Alternatif',
       color: '#9E9E9E',
       bgColor: '#F5F5F5',
     },

@@ -12,7 +12,8 @@ import { questions } from '../data/questions';
 import { faculties } from '../data/faculties';
 import { studyPrograms } from '../data/programs';
 import { admissionQuotas, getQuotaByProgramId } from '../data/quotas';
-import { UserAnswers } from '../data/types';
+import { algorithmConfig } from '../data/config';
+import { UserAnswers, TierThreshold } from '../data/types';
 
 console.log('===========================================================');
 console.log('UNDIP MAJOR MATCHER — HMIM RECOMMENDATION ENGINE TESTS');
@@ -115,8 +116,12 @@ if (getTier(65).tier !== 'B') throw new Error('Score 65 must be Tier B');
 if (getTier(64.9).tier !== 'C') throw new Error('Score 64.9 must be Tier C');
 if (getTier(50).tier !== 'C') throw new Error('Score 50 must be Tier C');
 if (getTier(49.9).tier !== 'D') throw new Error('Score 49.9 must be Tier D');
+if (getTier(49.9).label !== 'Eksplorasi Alternatif') throw new Error('Tier D label must be Eksplorasi Alternatif');
 if (getTier(0).tier !== 'D') throw new Error('Score 0 must be Tier D');
-console.log('  ✓ Tier boundaries S (85-100), A (75-84), B (65-74), C (50-64), D (0-49) verified');
+if (algorithmConfig.tierThresholds.find((t: TierThreshold) => t.tier === 'D')?.label !== 'Eksplorasi Alternatif') {
+  throw new Error('Config Tier D label must be Eksplorasi Alternatif');
+}
+console.log('  ✓ Tier boundaries S (85-100), A (75-84), B (65-74), C (50-64), D (0-49) & softer label verified');
 
 // -----------------------------------------------------------------------------
 // Test 6: Chemical Engineering vs Pure Chemistry Discrimination

@@ -614,14 +614,21 @@ export default function AdminPage() {
               <h3 className="font-bold text-[#FFFBEB] text-base">Ambang Batas Tier (0–100)</h3>
               <div className="space-y-2.5">
                 {algorithmConfig.tierThresholds.map((t) => (
-                  <div key={t.tier} className="flex items-center justify-between p-3 rounded-xl border border-[#78350F] bg-[#190E08]">
-                    <div className="flex items-center gap-2">
-                      <TierBadge tier={t.tier} size="sm" />
-                      <span className="text-xs font-medium text-amber-200/80">{t.label}</span>
+                  <div key={t.tier} className="p-3 rounded-xl border border-[#78350F] bg-[#190E08] space-y-1">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <TierBadge tier={t.tier} size="sm" />
+                        <span className="text-xs font-medium text-amber-200/80">{t.label}</span>
+                      </div>
+                      <span className="font-mono font-bold text-[#FDE68A] text-xs">
+                        {t.min} – {t.max}%
+                      </span>
                     </div>
-                    <span className="font-mono font-bold text-[#FDE68A] text-xs">
-                      {t.min} – {t.max}%
-                    </span>
+                    {t.tier === 'D' && (
+                      <p className="text-[10px] text-amber-300/80 italic pl-1">
+                        Bukan berarti tidak bisa — jelajahi alasan dan pilihan lainnya.
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>

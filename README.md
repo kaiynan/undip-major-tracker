@@ -17,7 +17,7 @@ Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP)
    - *Bobot Adaptif & Terkalibrasi:* Menggunakan bobot bawaan standar (RIASEC: 20%, Domain: 35%, Learning: 20%, Curriculum: 25%) yang dikonfigurasi secara transparan di panel inspeksi sistem.
 2. **Mesin Rekomendasi HMIM (Cosine Similarity):**
    - Perhitungan keselarasan vektor multi-dimensi dengan normalisasi skor 0–100%.
-   - Tier klasifikasi: **S** (85–100), **A** (75–84.9), **B** (65–74.9), **C** (50–64.9), **D** (0–49.9).
+   - Tier klasifikasi: **S** (85–100, Sangat Cocok), **A** (75–84.9, Rekomendasi Utama), **B** (65–74.9, Cukup Cocok), **C** (50–64.9, Potensi Alternatif), **D** (0–49.9, Eksplorasi Alternatif). Label Tier D menggunakan pendekatan suportif disertai penjelasan *"Bukan berarti tidak bisa — jelajahi alasan dan pilihan lainnya."*
    - Perumusan skor agregat fakultas: $Score_F = \frac{S_1 + S_2 + S_3}{n}$ (rata-rata 3 prodi tertinggi).
    - **Critical Consistency Rule:** Skor dan tier setiap prodi 100% identik di View 1 (*All Major Tier List*) dan View 2 (*Faculty Tier List*).
 3. **Database Resmi 67 Program Studi Terverifikasi:**
