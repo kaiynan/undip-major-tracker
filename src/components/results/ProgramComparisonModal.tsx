@@ -67,7 +67,7 @@ export function ProgramComparisonModal({
         </div>
         <button
           onClick={onClose}
-          className="p-2 rounded-xl text-amber-200/70 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer"
+          className="p-2 rounded-xl text-amber-200/70 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Tutup komparasi program studi"
         >
           <X className="w-5 h-5" />
@@ -91,7 +91,7 @@ export function ProgramComparisonModal({
                   <button
                     onClick={() => onRemoveProgram(program.id)}
                     aria-label={`Hapus ${program.name} dari komparasi`}
-                    className="text-xs text-rose-400 hover:text-rose-300 font-bold transition-colors cursor-pointer"
+                    className="text-xs text-rose-400 hover:text-rose-300 font-bold transition-colors cursor-pointer min-h-[44px] px-2 flex items-center"
                   >
                     Hapus
                   </button>
@@ -124,7 +124,7 @@ export function ProgramComparisonModal({
                 <div className="bg-[#24130C] p-3.5 rounded-2xl border border-[#78350F] text-xs space-y-1 mb-4">
                   <div className="font-bold text-amber-300 flex items-center gap-1.5">
                     <Users className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Daya Tampung: {quota?.totalCapacity ? `${quota.totalCapacity} Kursi` : 'Belum rilis'}</span>
+                    <span>Daya Tampung (TA 2024/2025, dapat berubah): {quota?.totalCapacity ? `${quota.totalCapacity} Kursi` : 'Belum rilis'}</span>
                   </div>
                   {quota?.totalCapacity && (
                     <div className="text-[11px] text-amber-100/80 pt-1">

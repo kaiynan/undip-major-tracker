@@ -228,7 +228,7 @@ export default function AdminPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer min-h-[44px] ${
                   isActive
                     ? 'bg-[#78350F] text-[#FFFBEB] border-2 border-[#F59E0B] shadow-xs'
                     : 'bg-[#24130C] text-amber-200/80 hover:bg-[#341A10] border-2 border-[#78350F]'

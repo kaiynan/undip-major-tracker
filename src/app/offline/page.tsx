@@ -27,7 +27,8 @@ export default function OfflinePage() {
         <div className="mt-6 space-y-2.5">
           <button
             onClick={handleReload}
-            className="w-full flex items-center justify-center gap-2 bg-[#002060] hover:bg-[#001744] text-white py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-xs cursor-pointer"
+            aria-label="Coba muat ulang halaman saat online"
+            className="w-full flex items-center justify-center gap-2 bg-[#002060] hover:bg-[#001744] text-white py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-xs cursor-pointer min-h-[44px]"
           >
             <RefreshCw className="w-4 h-4" />
             <span>Coba Muat Ulang Halaman</span>
@@ -35,7 +36,8 @@ export default function OfflinePage() {
 
           <Link
             href="/results"
-            className="w-full flex items-center justify-center gap-2 bg-blue-50 hover:bg-blue-100 text-[#002060] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all"
+            aria-label="Buka hasil rekomendasi yang tersimpan di perangkat"
+            className="w-full flex items-center justify-center gap-2 bg-blue-50 hover:bg-blue-100 text-[#002060] py-3 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all min-h-[44px]"
           >
             <Trophy className="w-4 h-4" />
             <span>Buka Hasil Tersimpan</span>
@@ -43,7 +45,8 @@ export default function OfflinePage() {
 
           <Link
             href="/"
-            className="w-full flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all"
+            aria-label="Kembali ke beranda utama"
+            className="w-full flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all min-h-[44px]"
           >
             <Home className="w-4 h-4" />
             <span>Kembali ke Beranda</span>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useSyncExternalStore } from 'react';
 import { PixelIntroOverlay } from '@/components/pixel/PixelIntroOverlay';
 import { PixelHorseStatueHero } from '@/components/pixel/PixelHorseStatueHero';
 import { PixelRectorateScene } from '@/components/pixel/PixelRectorateScene';
@@ -8,15 +8,22 @@ import { PixelCaraKerjaScene } from '@/components/pixel/PixelCaraKerjaScene';
 import { PixelTentangKamiScene } from '@/components/pixel/PixelTentangKamiScene';
 import { retroAudio } from '@/lib/retroAudio';
 
+const subscribeNoop = () => () => {};
+
 export default function HomePage() {
-  const [showIntro, setShowIntro] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return true;
-    try {
-      return !sessionStorage.getItem('undip_intro_seen');
-    } catch {
-      return true;
-    }
-  });
+  const introSeen = useSyncExternalStore(
+    subscribeNoop,
+    () => {
+      try {
+        return sessionStorage.getItem('undip_intro_seen') === 'true';
+      } catch {
+        return false;
+      }
+    },
+    () => false
+  );
+  const [introDismissed, setIntroDismissed] = useState(false);
+  const showIntro = !introSeen && !introDismissed;
 
   const [activeSection, setActiveSection] = useState<'beranda' | 'patung-kuda' | 'cara-kerja' | 'tentang-kami'>('patung-kuda');
   const hasCenteredHero = useRef(false);
@@ -90,7 +97,7 @@ export default function HomePage() {
   }, [showIntro]);
 
   const handleIntroComplete = () => {
-    setShowIntro(false);
+    setIntroDismissed(true);
     try {
       sessionStorage.setItem('undip_intro_seen', 'true');
     } catch {

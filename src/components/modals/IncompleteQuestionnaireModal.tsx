@@ -45,7 +45,7 @@ export function IncompleteQuestionnaireModal({
       {/* Close Button to Explore Map */}
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 rounded-xl text-amber-200/70 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer"
+        className="absolute top-4 right-4 p-2 rounded-xl text-amber-200/70 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
         title="Tutup untuk menjelajahi peta kampus"
         aria-label="Tutup untuk menjelajahi peta kampus"
       >
@@ -92,7 +92,7 @@ export function IncompleteQuestionnaireModal({
         {/* Primary Action Button */}
         <Link
           href="/questionnaire"
-          className="w-full flex items-center justify-center gap-2 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-black py-3.5 px-6 rounded-2xl border-2 border-[#B45309] shadow-[0_4px_16px_rgba(245,158,11,0.4)] transition-all text-xs sm:text-sm cursor-pointer"
+          className="w-full flex items-center justify-center gap-2 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-black py-3.5 px-6 rounded-2xl border-2 border-[#B45309] shadow-[0_4px_16px_rgba(245,158,11,0.4)] transition-all text-xs sm:text-sm cursor-pointer min-h-[44px]"
         >
           <span>{hasStarted ? `Lanjutkan Kuisioner (${answeredCount}/${totalQuestions})` : 'Mulai Kuisioner (36 Soal)'}</span>
           <ArrowRight className="w-4 h-4" />
@@ -101,7 +101,8 @@ export function IncompleteQuestionnaireModal({
         {/* Secondary Action: Explore Full-Screen Campus Map */}
         <button
           onClick={onClose}
-          className="w-full flex items-center justify-center gap-2 bg-[#190E08] hover:bg-[#341A10] text-amber-200 font-bold py-2.5 px-4 rounded-xl border border-[#78350F] transition-all text-xs cursor-pointer"
+          aria-label="Jelajahi peta kampus dahulu (tutup panel modal)"
+          className="w-full flex items-center justify-center gap-2 bg-[#190E08] hover:bg-[#341A10] text-amber-200 font-bold py-2.5 px-4 rounded-xl border border-[#78350F] transition-all text-xs cursor-pointer min-h-[44px]"
         >
           <Eye className="w-4 h-4 text-[#F59E0B]" />
           <span>Jelajahi Peta Dahulu (Tutup Panel)</span>
@@ -116,25 +117,29 @@ export function IncompleteQuestionnaireModal({
             <div className="flex flex-wrap justify-center gap-2">
               <button
                 onClick={() => onLoadSampleProfile('engineering')}
-                className="px-3 py-1.5 text-xs font-bold bg-[#190E08] text-blue-300 rounded-xl border border-blue-500/50 hover:bg-blue-950/60 transition-colors cursor-pointer"
+                aria-label="Coba profil minat teknik"
+                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-blue-300 rounded-xl border border-blue-500/50 hover:bg-blue-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
               >
                 Teknik
               </button>
               <button
                 onClick={() => onLoadSampleProfile('medical')}
-                className="px-3 py-1.5 text-xs font-bold bg-[#190E08] text-emerald-300 rounded-xl border border-emerald-500/50 hover:bg-emerald-950/60 transition-colors cursor-pointer"
+                aria-label="Coba profil minat kedokteran"
+                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-emerald-300 rounded-xl border border-emerald-500/50 hover:bg-emerald-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
               >
                 Kedokteran
               </button>
               <button
                 onClick={() => onLoadSampleProfile('business')}
-                className="px-3 py-1.5 text-xs font-bold bg-[#190E08] text-amber-300 rounded-xl border border-amber-500/50 hover:bg-amber-950/60 transition-colors cursor-pointer"
+                aria-label="Coba profil minat bisnis"
+                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-amber-300 rounded-xl border border-amber-500/50 hover:bg-amber-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
               >
                 Bisnis
               </button>
               <button
                 onClick={() => onLoadSampleProfile('humanities')}
-                className="px-3 py-1.5 text-xs font-bold bg-[#190E08] text-purple-300 rounded-xl border border-purple-500/50 hover:bg-purple-950/60 transition-colors cursor-pointer"
+                aria-label="Coba profil minat humaniora"
+                className="px-3.5 py-2 text-xs font-bold bg-[#190E08] text-purple-300 rounded-xl border border-purple-500/50 hover:bg-purple-950/60 transition-colors cursor-pointer min-h-[44px] flex items-center"
               >
                 Humaniora
               </button>

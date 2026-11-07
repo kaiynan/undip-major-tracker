@@ -73,7 +73,7 @@ export function QuestionOverviewModal({
         </div>
         <button
           onClick={onClose}
-          className="p-2 rounded-xl text-amber-200/70 hover:text-white hover:bg-[#341A10] transition-colors cursor-pointer"
+          className="p-2 rounded-xl text-amber-200/70 hover:text-white hover:bg-[#341A10] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Tutup ikhtisar pertanyaan"
         >
           <X className="w-5 h-5" />
@@ -102,7 +102,7 @@ export function QuestionOverviewModal({
                       onClose();
                     }}
                     aria-label={`Pertanyaan #${q.id}${isAnswered ? `, telah dijawab: ${value}` : ', belum dijawab'}`}
-                    className={`relative flex flex-col items-center justify-center p-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    className={`relative flex flex-col items-center justify-center p-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
                       isCurrent
                         ? 'ring-2 ring-[#F59E0B] bg-[#78350F] text-[#FFFBEB] border border-[#F59E0B]'
                         : isAnswered
@@ -139,7 +139,8 @@ export function QuestionOverviewModal({
         </div>
         <button
           onClick={onClose}
-          className="px-4 py-2 bg-[#78350F] hover:bg-[#92400E] border border-[#F59E0B] text-[#FFFBEB] rounded-xl font-bold text-xs transition-colors cursor-pointer"
+          aria-label="Tutup dialog ikhtisar pertanyaan"
+          className="px-4 py-2 bg-[#78350F] hover:bg-[#92400E] border border-[#F59E0B] text-[#FFFBEB] rounded-xl font-bold text-xs transition-colors cursor-pointer min-h-[44px] flex items-center"
         >
           Tutup
         </button>

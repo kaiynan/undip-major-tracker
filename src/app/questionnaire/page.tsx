@@ -188,20 +188,25 @@ export default function QuestionnairePage() {
   }, [currentQuestion.id, currentIndex, totalQuestions, setAnswer, triggerAdvancing, isGallopingAway, isCalculating]);
 
   const handlePrev = useCallback(() => {
+    if (isAdvancingRef.current || isGallopingAway || isCalculating) return;
     if (currentIndex > 0) {
       // Do NOT trigger forward running animation on backwards navigation
       setCurrentIndex((prev) => prev - 1);
     }
-  }, [currentIndex]);
+  }, [currentIndex, isGallopingAway, isCalculating]);
 
   const handleNext = useCallback(() => {
+    if (isAdvancingRef.current || isGallopingAway || isCalculating) return;
     if (currentIndex < totalQuestions - 1) {
+      isAdvancingRef.current = true;
       triggerAdvancing();
-      setTimeout(() => {
-        setCurrentIndex((prev) => prev + 1);
+      if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+      transitionTimeoutRef.current = setTimeout(() => {
+        setCurrentIndex((prev) => Math.min(totalQuestions - 1, prev + 1));
+        isAdvancingRef.current = false;
       }, 150);
     }
-  }, [currentIndex, totalQuestions, triggerAdvancing]);
+  }, [currentIndex, totalQuestions, triggerAdvancing, isGallopingAway, isCalculating]);
 
   const handleSubmit = useCallback(() => {
     if (isGallopingAway || isCalculating) return;
@@ -427,7 +432,8 @@ export default function QuestionnairePage() {
             <button
               onClick={handlePrev}
               disabled={currentIndex === 0 || isGallopingAway}
-              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold border-2 transition-all cursor-pointer ${
+              aria-label="Kembali ke pertanyaan sebelumnya"
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold border-2 transition-all cursor-pointer min-h-[44px] ${
                 currentIndex === 0 || isGallopingAway
                   ? 'border-[#3D1F13] text-stone-600 bg-[#1F100A] cursor-not-allowed'
                   : 'border-[#78350F] text-[#FDE68A] bg-[#24130C] hover:bg-[#341A10] hover:border-[#F59E0B] shadow-xs'
@@ -440,7 +446,8 @@ export default function QuestionnairePage() {
             <button
               onClick={handleNext}
               disabled={currentIndex === totalQuestions - 1 || isGallopingAway}
-              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold border-2 transition-all cursor-pointer ${
+              aria-label="Lanjut ke pertanyaan selanjutnya"
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold border-2 transition-all cursor-pointer min-h-[44px] ${
                 currentIndex === totalQuestions - 1 || isGallopingAway
                   ? 'border-[#3D1F13] text-stone-600 bg-[#1F100A] cursor-not-allowed'
                   : 'border-[#78350F] text-[#FDE68A] bg-[#24130C] hover:bg-[#341A10] hover:border-[#F59E0B] shadow-xs'
@@ -456,7 +463,8 @@ export default function QuestionnairePage() {
               <button
                 onClick={handleSubmit}
                 disabled={isGallopingAway}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#059669] hover:bg-[#047857] text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg border-2 border-[#6EE7B7] transition-all text-sm cursor-pointer disabled:opacity-75"
+                aria-label="Lihat hasil rekomendasi program studi (seluruh 36 pertanyaan telah terisi)"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#059669] hover:bg-[#047857] text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg border-2 border-[#6EE7B7] transition-all text-sm cursor-pointer disabled:opacity-75 min-h-[44px]"
               >
                 <CheckCircle2 className="w-4 h-4 text-[#6EE7B7]" />
                 <span>Lihat Hasil Rekomendasi (36/36 Terisi)</span>
@@ -465,7 +473,8 @@ export default function QuestionnairePage() {
             ) : (
               <button
                 onClick={handleSubmit}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#9A3412] hover:bg-[#C2410C] text-white font-bold px-7 py-3.5 rounded-2xl shadow-xs border-2 border-[#F59E0B] transition-all text-sm cursor-pointer"
+                aria-label={`Hitung rekomendasi program studi (${answeredCount} dari ${totalQuestions} pertanyaan terisi)`}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#9A3412] hover:bg-[#C2410C] text-white font-bold px-7 py-3.5 rounded-2xl shadow-xs border-2 border-[#F59E0B] transition-all text-sm cursor-pointer min-h-[44px]"
               >
                 <span>Hitung Rekomendasi</span>
                 <span className="text-xs bg-black/25 px-2.5 py-0.5 rounded-full font-bold text-[#FDE68A]">

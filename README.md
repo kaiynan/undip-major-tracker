@@ -14,7 +14,7 @@ Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP)
    - **Domain-Specific Interest:** 12 bidang ilmu (D1–D12).
    - **Learning & Activity Preference:** 8 gaya dan aktivitas belajar.
    - **Curriculum & Competency:** 8 karakteristik kurikulum dan prodi.
-   - *Bobot Adaptif & Slider Dinamis:* Menggunakan bobot bawaan standar (RIASEC: 20%, Domain: 35%, Learning: 20%, Curriculum: 25%) yang dapat diatur secara dinamis melalui slider interaktif di panel konfigurasi sistem.
+   - *Bobot Adaptif & Terkalibrasi:* Menggunakan bobot bawaan standar (RIASEC: 20%, Domain: 35%, Learning: 20%, Curriculum: 25%) yang dikonfigurasi secara transparan di panel inspeksi sistem.
 2. **Mesin Rekomendasi HMIM (Cosine Similarity):**
    - Perhitungan keselarasan vektor multi-dimensi dengan normalisasi skor 0–100%.
    - Tier klasifikasi: **S** (85–100), **A** (75–84.9), **B** (65–74.9), **C** (50–64.9), **D** (0–49.9).
@@ -34,14 +34,14 @@ Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP)
    - Konfigurasi Capacitor (`capacitor.config.ts`) siap build Android/iOS.
 6. **Alat Pendukung:**
    - Komparasi berdampingan hingga 3 program studi.
-   - Simulator bobot & batas tier interaktif (`/admin`).
+   - Registri data akademik, inspektor bobot & batas tier interaktif (`/admin`).
    - Profil instan untuk pengujian cepat (Teknik, Medis, Bisnis, Humaniora, Maritim).
 
 ---
 
 ## 📐 Formula Rekomendasi — HMIM
 
-Skor kecocokan dihitung secara deterministik menggunakan bobot multi-dimensi (bobot bawaan standar atau kustomisasi via slider interaktif):
+Skor kecocokan dihitung secara deterministik menggunakan bobot multi-dimensi:
 
 $$S_{\text{prodi}} = w_{\text{RIASEC}} \times S_{\text{RIASEC}} + w_{\text{Domain}} \times S_{\text{Domain}} + w_{\text{Learning}} \times S_{\text{Learning}} + w_{\text{Curriculum}} \times S_{\text{Curriculum}}$$
 
