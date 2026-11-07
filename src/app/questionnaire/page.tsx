@@ -1,0 +1,471 @@
+'use client';
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { questions } from '@/data/questions';
+import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
+import { QuestionCard } from '@/components/questionnaire/QuestionCard';
+import { QuestionOverviewModal } from '@/components/questionnaire/QuestionOverviewModal';
+import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
+import { retroAudio } from '@/lib/retroAudio';
+import { PixelHorseProgressBar } from '@/components/pixel/PixelHorseProgressBar';
+import { PixelCalculationTransition } from '@/components/pixel/PixelCalculationTransition';
+import { PixelQuestionnaireBackground } from '@/components/pixel/PixelQuestionnaireRunner';
+import { RetakeConfirmModal } from '@/components/modals/RetakeConfirmModal';
+import { IncompleteQuestionnaireModal } from '@/components/modals/IncompleteQuestionnaireModal';
+import {
+  ChevronLeft,
+  ChevronRight,
+  Grid,
+  RotateCcw,
+  AlertCircle,
+  CheckCircle2,
+  HelpCircle,
+  ArrowRight,
+  Keyboard,
+  Sparkles,
+} from 'lucide-react';
+
+const DIMENSION_CONFIG = {
+  riasec: {
+    name: 'Dimensi A: RIASEC (Minat Umum)',
+    weight: '20%',
+    range: 'Soal 01–08',
+    description: 'Mengukur kecenderungan aktivitas nyata, riset logis, ekspresi seni, sosial, kepemimpinan, dan keteraturan kerja.',
+  },
+  domain: {
+    name: 'Dimensi B: Domain-Specific Interest',
+    weight: '35%',
+    range: 'Soal 09–20',
+    description: 'Mengidentifikasi ketertarikan mendalam pada 12 rumpun bidang keilmuan spesifik di lingkungan UNDIP.',
+  },
+  learning: {
+    name: 'Dimensi C: Learning & Activity Preference',
+    weight: '20%',
+    range: 'Soal 21–28',
+    description: 'Mengukur kecocokan gaya belajar: laboratorium, analisis data, studi lapangan, kolaborasi tim, atau pemecahan masalah praktis.',
+  },
+  curriculum: {
+    name: 'Dimensi D: Curriculum & Competency',
+    weight: '25%',
+    range: 'Soal 29–36',
+    description: 'Mencocokkan ketertarikan dengan kurikulum autentik, keahlian utama, dan profil lulusan program studi UNDIP.',
+  },
+};
+
+export default function QuestionnairePage() {
+  const router = useRouter();
+  const {
+    answers,
+    setAnswer,
+    resetAnswers,
+    answeredCount,
+    totalQuestions,
+    progressPercentage,
+    isComplete,
+  } = useQuestionnaire();
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isOverviewOpen, setIsOverviewOpen] = useState(false);
+  const [showIncompleteAlert, setShowIncompleteAlert] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
+  const [isAdvancing, setIsAdvancing] = useState(false);
+  const [isGallopingAway, setIsGallopingAway] = useState(false);
+  const [isCalculating, setIsCalculating] = useState(false);
+
+  // Jump to first unanswered question on initial mount if partially done
+  useEffect(() => {
+    const firstUnansweredIndex = questions.findIndex((q) => answers[q.id] === undefined);
+    if (firstUnansweredIndex !== -1 && answeredCount > 0 && answeredCount < totalQuestions) {
+      setCurrentIndex(firstUnansweredIndex);
+    }
+  }, []);
+
+  const currentQuestion = questions[currentIndex];
+  const dimensionInfo = DIMENSION_CONFIG[currentQuestion.dimension];
+
+  // Trigger brief forward movement animation for the horse indicator
+  const triggerAdvancing = useCallback(() => {
+    setIsAdvancing(true);
+    setTimeout(() => {
+      setIsAdvancing(false);
+    }, 450);
+  }, []);
+
+  const handleSelectAnswer = useCallback((value: number) => {
+    retroAudio.playSelect();
+    setAnswer(currentQuestion.id, value);
+    setShowIncompleteAlert(false);
+
+    // Check if this answer completes all 36 questions
+    const answeredKeys = Object.keys(answers);
+    const willBeComplete = answers[currentQuestion.id] !== undefined
+      ? answeredKeys.length >= totalQuestions
+      : answeredKeys.length + 1 >= totalQuestions;
+
+    if (willBeComplete) {
+      // Step 1: Progress reaches 100%
+      // Step 2 & 3: Horse gallops away toward the right
+      setTimeout(() => {
+        setIsGallopingAway(true);
+        try {
+          retroAudio.playLevelUp();
+        } catch {
+          // best-effort audio
+        }
+
+        // Step 4: HMIM Calculation transition overlay
+        setTimeout(() => {
+          setIsCalculating(true);
+        }, 1100);
+      }, 400);
+    } else if (currentIndex < totalQuestions - 1) {
+      // Auto advance to next question smoothly with forward gallop transition
+      triggerAdvancing();
+      setTimeout(() => {
+        setCurrentIndex((prev) => Math.min(totalQuestions - 1, prev + 1));
+      }, 220);
+    }
+  }, [currentQuestion.id, currentIndex, totalQuestions, answers, setAnswer, triggerAdvancing]);
+
+  const handlePrev = useCallback(() => {
+    if (currentIndex > 0) {
+      // Do NOT trigger forward running animation on backwards navigation
+      setCurrentIndex((prev) => prev - 1);
+    }
+  }, [currentIndex]);
+
+  const handleNext = useCallback(() => {
+    if (currentIndex < totalQuestions - 1) {
+      triggerAdvancing();
+      setTimeout(() => {
+        setCurrentIndex((prev) => prev + 1);
+      }, 150);
+    }
+  }, [currentIndex, totalQuestions, triggerAdvancing]);
+
+  const handleSubmit = useCallback(() => {
+    if (isGallopingAway || isCalculating) return;
+
+    if (!isComplete) {
+      setShowIncompleteAlert(true);
+      const firstUnansweredIndex = questions.findIndex((q) => answers[q.id] === undefined);
+      if (firstUnansweredIndex !== -1) {
+        setCurrentIndex(firstUnansweredIndex);
+      }
+      return;
+    }
+
+    // Trigger Stage 1 & 2: Horse Gallops Away to the Right
+    setIsGallopingAway(true);
+    try {
+      retroAudio.playLevelUp();
+    } catch {
+      // best-effort
+    }
+
+    // Trigger Stage 3: Calculation transition overlay
+    setTimeout(() => {
+      setIsCalculating(true);
+    }, 1100);
+  }, [isComplete, answers, isGallopingAway, isCalculating]);
+
+  // Keyboard navigation support on desktop (1-5, Left, Right)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isOverviewOpen || showResetModal || isGallopingAway || isCalculating) return;
+      if (['input', 'textarea', 'select'].includes((e.target as HTMLElement)?.tagName?.toLowerCase())) return;
+
+      if (e.key >= '1' && e.key <= '5') {
+        e.preventDefault();
+        handleSelectAnswer(parseInt(e.key, 10));
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        handlePrev();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        handleNext();
+      } else if (e.key === 'Enter' && isComplete) {
+        e.preventDefault();
+        handleSubmit();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOverviewOpen, showResetModal, handleSelectAnswer, handlePrev, handleNext, handleSubmit, isComplete, isGallopingAway, isCalculating]);
+
+  const unansweredQuestions = questions.filter((q) => answers[q.id] === undefined);
+
+  return (
+    <div className="relative min-h-screen pb-24 pt-4 sm:pt-6 text-slate-100 bg-[#140B07] border-t-2 border-[#78350F] overflow-x-hidden">
+      {/* Continuous Side-Scrolling Golden-Hour Parallax Background */}
+      <PixelQuestionnaireBackground isAdvancing={isAdvancing} />
+
+      <div className="relative z-10 max-w-4xl mx-auto px-3 sm:px-6">
+        {/* Top Header Card */}
+        <div className="bg-[#24130C] rounded-2xl sm:rounded-3xl p-4 sm:p-7 border-2 border-[#78350F] shadow-[0_4px_20px_rgba(0,0,0,0.5)] mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-5">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] sm:text-xs font-bold text-[#FDE68A] bg-[#78350F] border border-[#F59E0B] px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-wider">
+                  Kuisioner Minat 36 Pertanyaan
+                </span>
+              </div>
+              <h1 className="text-lg sm:text-2xl font-black text-[#FFFBEB] mt-1.5 sm:mt-2">
+                Kenali Karakteristik & Minat Studimu
+              </h1>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={() => setIsOverviewOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold text-[#FDE68A] bg-[#190E08] hover:bg-[#341A10] border border-[#78350F] rounded-xl transition-all cursor-pointer"
+                title="Buka peta semua soal"
+              >
+                <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F59E0B]" />
+                <span>Peta Soal ({answeredCount}/{totalQuestions})</span>
+              </button>
+              <button
+                onClick={() => setShowResetModal(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-bold text-rose-300 hover:bg-rose-950/80 bg-rose-950/40 border border-rose-800/60 rounded-xl transition-all cursor-pointer"
+                title="Reset semua jawaban"
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+                <span className="hidden sm:inline">Reset</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Dimension Selector Navigation Tabs */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-[#78350F]/60 text-[11px]">
+            <button
+              onClick={() => setCurrentIndex(0)}
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+                currentQuestion.dimension === 'riasec'
+                  ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+              }`}
+            >
+              <div className="font-bold truncate text-xs text-[#FFFBEB]">1. RIASEC</div>
+              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 01–08 • 20%</div>
+            </button>
+            <button
+              onClick={() => setCurrentIndex(8)}
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+                currentQuestion.dimension === 'domain'
+                  ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+              }`}
+            >
+              <div className="font-bold truncate text-xs text-[#FFFBEB]">2. Bidang Ilmu</div>
+              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 09–20 • 35%</div>
+            </button>
+            <button
+              onClick={() => setCurrentIndex(20)}
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+                currentQuestion.dimension === 'learning'
+                  ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+              }`}
+            >
+              <div className="font-bold truncate text-xs text-[#FFFBEB]">3. Gaya Belajar</div>
+              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 21–28 • 20%</div>
+            </button>
+            <button
+              onClick={() => setCurrentIndex(28)}
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+                currentQuestion.dimension === 'curriculum'
+                  ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+              }`}
+            >
+              <div className="font-bold truncate text-xs text-[#FFFBEB]">4. Kurikulum</div>
+              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 29–36 • 25%</div>
+            </button>
+          </div>
+        </div>
+
+        {/* ============================================================== */}
+        {/* NEW REQUIREMENT 1: HORSE STATUE ANIMATED PROGRESS BAR           */}
+        {/* ============================================================== */}
+        <PixelHorseProgressBar
+          answeredCount={answeredCount}
+          totalQuestions={totalQuestions}
+          isAdvancing={isAdvancing}
+          isGallopingAway={isGallopingAway}
+        />
+
+        {/* Dimension Description Notice */}
+        <div className="mb-4 bg-[#24130C] rounded-2xl border border-[#78350F] px-4 py-3 text-xs text-amber-100/90 flex items-start gap-2.5 shadow-2xs">
+          <HelpCircle className="w-4 h-4 text-[#F59E0B] shrink-0 mt-0.5" />
+          <span className="leading-relaxed">
+            <strong className="text-[#FDE68A] font-bold">{dimensionInfo.name} ({dimensionInfo.range}):</strong>{' '}
+            {dimensionInfo.description}
+          </span>
+        </div>
+
+        {/* Incomplete Submission Alert */}
+        {showIncompleteAlert && (
+          <div className="mb-6 p-4 bg-[#381111] border-2 border-rose-500 rounded-2xl text-rose-100 text-sm flex items-start gap-3 shadow-md">
+            <AlertCircle className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
+            <div className="flex-1">
+              <h4 className="font-bold text-rose-200">
+                Masih Ada {unansweredQuestions.length} Pertanyaan yang Belum Terjawab!
+              </h4>
+              <p className="text-xs text-rose-200/80 mt-0.5 leading-relaxed">
+                Algoritma HMIM membutuhkan seluruh 36 pertanyaan dijawab agar hasil pencocokan minat
+                dan peringkat program studi akurat. Kamu diarahkan langsung ke pertanyaan pertama yang
+                belum terisi.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {unansweredQuestions.slice(0, 10).map((uq) => (
+                  <button
+                    key={uq.id}
+                    onClick={() => {
+                      const idx = questions.findIndex((q) => q.id === uq.id);
+                      if (idx !== -1) setCurrentIndex(idx);
+                    }}
+                    className="px-2.5 py-1 bg-rose-900/80 hover:bg-rose-800 text-rose-100 border border-rose-600 font-bold rounded-lg text-xs transition-colors cursor-pointer"
+                  >
+                    Nomor {String(uq.id).padStart(2, '0')}
+                  </button>
+                ))}
+                {unansweredQuestions.length > 10 && (
+                  <span className="text-xs text-rose-300 font-medium self-center">
+                    +{unansweredQuestions.length - 10} lainnya
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Stationary High-Contrast Question Card */}
+        <div key={currentQuestion.id} className="transition-opacity duration-200">
+          <QuestionCard
+            question={currentQuestion}
+            questionNumber={currentIndex + 1}
+            totalQuestions={totalQuestions}
+            currentValue={answers[currentQuestion.id]}
+            onSelect={handleSelectAnswer}
+            dimensionName={dimensionInfo.name}
+            dimensionWeight={dimensionInfo.weight}
+          />
+        </div>
+
+        {/* Navigation Controls Bar */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <button
+              onClick={handlePrev}
+              disabled={currentIndex === 0 || isGallopingAway}
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold border-2 transition-all cursor-pointer ${
+                currentIndex === 0 || isGallopingAway
+                  ? 'border-[#3D1F13] text-stone-600 bg-[#1F100A] cursor-not-allowed'
+                  : 'border-[#78350F] text-[#FDE68A] bg-[#24130C] hover:bg-[#341A10] hover:border-[#F59E0B] shadow-xs'
+              }`}
+            >
+              <ChevronLeft className="w-4 h-4 text-[#F59E0B]" />
+              <span>Sebelumnya</span>
+            </button>
+
+            <button
+              onClick={handleNext}
+              disabled={currentIndex === totalQuestions - 1 || isGallopingAway}
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-2 px-5 py-3 rounded-2xl text-sm font-bold border-2 transition-all cursor-pointer ${
+                currentIndex === totalQuestions - 1 || isGallopingAway
+                  ? 'border-[#3D1F13] text-stone-600 bg-[#1F100A] cursor-not-allowed'
+                  : 'border-[#78350F] text-[#FDE68A] bg-[#24130C] hover:bg-[#341A10] hover:border-[#F59E0B] shadow-xs'
+              }`}
+            >
+              <span>Selanjutnya</span>
+              <ChevronRight className="w-4 h-4 text-[#F59E0B]" />
+            </button>
+          </div>
+
+          <div className="w-full sm:w-auto">
+            {isComplete ? (
+              <button
+                onClick={handleSubmit}
+                disabled={isGallopingAway}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#059669] hover:bg-[#047857] text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg border-2 border-[#6EE7B7] transition-all text-sm cursor-pointer disabled:opacity-75"
+              >
+                <CheckCircle2 className="w-4 h-4 text-[#6EE7B7]" />
+                <span>Lihat Hasil Rekomendasi (36/36 Terisi)</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#9A3412] hover:bg-[#C2410C] text-white font-bold px-7 py-3.5 rounded-2xl shadow-xs border-2 border-[#F59E0B] transition-all text-sm cursor-pointer"
+              >
+                <span>Hitung Rekomendasi</span>
+                <span className="text-xs bg-black/25 px-2.5 py-0.5 rounded-full font-bold text-[#FDE68A]">
+                  {answeredCount}/{totalQuestions}
+                </span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Keyboard Hints Bar on Desktop */}
+        <div className="hidden sm:flex items-center justify-center gap-4 mt-6 text-xs text-amber-200/60">
+          <span className="inline-flex items-center gap-1 text-amber-300">
+            <Keyboard className="w-3.5 h-3.5" />
+            <span>Pintasan Keyboard:</span>
+          </span>
+          <span><kbd className="px-1.5 py-0.5 bg-[#190E08] border border-[#78350F] rounded font-mono text-[10px] text-[#FDE68A]">1</kbd>–<kbd className="px-1.5 py-0.5 bg-[#190E08] border border-[#78350F] rounded font-mono text-[10px] text-[#FDE68A]">5</kbd> untuk memilih</span>
+          <span><kbd className="px-1.5 py-0.5 bg-[#190E08] border border-[#78350F] rounded font-mono text-[10px] text-[#FDE68A]">←</kbd> / <kbd className="px-1.5 py-0.5 bg-[#190E08] border border-[#78350F] rounded font-mono text-[10px] text-[#FDE68A]">→</kbd> navigasi soal</span>
+          <span><kbd className="px-1.5 py-0.5 bg-[#190E08] border border-[#78350F] rounded font-mono text-[10px] text-[#FDE68A]">Enter</kbd> hitung hasil</span>
+        </div>
+
+        {/* Disclaimer Banner */}
+        <div className="mt-8">
+          <DisclaimerBanner compact />
+        </div>
+      </div>
+
+      {/* Question Overview Modal */}
+      <QuestionOverviewModal
+        isOpen={isOverviewOpen}
+        onClose={() => setIsOverviewOpen(false)}
+        questions={questions}
+        answers={answers}
+        currentQuestionId={currentQuestion.id}
+        onSelectQuestion={(id) => {
+          const idx = questions.findIndex((q) => q.id === id);
+          if (idx !== -1) setCurrentIndex(idx);
+        }}
+      />
+
+      {/* Reset Confirmation Modal */}
+      <RetakeConfirmModal
+        isOpen={showResetModal}
+        onClose={() => setShowResetModal(false)}
+        onConfirm={() => {
+          resetAnswers();
+          setCurrentIndex(0);
+          setShowResetModal(false);
+        }}
+      />
+
+      {/* Incomplete Questionnaire Alert Modal */}
+      <IncompleteQuestionnaireModal
+        isOpen={showIncompleteAlert}
+        onClose={() => setShowIncompleteAlert(false)}
+        answeredCount={answeredCount}
+        totalQuestions={totalQuestions}
+      />
+
+      {/* Stage 3 Calculation Transition Screen */}
+      {isCalculating && (
+        <PixelCalculationTransition
+          onComplete={() => {
+            router.push('/results');
+          }}
+        />
+      )}
+    </div>
+  );
+}

@@ -16,6 +16,48 @@ export interface Faculty {
 }
 
 /**
+ * Jalur Penerimaan Mahasiswa Baru.
+ */
+export interface AdmissionPathway {
+  id: string;
+  name: string;
+  shortName: string;
+  description: string;
+  percentageStandard: string;
+}
+
+/**
+ * Data Sumber Rujukan Daya Tampung & Kurikulum.
+ */
+export interface DataSource {
+  id: string;
+  name: string;
+  url: string;
+  publicationDate: string;
+  retrievedAt: string;
+  sourceType: 'official_portal' | 'sk_rektor' | 'snpmb' | 'pddikti';
+}
+
+/**
+ * Rekor Kuota & Daya Tampung Resmi Program Studi per Tahun Akademik.
+ */
+export interface AdmissionQuota {
+  id: string;
+  programId: string;
+  academicYear: string;
+  snbpQuota: number | null;     // null = "Data belum tersedia", distinct from 0
+  snbtQuota: number | null;
+  mandiriQuota: number | null;
+  otherQuota?: number | null;
+  totalCapacity: number | null;
+  sourceId: string;
+  sourceName: string;
+  sourceUrl: string;
+  lastVerified: string;
+  status: 'verified' | 'provisional' | 'unavailable';
+}
+
+/**
  * Representasi sebuah Program Studi di UNDIP beserta profil minatnya.
  *
  * Profil minat terdiri dari 4 dimensi:
@@ -29,6 +71,7 @@ export interface StudyProgram {
   name: string;
   facultyId: string;
   degreeLevel: 'S1' | 'D4' | 'S2' | 'S3' | 'Profesi' | 'Spesialis';
+  campusLocation?: string; // e.g., 'Semarang (Kampus Utama)', 'Batang', 'Rembang'
   description: string;
   websiteUrl: string;
   learningOutcomes: string[];
