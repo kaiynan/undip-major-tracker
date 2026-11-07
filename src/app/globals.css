@@ -25,6 +25,7 @@
 @import "tailwindcss";
 
 :root {
+  --navbar-h: 56px;
   --background: #0B132B;
   --foreground: #F8F7F3;
   --muted-text: #94A3B8;

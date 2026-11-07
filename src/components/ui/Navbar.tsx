@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useSyncExternalStore } from 'react';
+import React, { useState, useEffect, useRef, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, ArrowRight, Volume2, VolumeX, RotateCcw } from 'lucide-react';
@@ -27,10 +27,27 @@ const subscribeNoop = () => () => {};
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const navRef = useRef<HTMLElement>(null);
   const { answeredCount, totalQuestions, isComplete } = useQuestionnaire();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const [isMuted, setIsMuted] = useState(() => (typeof window !== 'undefined' ? retroAudio.isMuted() : false));
+
+  // Expose measured navbar height as --navbar-h CSS variable
+  useEffect(() => {
+    const updateNavbarHeight = () => {
+      if (navRef.current) {
+        const height = navRef.current.offsetHeight;
+        document.documentElement.style.setProperty('--navbar-h', `${height}px`);
+      }
+    };
+    updateNavbarHeight();
+    const observer = new ResizeObserver(updateNavbarHeight);
+    if (navRef.current) {
+      observer.observe(navRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
 
   const handleToggleSound = () => {
     const nextMuted = retroAudio.toggleMute();
@@ -117,6 +134,10 @@ export function Navbar() {
   }
 
   const handleNavClick = (item: NavItem, e: React.MouseEvent) => {
+    // If clicked while intro is playing, cleanly skip intro first
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('undip:skip-intro'));
+    }
     setMobileMenuOpen(false);
     retroAudio.playSelect();
     setActiveSection(item.id);
@@ -152,6 +173,7 @@ export function Navbar() {
 
   return (
     <header
+      ref={navRef}
       className="sticky top-0 z-50 w-full bg-[#1A0E08]/95 backdrop-blur-md border-b-4 border-[#78350F] text-white select-none pixelated shadow-[0_4px_16px_rgba(0,0,0,0.6)]"
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >

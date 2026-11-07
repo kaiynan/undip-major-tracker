@@ -14,10 +14,10 @@ interface PixelIntroOverlayProps {
 export function PixelIntroOverlay({
   onComplete,
 }: PixelIntroOverlayProps) {
-  // Step 0: Loading
-  // Step 1: Wide establishing shot (Gate with distant Horse Statue centered)
-  // Step 2: Smooth Forward Tracking Zoom toward the Horse Statue
-  // Step 3: Transition wipe into Widya Puraya Hero
+  // Frame 0: Loading + Logos (clean full-screen, navbar hidden)
+  // Frame 1: Wide establishing shot (Gate with distant Horse Statue centered, Navbar visible)
+  // Frame 2: Smooth Forward Tracking Zoom toward the Horse Statue
+  // Frame 3: Transition wipe into Widya Puraya Hero
   const [frame, setFrame] = useState<0 | 1 | 2 | 3>(0);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -38,8 +38,8 @@ export function PixelIntroOverlay({
     handleComplete();
   }, [handleComplete]);
 
+  // Listen to keyboard shortcut (ESC / Space)
   useEffect(() => {
-    // Keyboard Escape or Space to skip intro
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' || e.key === ' ') {
         e.preventDefault();
@@ -50,42 +50,54 @@ export function PixelIntroOverlay({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleSkip]);
 
+  // Listen to custom event when user clicks any Navbar link during intro
   useEffect(() => {
-    // Frame 0: Loading bar (0 to 1.1s)
-    const loadInterval = setInterval(() => {
-      setLoadingProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(loadInterval);
-          return 100;
-        }
-        const next = prev + 15;
-        return next > 100 ? 100 : next;
-      });
-    }, 120);
+    const onSkipEvent = () => handleSkip();
+    window.addEventListener('undip:skip-intro', onSkipEvent);
+    return () => window.removeEventListener('undip:skip-intro', onSkipEvent);
+  }, [handleSkip]);
 
-    // Frame 1: Gate reveal (wide shot with horse statue in center) at 1.1s
+  useEffect(() => {
+    // Frame 0: Loading bar with ease-out timing, reaches 100% around ~2.1s
+    const startTime = Date.now();
+    const loadDuration = 2100;
+
+    const loadInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= loadDuration) {
+        setLoadingProgress(100);
+        clearInterval(loadInterval);
+      } else {
+        const factor = elapsed / loadDuration;
+        // Ease-out curve
+        const progress = Math.min(99, Math.floor(100 * Math.pow(factor, 0.75)));
+        setLoadingProgress(progress);
+      }
+    }, 40);
+
+    // Frame 1: Gate reveal at 2.3s (Frame 1 lasts ~2.3s >= 2.2s required)
     const t1 = setTimeout(() => {
       setFrame(1);
       setZoomLevel(1);
       retroAudio.playBlip(520);
-    }, 1100);
+    }, 2300);
 
-    // Frame 2: Smooth camera tracking push towards the horse statue at 2.4s
+    // Frame 2: Smooth camera tracking push towards the horse statue at 3.7s
     const t2 = setTimeout(() => {
       setFrame(2);
-      setZoomLevel(2.8); // Smoothly zooms into the center opening
+      setZoomLevel(2.8);
       retroAudio.playWarp();
-    }, 2400);
+    }, 3700);
 
-    // Frame 3: Transition Wipe at 4.6s
+    // Frame 3: Transition Wipe at 5.7s
     const t3 = setTimeout(() => {
       setFrame(3);
-    }, 4600);
+    }, 5700);
 
-    // Complete at 5.3s
+    // Complete at 6.4s
     const t4 = setTimeout(() => {
       handleComplete();
-    }, 5300);
+    }, 6400);
 
     return () => {
       clearInterval(loadInterval);
@@ -97,135 +109,149 @@ export function PixelIntroOverlay({
   }, [handleComplete]);
 
   return (
-    <div
-      className={`fixed inset-0 bg-[#1A0E08] flex flex-col justify-between overflow-hidden select-none transition-opacity duration-700 ${
-        frame === 0 ? 'z-[60]' : 'z-[45]'
-      } ${
-        frame === 3 ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
-      aria-label="Animasi Pembuka Gerbang UNDIP Tembalang"
-      style={{
-        paddingTop: 'env(safe-area-inset-top, 0px)',
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
-      }}
-    >
-      {/* Top HUD with Skip Button */}
+    <>
+      {/* Top Navbar Cover during Frame 1 to keep Frame 1 clean and full-screen */}
       <div
-        className={`relative z-30 p-3 sm:p-6 flex items-center justify-end transition-all duration-300 ${
-          frame >= 1 ? 'pt-16 sm:pt-20' : 'pt-3 sm:pt-6'
+        className={`fixed top-0 left-0 right-0 z-[55] bg-[#1A0E08] transition-opacity duration-700 pointer-events-none ${
+          frame === 0 ? 'opacity-100 pointer-events-auto' : 'opacity-0'
         }`}
+        style={{ height: 'var(--navbar-h, 56px)' }}
+        aria-hidden="true"
+      />
+
+      <div
+        className={`fixed left-0 right-0 bottom-0 bg-[#1A0E08] flex flex-col justify-between overflow-hidden select-none transition-all duration-400 ${
+          frame === 0 ? 'z-[60]' : 'z-[45]'
+        } ${
+          frame === 3 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+        }`}
+        aria-label="Animasi Pembuka Gerbang UNDIP Tembalang"
+        style={{
+          top: frame === 0 ? 0 : 'var(--navbar-h, 56px)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        }}
       >
-        <button
-          onClick={handleSkip}
-          className="font-pixel text-[8.5px] sm:text-[10px] bg-[#0A1428]/95 hover:bg-[#102A56] text-[#FCD34D] hover:text-white px-3 sm:px-3.5 py-2 sm:py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#78350F] flex items-center gap-1.5 cursor-pointer pixelated active:scale-95 shrink-0 min-h-[38px] sm:min-h-[32px]"
-          aria-label="Lewati animasi pembuka"
-        >
-          <FastForward className="w-3.5 h-3.5 text-[#FCD34D]" />
-          <span className="hidden sm:inline">LEWATI INTRO [ESC]</span>
-          <span className="sm:hidden">LEWATI</span>
-        </button>
-      </div>
+        {/* Top HUD with Skip Button — visible, tappable >= 44x44px and placed below navbar from Frame 2 */}
+        <div className="relative z-30 pt-3 px-3 pb-1 sm:pt-4 sm:px-6 flex items-center justify-end shrink-0">
+          <button
+            onClick={handleSkip}
+            className="font-pixel text-[8.5px] sm:text-[10px] bg-[#0A1428]/95 hover:bg-[#102A56] text-[#FCD34D] hover:text-white px-3 sm:px-4 py-2 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#78350F] flex items-center justify-center gap-1.5 cursor-pointer pixelated active:scale-95 shrink-0 min-h-[44px] min-w-[44px]"
+            aria-label="Lewati animasi pembuka"
+          >
+            <FastForward className="w-4 h-4 text-[#FCD34D] shrink-0" />
+            <span className="hidden sm:inline">LEWATI INTRO [ESC]</span>
+            <span className="sm:hidden">LEWATI</span>
+          </button>
+        </div>
 
-      {/* Main Visual Arena */}
-      <div className="relative flex-1 flex items-center justify-center overflow-hidden">
-        {/* Frame 0: Dark Screen & Loading Progress */}
-        {frame === 0 && (
-          <div className="relative z-20 flex flex-col items-center justify-center text-center p-6 space-y-4 max-w-md w-full animate-in fade-in duration-300">
-            {/* Three Logos: Universitas Diponegoro, Sedulur Serang Diponegoro, Gema Saujana (Transparent Background) */}
-            <div className="flex items-center justify-center gap-4 sm:gap-7 mb-2">
-              {/* 1. Universitas Diponegoro (UNDIP) */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-                <Image
-                  src="/images/logos/undip.png"
-                  alt="Universitas Diponegoro"
-                  width={96}
-                  height={96}
-                  priority
-                  className="max-w-full max-h-full object-contain"
-                />
-              </div>
+        {/* Main Visual Arena */}
+        <div className="relative flex-1 flex items-center justify-center overflow-hidden">
+          {/* Frame 0: Dark Screen & Loading Progress */}
+          {frame === 0 && (
+            <div className="relative z-20 flex flex-col items-center justify-center text-center p-4 sm:p-6 space-y-4 max-w-md w-full animate-in fade-in duration-300">
+              {/* Three Logos: Universitas Diponegoro, Sedulur Serang Diponegoro, Gema Saujana (Transparent Background) */}
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mb-2">
+                {/* 1. Universitas Diponegoro (UNDIP) */}
+                <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_0_8px_rgba(245,158,11,0.25)]">
+                  <Image
+                    src="/logos/undip.png"
+                    alt="Universitas Diponegoro"
+                    width={96}
+                    height={96}
+                    priority
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
 
-              {/* 2. Sedulur Serang Diponegoro */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-                <Image
-                  src="/images/logos/sedulur-serang-diponegoro.png"
-                  alt="Sedulur Serang Diponegoro"
-                  width={96}
-                  height={96}
-                  priority
-                  className="max-w-full max-h-full object-contain"
-                />
-              </div>
+                {/* 2. Sedulur Serang Diponegoro */}
+                <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_0_8px_rgba(245,158,11,0.25)]">
+                  <Image
+                    src="/logos/sedulur-serang-diponegoro.png"
+                    alt="Sedulur Serang Diponegoro"
+                    width={96}
+                    height={96}
+                    priority
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
 
-              {/* 3. Gema Saujana */}
-              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-                <Image
-                  src="/images/logos/gema-saujana.png"
-                  alt="Gema Saujana"
-                  width={96}
-                  height={96}
-                  priority
-                  className="max-w-full max-h-full object-contain"
-                />
-              </div>
-            </div>
-
-            <div className="font-pixel text-[10px] sm:text-xs text-[#93C5FD] tracking-wider sm:tracking-widest uppercase">
-              Roadshow Sedulur Serang Diponegoro 2027
-            </div>
-            <h1 className="font-pixel text-lg sm:text-2xl md:text-3xl text-white tracking-wide">
-              Define Your Next Move
-            </h1>
-
-            {/* Indikator Loading tepat diatas box loading */}
-            <div className="w-full text-center mt-3 mb-1">
-              <span className="font-pixel text-[10px] sm:text-xs text-[#FCD34D] tracking-wider animate-pulse">
-                (Loading {loadingProgress}%)
-              </span>
-            </div>
-
-            {/* Pixel Loading Bar */}
-            <div className="w-full bg-[#081226] h-3.5 sm:h-4 border-2 border-[#334155] p-0.5 shadow-[2px_2px_0_0_#000]">
-              <div
-                className="h-full bg-gradient-to-r from-[#1D4ED8] via-[#F59E0B] to-[#10B981] transition-all duration-150"
-                style={{ width: `${loadingProgress}%` }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Frame 1, 2, 3: Gate Scene with Horse Statue in Center & Smooth Tracking Push */}
-        {frame >= 1 && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <PixelGateScene
-              scale={1}
-              zoomLevel={zoomLevel}
-              className="w-full h-full"
-            />
-
-            {/* Moving Forward Atmosphere in Frame 2 */}
-            {frame === 2 && (
-              <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none animate-in fade-in duration-300">
-                <div className="bg-[#0A1428]/85 border-2 border-[#FCD34D] px-6 py-2.5 text-center shadow-[4px_4px_0_0_#000]">
-                  <div className="font-pixel text-xs sm:text-sm text-[#FCD34D] animate-pulse">
-                    MENDEKATI PATUNG KUDA WIDYA PURAYA...
-                  </div>
+                {/* 3. Gema Saujana */}
+                <div className="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_0_8px_rgba(245,158,11,0.25)]">
+                  <Image
+                    src="/logos/gema-saujana.png"
+                    alt="Gema Saujana"
+                    width={96}
+                    height={96}
+                    priority
+                    className="max-w-full max-h-full object-contain"
+                  />
                 </div>
               </div>
-            )}
-          </div>
-        )}
-      </div>
 
-      {/* Bottom Subtitle / Prompt Bar */}
-      <div className="relative z-30 p-4 sm:p-5 text-center bg-[#081226]/90 border-t-2 border-[#1E293B]">
-        <p className="font-pixel text-[9px] sm:text-[10px] text-slate-200">
-          Find Your Potential, Discover Your Future
-        </p>
-      </div>
+              <div className="font-pixel text-[10px] sm:text-xs text-[#93C5FD] tracking-wider sm:tracking-widest uppercase">
+                Roadshow Sedulur Serang Diponegoro 2027
+              </div>
+              <h1 className="font-pixel text-lg sm:text-2xl md:text-3xl text-white tracking-wide">
+                Define Your Next Move
+              </h1>
 
-      {/* Scanline CRT overlay */}
-      <div className="scanlines absolute inset-0 z-40 pointer-events-none opacity-30" />
-    </div>
+              {/* Indikator Loading tepat diatas box loading: Loading NN% */}
+              <div className="w-full text-center mt-3 mb-1.5" aria-hidden="true">
+                <span className="font-pixel text-[10px] sm:text-xs text-[#FCD34D] tracking-wider tabular-nums inline-block">
+                  Loading {loadingProgress}%
+                </span>
+              </div>
+
+              {/* Pixel Loading Bar */}
+              <div
+                role="progressbar"
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={loadingProgress}
+                aria-label="Memuat aplikasi"
+                className="w-full bg-[#081226] h-3.5 sm:h-4 border-2 border-[#334155] p-0.5 shadow-[2px_2px_0_0_#000]"
+              >
+                <div
+                  className="h-full bg-gradient-to-r from-[#1D4ED8] via-[#F59E0B] to-[#10B981] transition-all duration-150"
+                  style={{ width: `${loadingProgress}%` }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* Frame 1, 2, 3: Gate Scene with Horse Statue in Center & Smooth Tracking Push */}
+          {frame >= 1 && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <PixelGateScene
+                scale={1}
+                zoomLevel={zoomLevel}
+                className="w-full h-full"
+              />
+
+              {/* Moving Forward Atmosphere in Frame 2 */}
+              {frame === 2 && (
+                <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none animate-in fade-in duration-300">
+                  <div className="bg-[#0A1428]/85 border-2 border-[#FCD34D] px-6 py-2.5 text-center shadow-[4px_4px_0_0_#000]">
+                    <div className="font-pixel text-xs sm:text-sm text-[#FCD34D] motion-safe:animate-pulse">
+                      MENDEKATI PATUNG KUDA WIDYA PURAYA...
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Bottom Subtitle / Prompt Bar */}
+        <div className="relative z-30 p-3 sm:p-5 text-center bg-[#081226]/90 border-t-2 border-[#1E293B]">
+          <p className="font-pixel text-[9px] sm:text-[10px] text-slate-200">
+            Find Your Potential, Discover Your Future
+          </p>
+        </div>
+
+        {/* Scanline CRT overlay */}
+        <div className="scanlines absolute inset-0 z-40 pointer-events-none opacity-30" />
+      </div>
+    </>
   );
 }
