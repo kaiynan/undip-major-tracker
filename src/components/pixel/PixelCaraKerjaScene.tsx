@@ -11,7 +11,6 @@ const STEPS = [
     Icon: Compass,
     description:
       'Pahami dorongan alamiah dirimu: eksplorasi apakah kamu lebih tertarik pada praktik alat, investigasi analitis, ekspresi sosial, atau kepemimpinan bisnis.',
-    hint: 'Dimensi RIASEC Holland (Bobot 20%)',
   },
   {
     step: '02',
@@ -20,7 +19,6 @@ const STEPS = [
     Icon: FileText,
     description:
       'Tanggapi 36 butir refleksi terstruktur dengan skala 1–5 (Sangat Tidak Tertarik hingga Sangat Tertarik). Waktu pengerjaan santai sekitar 5–8 menit.',
-    hint: '36 Butir Multi-Dimensi',
   },
   {
     step: '03',
@@ -29,7 +27,6 @@ const STEPS = [
     Icon: Sparkles,
     description:
       'Mesin analitik HMIM memproses profilmu secara komprehensif dan menghasilkan pengelompokan Tier kecocokan (Tier S, A, B, C, D) yang transparan dan obyektif.',
-    hint: 'Algoritma HMIM 4 Dimensi',
   },
   {
     step: '04',
@@ -38,7 +35,6 @@ const STEPS = [
     Icon: GraduationCap,
     description:
       'Pelajari profil kurikulum autentik, capaian pembelajaran (CPL), prospek karier, serta daya tampung resmi penerimaan mahasiswa baru (SNBP, SNBT, Mandiri) di 67 program studi.',
-    hint: '67 Pilihan Program Studi S1 & D4',
   },
 ];
 
@@ -91,8 +87,7 @@ export function PixelCaraKerjaScene() {
                 </div>
 
                 {/* Step Metadata Footer */}
-                <div className="mt-5 pt-3 border-t border-[#78350F]/40 flex items-center justify-between text-[10px] font-mono text-amber-200/80">
-                  <span>{item.hint}</span>
+                <div className="mt-5 pt-3 border-t border-[#78350F]/40 flex items-center justify-end text-[10px] font-mono text-amber-200/80">
                   <span className="text-[#FDE68A] font-bold">{item.step}/04</span>
                 </div>
               </div>

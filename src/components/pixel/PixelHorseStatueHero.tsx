@@ -33,16 +33,25 @@ export function PixelHorseStatueHero({
     }
   }, []);
 
-  const handlePressToPlay = () => {
+  const handlePressToPlay = (e?: React.SyntheticEvent) => {
+    if (e) {
+      e.stopPropagation();
+    }
     if (isStarting) return;
     setIsStarting(true);
     retroAudio.playStartGame();
 
+    const navigate = () => {
+      try {
+        router.push('/questionnaire');
+      } catch {
+        window.location.href = '/questionnaire';
+      }
+    };
+
     if (prefersReducedMotion) {
       setTransitionFade(true);
-      setTimeout(() => {
-        router.push('/questionnaire');
-      }, 300);
+      setTimeout(navigate, 300);
       return;
     }
 
@@ -51,9 +60,7 @@ export function PixelHorseStatueHero({
       setTransitionFade(true);
     }, 750);
 
-    setTimeout(() => {
-      router.push('/questionnaire');
-    }, 1050);
+    setTimeout(navigate, 1050);
   };
 
   const handleToggleAudio = () => {
@@ -67,7 +74,7 @@ export function PixelHorseStatueHero({
   return (
     <section
       id="patung-kuda"
-      className="relative w-full min-h-[92vh] sm:min-h-screen bg-[#1F130E] flex flex-col justify-between overflow-hidden select-none border-y-4 border-[#78350F]"
+      className="relative w-full min-h-[92vh] sm:min-h-screen bg-[#1F130E] flex flex-col justify-between overflow-hidden select-none border-y-4 border-[#78350F] scroll-mt-14 sm:scroll-mt-16"
       aria-label="Scene Pangeran Diponegoro Widya Puraya - Sunset Golden Hour"
     >
       {/* ============================================================== */}
@@ -90,13 +97,13 @@ export function PixelHorseStatueHero({
       {/* ============================================================== */}
       {/* 2. TOP SPATIAL NAVIGATION CUE: SCROLL UP TO REKTORAT */}
       {/* ============================================================== */}
-      <div className={`relative z-20 pt-3 px-4 flex flex-col items-center transition-opacity duration-300 ${isStarting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`relative z-20 pt-4 sm:pt-6 px-4 flex flex-col items-center transition-opacity duration-300 ${isStarting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <button
           onClick={() => {
             retroAudio.playWarp();
             onScrollUp?.();
           }}
-          className="group flex flex-col items-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated"
+          className="group flex flex-col items-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated active:scale-95 touch-manipulation"
           aria-label="Eksplorasi ke Atas: Gedung Rektorat UNDIP (Beranda)"
         >
           <div className="flex items-center gap-1.5 font-pixel text-[9px] sm:text-[10px] tracking-wider uppercase">
@@ -114,10 +121,10 @@ export function PixelHorseStatueHero({
       {/* 3. MAIN VISUAL COMPOSITION: COMPLETE FULL-WHITE DIPONEGORO STATUE */}
       {/* ============================================================== */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center max-w-6xl mx-auto w-full px-2 sm:px-6 my-auto">
-        <div className="relative w-full max-w-4xl min-h-[440px] sm:min-h-0 aspect-auto sm:aspect-[16/10] flex items-center justify-center">
+        <div className="relative w-full max-w-4xl min-h-[300px] sm:min-h-0 aspect-auto sm:aspect-[16/10] flex items-center justify-center">
           <svg
             viewBox="0 0 900 580"
-            className="w-full h-full max-h-[65vh] object-contain overflow-visible"
+            className="w-full h-full max-h-[52vh] sm:max-h-[62vh] object-contain overflow-visible"
             style={{ shapeRendering: 'crispEdges' }}
             preserveAspectRatio="xMidYMid meet"
           >
@@ -233,47 +240,50 @@ export function PixelHorseStatueHero({
           {/* ============================================================== */}
           {/* Positioned cleanly below the statue's torso so horse & pointing arm are 100% visible */}
           <div className={`absolute inset-x-0 bottom-1 sm:bottom-4 flex flex-col items-center justify-center pointer-events-none transition-all duration-300 ${isStarting ? 'opacity-0 scale-95 pointer-events-none' : 'opacity-100'}`}>
-            <div className="pointer-events-auto bg-[#1A0E08]/95 backdrop-blur-md px-4 sm:px-8 py-3 sm:py-4 border-3 sm:border-4 border-[#F59E0B] shadow-[0_0_30px_rgba(245,158,11,0.5)] flex flex-col items-center gap-1.5 sm:gap-2 text-center transition-all hover:scale-105 active:scale-95 cursor-pointer max-w-[94%] sm:max-w-md pixelated">
+            <div
+              onClick={handlePressToPlay}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handlePressToPlay(e);
+                }
+              }}
+              className="pointer-events-auto bg-[#1A0E08]/95 backdrop-blur-md px-6 sm:px-10 py-4 sm:py-6 border-4 border-[#F59E0B] shadow-[0_0_35px_rgba(245,158,11,0.6),4px_4px_0_0_#451A03] flex flex-col items-center gap-2 sm:gap-2.5 text-center transition-all hover:scale-105 active:scale-95 cursor-pointer w-[92%] sm:w-auto sm:min-w-[420px] max-w-lg pixelated touch-manipulation select-none"
+              aria-label="Tekan untuk Mulai Kuisioner Minat 36 Pertanyaan"
+            >
               <div className="flex items-center gap-2">
-                <span className="font-pixel text-[8.5px] sm:text-[9px] text-[#FDE68A] tracking-wider sm:tracking-widest uppercase">
+                <span className="font-pixel text-[9px] sm:text-[10px] text-[#FDE68A] tracking-wider sm:tracking-widest uppercase">
                   UNIVERSITAS DIPONEGORO
                 </span>
-                <span className="w-2 h-2 bg-[#F59E0B] inline-block animate-pulse" />
+                <span className="w-2.5 h-2.5 bg-[#F59E0B] inline-block animate-pulse" />
               </div>
 
               {/* The Central Blinking Retro Arcade Prompt */}
               <button
+                type="button"
                 onClick={handlePressToPlay}
                 disabled={isStarting}
-                className="group flex items-center justify-center gap-1.5 sm:gap-2.5 py-1 px-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer w-full"
+                className="group flex items-center justify-center gap-2 sm:gap-3 py-1.5 px-2 text-[#FDE68A] hover:text-white transition-colors cursor-pointer w-full touch-manipulation min-h-[48px]"
                 aria-label="Tekan untuk Mulai Kuisioner Minat 36 Pertanyaan"
               >
-                <span className="font-pixel text-sm sm:text-2xl text-[#F59E0B] group-hover:translate-x-[-3px] transition-transform animate-retro-blink shrink-0">
+                <span className="font-pixel text-base sm:text-2xl md:text-3xl text-[#F59E0B] group-hover:translate-x-[-4px] transition-transform animate-retro-blink shrink-0">
                   ▶
                 </span>
-                <span className="font-pixel text-base sm:text-2xl md:text-3xl text-[#FFFFFF] drop-shadow-[0_2px_0_#451A03] sm:drop-shadow-[0_3px_0_#451A03] tracking-normal sm:tracking-wider animate-retro-blink whitespace-nowrap">
+                <span className="font-pixel text-lg sm:text-2xl md:text-3xl text-[#FFFFFF] drop-shadow-[0_2px_0_#451A03] sm:drop-shadow-[0_3px_0_#451A03] tracking-normal sm:tracking-wider animate-retro-blink whitespace-nowrap">
                   PRESS TO PLAY
                 </span>
-                <span className="font-pixel text-sm sm:text-2xl text-[#F59E0B] group-hover:translate-x-[3px] transition-transform animate-retro-blink shrink-0">
+                <span className="font-pixel text-base sm:text-2xl md:text-3xl text-[#F59E0B] group-hover:translate-x-[4px] transition-transform animate-retro-blink shrink-0">
                   ◀
                 </span>
               </button>
 
-              <p className="text-[11px] sm:text-xs text-amber-100 font-medium font-sans">
+              <p className="text-xs sm:text-sm text-amber-100 font-medium font-sans">
                 {answeredCount > 0
                   ? `Lanjutkan Quest Minat (${answeredCount}/${totalQuestions} Terjawab)`
                   : 'Mulai Petualangan 36 Refleksi Minat Akademik'}
               </p>
-
-              {/* Clean Supporting Metadata Badges */}
-              <div className="flex items-center gap-2 pt-0.5">
-                <span className="font-pixel text-[8px] bg-[#9A3412] text-amber-100 px-2 py-0.5 border border-[#F59E0B]">
-                  67 PRODI
-                </span>
-                <span className="font-pixel text-[8px] bg-[#78350F] text-amber-100 px-2 py-0.5 border border-[#FDE68A]">
-                  HMIM ENGINE
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -282,13 +292,13 @@ export function PixelHorseStatueHero({
       {/* ============================================================== */}
       {/* 5. BOTTOM SPATIAL NAVIGATION CUE: SCROLL DOWN TO CARA KERJA */}
       {/* ============================================================== */}
-      <div className={`relative z-20 pb-3 px-4 flex flex-col items-center transition-opacity duration-300 ${isStarting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className={`relative z-20 pb-20 md:pb-4 px-4 flex flex-col items-center transition-opacity duration-300 ${isStarting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <button
           onClick={() => {
             retroAudio.playWarp();
             onScrollDown?.();
           }}
-          className="group flex flex-col items-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated"
+          className="group flex flex-col items-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated active:scale-95 touch-manipulation"
           aria-label="Eksplorasi ke Bawah: Panduan Cara Kerja & Tentang Kami"
         >
           <div className="flex items-center gap-1.5 font-pixel text-[9px] sm:text-[10px] tracking-wider uppercase">

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Compass, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Compass, ExternalLink } from 'lucide-react';
 import { faculties } from '@/data/faculties';
 
 export function Footer() {
@@ -30,10 +30,6 @@ export function Footer() {
               arsitektur <strong>Hybrid Multi-Dimensional Interest Matching (HMIM)</strong>. Dirancang khusus
               untuk membantu calon mahasiswa menemukan jurusan impian secara obyektif dan komprehensif.
             </p>
-            <div className="flex items-center gap-2 text-xs text-emerald-400 font-mono">
-              <ShieldCheck className="w-4 h-4 shrink-0" />
-              <span>Privasi Terjaga: 100% data tersimpan di browser tanpa pengumpulan NIK/identitas.</span>
-            </div>
           </div>
 
           {/* Quick Links */}

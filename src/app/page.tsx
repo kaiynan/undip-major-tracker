@@ -79,7 +79,13 @@ export default function HomePage() {
   const scrollToSection = (sectionId: string, smooth = true) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+      const navOffset = window.innerWidth >= 640 ? 64 : 56;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - navOffset;
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: smooth ? 'smooth' : 'auto',
+      });
       window.history.replaceState(null, '', `#${sectionId}`);
       setActiveSection(sectionId as typeof activeSection);
     }

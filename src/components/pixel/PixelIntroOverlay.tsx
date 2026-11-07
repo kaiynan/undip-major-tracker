@@ -42,7 +42,8 @@ export function PixelIntroOverlay({
           clearInterval(loadInterval);
           return 100;
         }
-        return prev + 25;
+        const next = prev + 15;
+        return next > 100 ? 100 : next;
       });
     }, 120);
 
@@ -97,7 +98,9 @@ export function PixelIntroOverlay({
 
   return (
     <div
-      className={`fixed inset-0 z-50 bg-[#1A0E08] flex flex-col justify-between overflow-hidden select-none transition-opacity duration-700 ${
+      className={`fixed inset-0 bg-[#1A0E08] flex flex-col justify-between overflow-hidden select-none transition-opacity duration-700 ${
+        frame === 0 ? 'z-[60]' : 'z-[45]'
+      } ${
         frame === 3 ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
       aria-label="Animasi Pembuka Gerbang UNDIP Tembalang"
@@ -107,27 +110,11 @@ export function PixelIntroOverlay({
       }}
     >
       {/* Top HUD with Skip Button */}
-      <div className="relative z-30 p-3 sm:p-6 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-          <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-[#F59E0B] inline-block animate-pulse shrink-0" />
-          <span className="font-pixel text-[8px] sm:text-[10px] text-[#FCD34D] tracking-wider sm:tracking-widest uppercase truncate">
-            {frame === 0 && 'FRAME 1/4: INISIALISASI...'}
-            {frame === 1 && (
-              <>
-                <span className="hidden sm:inline">FRAME 2/4: GERBANG UNDIP — PATUNG KUDA DIPONEGORO TERLIHAT</span>
-                <span className="sm:hidden">FRAME 2/4: GERBANG UNDIP</span>
-              </>
-            )}
-            {frame === 2 && (
-              <>
-                <span className="hidden sm:inline">FRAME 3/4: MENDEKATI PATUNG KUDA DIPONEGORO...</span>
-                <span className="sm:hidden">FRAME 3/4: MENDEKATI PATUNG</span>
-              </>
-            )}
-            {frame === 3 && 'FRAME 4/4: WIDYA PURAYA'}
-          </span>
-        </div>
-
+      <div
+        className={`relative z-30 p-3 sm:p-6 flex items-center justify-end transition-all duration-300 ${
+          frame >= 1 ? 'pt-16 sm:pt-20' : 'pt-3 sm:pt-6'
+        }`}
+      >
         <button
           onClick={handleSkip}
           className="font-pixel text-[8.5px] sm:text-[10px] bg-[#0A1428]/95 hover:bg-[#102A56] text-[#FCD34D] hover:text-white px-3 sm:px-3.5 py-2 sm:py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#78350F] flex items-center gap-1.5 cursor-pointer pixelated active:scale-95 shrink-0 min-h-[38px] sm:min-h-[32px]"
@@ -144,30 +131,57 @@ export function PixelIntroOverlay({
         {/* Frame 0: Dark Screen & Loading Progress */}
         {frame === 0 && (
           <div className="relative z-20 flex flex-col items-center justify-center text-center p-6 space-y-4 max-w-md w-full animate-in fade-in duration-300">
-            <div className="w-16 h-16 bg-[#102A56] border-4 border-[#F59E0B] flex items-center justify-center text-white mb-2 shadow-[4px_4px_0_0_#000]">
-              <span className="font-pixel text-2xl text-[#FCD34D] animate-retro-blink">◆</span>
+            {/* Three Logos: Universitas Diponegoro, Sedulur Serang Diponegoro, Gema Saujana (Transparent Background) */}
+            <div className="flex items-center justify-center gap-4 sm:gap-7 mb-2">
+              {/* 1. Universitas Diponegoro (UNDIP) */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+                <img
+                  src="/images/logos/undip.png"
+                  alt="Universitas Diponegoro"
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+
+              {/* 2. Sedulur Serang Diponegoro */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+                <img
+                  src="/images/logos/sedulur-serang-diponegoro.png"
+                  alt="Sedulur Serang Diponegoro"
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
+
+              {/* 3. Gema Saujana */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center shrink-0 drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
+                <img
+                  src="/images/logos/gema-saujana.png"
+                  alt="Gema Saujana"
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
             </div>
 
-            <div className="font-pixel text-xs sm:text-sm text-[#93C5FD] tracking-widest uppercase">
-              UNIVERSITAS DIPONEGORO
+            <div className="font-pixel text-[10px] sm:text-xs text-[#93C5FD] tracking-wider sm:tracking-widest uppercase">
+              Roadshow Sedulur Serang Diponegoro 2027
             </div>
-            <h1 className="font-pixel text-lg sm:text-2xl text-white tracking-wide">
-              UNDIP MAJOR MATCHER
+            <h1 className="font-pixel text-lg sm:text-2xl md:text-3xl text-white tracking-wide">
+              Define Your Next Move
             </h1>
-            <div className="font-pixel text-[9px] text-[#FCD34D]">
-              RETRO ADVENTURE EDITION
+
+            {/* Indikator Loading tepat diatas box loading */}
+            <div className="w-full text-center mt-3 mb-1">
+              <span className="font-pixel text-[10px] sm:text-xs text-[#FCD34D] tracking-wider animate-pulse">
+                (Loading {loadingProgress}%)
+              </span>
             </div>
 
             {/* Pixel Loading Bar */}
-            <div className="w-full bg-[#081226] h-5 border-2 border-[#334155] p-0.5 shadow-[2px_2px_0_0_#000]">
+            <div className="w-full bg-[#081226] h-3.5 sm:h-4 border-2 border-[#334155] p-0.5 shadow-[2px_2px_0_0_#000]">
               <div
                 className="h-full bg-gradient-to-r from-[#1D4ED8] via-[#F59E0B] to-[#10B981] transition-all duration-150"
                 style={{ width: `${loadingProgress}%` }}
               />
             </div>
-            <span className="font-mono text-[10px] text-slate-300">
-              MEMUAT DUNIA PIXEL TEMBALANG ({loadingProgress}%)
-            </span>
           </div>
         )}
 
@@ -179,20 +193,6 @@ export function PixelIntroOverlay({
               zoomLevel={zoomLevel}
               className="w-full h-full"
             />
-
-            {/* Cinematic Establishing Title in Frame 1 */}
-            {frame === 1 && (
-              <div className="absolute top-[16%] z-30 text-center px-4 animate-in fade-in slide-in-from-top-4 duration-500">
-                <div className="bg-[#0A1428]/90 border-2 border-[#F59E0B] px-6 py-2.5 inline-block shadow-[4px_4px_0_0_#000]">
-                  <div className="font-pixel text-[9px] text-[#93C5FD] uppercase tracking-widest">
-                    GERBANG KAMPUS UNDIP TEMBALANG
-                  </div>
-                  <div className="font-pixel text-sm sm:text-lg text-[#FCD34D] mt-1">
-                    PATUNG KUDA DIPONEGORO DI DEPAN
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Moving Forward Atmosphere in Frame 2 */}
             {frame === 2 && (
@@ -211,7 +211,7 @@ export function PixelIntroOverlay({
       {/* Bottom Subtitle / Prompt Bar */}
       <div className="relative z-30 p-4 sm:p-5 text-center bg-[#081226]/90 border-t-2 border-[#1E293B]">
         <p className="font-pixel text-[9px] sm:text-[10px] text-slate-200">
-          &ldquo;ENTER UNDIP. EXPLORE YOUR WORLD. DISCOVER YOUR FUTURE.&rdquo;
+          Find Your Potential, Discover Your Future
         </p>
       </div>
 

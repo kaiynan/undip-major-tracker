@@ -1,17 +1,11 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
 import {
-  ShieldCheck,
   Brain,
-  Users,
-  ArrowRight,
   Compass,
   Microscope,
   BookOpen,
-  Sparkles,
 } from 'lucide-react';
 
 const DIMENSIONS = [
@@ -56,7 +50,7 @@ export function PixelTentangKamiScene() {
       className="relative w-full bg-[#1A0E08] text-slate-100 py-16 px-4 sm:px-6 lg:px-8 border-b-4 border-[#78350F] scroll-mt-16"
       aria-label="Scene Tentang Kami"
     >
-      <div className="max-w-6xl mx-auto space-y-12">
+      <div className="max-w-6xl mx-auto space-y-10">
         {/* Section Heading: Clean, Minimal & Consistent */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="font-pixel text-lg sm:text-2xl text-white tracking-wide">
@@ -109,57 +103,6 @@ export function PixelTentangKamiScene() {
               );
             })}
           </div>
-
-          <div className="mt-6 pt-4 border-t border-[#78350F]/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-amber-200/80">
-            <span>
-              Contoh Nyata: Membedakan secara akurat antara peminat <strong>Teknik Kimia</strong> (proses industri) vs <strong>Kimia Murni</strong> (riset laboratorium).
-            </span>
-            <Link
-              href="/admin"
-              className="font-pixel text-[10px] text-[#FDE68A] hover:underline inline-flex items-center gap-1.5 shrink-0"
-            >
-              <span>DETAIL RUMUS HMIM</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-
-        {/* 3 Pillars of Transparency & Trust (Uniform Symmetrical Grid) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#24130C] border-2 border-[#78350F] p-5 pixelated space-y-2.5 shadow-[3px_3px_0_0_#0F0804]">
-            <div className="flex items-center gap-2 font-pixel text-xs text-[#FDE68A]">
-              <ShieldCheck className="w-4 h-4 text-[#F59E0B] shrink-0" />
-              <span>Transparansi & Akurasi</span>
-            </div>
-            <p className="text-xs text-amber-100/75 leading-relaxed font-normal">
-              Seluruh data 67 program studi dan daya tampung bersumber langsung dari penetapan resmi PMB UNDIP dan Portal Nasional SNPMB BPPP Kemdikbudristek RI.
-            </p>
-          </div>
-
-          <div className="bg-[#24130C] border-2 border-[#78350F] p-5 pixelated space-y-2.5 shadow-[3px_3px_0_0_#0F0804]">
-            <div className="flex items-center gap-2 font-pixel text-xs text-[#FDE68A]">
-              <Brain className="w-4 h-4 text-[#F59E0B] shrink-0" />
-              <span>Instrumen Eksplorasi</span>
-            </div>
-            <p className="text-xs text-amber-100/75 leading-relaxed font-normal">
-              Platform ini berfungsi sebagai alat eksplorasi minat akademik mandiri untuk calon mahasiswa baru, bukan penentu kelulusan seleksi atau diagnosis psikologis klinis.
-            </p>
-          </div>
-
-          <div className="bg-[#24130C] border-2 border-[#78350F] p-5 pixelated space-y-2.5 shadow-[3px_3px_0_0_#0F0804]">
-            <div className="flex items-center gap-2 font-pixel text-xs text-[#FDE68A]">
-              <Users className="w-4 h-4 text-[#F59E0B] shrink-0" />
-              <span>Privasi Siswa 100%</span>
-            </div>
-            <p className="text-xs text-amber-100/75 leading-relaxed font-normal">
-              Seluruh jawaban kuisioner diproses dan tersimpan secara lokal di browser perangkatmu. Tidak ada data pribadi atau identitas yang dikumpulkan ke server eksternal.
-            </p>
-          </div>
-        </div>
-
-        {/* Official Mandatory Disclaimer */}
-        <div className="pt-2">
-          <DisclaimerBanner />
         </div>
       </div>
     </section>
