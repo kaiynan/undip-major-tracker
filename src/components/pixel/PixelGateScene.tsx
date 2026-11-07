@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PixelDiponegoroStatue } from './PixelDiponegoroStatue';
 
 interface PixelGateSceneProps {
@@ -14,24 +14,35 @@ export function PixelGateScene({
   zoomLevel = 1,
   className = '',
 }: PixelGateSceneProps) {
+  const [isPortrait, setIsPortrait] = useState(false);
+
+  useEffect(() => {
+    const updateOrientation = () => {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
+    updateOrientation();
+    window.addEventListener('resize', updateOrientation);
+    return () => window.removeEventListener('resize', updateOrientation);
+  }, []);
+
   return (
     <div
       className={`relative w-full h-full overflow-hidden select-none pixelated flex items-center justify-center bg-gradient-to-b from-[#3F1D2C] via-[#832B13] to-[#15803D] ${className}`}
       style={{
         transform: `translate3d(0, 0, 0) scale(${scale * zoomLevel})`,
         WebkitTransform: `translate3d(0, 0, 0) scale(${scale * zoomLevel})`,
-        transformOrigin: '50% 58%',
-        WebkitTransformOrigin: '50% 58%',
+        transformOrigin: isPortrait ? '50% 50%' : '50% 55%',
+        WebkitTransformOrigin: isPortrait ? '50% 50%' : '50% 55%',
         transition: 'transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)',
         WebkitTransition: '-webkit-transform 1.8s cubic-bezier(0.16, 1, 0.3, 1)',
         willChange: 'transform',
       }}
     >
       <svg
-        viewBox="0 0 800 450"
-        className="w-full h-full max-h-screen object-contain sm:object-cover"
+        viewBox={isPortrait ? "165 -250 470 980" : "0 0 800 450"}
+        className="w-full h-full object-cover"
         style={{ shapeRendering: 'crispEdges' }}
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio="xMidYMid slice"
       >
         <defs>
           {/* Pixel Bricks Pattern (Warm Morning Terracotta) */}
@@ -56,6 +67,13 @@ export function PixelGateScene({
             <rect x="2" y="2" width="2" height="2" fill="#16A34A" />
           </pattern>
         </defs>
+
+        {/* 0. EXTENDED SKY & GROUND FOR PORTRAIT MOBILE */}
+        <rect x="0" y="-350" width="800" height="350" fill="#2E1220" />
+        <rect x="0" y="-180" width="800" height="100" fill="#3F1D2C" />
+        <rect x="0" y="-80" width="800" height="80" fill="#5C2323" />
+        <polygon points="70,450 730,450 850,850 -50,850" fill="url(#gate-road)" />
+        <rect x="392" y="450" width="16" height="400" fill="#FACC15" />
 
         {/* 1. COHESIVE GOLDEN-HOUR SUNSET SKY GRADIENT (Warm, Rich Pixel Dither Bands) */}
         <rect x="0" y="0" width="800" height="35" fill="#3F1D2C" />
