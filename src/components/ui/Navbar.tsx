@@ -8,17 +8,17 @@ import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { retroAudio } from '@/lib/retroAudio';
 
 interface NavItem {
-  id: 'beranda' | 'patung-kuda' | 'cara-kerja' | 'jelajahi' | 'tentang-kami' | 'admin';
+  id: 'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'hasil' | 'admin';
   label: string;
   href: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
   { id: 'beranda', label: 'BERANDA', href: '/#beranda' },
-  { id: 'patung-kuda', label: 'PATUNG KUDA', href: '/#patung-kuda' },
   { id: 'cara-kerja', label: 'CARA KERJA', href: '/#cara-kerja' },
   { id: 'tentang-kami', label: 'TENTANG KAMI', href: '/#tentang-kami' },
   { id: 'jelajahi', label: 'DAFTAR PROGRAM STUDI', href: '/program-studi' },
+  { id: 'hasil', label: 'HASIL MATCH', href: '/results' },
   { id: 'admin', label: 'ALGORITMA HMIM', href: '/admin' },
 ];
 
@@ -72,19 +72,20 @@ export function Navbar() {
     }
   };
 
-  const getInitialActive = (path: string): 'beranda' | 'patung-kuda' | 'cara-kerja' | 'jelajahi' | 'tentang-kami' | 'admin' => {
+  const getInitialActive = (path: string): 'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'hasil' | 'admin' => {
     if (path === '/program-studi' || path.startsWith('/program/')) return 'jelajahi';
+    if (path === '/results') return 'hasil';
     if (path === '/admin') return 'admin';
     if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash.replace('#', '');
-      if (['beranda', 'patung-kuda', 'cara-kerja', 'tentang-kami'].includes(hash)) {
-        return hash as 'beranda' | 'patung-kuda' | 'cara-kerja' | 'tentang-kami';
+      if (['beranda', 'cara-kerja', 'tentang-kami'].includes(hash)) {
+        return hash as 'beranda' | 'cara-kerja' | 'tentang-kami';
       }
     }
-    return 'patung-kuda';
+    return 'beranda';
   };
 
-  const [activeSection, setActiveSection] = useState<'beranda' | 'patung-kuda' | 'cara-kerja' | 'jelajahi' | 'tentang-kami' | 'admin'>(() => getInitialActive(pathname));
+  const [activeSection, setActiveSection] = useState<'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'hasil' | 'admin'>(() => getInitialActive(pathname));
 
   // Handle active navigation state on homepage scroll
   useEffect(() => {
@@ -94,11 +95,9 @@ export function Navbar() {
 
     const updateActiveSectionOnScroll = () => {
       const scrollY = window.scrollY;
-      const horseEl = document.getElementById('patung-kuda');
       const caraKerjaEl = document.getElementById('cara-kerja');
       const tentangKamiEl = document.getElementById('tentang-kami');
 
-      const horseTop = horseEl ? horseEl.getBoundingClientRect().top + scrollY - 180 : 400;
       const caraKerjaTop = caraKerjaEl ? caraKerjaEl.getBoundingClientRect().top + scrollY - 180 : Infinity;
       const tentangKamiTop = tentangKamiEl ? tentangKamiEl.getBoundingClientRect().top + scrollY - 220 : Infinity;
 
@@ -106,8 +105,6 @@ export function Navbar() {
         setActiveSection('tentang-kami');
       } else if (scrollY >= caraKerjaTop - 50) {
         setActiveSection('cara-kerja');
-      } else if (scrollY >= horseTop - 100) {
-        setActiveSection('patung-kuda');
       } else {
         setActiveSection('beranda');
       }
@@ -115,7 +112,7 @@ export function Navbar() {
 
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      if (['beranda', 'patung-kuda', 'cara-kerja', 'tentang-kami'].includes(hash)) {
+      if (['beranda', 'cara-kerja', 'tentang-kami'].includes(hash)) {
         setActiveSection(hash as typeof activeSection);
       }
     };
@@ -153,7 +150,7 @@ export function Navbar() {
       }
     } else if (pathname === '/' && item.href === '/') {
       e.preventDefault();
-      const element = document.getElementById('patung-kuda');
+      const element = document.getElementById('beranda');
       if (element) {
         const navOffset = window.innerWidth >= 640 ? 64 : 56;
         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
@@ -161,7 +158,7 @@ export function Navbar() {
           top: Math.max(0, elementPosition - navOffset),
           behavior: 'smooth',
         });
-        window.history.pushState(null, '', '#patung-kuda');
+        window.history.pushState(null, '', '#beranda');
       }
     }
   };
@@ -337,10 +334,11 @@ export function Navbar() {
               setMobileMenuOpen(false);
               handleReplayIntro();
             }}
-            aria-label="Putar ulang animasi intro gerbang"
-            className="w-full text-left font-pixel text-[10px] sm:text-xs py-3 px-4 bg-[#24130C] text-[#FDE68A] border border-[#78350F] hover:bg-[#341A10] cursor-pointer min-h-[44px] flex items-center"
+            aria-label="Putar Ulang Intro"
+            className="w-full text-left font-pixel text-[10px] sm:text-xs py-3 px-4 bg-[#24130C] text-[#FDE68A] border border-[#78350F] hover:bg-[#341A10] cursor-pointer min-h-[44px] flex items-center gap-2"
           >
-            ▶ PUTAR ULANG INTRO GERBANG
+            <RotateCcw className="w-4 h-4 text-[#FDE68A] shrink-0" />
+            <span>Putar Ulang Intro</span>
           </button>
 
           <div className="pt-2">
