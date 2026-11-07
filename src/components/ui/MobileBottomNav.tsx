@@ -1,20 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { retroAudio } from '@/lib/retroAudio';
 import { Home, Compass, Trophy, SlidersHorizontal } from 'lucide-react';
 
+const subscribeNoop = () => () => {};
+
 export function MobileBottomNav() {
   const pathname = usePathname();
   const { isComplete, progressPercentage } = useQuestionnaire();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
 
   const navItems = [
     {
@@ -50,11 +48,11 @@ export function MobileBottomNav() {
 
   return (
     <nav
-      aria-label="Navigasi Bawah Mobile"
-      className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1A0E08]/95 backdrop-blur-md border-t-2 border-[#78350F] shadow-[0_-4px_16px_rgba(0,0,0,0.6)] px-2 py-1.5 select-none pixelated"
+      aria-label="Navigasi Bawah Mobile dan Tablet"
+      className="2xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1A0E08]/95 backdrop-blur-md border-t-2 border-[#78350F] shadow-[0_-4px_16px_rgba(0,0,0,0.6)] px-2 py-1.5 select-none pixelated"
       style={{ paddingBottom: 'max(0.375rem, env(safe-area-inset-bottom))' }}
     >
-      <div className="flex items-center justify-around max-w-md mx-auto">
+      <div className="flex items-center justify-around max-w-lg mx-auto">
         {navItems.map((item) => {
           const Icon = item.icon;
           const active = item.isActive;
