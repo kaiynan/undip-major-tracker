@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { QuestionnaireProvider } from '@/contexts/QuestionnaireContext';
 import { Navbar } from '@/components/ui/Navbar';
@@ -8,14 +8,16 @@ import { MobileBottomNav } from '@/components/ui/MobileBottomNav';
 import { PwaRegistrar } from '@/components/ui/PwaRegistrar';
 import { Suspense } from 'react';
 
-const geistSans = Geist({
+const geistSans = localFont({
+  src: '../../public/fonts/geist-sans.woff2',
   variable: '--font-geist-sans',
-  subsets: ['latin'],
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+  src: '../../public/fonts/geist-mono.woff2',
   variable: '--font-geist-mono',
-  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const viewport: Viewport = {
