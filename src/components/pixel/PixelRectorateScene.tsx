@@ -8,7 +8,6 @@ import {
   ArrowRight,
   ChevronDown,
   Layers,
-  CheckCircle2,
   Wrench,
   Activity,
   Binary,
@@ -425,8 +424,8 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
           untuk 67 program studi Sarjana dan Vokasi UNDIP.
         </p>
 
-        {/* Academic Domains Exploration Trigger & Trust Statement */}
-        <div className="flex flex-col items-center justify-center gap-4 w-full sm:w-auto mb-6">
+        {/* Academic Domains Exploration Trigger */}
+        <div className="flex flex-col items-center justify-center w-full sm:w-auto">
           <PixelButton
             variant="ghost"
             size="lg"
@@ -438,18 +437,6 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
               <span>{showDomainExplorer ? 'Tutup Bidang Studi' : 'Jelajahi 7 Rumpun Ilmu'}</span>
             </span>
           </PixelButton>
-        </div>
-
-        {/* Essential Trust Statement (Clean, Single Line, No Clutter) */}
-        <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm font-mono text-amber-200/90 bg-[#1A0E08]/80 px-4 sm:px-6 py-2.5 border border-[#F59E0B]/50 shadow-[2px_2px_0_0_#451A03] pixelated">
-          <span className="flex items-center gap-1.5 text-[#FDE68A]">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#F59E0B]" />
-            <span>67 Program Studi S1 & D4</span>
-          </span>
-          <span className="text-amber-400/50">•</span>
-          <span>12 Fakultas / Sekolah</span>
-          <span className="text-amber-400/50">•</span>
-          <span className="text-[#34D399]">100% Gratis & Privat</span>
         </div>
       </div>
 
