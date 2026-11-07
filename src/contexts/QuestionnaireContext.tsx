@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useSyncExternalStore, ReactNode } from 'react';
 import { UserAnswers, ProgramScore, FacultyScore, DimensionScore } from '@/data/types';
 import { questions } from '@/data/questions';
 import { studyPrograms } from '@/data/programs';
@@ -27,6 +27,7 @@ interface QuestionnaireContextType {
   totalQuestions: number;
   progressPercentage: number;
   isComplete: boolean;
+  hydrated: boolean;
   programScores: ProgramScore[];
   facultyScores: FacultyScore[];
   dimensionScores: DimensionScore | null;
@@ -41,6 +42,8 @@ interface QuestionnaireContextType {
 
 const STORAGE_KEY = 'undip_major_matcher_answers';
 const COMPARISON_KEY = 'undip_major_matcher_comparison';
+
+const subscribeNoop = () => () => {};
 
 const QuestionnaireContext = createContext<QuestionnaireContextType | undefined>(undefined);
 
@@ -80,46 +83,47 @@ const LEARNING_LABELS: Record<string, string> = {
 };
 
 export function QuestionnaireProvider({ children }: { children: ReactNode }) {
-  const [answers, setAnswers] = useState<UserAnswers>({});
-  const [comparisonIds, setComparisonIds] = useState<string[]>([]);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // Load from localStorage on client mount
-  useEffect(() => {
+  const [answers, setAnswers] = useState<UserAnswers>(() => {
+    if (typeof window === 'undefined') return {};
     try {
       const savedAnswers = localStorage.getItem(STORAGE_KEY);
-      if (savedAnswers) {
-        setAnswers(JSON.parse(savedAnswers));
-      }
-      const savedComparison = localStorage.getItem(COMPARISON_KEY);
-      if (savedComparison) {
-        setComparisonIds(JSON.parse(savedComparison));
-      }
+      return savedAnswers ? JSON.parse(savedAnswers) : {};
     } catch {
-      // Ignore parse errors
+      return {};
     }
-    setIsHydrated(true);
-  }, []);
+  });
 
-  // Save to localStorage whenever answers change
+  const [comparisonIds, setComparisonIds] = useState<string[]>(() => {
+    if (typeof window === 'undefined') return [];
+    try {
+      const savedComparison = localStorage.getItem(COMPARISON_KEY);
+      return savedComparison ? JSON.parse(savedComparison) : [];
+    } catch {
+      return [];
+    }
+  });
+
+  const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
+
+  // Save to localStorage whenever answers change after hydration
   useEffect(() => {
-    if (!isHydrated) return;
+    if (!hydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
     } catch {
       // Ignore storage errors
     }
-  }, [answers, isHydrated]);
+  }, [answers, hydrated]);
 
-  // Save comparison IDs
+  // Save comparison IDs after hydration
   useEffect(() => {
-    if (!isHydrated) return;
+    if (!hydrated) return;
     try {
       localStorage.setItem(COMPARISON_KEY, JSON.stringify(comparisonIds));
     } catch {
       // Ignore storage errors
     }
-  }, [comparisonIds, isHydrated]);
+  }, [comparisonIds, hydrated]);
 
   const setAnswer = (questionId: number, value: number) => {
     setAnswers((prev) => ({
@@ -290,6 +294,7 @@ export function QuestionnaireProvider({ children }: { children: ReactNode }) {
         totalQuestions,
         progressPercentage,
         isComplete,
+        hydrated,
         programScores,
         facultyScores,
         dimensionScores,

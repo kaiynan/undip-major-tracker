@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Question } from '@/data/types';
-import { Check, Sparkles, ThumbsDown, Frown, Meh, Smile, Heart } from 'lucide-react';
+import { Check, Sparkles } from 'lucide-react';
 import { retroAudio } from '@/lib/retroAudio';
 
 interface QuestionCardProps {
@@ -66,6 +66,14 @@ export function QuestionCard({
 }: QuestionCardProps) {
   const microcopy = DIMENSION_MICROCOPY[question.dimension] || 'Jawab sesuai kecenderungan alami dirimu tanpa rasa tertekan.';
 
+  const triggerHaptic = () => {
+    if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') {
+      try {
+        navigator.vibrate(10);
+      } catch {}
+    }
+  };
+
   return (
     <div className="bg-[#24130C] rounded-2xl sm:rounded-3xl border-2 border-[#78350F] shadow-[0_4px_24px_rgba(0,0,0,0.4)] p-4 sm:p-8 md:p-10 transition-all">
       {/* Top Meta Bar */}
@@ -80,7 +88,7 @@ export function QuestionCard({
         </div>
 
         <div className="flex items-center gap-2 text-xs font-bold text-amber-200/90">
-          <span className="bg-[#190E08] border border-[#78350F]/60 px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs">
+          <span className="bg-[#190E08] border border-[#78350F]/60 px-2.5 sm:px-3 py-1 rounded-lg text-[11px] sm:text-xs font-mono">
             Pertanyaan {String(questionNumber).padStart(2, '0')}/{String(totalQuestions).padStart(2, '0')}
           </span>
           {currentValue !== undefined && (
@@ -99,7 +107,7 @@ export function QuestionCard({
       </div>
 
       {/* Question Headline */}
-      <h2 className="text-lg sm:text-2xl md:text-3xl font-extrabold text-[#FFFBEB] leading-snug tracking-tight mt-2 mb-5 sm:mb-8">
+      <h2 className="text-base sm:text-2xl md:text-3xl font-extrabold text-[#FFFBEB] leading-snug tracking-tight mt-2 mb-4 sm:mb-8">
         {question.text}
       </h2>
 
@@ -110,9 +118,13 @@ export function QuestionCard({
           <span className="hidden sm:inline text-[11px] text-amber-200/60 font-normal">
             Gunakan tombol <kbd className="px-1.5 py-0.5 bg-[#190E08] border border-[#78350F] rounded text-[#FDE68A] font-mono text-[10px]">1</kbd>–<kbd className="px-1.5 py-0.5 bg-[#190E08] border border-[#78350F] rounded text-[#FDE68A] font-mono text-[10px]">5</kbd> di keyboard
           </span>
+          <span className="sm:hidden text-[10px] text-amber-300/80 font-mono flex items-center gap-1">
+            <span>Ketuk Skala</span>
+            <span className="bg-[#190E08] border border-[#78350F] px-1.5 py-0.2 rounded text-[#FDE68A]">1–5</span>
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 gap-2 sm:gap-3">
+        <div className="grid grid-cols-1 gap-2.5 sm:gap-3">
           {LIKERT_OPTIONS.map((opt) => {
             const isSelected = currentValue === opt.value;
 
@@ -121,17 +133,20 @@ export function QuestionCard({
                 key={opt.value}
                 type="button"
                 onClick={() => {
+                  triggerHaptic();
                   retroAudio.playSelect();
                   onSelect(opt.value);
                 }}
                 onMouseEnter={() => retroAudio.playBlip(500)}
+                onTouchStart={() => triggerHaptic()}
+                aria-label={`Pilih skala ${opt.value}: ${opt.label} — ${opt.desc}`}
                 className={`w-full flex items-center justify-between p-3 sm:p-4.5 rounded-2xl border-2 text-left transition-all duration-150 cursor-pointer group min-h-[52px] sm:min-h-[60px] ${
                   isSelected
                     ? 'border-[#F59E0B] bg-[#78350F] text-white shadow-[0_0_15px_rgba(245,158,11,0.25)] ring-2 ring-[#F59E0B]/30'
                     : 'border-[#78350F]/60 bg-[#1F100A] text-amber-100/90 hover:border-[#F59E0B] hover:bg-[#2C160E]'
                 }`}
               >
-                <div className="flex items-center gap-3.5 sm:gap-4 flex-1">
+                <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                   {/* Number Circle Badge — Identical styling for all options */}
                   <div
                     className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 transition-colors ${
@@ -143,26 +158,28 @@ export function QuestionCard({
                     {opt.value}
                   </div>
 
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0 pr-1">
                     <div className="flex items-center gap-2">
-                      <span className={`text-sm sm:text-base font-bold ${isSelected ? 'text-[#FFFBEB]' : 'text-amber-100'}`}>
+                      <span className={`text-xs sm:text-base font-bold truncate sm:whitespace-normal ${isSelected ? 'text-[#FFFBEB]' : 'text-amber-100'}`}>
                         {opt.label}
                       </span>
                     </div>
-                    <p className={`text-xs mt-0.5 hidden sm:block ${isSelected ? 'text-amber-200' : 'text-amber-200/60'}`}>
+                    {/* Description is now cleanly displayed on HP as well as desktop (Requirement 14) */}
+                    <p className={`text-[11px] sm:text-xs mt-0.5 block leading-tight ${isSelected ? 'text-amber-200' : 'text-amber-200/70'}`}>
                       {opt.desc}
                     </p>
                   </div>
                 </div>
 
                 {/* Right Indicator: Shortcut + Checkmark Circle */}
-                <div className="flex items-center gap-3 shrink-0 ml-3">
-                  <span className={`hidden md:inline-block text-[11px] font-mono px-2 py-0.5 rounded ${isSelected ? 'bg-[#190E08]/60 text-[#FDE68A] border border-[#F59E0B]/50' : 'bg-[#190E08] text-amber-200/50 border border-[#78350F]/40'}`}>
-                    [{opt.shortcut}]
+                <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-2 sm:ml-3">
+                  <span className={`text-[10px] sm:text-[11px] font-mono px-1.5 sm:px-2 py-0.5 rounded ${isSelected ? 'bg-[#190E08]/60 text-[#FDE68A] border border-[#F59E0B]/50' : 'bg-[#190E08] text-amber-200/50 border border-[#78350F]/40'}`}>
+                    <span className="sm:hidden">#{opt.value}</span>
+                    <span className="hidden sm:inline">[{opt.shortcut}]</span>
                   </span>
 
                   <div
-                    className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+                    className={`w-6 h-6 rounded-full flex items-center justify-center transition-all shrink-0 ${
                       isSelected
                         ? 'bg-[#F59E0B] text-[#190E08] shadow-xs'
                         : 'border-2 border-[#78350F] group-hover:border-[#F59E0B]/60'

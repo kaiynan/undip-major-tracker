@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { questions } from '@/data/questions';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
@@ -23,7 +23,6 @@ import {
   HelpCircle,
   ArrowRight,
   Keyboard,
-  Sparkles,
 } from 'lucide-react';
 
 const DIMENSION_CONFIG = {
@@ -61,11 +60,31 @@ export default function QuestionnairePage() {
     resetAnswers,
     answeredCount,
     totalQuestions,
-    progressPercentage,
     isComplete,
+    hydrated,
   } = useQuestionnaire();
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // Lazy initialize currentIndex to the first unanswered question from storage if resuming
+  const [currentIndex, setCurrentIndex] = useState<number>(() => {
+    if (typeof window === 'undefined') return 0;
+    try {
+      const saved = localStorage.getItem('undip_major_matcher_answers');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const count = Object.keys(parsed).length;
+        if (count > 0 && count < questions.length) {
+          const firstUnanswered = questions.findIndex((q) => parsed[q.id] === undefined);
+          if (firstUnanswered !== -1) {
+            return firstUnanswered;
+          }
+        }
+      }
+    } catch {
+      // Safe fallback
+    }
+    return 0;
+  });
+
   const [isOverviewOpen, setIsOverviewOpen] = useState(false);
   const [showIncompleteAlert, setShowIncompleteAlert] = useState(false);
   const [showResetModal, setShowResetModal] = useState(false);
@@ -73,13 +92,40 @@ export default function QuestionnairePage() {
   const [isGallopingAway, setIsGallopingAway] = useState(false);
   const [isCalculating, setIsCalculating] = useState(false);
 
-  // Jump to first unanswered question on initial mount if partially done
+  // Auto-advance transition lock & timeout refs (Requirements 12 & 13)
+  const isAdvancingRef = useRef(false);
+  const transitionTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const answersRef = useRef(answers);
+
   useEffect(() => {
+    answersRef.current = answers;
+  }, [answers]);
+
+  // Jump to first unanswered question ONLY after localStorage is hydrated (Requirement 11)
+  const hasResumedRef = useRef(false);
+  useEffect(() => {
+    if (!hydrated || hasResumedRef.current) return;
+    hasResumedRef.current = true;
+
     const firstUnansweredIndex = questions.findIndex((q) => answers[q.id] === undefined);
     if (firstUnansweredIndex !== -1 && answeredCount > 0 && answeredCount < totalQuestions) {
-      setCurrentIndex(firstUnansweredIndex);
+      const frameId = requestAnimationFrame(() => {
+        setCurrentIndex(firstUnansweredIndex);
+      });
+      return () => cancelAnimationFrame(frameId);
     }
-  }, []);
+  }, [hydrated, answers, answeredCount, totalQuestions]);
+
+  // Clean up any pending transition timeouts on unmount or question change
+  useEffect(() => {
+    return () => {
+      if (transitionTimeoutRef.current) {
+        clearTimeout(transitionTimeoutRef.current);
+        transitionTimeoutRef.current = null;
+      }
+      isAdvancingRef.current = false;
+    };
+  }, [currentIndex]);
 
   const currentQuestion = questions[currentIndex];
   const dimensionInfo = DIMENSION_CONFIG[currentQuestion.dimension];
@@ -93,20 +139,30 @@ export default function QuestionnairePage() {
   }, []);
 
   const handleSelectAnswer = useCallback((value: number) => {
+    // Guard: ignore rapid repeated taps while transition/advancing is in progress (Requirement 12)
+    if (isAdvancingRef.current || isGallopingAway || isCalculating) return;
+
     retroAudio.playSelect();
     setAnswer(currentQuestion.id, value);
     setShowIncompleteAlert(false);
 
-    // Check if this answer completes all 36 questions
-    const answeredKeys = Object.keys(answers);
-    const willBeComplete = answers[currentQuestion.id] !== undefined
-      ? answeredKeys.length >= totalQuestions
-      : answeredKeys.length + 1 >= totalQuestions;
+    // Compute completion from latest fresh state ref (Requirement 13)
+    const currentAnswers = answersRef.current;
+    const wasAlreadyComplete = Object.keys(currentAnswers).length >= totalQuestions;
+    const nextAnswers = { ...currentAnswers, [currentQuestion.id]: value };
+    const willBeComplete = Object.keys(nextAnswers).length >= totalQuestions;
 
+    // If user is editing answers after already completing 36/36, do NOT auto-submit or gallop!
+    if (wasAlreadyComplete) {
+      return;
+    }
+
+    // First-time completion of all 36 questions
     if (willBeComplete) {
-      // Step 1: Progress reaches 100%
-      // Step 2 & 3: Horse gallops away toward the right
-      setTimeout(() => {
+      isAdvancingRef.current = true;
+      if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+
+      transitionTimeoutRef.current = setTimeout(() => {
         setIsGallopingAway(true);
         try {
           retroAudio.playLevelUp();
@@ -114,19 +170,22 @@ export default function QuestionnairePage() {
           // best-effort audio
         }
 
-        // Step 4: HMIM Calculation transition overlay
-        setTimeout(() => {
+        transitionTimeoutRef.current = setTimeout(() => {
           setIsCalculating(true);
         }, 1100);
       }, 400);
     } else if (currentIndex < totalQuestions - 1) {
       // Auto advance to next question smoothly with forward gallop transition
+      isAdvancingRef.current = true;
       triggerAdvancing();
-      setTimeout(() => {
+
+      if (transitionTimeoutRef.current) clearTimeout(transitionTimeoutRef.current);
+      transitionTimeoutRef.current = setTimeout(() => {
         setCurrentIndex((prev) => Math.min(totalQuestions - 1, prev + 1));
+        isAdvancingRef.current = false;
       }, 220);
     }
-  }, [currentQuestion.id, currentIndex, totalQuestions, answers, setAnswer, triggerAdvancing]);
+  }, [currentQuestion.id, currentIndex, totalQuestions, setAnswer, triggerAdvancing, isGallopingAway, isCalculating]);
 
   const handlePrev = useCallback(() => {
     if (currentIndex > 0) {
@@ -220,19 +279,23 @@ export default function QuestionnairePage() {
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={() => setIsOverviewOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold text-[#FDE68A] bg-[#190E08] hover:bg-[#341A10] border border-[#78350F] rounded-xl transition-all cursor-pointer"
-                title="Buka peta semua soal"
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold text-[#FDE68A] bg-[#190E08] hover:bg-[#341A10] border border-[#78350F] rounded-xl transition-all cursor-pointer min-h-[38px]"
+                title="Buka peta semua soal (Overview)"
+                aria-label={`Buka Peta Soal Overview (${answeredCount}/${totalQuestions} Terisi)`}
               >
-                <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F59E0B]" />
-                <span>Peta Soal ({answeredCount}/{totalQuestions})</span>
+                <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F59E0B] shrink-0" />
+                <span className="hidden xs:inline">Peta Soal</span>
+                <span className="xs:hidden">Overview</span>
+                <span>({answeredCount}/{totalQuestions})</span>
               </button>
               <button
                 onClick={() => setShowResetModal(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-bold text-rose-300 hover:bg-rose-950/80 bg-rose-950/40 border border-rose-800/60 rounded-xl transition-all cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-bold text-rose-300 hover:bg-rose-950/80 bg-rose-950/40 border border-rose-800/60 rounded-xl transition-all cursor-pointer min-h-[38px]"
                 title="Reset semua jawaban"
+                aria-label="Reset semua jawaban kuisioner"
               >
-                <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
-                <span className="hidden sm:inline">Reset</span>
+                <RotateCcw className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                <span className="text-xs">Reset</span>
               </button>
             </div>
           </div>
