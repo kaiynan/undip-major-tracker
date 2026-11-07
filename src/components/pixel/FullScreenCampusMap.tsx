@@ -319,10 +319,10 @@ export function FullScreenCampusMap({
         </div>
 
         {/* Camera Navigation Controls */}
-        <div className="flex items-center gap-1 bg-[#190E08]/90 backdrop-blur-md p-1.5 rounded-2xl border-2 border-[#78350F] shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
+        <div className="flex items-center gap-1.5 bg-[#190E08]/90 backdrop-blur-md p-1.5 rounded-2xl border-2 border-[#78350F] shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
           <button
             onClick={handleZoomIn}
-            className="p-1.5 sm:p-2 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 sm:p-2.5 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
             title="Perbesar Peta (+)"
             aria-label="Perbesar Peta (+)"
           >
@@ -330,16 +330,16 @@ export function FullScreenCampusMap({
           </button>
           <button
             onClick={handleZoomOut}
-            className="p-1.5 sm:p-2 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 sm:p-2.5 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
             title="Perkecil Peta (-)"
             aria-label="Perkecil Peta (-)"
           >
             <ZoomOut className="w-4 h-4" />
           </button>
-          <div className="w-px h-5 bg-[#78350F] mx-0.5" />
+          <div className="w-px h-6 bg-[#78350F] mx-0.5" />
           <button
             onClick={handleResetOverview}
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[36px] ${
+            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
               !selectedLocation
                 ? 'bg-[#78350F] text-[#FDE68A] border border-[#F59E0B]'
                 : 'text-amber-200 hover:bg-[#78350F] hover:text-white'
@@ -359,10 +359,11 @@ export function FullScreenCampusMap({
           <div className="flex items-center gap-1.5 overflow-x-auto p-1.5 bg-[#190E08]/90 backdrop-blur-md rounded-2xl border-2 border-[#78350F] shadow-[0_6px_20px_rgba(0,0,0,0.6)] scrollbar-none">
             <button
               onClick={() => handleResetOverview()}
-              className={`shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              aria-label={`Tampilkan tinjauan seluruh kampus (${campusFacultyLocations.length} lokasi)`}
+              className={`shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] flex items-center ${
                 !selectedFacultyId
                   ? 'bg-[#F59E0B] text-stone-900 font-black shadow-xs'
-                  : 'text-amber-200/80 hover:bg-[#78350F]/70'
+                  : 'text-amber-200/90 hover:bg-[#78350F]/70'
               }`}
             >
               Overview ({campusFacultyLocations.length})
@@ -374,7 +375,8 @@ export function FullScreenCampusMap({
                 <button
                   key={loc.id}
                   onClick={() => onSelectFaculty?.(loc.id)}
-                  className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                  aria-label={`Pilih fakultas ${loc.name} di peta`}
+                  className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border min-h-[44px] ${
                     isSelected
                       ? 'bg-[#78350F] text-[#FDE68A] border-[#F59E0B] shadow-md'
                       : 'text-amber-100 hover:bg-[#2A150D] border-transparent'
@@ -776,14 +778,15 @@ export function FullScreenCampusMap({
             </div>
             <button
               onClick={() => onSelectFaculty?.(null)}
-              className="p-1 rounded-lg text-amber-200/80 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer"
+              className="p-2.5 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
               title="Kembali ke Tinjauan Peta"
+              aria-label="Kembali ke Tinjauan Peta"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
-          <div className="mt-3 pt-3 border-t border-[#78350F]/70 space-y-1.5 text-xs text-amber-100/85">
+          <div className="mt-3 pt-3 border-t border-[#78350F]/70 space-y-1.5 text-xs text-amber-100/95">
             <p className="leading-relaxed">
               <strong className="text-[#FDE68A]">Karakter Arsitektur:</strong>{' '}
               {selectedLocation.architecturalStyle.facadeDescription}
@@ -792,13 +795,13 @@ export function FullScreenCampusMap({
               {selectedLocation.architecturalStyle.distinctiveFeatures.map((feat, i) => (
                 <span
                   key={i}
-                  className="text-[10px] bg-[#190E08] text-amber-200 px-2 py-0.5 rounded-md border border-[#78350F]/60"
+                  className="text-xs bg-[#190E08] text-amber-200 px-2.5 py-1 rounded-md border border-[#78350F]/60"
                 >
                   • {feat}
                 </span>
               ))}
             </div>
-            <div className="pt-2 text-[10px] text-amber-200/50 flex items-center justify-between">
+            <div className="pt-2 text-xs text-amber-200/80 flex items-center justify-between">
               <span>Sumber: {selectedLocation.referenceSource}</span>
               <span>Pembaruan: {selectedLocation.verificationDate}</span>
             </div>

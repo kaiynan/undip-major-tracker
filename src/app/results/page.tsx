@@ -238,18 +238,18 @@ export default function ResultsPage() {
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <Link
             href="/"
-            className="flex items-center gap-1.5 sm:gap-2 font-pixel text-[10px] sm:text-xs text-[#FDE68A] hover:text-amber-300 transition-colors"
+            className="flex items-center gap-1.5 sm:gap-2 font-pixel text-xs text-[#FDE68A] hover:text-amber-300 transition-colors min-h-[44px]"
             aria-label="Kembali ke Beranda"
           >
-            <span className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-emerald-400 animate-ping motion-reduce:animate-none shrink-0" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping motion-reduce:animate-none shrink-0" />
             <span className="hidden xs:inline">UNDIP MAP</span>
             <span className="xs:hidden">MAP</span>
           </Link>
 
           {/* Quick status summary badge */}
           {topProgramData && (
-            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#190E08] border border-[#78350F] text-xs font-bold text-amber-200">
-              <Trophy className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#190E08] border border-[#78350F] text-xs font-bold text-amber-200 min-h-[44px]">
+              <Trophy className="w-4 h-4 text-amber-400 shrink-0" />
               <span className="text-amber-300 font-normal">Top Match:</span>
               <span className="text-white truncate max-w-[180px]">{topProgramData.name}</span>
             </div>
@@ -263,14 +263,14 @@ export default function ResultsPage() {
               setActiveTab('all-majors');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-black transition-all cursor-pointer min-h-[36px] ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
               activeTab === 'all-majors'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
-                : 'text-amber-200/80 hover:text-white'
+                : 'text-amber-200/90 hover:text-white'
             }`}
             aria-label="Lihat Output 1: 67 Program Studi"
           >
-            <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+            <GraduationCap className="w-4 h-4 shrink-0" />
             <span className="hidden md:inline">Output 1:</span>
             <span className="hidden sm:inline">67 Jurusan</span>
             <span className="sm:hidden">67 Prodi</span>
@@ -281,14 +281,14 @@ export default function ResultsPage() {
               setActiveTab('faculties');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[10px] sm:text-xs font-black transition-all cursor-pointer min-h-[36px] ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
               activeTab === 'faculties'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
-                : 'text-amber-200/80 hover:text-white'
+                : 'text-amber-200/90 hover:text-white'
             }`}
             aria-label="Lihat Output 2: 12 Fakultas"
           >
-            <Building2 className="w-3.5 h-3.5 shrink-0" />
+            <Building2 className="w-4 h-4 shrink-0" />
             <span className="hidden md:inline">Output 2:</span>
             <span className="hidden sm:inline">12 Fakultas</span>
             <span className="sm:hidden">12 Fak</span>
@@ -300,32 +300,32 @@ export default function ResultsPage() {
           {/* Audio Toggle */}
           <button
             onClick={handleToggleSound}
-            className="p-1.5 sm:p-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
             title={isMuted ? 'Aktifkan Suara Retro' : 'Bisukan Suara'}
-            aria-label={isMuted ? 'Aktifkan Suara' : 'Bisukan Suara'}
+            aria-label={isMuted ? 'Aktifkan Suara Retro' : 'Bisukan Suara Retro'}
           >
-            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
           </button>
 
           {/* Toggle Panel Button ("Peta Penuh" / "Buka Panel") */}
           <button
             onClick={() => setIsPanelOpen(!isPanelOpen)}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl text-[10px] sm:text-xs font-bold transition-all cursor-pointer min-h-[36px] ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
               isPanelOpen
                 ? 'bg-amber-500 text-stone-950 hover:bg-amber-400 shadow-xs'
                 : 'bg-[#78350F] text-[#FDE68A] hover:bg-[#8D3F12] border border-[#F59E0B]'
             }`}
             title={isPanelOpen ? 'Sembunyikan panel untuk melihat peta penuh' : 'Buka panel hasil rekomendasi'}
-            aria-label={isPanelOpen ? 'Sembunyikan panel (Peta Penuh)' : 'Buka panel hasil rekomendasi'}
+            aria-label={isPanelOpen ? 'Sembunyikan panel hasil (tampilkan Peta Penuh)' : 'Buka panel hasil rekomendasi prodi'}
           >
             {isPanelOpen ? (
               <>
-                <Maximize2 className="w-3.5 h-3.5 shrink-0" />
+                <Maximize2 className="w-4 h-4 shrink-0" />
                 <span className="hidden sm:inline">Peta Penuh</span>
               </>
             ) : (
               <>
-                <Layers className="w-3.5 h-3.5 shrink-0" />
+                <Layers className="w-4 h-4 shrink-0" />
                 <span className="hidden sm:inline">Buka Panel</span>
               </>
             )}
@@ -334,21 +334,21 @@ export default function ResultsPage() {
           {/* Share Button */}
           <button
             onClick={() => setIsShareOpen(true)}
-            className="p-1.5 sm:p-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-200 border border-[#78350F] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-200 hover:text-white border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
             title="Bagikan Hasil"
             aria-label="Bagikan Hasil Rekomendasi"
           >
-            <Share2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Share2 className="w-4 h-4" />
           </button>
 
           {/* Retake Questionnaire Button */}
           <button
             onClick={() => setIsRetakeModalOpen(true)}
-            className="p-1.5 sm:p-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-rose-300 border border-rose-900/60 transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-rose-300 hover:text-rose-200 border border-rose-900/60 transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
             title="Ulangi Kuisioner"
             aria-label="Ulangi Kuisioner Minat"
           >
-            <RotateCcw className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <RotateCcw className="w-4 h-4" />
           </button>
         </div>
       </header>
@@ -367,7 +367,7 @@ export default function ResultsPage() {
         >
           {/* Mobile Drag Indicator Handle (3-Position Snapping: Collapsed / Half / Expanded) */}
           <div
-            className="flex sm:hidden flex-col items-center pt-2.5 pb-2 bg-[#190E08]/95 shrink-0 cursor-grab active:cursor-grabbing touch-none select-none border-b border-[#78350F]/40"
+            className="flex sm:hidden flex-col items-center justify-center pt-2.5 pb-2 bg-[#190E08]/95 shrink-0 cursor-grab active:cursor-grabbing touch-none select-none border-b border-[#78350F]/40 min-h-[44px]"
             onPointerDown={handleSheetPointerDown}
             onPointerUp={handleSheetPointerUp}
             onPointerCancel={handleSheetPointerUp}
@@ -377,7 +377,7 @@ export default function ResultsPage() {
             title="Tarik ke atas/bawah untuk mengubah posisi panel"
           >
             <div className="w-12 h-1.5 rounded-full bg-[#78350F] hover:bg-[#F59E0B] transition-colors" />
-            <div className="flex items-center gap-1 text-[9px] font-mono text-amber-200/60 mt-1 uppercase tracking-wider">
+            <div className="flex items-center gap-1 text-xs font-mono text-amber-200/90 mt-1 uppercase tracking-wider">
               {sheetPosition === 'collapsed' && (
                 <>
                   <span>▲ Geser ke Atas</span>
@@ -403,7 +403,7 @@ export default function ResultsPage() {
           <div className="px-4 py-3 sm:p-5 border-b-2 border-[#78350F] flex flex-col gap-2.5 sm:gap-3 bg-[#190E08]/95 shrink-0">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-xl bg-[#78350F] text-[#FDE68A] border border-[#F59E0B] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-[#78350F] text-[#FDE68A] border border-[#F59E0B] flex items-center justify-center shrink-0">
                   {activeTab === 'all-majors' ? (
                     <GraduationCap className="w-4 h-4" />
                   ) : (
@@ -414,7 +414,7 @@ export default function ResultsPage() {
                   <h2 className="text-sm sm:text-base font-extrabold text-[#FFFBEB] truncate font-pixel">
                     Panel Rekomendasi HMIM
                   </h2>
-                  <p className="text-[11px] text-amber-200/70 truncate">
+                  <p className="text-xs text-amber-200/90 truncate">
                     {selectedFacultyObj
                       ? `Kamera Terfokus: ${selectedFacultyObj.name} (${selectedFacultyObj.shortName})`
                       : 'Kamera dan filter tersinkronisasi interaktif dengan peta'}
@@ -426,14 +426,15 @@ export default function ResultsPage() {
                 {selectedFacultyId && (
                   <button
                     onClick={() => setSelectedFacultyId(null)}
-                    className="text-[11px] font-bold px-2.5 py-1 bg-[#24130C] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] rounded-lg transition-colors cursor-pointer"
+                    aria-label="Reset filter fokus kamera peta"
+                    className="text-xs font-bold px-3 py-1.5 bg-[#24130C] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] rounded-lg transition-colors cursor-pointer min-h-[44px] flex items-center"
                   >
                     Reset Filter
                   </button>
                 )}
                 <button
                   onClick={() => setIsPanelOpen(false)}
-                  className="p-1.5 rounded-lg text-amber-200/70 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer"
+                  className="p-2 rounded-xl text-amber-200/90 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                   title="Tutup panel (Lihat Peta Penuh)"
                   aria-label="Tutup panel hasil rekomendasi"
                 >
@@ -446,26 +447,26 @@ export default function ResultsPage() {
             <div className="grid grid-cols-2 gap-2 bg-[#140B07] p-1.5 rounded-xl border border-[#78350F]">
               <button
                 onClick={() => setActiveTab('all-majors')}
-                className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
                   activeTab === 'all-majors'
                     ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
-                    : 'text-amber-200/80 hover:text-white hover:bg-[#2A150D]'
+                    : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
                 }`}
                 aria-label="Tampilkan Output 1: 67 Jurusan"
               >
-                <GraduationCap className="w-3.5 h-3.5" />
+                <GraduationCap className="w-4 h-4" />
                 <span>Output 1: 67 Jurusan</span>
               </button>
               <button
                 onClick={() => setActiveTab('faculties')}
-                className={`flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-black transition-all cursor-pointer ${
+                className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
                   activeTab === 'faculties'
                     ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
-                    : 'text-amber-200/80 hover:text-white hover:bg-[#2A150D]'
+                    : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
                 }`}
                 aria-label="Tampilkan Output 2: 12 Fakultas"
               >
-                <Building2 className="w-3.5 h-3.5" />
+                <Building2 className="w-4 h-4" />
                 <span>Output 2: 12 Fakultas</span>
               </button>
             </div>
@@ -480,14 +481,15 @@ export default function ResultsPage() {
                   <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
                   <div>
                     <strong className="font-bold text-amber-100">Hasil Sementara ({answeredCount}/{totalQuestions} Soal Terisi)</strong>
-                    <p className="text-[11px] text-amber-200/80 mt-0.5">
+                    <p className="text-xs text-amber-200/90 mt-0.5">
                       Lengkapi seluruh 36 pertanyaan untuk akurasi rekomendasi prodi yang paling optimal.
                     </p>
                   </div>
                 </div>
                 <Link
                   href="/questionnaire"
-                  className="px-3 py-1.5 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 rounded-lg font-bold text-[11px] shrink-0 text-center transition-colors"
+                  aria-label="Lanjutkan kuisioner minat"
+                  className="px-3.5 py-2 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 rounded-lg font-bold text-xs shrink-0 text-center transition-colors min-h-[44px] flex items-center justify-center"
                 >
                   Lanjut
                 </Link>
@@ -502,14 +504,14 @@ export default function ResultsPage() {
                     <span className="font-pixel text-[8px] bg-emerald-600 text-stone-950 px-2 py-0.5 rounded font-bold border border-emerald-400">
                       STAGE CLEAR
                     </span>
-                    <span className="text-[11px] text-amber-300 font-bold">
+                    <span className="text-xs text-amber-300 font-bold">
                       Laporan Eksplorasi Minat HMIM
                     </span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-black text-[#FFFBEB]">
                     {topProgramData?.name}
                   </h3>
-                  <p className="text-xs text-amber-200/80">
+                  <p className="text-xs text-amber-200/90">
                     Jenjang {topProgramData?.degreeLevel} • {topFacultyData?.shortName} • Kecocokan {topProgram?.totalScore}%
                   </p>
                 </div>
@@ -518,7 +520,7 @@ export default function ResultsPage() {
               </div>
 
               {/* Personalized Narrative Synthesis */}
-              <p className="text-xs sm:text-sm text-amber-100/90 mt-3 leading-relaxed">
+              <p className="text-xs sm:text-sm text-amber-100/95 mt-3 leading-relaxed">
                 {generateNarrative()}
               </p>
 
@@ -526,12 +528,13 @@ export default function ResultsPage() {
               <div className="mt-4 pt-3 border-t border-[#78350F]/70 flex items-center justify-between">
                 <button
                   onClick={() => setShowDimensionChart(!showDimensionChart)}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-[#FDE68A] transition-colors cursor-pointer"
+                  aria-label={showDimensionChart ? 'Sembunyikan rincian 4 dimensi' : 'Lihat rincian 4 dimensi HMIM'}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-[#FDE68A] transition-colors cursor-pointer min-h-[44px]"
                 >
-                  <BarChart3 className="w-3.5 h-3.5" />
+                  <BarChart3 className="w-4 h-4" />
                   <span>{showDimensionChart ? 'Sembunyikan 4 Dimensi' : 'Lihat Rincian 4 Dimensi HMIM'}</span>
                 </button>
-                <span className="text-[10px] font-mono text-amber-200/60">
+                <span className="text-xs font-mono text-amber-200/80">
                   S = 0.20R + 0.35D + 0.20L + 0.25C
                 </span>
               </div>
@@ -582,7 +585,8 @@ export default function ResultsPage() {
                 </div>
                 <button
                   onClick={() => setSelectedFacultyId(null)}
-                  className="font-bold text-amber-400 hover:text-amber-200 underline shrink-0 cursor-pointer text-[11px]"
+                  aria-label="Tampilkan semua fakultas dan reset fokus peta"
+                  className="font-bold text-amber-400 hover:text-amber-200 underline shrink-0 cursor-pointer text-xs min-h-[44px] flex items-center"
                 >
                   Tampilkan Semua
                 </button>
@@ -631,7 +635,7 @@ export default function ResultsPage() {
                 className="p-4 rounded-2xl bg-[#190E08] border border-[#78350F] hover:border-[#F59E0B] transition-all flex items-center justify-between gap-3 group min-h-[44px]"
               >
                 <div>
-                  <div className="text-[10px] font-bold text-[#F59E0B] uppercase tracking-wider">
+                  <div className="text-xs font-bold text-[#F59E0B] uppercase tracking-wider">
                     Arsitektur
                   </div>
                   <div className="text-xs font-extrabold text-[#FFFBEB] group-hover:text-[#FDE68A] transition-colors">
@@ -651,7 +655,7 @@ export default function ResultsPage() {
                 className="p-4 rounded-2xl bg-[#190E08] border border-[#78350F] hover:border-amber-400 transition-all flex items-center justify-between gap-3 group text-left cursor-pointer min-h-[44px]"
               >
                 <div>
-                  <div className="text-[10px] font-bold text-amber-400 uppercase tracking-wider">
+                  <div className="text-xs font-bold text-amber-400 uppercase tracking-wider">
                     Petualangan Visual
                   </div>
                   <div className="text-xs font-extrabold text-[#FFFBEB] group-hover:text-amber-200 transition-colors">
@@ -680,7 +684,7 @@ export default function ResultsPage() {
               <Trophy className="w-4 h-4" />
             </div>
             <div className="text-left min-w-0">
-              <div className="text-[9px] sm:text-[10px] font-mono text-amber-300 font-bold uppercase tracking-wider truncate">
+              <div className="text-xs font-mono text-amber-300 font-bold uppercase tracking-wider truncate">
                 HASIL REKOMENDASI TERSEDIA
               </div>
               <div className="text-xs font-black text-white group-hover:text-amber-200 transition-colors truncate">
@@ -699,7 +703,7 @@ export default function ResultsPage() {
             <Scale className="w-4 h-4" />
           </div>
           <div className="text-left min-w-0 pr-1">
-            <div className="text-[9px] sm:text-[10px] font-mono text-amber-300 font-bold uppercase tracking-wider truncate">
+            <div className="text-xs font-mono text-amber-300 font-bold uppercase tracking-wider truncate">
               KOMPARASI PRODI
             </div>
             <div className="text-xs font-black text-white truncate">
@@ -709,7 +713,7 @@ export default function ResultsPage() {
           <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={() => setIsComparisonOpen(true)}
-              className="flex items-center gap-1 sm:gap-1.5 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-black text-xs px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl transition-all cursor-pointer shadow-xs border border-amber-600 min-h-[38px]"
+              className="flex items-center gap-1 sm:gap-1.5 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-black text-xs px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all cursor-pointer shadow-xs border border-amber-600 min-h-[44px]"
               aria-label={`Buka komparasi ${comparisonIds.length} program studi`}
             >
               <span>Lihat Perbandingan ({comparisonIds.length})</span>
@@ -717,7 +721,7 @@ export default function ResultsPage() {
             </button>
             <button
               onClick={clearComparison}
-              className="p-1.5 sm:p-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-300/80 hover:text-white border border-[#78350F] transition-colors cursor-pointer text-xs font-bold min-h-[38px] min-w-[38px] flex items-center justify-center"
+              className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-300/90 hover:text-white border border-[#78350F] transition-colors cursor-pointer text-xs font-bold min-h-[44px] min-w-[44px] flex items-center justify-center"
               title="Bersihkan pembanding"
               aria-label="Bersihkan pilihan komparasi prodi"
             >

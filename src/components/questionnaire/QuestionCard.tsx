@@ -165,7 +165,7 @@ export function QuestionCard({
                       </span>
                     </div>
                     {/* Description is now cleanly displayed on HP as well as desktop (Requirement 14) */}
-                    <p className={`text-[11px] sm:text-xs mt-0.5 block leading-tight ${isSelected ? 'text-amber-200' : 'text-amber-200/70'}`}>
+                    <p className={`text-xs mt-0.5 block leading-tight ${isSelected ? 'text-amber-100' : 'text-amber-200/90'}`}>
                       {opt.desc}
                     </p>
                   </div>
@@ -173,7 +173,7 @@ export function QuestionCard({
 
                 {/* Right Indicator: Shortcut + Checkmark Circle */}
                 <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-2 sm:ml-3">
-                  <span className={`text-[10px] sm:text-[11px] font-mono px-1.5 sm:px-2 py-0.5 rounded ${isSelected ? 'bg-[#190E08]/60 text-[#FDE68A] border border-[#F59E0B]/50' : 'bg-[#190E08] text-amber-200/50 border border-[#78350F]/40'}`}>
+                  <span className={`text-xs font-mono px-2 py-0.5 rounded ${isSelected ? 'bg-[#190E08]/60 text-[#FDE68A] border border-[#F59E0B]/50' : 'bg-[#190E08] text-amber-200/80 border border-[#78350F]/40'}`}>
                     <span className="sm:hidden">#{opt.value}</span>
                     <span className="hidden sm:inline">[{opt.shortcut}]</span>
                   </span>

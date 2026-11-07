@@ -279,72 +279,76 @@ export default function QuestionnairePage() {
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={() => setIsOverviewOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold text-[#FDE68A] bg-[#190E08] hover:bg-[#341A10] border border-[#78350F] rounded-xl transition-all cursor-pointer min-h-[38px]"
+                className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-[#FDE68A] bg-[#190E08] hover:bg-[#341A10] border border-[#78350F] rounded-xl transition-all cursor-pointer min-h-[44px]"
                 title="Buka peta semua soal (Overview)"
                 aria-label={`Buka Peta Soal Overview (${answeredCount}/${totalQuestions} Terisi)`}
               >
-                <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#F59E0B] shrink-0" />
+                <Grid className="w-4 h-4 text-[#F59E0B] shrink-0" />
                 <span className="hidden xs:inline">Peta Soal</span>
                 <span className="xs:hidden">Overview</span>
                 <span>({answeredCount}/{totalQuestions})</span>
               </button>
               <button
                 onClick={() => setShowResetModal(true)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 text-xs font-bold text-rose-300 hover:bg-rose-950/80 bg-rose-950/40 border border-rose-800/60 rounded-xl transition-all cursor-pointer min-h-[38px]"
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-rose-300 hover:bg-rose-950/80 bg-rose-950/40 border border-rose-800/60 rounded-xl transition-all cursor-pointer min-h-[44px]"
                 title="Reset semua jawaban"
                 aria-label="Reset semua jawaban kuisioner"
               >
-                <RotateCcw className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                <RotateCcw className="w-4 h-4 text-rose-400 shrink-0" />
                 <span className="text-xs">Reset</span>
               </button>
             </div>
           </div>
 
           {/* Dimension Selector Navigation Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-[#78350F]/60 text-[11px]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-[#78350F]/60 text-xs">
             <button
               onClick={() => setCurrentIndex(0)}
-              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+              aria-label="Pindah ke Dimensi 1: RIASEC (Soal 01-08)"
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border min-h-[44px] ${
                 currentQuestion.dimension === 'riasec'
                   ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
-                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/90 border-[#78350F]/50 font-medium'
               }`}
             >
               <div className="font-bold truncate text-xs text-[#FFFBEB]">1. RIASEC</div>
-              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 01–08 • 20%</div>
+              <div className="text-xs text-amber-200/80 mt-0.5">Soal 01–08 • 20%</div>
             </button>
             <button
               onClick={() => setCurrentIndex(8)}
-              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+              aria-label="Pindah ke Dimensi 2: Bidang Ilmu (Soal 09-20)"
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border min-h-[44px] ${
                 currentQuestion.dimension === 'domain'
                   ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
-                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/90 border-[#78350F]/50 font-medium'
               }`}
             >
               <div className="font-bold truncate text-xs text-[#FFFBEB]">2. Bidang Ilmu</div>
-              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 09–20 • 35%</div>
+              <div className="text-xs text-amber-200/80 mt-0.5">Soal 09–20 • 35%</div>
             </button>
             <button
               onClick={() => setCurrentIndex(20)}
-              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+              aria-label="Pindah ke Dimensi 3: Gaya Belajar (Soal 21-28)"
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border min-h-[44px] ${
                 currentQuestion.dimension === 'learning'
                   ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
-                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/90 border-[#78350F]/50 font-medium'
               }`}
             >
               <div className="font-bold truncate text-xs text-[#FFFBEB]">3. Gaya Belajar</div>
-              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 21–28 • 20%</div>
+              <div className="text-xs text-amber-200/80 mt-0.5">Soal 21–28 • 20%</div>
             </button>
             <button
               onClick={() => setCurrentIndex(28)}
-              className={`p-3 rounded-xl text-left transition-all cursor-pointer border ${
+              aria-label="Pindah ke Dimensi 4: Kurikulum (Soal 29-36)"
+              className={`p-3 rounded-xl text-left transition-all cursor-pointer border min-h-[44px] ${
                 currentQuestion.dimension === 'curriculum'
                   ? 'bg-[#78350F] border-[#F59E0B] text-[#FFFBEB] font-bold shadow-xs'
-                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/70 border-[#78350F]/50 font-medium'
+                  : 'bg-[#190E08]/80 hover:bg-[#2A150D] text-amber-200/90 border-[#78350F]/50 font-medium'
               }`}
             >
               <div className="font-bold truncate text-xs text-[#FFFBEB]">4. Kurikulum</div>
-              <div className="text-[10px] text-amber-200/70 mt-0.5">Soal 29–36 • 25%</div>
+              <div className="text-xs text-amber-200/80 mt-0.5">Soal 29–36 • 25%</div>
             </button>
           </div>
         </div>

@@ -88,7 +88,8 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
         <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
           <button
             onClick={() => router.back()}
-            className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold text-amber-200/90 hover:text-white bg-[#190E08] hover:bg-[#341A10] border-2 border-[#78350F] px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all shadow-[2px_2px_0_0_#000] cursor-pointer"
+            aria-label="Kembali ke Daftar Rekomendasi"
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold text-amber-200/90 hover:text-white bg-[#190E08] hover:bg-[#341A10] border-2 border-[#78350F] px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl transition-all shadow-[2px_2px_0_0_#000] cursor-pointer min-h-[44px]"
           >
             <ArrowLeft className="w-4 h-4 text-amber-400" />
             <span>Kembali ke Daftar Rekomendasi</span>
@@ -97,10 +98,11 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => toggleComparison(program.id)}
-              className={`text-xs px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-black flex items-center gap-1.5 sm:gap-2 border-2 transition-all cursor-pointer shadow-[2px_2px_0_0_#000] ${
+              aria-label={isComparing ? `Hapus ${program.name} dari komparasi` : `Tambah ${program.name} ke komparasi prodi`}
+              className={`text-xs px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-black flex items-center gap-1.5 sm:gap-2 border-2 transition-all cursor-pointer shadow-[2px_2px_0_0_#000] min-h-[44px] ${
                 isComparing
                   ? 'bg-emerald-950 text-emerald-300 border-emerald-500 hover:bg-emerald-900'
-                  : 'bg-[#190E08] text-amber-200/80 border-[#78350F] hover:bg-[#341A10] hover:text-white'
+                  : 'bg-[#190E08] text-amber-200/90 border-[#78350F] hover:bg-[#341A10] hover:text-white'
               }`}
             >
               {isComparing ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Scale className="w-3.5 h-3.5 text-amber-400" />}

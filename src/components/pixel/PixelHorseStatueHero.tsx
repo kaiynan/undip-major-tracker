@@ -1,11 +1,25 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import { useRouter } from 'next/navigation';
 import { retroAudio } from '@/lib/retroAudio';
 import { PixelDiponegoroStatue } from './PixelDiponegoroStatue';
-import { ChevronUp, ChevronDown, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { ChevronUp, ChevronDown, Volume2, VolumeX } from 'lucide-react';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
+
+const subscribeReducedMotion = (callback: () => void) => {
+  if (typeof window === 'undefined') return () => {};
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', callback);
+  return () => mq.removeEventListener('change', callback);
+};
+
+const getReducedMotionSnapshot = () => {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+};
+
+const getReducedMotionServerSnapshot = () => false;
 
 interface PixelHorseStatueHeroProps {
   onScrollUp?: () => void;
@@ -20,18 +34,12 @@ export function PixelHorseStatueHero({
   const { answeredCount, totalQuestions } = useQuestionnaire();
   const [isStarting, setIsStarting] = useState(false);
   const [transitionFade, setTransitionFade] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const prefersReducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
   const [isMuted, setIsMuted] = useState(() => retroAudio.isMuted());
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-      setPrefersReducedMotion(mq.matches);
-      const listener = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
-      mq.addEventListener('change', listener);
-      return () => mq.removeEventListener('change', listener);
-    }
-  }, []);
 
   const handlePressToPlay = (e?: React.SyntheticEvent) => {
     if (e) {
@@ -42,11 +50,7 @@ export function PixelHorseStatueHero({
     retroAudio.playStartGame();
 
     const navigate = () => {
-      try {
-        router.push('/questionnaire');
-      } catch {
-        window.location.href = '/questionnaire';
-      }
+      router.push('/questionnaire');
     };
 
     if (prefersReducedMotion) {
@@ -103,7 +107,7 @@ export function PixelHorseStatueHero({
             retroAudio.playWarp();
             onScrollUp?.();
           }}
-          className="group flex flex-col items-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated active:scale-95 touch-manipulation"
+          className="group flex flex-col items-center justify-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-2 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated active:scale-95 touch-manipulation min-h-[44px]"
           aria-label="Eksplorasi ke Atas: Gedung Rektorat UNDIP (Beranda)"
         >
           <div className="flex items-center gap-1.5 font-pixel text-[9px] sm:text-[10px] tracking-wider uppercase">
@@ -298,7 +302,7 @@ export function PixelHorseStatueHero({
             retroAudio.playWarp();
             onScrollDown?.();
           }}
-          className="group flex flex-col items-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-1.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated active:scale-95 touch-manipulation"
+          className="group flex flex-col items-center justify-center gap-1 text-[#FDE68A] hover:text-white transition-colors cursor-pointer bg-[#2A160E]/90 hover:bg-[#3D1F13] px-4 py-2 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#451A03] pixelated active:scale-95 touch-manipulation min-h-[44px]"
           aria-label="Eksplorasi ke Bawah: Panduan Cara Kerja & Tentang Kami"
         >
           <div className="flex items-center gap-1.5 font-pixel text-[9px] sm:text-[10px] tracking-wider uppercase">
@@ -316,7 +320,7 @@ export function PixelHorseStatueHero({
       <div className={`absolute top-3 right-3 z-30 flex items-center gap-2 transition-opacity duration-300 ${isStarting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <button
           onClick={handleToggleAudio}
-          className="bg-[#2A160E]/90 hover:bg-[#3D1F13] text-[#FDE68A] p-2 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#000] pixelated cursor-pointer"
+          className="bg-[#2A160E]/90 hover:bg-[#3D1F13] text-[#FDE68A] p-2.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#000] pixelated cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
           title={isMuted ? 'Aktifkan Suara Retro (SFX: OFF)' : 'Bisukan Suara Retro (SFX: ON)'}
           aria-label={isMuted ? 'Suara mati' : 'Suara hidup'}
         >

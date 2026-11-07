@@ -66,11 +66,12 @@ export function MobileBottomNav() {
             <Link
               key={item.href}
               href={item.href}
+              aria-label={item.label}
               onClick={() => retroAudio.playSelect()}
               className={`flex-1 flex flex-col items-center justify-center py-1 px-1 transition-all relative min-h-[48px] ${
                 active
                   ? 'text-[#FDE68A] font-bold'
-                  : 'text-amber-200/70 hover:text-white'
+                  : 'text-amber-200/90 hover:text-white'
               }`}
             >
               <div className="relative">
@@ -78,7 +79,7 @@ export function MobileBottomNav() {
                   className={`p-1.5 border transition-all ${
                     active
                       ? 'bg-[#9A3412] text-[#FDE68A] border-[#FDE68A] shadow-[2px_2px_0_0_#000]'
-                      : 'bg-transparent text-amber-200/70 border-transparent'
+                      : 'bg-transparent text-amber-200/90 border-transparent'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -89,7 +90,7 @@ export function MobileBottomNav() {
                   </span>
                 )}
               </div>
-              <span className={`font-pixel text-[8px] mt-1 tracking-tight ${active ? 'text-[#FDE68A]' : 'text-amber-200/70'}`}>
+              <span className={`font-pixel text-[8px] mt-1 tracking-tight ${active ? 'text-[#FDE68A]' : 'text-amber-200/90'}`}>
                 {item.label}
               </span>
             </Link>

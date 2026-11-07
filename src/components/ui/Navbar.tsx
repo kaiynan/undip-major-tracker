@@ -209,22 +209,22 @@ export function Navbar() {
             {/* Replay Intro */}
             <button
               onClick={handleReplayIntro}
-              className="hidden sm:inline-flex items-center gap-1.5 font-pixel text-[9px] bg-[#2A160E] hover:bg-[#3D1F13] text-amber-200 hover:text-[#FDE68A] px-2.5 sm:px-3 py-1.5 border-2 border-[#78350F] shadow-[2px_2px_0_0_#000] transition-colors cursor-pointer whitespace-nowrap min-h-[36px]"
+              className="hidden sm:inline-flex items-center gap-1.5 font-pixel text-[9px] bg-[#2A160E] hover:bg-[#3D1F13] text-amber-200 hover:text-[#FDE68A] px-3 py-2 border-2 border-[#78350F] shadow-[2px_2px_0_0_#000] transition-colors cursor-pointer whitespace-nowrap min-h-[44px]"
               title="Putar Ulang Animasi Gerbang Tembalang"
               aria-label="Putar Ulang Animasi Gerbang Tembalang"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-[#FDE68A] shrink-0" />
+              <RotateCcw className="w-4 h-4 text-[#FDE68A] shrink-0" />
               <span className="hidden md:inline">RESTART INTRO</span>
             </button>
 
             {/* Audio Toggle */}
             <button
               onClick={handleToggleSound}
-              className="p-1.5 sm:px-2.5 sm:py-1.5 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] shadow-[2px_2px_0_0_#000] flex items-center justify-center font-pixel text-[9px] cursor-pointer min-h-[36px] min-w-[36px] whitespace-nowrap"
+              className="p-2 sm:px-3 sm:py-2 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] shadow-[2px_2px_0_0_#000] flex items-center justify-center font-pixel text-[9px] cursor-pointer min-h-[44px] min-w-[44px] whitespace-nowrap"
               title={isMuted ? 'Aktifkan Suara Retro' : 'Bisukan Suara'}
               aria-label={isMuted ? 'Suara Mati' : 'Suara Hidup'}
             >
-              {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
               <span className="hidden lg:inline ml-1">{isMuted ? 'SFX: OFF' : 'SFX: ON'}</span>
             </button>
 
@@ -233,17 +233,17 @@ export function Navbar() {
               <Link
                 href="/results"
                 onClick={() => retroAudio.playSelect()}
-                className="font-pixel text-[8.5px] sm:text-[10px] bg-[#059669] hover:bg-[#10B981] text-white px-2.5 sm:px-4 py-1.5 sm:py-2 border-2 border-[#064E3B] shadow-[2px_2px_0_0_#000] inline-flex items-center gap-1 sm:gap-1.5 cursor-pointer min-h-[36px] whitespace-nowrap"
+                className="font-pixel text-[9px] sm:text-xs bg-[#059669] hover:bg-[#10B981] text-white px-3 sm:px-4 py-2 border-2 border-[#064E3B] shadow-[2px_2px_0_0_#000] inline-flex items-center gap-1.5 cursor-pointer min-h-[44px] whitespace-nowrap"
                 aria-label="Lihat Hasil Rekomendasi Program Studi"
               >
                 <span>HASIL</span>
-                <ArrowRight className="w-3 h-3" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             ) : (
               <Link
                 href="/questionnaire"
                 onClick={() => retroAudio.playSelect()}
-                className="font-pixel text-[8.5px] sm:text-[10px] bg-[#F59E0B] hover:bg-[#FBBF24] text-[#0A1128] font-bold px-2 sm:px-4 py-1.5 sm:py-2 border-2 border-[#78350F] shadow-[2px_2px_0_0_#000] inline-flex items-center gap-1 sm:gap-1.5 cursor-pointer min-h-[36px] whitespace-nowrap"
+                className="font-pixel text-[9px] sm:text-xs bg-[#F59E0B] hover:bg-[#FBBF24] text-[#0A1128] font-bold px-3 sm:px-4 py-2 border-2 border-[#78350F] shadow-[2px_2px_0_0_#000] inline-flex items-center gap-1.5 cursor-pointer min-h-[44px] whitespace-nowrap"
                 aria-label="Mulai Kuisioner Minat"
               >
                 <span>
@@ -251,7 +251,7 @@ export function Navbar() {
                     ? `QUEST (${answeredCount}/${totalQuestions})`
                     : 'MULAI TES'}
                 </span>
-                <ArrowRight className="w-3 h-3" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             )}
 
@@ -261,7 +261,7 @@ export function Navbar() {
                 retroAudio.playBlip(500);
                 setMobileMenuOpen(!mobileMenuOpen);
               }}
-              className="2xl:hidden p-1.5 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center shrink-0"
+              className="2xl:hidden p-2 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
               aria-label="Buka Menu Navigasi"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -272,7 +272,7 @@ export function Navbar() {
 
       {/* Mobile / Tablet Dropdown Menu (2xl:hidden) */}
       {mobileMenuOpen && (
-        <div className="2xl:hidden bg-[#1A0E08] border-t-2 border-[#78350F] px-4 py-4 space-y-2 shadow-2xl animate-fade-in">
+        <div className="2xl:hidden bg-[#1A0E08] border-t-2 border-[#78350F] px-4 py-4 space-y-2.5 shadow-2xl animate-fade-in">
           {NAV_ITEMS.map((item) => {
             const isActive = (pathname !== '/' ? getInitialActive(pathname) : activeSection) === item.id;
             return (
@@ -280,7 +280,7 @@ export function Navbar() {
                 key={item.id}
                 href={item.href}
                 onClick={(e) => handleNavClick(item, e)}
-                className={`block font-pixel text-[10px] py-2.5 px-3 border transition-colors ${
+                className={`flex items-center font-pixel text-[10px] sm:text-xs py-3 px-4 border transition-colors min-h-[44px] ${
                   isActive
                     ? 'bg-[#9A3412] text-[#FDE68A] border-[#FDE68A] shadow-[2px_2px_0_0_#000]'
                     : 'bg-[#24130C] text-amber-100 border-[#78350F] hover:bg-[#341A10]'
@@ -296,7 +296,8 @@ export function Navbar() {
               setMobileMenuOpen(false);
               handleReplayIntro();
             }}
-            className="w-full text-left font-pixel text-[10px] py-2.5 px-3 bg-[#24130C] text-[#FDE68A] border border-[#78350F] hover:bg-[#341A10] cursor-pointer"
+            aria-label="Putar ulang animasi intro gerbang"
+            className="w-full text-left font-pixel text-[10px] sm:text-xs py-3 px-4 bg-[#24130C] text-[#FDE68A] border border-[#78350F] hover:bg-[#341A10] cursor-pointer min-h-[44px] flex items-center"
           >
             ▶ PUTAR ULANG INTRO GERBANG
           </button>
@@ -305,7 +306,7 @@ export function Navbar() {
             <Link
               href="/questionnaire"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center block font-pixel text-[10px] py-3 px-3 bg-[#F59E0B] text-[#0A1128] font-bold shadow-[2px_2px_0_0_#78350F] active:translate-x-0.5 active:translate-y-0.5"
+              className="w-full text-center flex items-center justify-center font-pixel text-[10px] sm:text-xs py-3.5 px-4 bg-[#F59E0B] text-[#0A1128] font-bold shadow-[2px_2px_0_0_#78350F] active:translate-x-0.5 active:translate-y-0.5 min-h-[44px]"
             >
               MASUK KE KUISIONER (36 PERTANYAAN)
             </Link>

@@ -128,13 +128,15 @@ export const FacultyTierList = React.memo(function FacultyTierList({
         <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
           <button
             onClick={expandAll}
-            className="text-xs font-bold px-3 py-1.5 bg-[#24130C] border border-[#78350F] rounded-xl text-amber-200 hover:text-white hover:bg-[#341A10] transition-colors cursor-pointer"
+            aria-label="Buka semua kartu rincian prodi fakultas"
+            className="text-xs font-bold px-3.5 py-2 bg-[#24130C] border border-[#78350F] rounded-xl text-amber-200 hover:text-white hover:bg-[#341A10] transition-colors cursor-pointer min-h-[44px] flex items-center"
           >
             Buka Semua
           </button>
           <button
             onClick={collapseAll}
-            className="text-xs font-bold px-3 py-1.5 bg-[#24130C] border border-[#78350F] rounded-xl text-amber-200 hover:text-white hover:bg-[#341A10] transition-colors cursor-pointer"
+            aria-label="Tutup semua kartu rincian prodi fakultas"
+            className="text-xs font-bold px-3.5 py-2 bg-[#24130C] border border-[#78350F] rounded-xl text-amber-200 hover:text-white hover:bg-[#341A10] transition-colors cursor-pointer min-h-[44px] flex items-center"
           >
             Tutup Semua
           </button>
@@ -194,10 +196,10 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-center gap-1.5 mb-1">
                       <TierBadge tier={facultyScore.tier} size="sm" />
-                      <span className="text-[11px] font-bold text-[#FDE68A] bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]">
+                      <span className="text-xs font-bold text-[#FDE68A] bg-[#24130C] px-2.5 py-1 rounded border border-[#78350F]">
                         {faculty.shortName}
                       </span>
-                      <span className="text-[11px] text-amber-200/70 font-medium">
+                      <span className="text-xs text-amber-200/90 font-medium">
                         {facultyScore.programScores.length} Prodi
                       </span>
                       {isSelected && (
@@ -211,13 +213,13 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                       {faculty.name}
                     </h3>
 
-                    <p className="text-xs text-amber-100/75 mt-0.5 line-clamp-1 max-w-xl">
+                    <p className="text-xs text-amber-100/90 mt-0.5 line-clamp-1 max-w-xl leading-relaxed">
                       {faculty.description}
                     </p>
 
                     {/* Top 3 Major Highlights Pills */}
-                    <div className="mt-2.5 flex flex-wrap items-center gap-1 text-xs text-amber-200/80">
-                      <span className="font-bold text-amber-200/60 text-[10px] uppercase tracking-wider mr-1 font-mono">
+                    <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-xs text-amber-200/90">
+                      <span className="font-bold text-amber-200/90 text-xs uppercase tracking-wider mr-1 font-mono">
                         Top Rekomendasi:
                       </span>
                       {topPrograms.map((ps) => {
@@ -225,7 +227,7 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                         return (
                           <span
                             key={ps.programId}
-                            className="inline-flex items-center gap-1 bg-[#24130C] border border-[#78350F] px-2 py-0.5 rounded text-[11px] font-semibold"
+                            className="inline-flex items-center gap-1.5 bg-[#24130C] border border-[#78350F] px-2.5 py-1 rounded text-xs font-semibold"
                           >
                             <span className="text-amber-100 font-bold truncate max-w-[140px]">{prog?.name}</span>
                             <span className="text-amber-400 font-black font-mono">{ps.totalScore}%</span>
@@ -243,19 +245,20 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                       e.stopPropagation();
                       handleSelectFaculty(faculty.id);
                     }}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                    className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
                       isSelected
                         ? 'bg-[#F59E0B] text-stone-950 border border-[#F59E0B] font-black shadow-xs'
                         : 'bg-[#24130C] text-[#FDE68A] hover:bg-[#341A10] border border-[#78350F]'
                     }`}
                     title="Zoom kamera peta ke fakultas ini"
+                    aria-label={`Fokuskan kamera peta ke fakultas ${faculty.name}`}
                   >
-                    <MapPin className="w-3.5 h-3.5 text-[#F59E0B]" />
+                    <MapPin className="w-4 h-4 text-[#F59E0B]" />
                     <span>{isSelected ? 'Terfokus di Peta' : 'Fokus di Peta'}</span>
                   </button>
 
                   <div className="text-right">
-                    <div className="text-[10px] font-mono font-semibold text-amber-200/60 uppercase tracking-wider">
+                    <div className="text-xs font-mono font-semibold text-amber-200/90 uppercase tracking-wider">
                       Skor Agregat
                     </div>
                     <div className="text-xl sm:text-2xl font-black text-amber-400 font-mono">
@@ -263,8 +266,13 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                     </div>
                   </div>
 
-                  <div className="w-8 h-8 rounded-lg bg-[#24130C] border border-[#78350F] flex items-center justify-center text-amber-200">
-                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    aria-label={isExpanded ? `Tutup daftar prodi ${faculty.name}` : `Buka daftar prodi ${faculty.name}`}
+                    className="w-10 h-10 rounded-xl bg-[#24130C] border border-[#78350F] flex items-center justify-center text-amber-200 min-h-[44px] min-w-[44px]"
+                  >
+                    {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                   </div>
                 </div>
               </div>
@@ -281,10 +289,11 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                         href={faculty.websiteUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-400 hover:text-amber-200 transition-colors"
+                        aria-label={`Kunjungi situs resmi ${faculty.shortName}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 hover:text-amber-200 transition-colors min-h-[44px]"
                       >
                         <span>Situs Resmi {faculty.shortName}</span>
-                        <ExternalLink className="w-3 h-3" />
+                        <ExternalLink className="w-3.5 h-3.5" />
                       </a>
                     )}
                   </div>
@@ -301,28 +310,28 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                           className="bg-[#190E08] rounded-xl p-3.5 sm:p-4 border border-[#78350F]/80 hover:border-[#F59E0B]/70 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3 text-white"
                         >
                           <div className="flex items-start gap-3 flex-1 min-w-0">
-                            <span className="w-6 h-6 rounded-md bg-[#24130C] text-amber-300 border border-[#78350F]/70 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                            <span className="w-7 h-7 rounded-md bg-[#24130C] text-amber-300 border border-[#78350F]/70 font-mono font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
                               {pIndex + 1}
                             </span>
                             <div className="flex-1 min-w-0">
                               <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
                                 <TierBadge tier={ps.tier} size="sm" />
-                                <span className="text-[10px] font-bold text-amber-200/80 bg-[#24130C] px-1.5 py-0.5 rounded border border-[#78350F]/60">
+                                <span className="text-xs font-bold text-amber-200/90 bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]/60">
                                   {prog.degreeLevel}
                                 </span>
                               </div>
-                              <h4 className="font-extrabold text-[#FFFBEB] text-sm leading-snug truncate">
+                              <h4 className="font-extrabold text-[#FFFBEB] text-sm sm:text-base leading-snug truncate">
                                 {prog.name}
                               </h4>
-                              <p className="text-[11px] text-amber-100/70 line-clamp-1">
+                              <p className="text-xs text-amber-100/90 line-clamp-1 leading-relaxed">
                                 {prog.description}
                               </p>
 
                               {/* Admissions Quotas */}
                               {quota && (
-                                <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[10px] text-amber-200/70 font-mono">
+                                <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-amber-200/90 font-mono">
                                   <span className="font-semibold text-[#FDE68A] flex items-center gap-1">
-                                    <Users className="w-3 h-3 text-amber-400" />
+                                    <Users className="w-3.5 h-3.5 text-amber-400" />
                                     Daya Tampung: {quota.totalCapacity}
                                   </span>
                                   <span>•</span>
@@ -339,16 +348,17 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                           {/* Individual Program Score & Action */}
                           <div className="flex items-center justify-between md:justify-end gap-3 pt-2 md:pt-0 border-t md:border-t-0 border-[#78350F]/60 shrink-0">
                             <div className="text-right">
-                              <div className="text-[10px] font-mono text-amber-200/60 font-medium">Skor HMIM</div>
+                              <div className="text-xs font-mono text-amber-200/90 font-medium">Skor HMIM</div>
                               <div className="text-base sm:text-lg font-black text-amber-400 font-mono">{ps.totalScore}%</div>
                             </div>
 
                             <Link
                               href={`/program/${prog.id}`}
-                              className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#78350F] hover:bg-[#8D3F12] text-[#FFFBEB] border border-[#F59E0B] font-bold text-xs rounded-xl transition-colors shadow-xs"
+                              aria-label={`Lihat detail lengkap ${prog.name}`}
+                              className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#78350F] hover:bg-[#8D3F12] text-[#FFFBEB] border border-[#F59E0B] font-bold text-xs rounded-xl transition-colors shadow-xs min-h-[44px]"
                             >
                               <span>Detail</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
+                              <ArrowRight className="w-4 h-4" />
                             </Link>
                           </div>
                         </div>

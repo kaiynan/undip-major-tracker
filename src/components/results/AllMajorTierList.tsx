@@ -77,41 +77,41 @@ const ProgramCard = React.memo(function ProgramCard({
             <div className="flex-1 min-w-0">
               <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
                 <TierBadge tier={score.tier} size="sm" />
-                <span className="text-[11px] font-bold text-[#FDE68A] bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]">
+                <span className="text-xs font-bold text-[#FDE68A] bg-[#24130C] px-2.5 py-1 rounded border border-[#78350F]">
                   {faculty?.shortName}
                 </span>
-                <span className="text-[11px] font-semibold text-amber-200/70 bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]/60">
+                <span className="text-xs font-semibold text-amber-200/90 bg-[#24130C] px-2.5 py-1 rounded border border-[#78350F]/60">
                   Jenjang {program.degreeLevel}
                 </span>
                 {quota && (
-                  <span className="text-[11px] text-amber-200/80 flex items-center gap-1 bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]/60">
-                    <Users className="w-3 h-3 text-amber-400" />
+                  <span className="text-xs text-amber-200 flex items-center gap-1 bg-[#24130C] px-2.5 py-1 rounded border border-[#78350F]/60">
+                    <Users className="w-3.5 h-3.5 text-amber-400" />
                     Daya Tampung: <strong className="text-[#FDE68A]">{quota.totalCapacity}</strong>
                   </span>
                 )}
               </div>
 
-              <h3 className="text-sm sm:text-lg font-black text-[#FFFBEB] tracking-tight truncate sm:whitespace-normal">
+              <h3 className="text-base sm:text-lg font-black text-[#FFFBEB] tracking-tight truncate sm:whitespace-normal">
                 {program.name}
               </h3>
 
-              <p className="text-xs text-amber-100/75 mt-1 line-clamp-2 leading-relaxed">
+              <p className="text-xs sm:text-sm text-amber-100/90 mt-1 line-clamp-2 leading-relaxed">
                 {program.description}
               </p>
 
               {/* Admissions Quota Breakdown Badges */}
               {quota && (
-                <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-[11px]">
-                  <span className="font-semibold text-amber-200/60 uppercase tracking-wider text-[10px] mr-1 font-mono">
+                <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-xs">
+                  <span className="font-semibold text-amber-200/90 uppercase tracking-wider text-xs mr-1 font-mono">
                     Alokasi Kuota:
                   </span>
-                  <span className="px-2 py-0.5 bg-[#24130C] text-blue-300 rounded border border-blue-900/60 font-medium font-mono">
+                  <span className="px-2.5 py-1 bg-[#24130C] text-blue-300 rounded border border-blue-900/60 font-medium font-mono text-xs">
                     SNBP: <strong className="text-blue-200">{quota.snbpQuota}</strong> ({quota.totalCapacity && quota.snbpQuota ? Math.round((quota.snbpQuota / quota.totalCapacity) * 100) : '-'}%)
                   </span>
-                  <span className="px-2 py-0.5 bg-[#24130C] text-emerald-300 rounded border border-emerald-900/60 font-medium font-mono">
+                  <span className="px-2.5 py-1 bg-[#24130C] text-emerald-300 rounded border border-emerald-900/60 font-medium font-mono text-xs">
                     SNBT: <strong className="text-emerald-200">{quota.snbtQuota}</strong> ({quota.totalCapacity && quota.snbtQuota ? Math.round((quota.snbtQuota / quota.totalCapacity) * 100) : '-'}%)
                   </span>
-                  <span className="px-2 py-0.5 bg-[#24130C] text-amber-300 rounded border border-amber-900/60 font-medium font-mono">
+                  <span className="px-2.5 py-1 bg-[#24130C] text-amber-300 rounded border border-amber-900/60 font-medium font-mono text-xs">
                     Mandiri: <strong className="text-amber-200">{quota.mandiriQuota}</strong> ({quota.totalCapacity && quota.mandiriQuota ? Math.round((quota.mandiriQuota / quota.totalCapacity) * 100) : '-'}%)
                   </span>
                 </div>
@@ -122,7 +122,7 @@ const ProgramCard = React.memo(function ProgramCard({
           {/* Score & Actions Right Column */}
           <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-2.5 pt-3 md:pt-0 border-t md:border-t-0 border-[#78350F]/70 shrink-0 min-w-0 max-w-full">
             <div className="text-left md:text-right">
-              <div className="text-[10px] font-mono font-semibold text-amber-200/60 uppercase tracking-wider">
+              <div className="text-xs font-mono font-semibold text-amber-200/90 uppercase tracking-wider">
                 Skor Keselarasan
               </div>
               <div className="text-xl sm:text-3xl font-black text-amber-400 font-mono">
@@ -133,11 +133,11 @@ const ProgramCard = React.memo(function ProgramCard({
               </div>
             </div>
 
-            <div className="flex flex-wrap sm:flex-nowrap items-center gap-1.5">
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
               {/* Comparison Pin Button */}
               <button
                 onClick={() => onToggleComparison(program.id)}
-                className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border min-h-[36px] ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border min-h-[44px] ${
                   isComparing
                     ? 'bg-[#F59E0B] text-stone-950 border-[#F59E0B] font-black shadow-xs'
                     : 'bg-[#24130C] text-amber-200 border-[#78350F] hover:bg-[#341A10]'
@@ -145,7 +145,7 @@ const ProgramCard = React.memo(function ProgramCard({
                 title={isComparing ? 'Hapus dari pembanding' : 'Tambah ke pembanding'}
                 aria-label={isComparing ? `Hapus ${program.name} dari pembanding` : `Tambah ${program.name} ke pembanding`}
               >
-                <Scale className="w-3.5 h-3.5" />
+                <Scale className="w-4 h-4" />
                 <span className="hidden sm:inline">
                   {isComparing ? 'Dipilih' : 'Bandingkan'}
                 </span>
@@ -154,30 +154,30 @@ const ProgramCard = React.memo(function ProgramCard({
               {/* Quick Focus on Map Button */}
               <button
                 onClick={() => onSelectFaculty(program.facultyId)}
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-[#24130C] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer min-h-[36px]"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold bg-[#24130C] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer min-h-[44px]"
                 title="Fokus peta ke fakultas prodi ini"
                 aria-label={`Fokus peta ke fakultas ${program.name}`}
               >
-                <MapPin className="w-3.5 h-3.5 text-[#F59E0B]" />
+                <MapPin className="w-4 h-4 text-[#F59E0B]" />
                 <span className="hidden sm:inline">Peta</span>
               </button>
 
               {/* Detail Link */}
               <Link
                 href={`/program/${program.id}`}
-                className="flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-extrabold bg-[#78350F] hover:bg-[#8D3F12] text-[#FFFBEB] border border-[#F59E0B] transition-colors shadow-xs min-h-[36px]"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-extrabold bg-[#78350F] hover:bg-[#8D3F12] text-[#FFFBEB] border border-[#F59E0B] transition-colors shadow-xs min-h-[44px]"
                 aria-label={`Lihat detail lengkap ${program.name}`}
               >
                 <span>Detail</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-4 h-4" />
               </Link>
 
               {/* Breakdown Accordion Toggle */}
               <button
                 onClick={() => onToggleExpand(score.programId)}
-                className="p-1.5 rounded-xl text-amber-200/70 hover:text-white hover:bg-[#24130C] border border-[#78350F]/60 transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
+                className="p-2.5 rounded-xl text-amber-200/90 hover:text-white hover:bg-[#24130C] border border-[#78350F]/60 transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
                 title="Lihat rincian 4 dimensi"
-                aria-label="Lihat rincian 4 dimensi"
+                aria-label={isExpanded ? `Tutup rincian 4 dimensi ${program.name}` : `Lihat rincian 4 dimensi ${program.name}`}
               >
                 {isExpanded ? (
                   <ChevronUp className="w-4 h-4 text-amber-300" />
@@ -197,7 +197,7 @@ const ProgramCard = React.memo(function ProgramCard({
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5">
               <div className="bg-[#190E08] p-3 rounded-xl border border-[#78350F]/80">
-                <div className="text-[10px] text-amber-200/70 font-semibold font-mono">1. RIASEC (20%)</div>
+                <div className="text-xs text-amber-200/90 font-semibold font-mono">1. RIASEC (20%)</div>
                 <div className="text-base font-black text-amber-400 font-mono mt-0.5">
                   {score.dimensionScores.riasec}%
                 </div>
@@ -207,7 +207,7 @@ const ProgramCard = React.memo(function ProgramCard({
               </div>
 
               <div className="bg-[#190E08] p-3 rounded-xl border border-[#78350F]/80">
-                <div className="text-[10px] text-amber-200/70 font-semibold font-mono">2. Bidang Ilmu (35%)</div>
+                <div className="text-xs text-amber-200/90 font-semibold font-mono">2. Bidang Ilmu (35%)</div>
                 <div className="text-base font-black text-emerald-400 font-mono mt-0.5">
                   {score.dimensionScores.domain}%
                 </div>
@@ -217,7 +217,7 @@ const ProgramCard = React.memo(function ProgramCard({
               </div>
 
               <div className="bg-[#190E08] p-3 rounded-xl border border-[#78350F]/80">
-                <div className="text-[10px] text-amber-200/70 font-semibold font-mono">3. Gaya Belajar (20%)</div>
+                <div className="text-xs text-amber-200/90 font-semibold font-mono">3. Gaya Belajar (20%)</div>
                 <div className="text-base font-black text-sky-400 font-mono mt-0.5">
                   {score.dimensionScores.learning}%
                 </div>
@@ -227,7 +227,7 @@ const ProgramCard = React.memo(function ProgramCard({
               </div>
 
               <div className="bg-[#190E08] p-3 rounded-xl border border-[#78350F]/80">
-                <div className="text-[10px] text-amber-200/70 font-semibold font-mono">4. Kurikulum (25%)</div>
+                <div className="text-xs text-amber-200/90 font-semibold font-mono">4. Kurikulum (25%)</div>
                 <div className="text-base font-black text-amber-400 font-mono mt-0.5">
                   {score.dimensionScores.curriculum}%
                 </div>
@@ -239,13 +239,13 @@ const ProgramCard = React.memo(function ProgramCard({
 
             {/* Curriculum Keywords Tags */}
             <div className="mt-3.5 flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] font-bold text-amber-200/60 uppercase tracking-wider mr-1 font-mono">
+              <span className="text-xs font-bold text-amber-200/90 uppercase tracking-wider mr-1 font-mono">
                 Kata Kunci Kurikulum:
               </span>
               {program.curriculumKeywords.map((kw: string, i: number) => (
                 <span
                   key={i}
-                  className="bg-[#190E08] border border-[#78350F] text-amber-200/90 px-2 py-0.5 rounded text-[11px] font-medium"
+                  className="bg-[#190E08] border border-[#78350F] text-amber-200 px-2.5 py-1 rounded text-xs font-medium"
                 >
                   {kw}
                 </span>
@@ -447,15 +447,16 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
       <div className="bg-[#190E08] rounded-2xl p-4 sm:p-6 border-2 border-[#78350F] shadow-inner space-y-4 text-amber-100">
         {/* Tier Pills Filter */}
         <div className="flex flex-wrap items-center gap-2 pb-4 border-b border-[#78350F]/70">
-          <span className="text-xs font-bold text-amber-200/70 uppercase tracking-wider mr-2 hidden sm:inline font-mono">
+          <span className="text-xs font-bold text-amber-200/90 uppercase tracking-wider mr-2 hidden sm:inline font-mono">
             Filter Tier:
           </span>
           <button
             onClick={() => setSelectedTier('all')}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            aria-label={`Tampilkan semua tier prodi (${programScores.length} program)`}
+            className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] flex items-center ${
               selectedTier === 'all'
                 ? 'bg-[#F59E0B] text-stone-950 font-black shadow-xs'
-                : 'bg-[#24130C] text-amber-200/80 hover:bg-[#341A10] border border-[#78350F]'
+                : 'bg-[#24130C] text-amber-200/90 hover:bg-[#341A10] border border-[#78350F]'
             }`}
           >
             Semua ({programScores.length})
@@ -464,15 +465,16 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
             <button
               key={t}
               onClick={() => setSelectedTier(t)}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer border ${
+              aria-label={`Filter berdasarkan Tier ${t} (${tierCounts[t]} program studi)`}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer border min-h-[44px] ${
                 selectedTier === t
                   ? 'bg-[#F59E0B] text-stone-950 border-[#F59E0B] font-black shadow-xs'
-                  : 'bg-[#24130C] text-amber-200/80 border-[#78350F] hover:bg-[#341A10]'
+                  : 'bg-[#24130C] text-amber-200/90 border-[#78350F] hover:bg-[#341A10]'
               }`}
             >
               <span>Tier {t}</span>
               <span
-                className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                className={`text-xs px-2 py-0.5 rounded-full font-bold ${
                   selectedTier === t
                     ? 'bg-stone-950 text-amber-300'
                     : 'bg-[#190E08] text-amber-200 border border-[#78350F]/70'
@@ -488,13 +490,14 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
           {/* Search Input */}
           <div className="sm:col-span-4 relative">
-            <Search className="w-4 h-4 text-amber-200/60 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-amber-200/80 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               placeholder="Cari prodi, bidang studi, atau kata kunci..."
               value={searchTerm}
+              aria-label="Cari program studi, bidang studi, atau kata kunci kurikulum"
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] transition-all text-[#FFFBEB] placeholder:text-stone-500"
+              className="w-full pl-9 pr-4 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] transition-all text-[#FFFBEB] placeholder:text-stone-400 min-h-[44px]"
             />
           </div>
 
@@ -502,8 +505,9 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
           <div className="sm:col-span-3">
             <select
               value={selectedFaculty}
+              aria-label="Filter berdasarkan Fakultas atau Sekolah"
               onChange={(e) => setSelectedFaculty(e.target.value)}
-              className="w-full px-3 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] font-medium text-amber-100 cursor-pointer"
+              className="w-full px-3 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] font-medium text-amber-100 cursor-pointer min-h-[44px]"
             >
               <option value="all">Semua Fakultas & Sekolah ({faculties.length})</option>
               {faculties.map((f) => (
@@ -518,8 +522,9 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
           <div className="sm:col-span-2">
             <select
               value={selectedDegree}
+              aria-label="Filter berdasarkan Jenjang Pendidikan"
               onChange={(e) => setSelectedDegree(e.target.value)}
-              className="w-full px-3 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] font-medium text-amber-100 cursor-pointer"
+              className="w-full px-3 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] font-medium text-amber-100 cursor-pointer min-h-[44px]"
             >
               <option value="all">Semua Jenjang</option>
               <option value="S1">Sarjana (S1)</option>
@@ -531,8 +536,9 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
           <div className="sm:col-span-3">
             <select
               value={selectedPathway}
+              aria-label="Filter berdasarkan Jalur Penerimaan Mahasiswa"
               onChange={(e) => setSelectedPathway(e.target.value)}
-              className="w-full px-3 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] font-medium text-amber-100 cursor-pointer"
+              className="w-full px-3 py-2.5 text-xs sm:text-sm bg-[#24130C] border border-[#78350F] rounded-xl focus:outline-hidden focus:border-[#F59E0B] font-medium text-amber-100 cursor-pointer min-h-[44px]"
             >
               <option value="all">Semua Jalur Penerimaan</option>
               <option value="snbp">Tersedia Jalur SNBP</option>
@@ -543,7 +549,7 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
         </div>
 
         {/* Sort and Count Sub-bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-amber-200/70 pt-2 border-t border-[#78350F]/60">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs text-amber-200/90 pt-2 border-t border-[#78350F]/60">
           <div className="flex items-center gap-3">
             <span>
               Menampilkan <strong className="text-[#FDE68A]">{filteredScores.length}</strong> dari <strong className="text-[#FDE68A]">{programScores.length}</strong> program studi
@@ -558,7 +564,8 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
                   setSelectedPathway('all');
                   setSortBy('score');
                 }}
-                className="text-xs text-amber-400 hover:text-amber-200 underline font-bold cursor-pointer"
+                aria-label="Reset semua filter pencarian dan seleksi prodi"
+                className="text-xs text-amber-400 hover:text-amber-200 underline font-bold cursor-pointer min-h-[44px] flex items-center"
               >
                 Reset Filter
               </button>
@@ -567,14 +574,15 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
 
           {/* Sort By Dropdown */}
           <div className="flex items-center gap-2 self-start sm:self-auto">
-            <span className="text-amber-200/60 font-medium flex items-center gap-1 font-mono">
+            <span className="text-amber-200/90 font-medium flex items-center gap-1 font-mono">
               <ArrowUpDown className="w-3.5 h-3.5" />
               <span>Urutkan:</span>
             </span>
             <select
               value={sortBy}
+              aria-label="Urutkan daftar program studi"
               onChange={(e) => setSortBy(e.target.value as 'score' | 'quota' | 'name')}
-              className="px-3 py-1.5 bg-[#24130C] border border-[#78350F] rounded-lg text-xs font-bold text-amber-200 focus:outline-hidden focus:border-[#F59E0B] cursor-pointer"
+              className="px-3 py-2 bg-[#24130C] border border-[#78350F] rounded-xl text-xs font-bold text-amber-200 focus:outline-hidden focus:border-[#F59E0B] cursor-pointer min-h-[44px]"
             >
               <option value="score">Skor Kecocokan (Tertinggi)</option>
               <option value="quota">Daya Tampung (Terbanyak)</option>
