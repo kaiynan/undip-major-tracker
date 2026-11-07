@@ -266,17 +266,17 @@ export default function ResultsPage() {
               setActiveTab('all-majors');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
               activeTab === 'all-majors'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                 : 'text-amber-200/90 hover:text-white'
             }`}
             aria-label="Lihat Output 1: 67 Program Studi"
           >
-            <GraduationCap className="w-4 h-4 shrink-0" />
+            <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span className="hidden md:inline">Output 1:</span>
             <span className="hidden sm:inline">67 Jurusan</span>
-            <span className="sm:hidden">67 Prodi</span>
+            <span className="sm:hidden text-[11px]">67 Prodi</span>
           </button>
 
           <button
@@ -284,26 +284,26 @@ export default function ResultsPage() {
               setActiveTab('faculties');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
               activeTab === 'faculties'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                 : 'text-amber-200/90 hover:text-white'
             }`}
             aria-label="Lihat Output 2: 12 Fakultas"
           >
-            <Building2 className="w-4 h-4 shrink-0" />
+            <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span className="hidden md:inline">Output 2:</span>
             <span className="hidden sm:inline">12 Fakultas</span>
-            <span className="sm:hidden">12 Fak</span>
+            <span className="sm:hidden text-[11px]">12 Fak</span>
           </button>
         </div>
 
         {/* Right: Sound, Toggle Panel ("Peta Penuh"), Share, and Retake */}
         <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-          {/* Audio Toggle */}
+          {/* Audio Toggle (desktop/tablet only; on phone global Navbar directly above has SFX toggle) */}
           <button
             onClick={handleToggleSound}
-            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="hidden sm:flex p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] items-center justify-center"
             title={isMuted ? 'Aktifkan Suara Retro' : 'Bisukan Suara'}
             aria-label={isMuted ? 'Aktifkan Suara Retro' : 'Bisukan Suara Retro'}
           >
@@ -313,7 +313,7 @@ export default function ResultsPage() {
           {/* Toggle Panel Button ("Peta Penuh" / "Buka Panel") */}
           <button
             onClick={() => setIsPanelOpen(!isPanelOpen)}
-            className={`flex items-center gap-1 sm:gap-1.5 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
               isPanelOpen
                 ? 'bg-amber-500 text-stone-950 hover:bg-amber-400 shadow-xs'
                 : 'bg-[#78350F] text-[#FDE68A] hover:bg-[#8D3F12] border border-[#F59E0B]'
@@ -347,11 +347,11 @@ export default function ResultsPage() {
           {/* Retake Questionnaire Button */}
           <button
             onClick={() => setIsRetakeModalOpen(true)}
-            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-rose-300 hover:text-rose-200 border border-rose-900/60 transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
-            title="Ulangi Kuisioner"
-            aria-label="Ulangi Kuisioner Minat"
+            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-rose-300 hover:text-rose-200 border border-rose-900/60 transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
+            title="Ulangi Kuisioner (Reset & Isi Ulang)"
+            aria-label="Ulangi Kuisioner (Reset & Isi Ulang)"
           >
-            <RotateCcw className="w-4 h-4" />
+            <RotateCcw className="w-4 h-4 text-rose-400" />
           </button>
         </div>
       </header>

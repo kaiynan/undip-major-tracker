@@ -100,7 +100,7 @@ export function Modal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xs overscroll-contain animate-in fade-in duration-150 select-none"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-xs overscroll-contain animate-in fade-in duration-150 overflow-y-auto"
       onClick={(e) => {
         // Close when clicking directly on the backdrop (outside modalRef content)
         if (e.target === e.currentTarget) {
@@ -108,7 +108,6 @@ export function Modal({
         }
       }}
       onWheel={(e) => e.stopPropagation()}
-      onTouchMove={(e) => e.stopPropagation()}
     >
       <div
         ref={modalRef}
@@ -117,7 +116,7 @@ export function Modal({
         aria-labelledby={titleId}
         aria-label={ariaLabel}
         tabIndex={-1}
-        className={`relative w-full ${maxWidth} bg-[#24130C] rounded-3xl border-2 border-[#78350F] shadow-[0_16px_50px_rgba(0,0,0,0.9)] text-white focus:outline-hidden ${className}`}
+        className={`relative w-full ${maxWidth} max-h-[90vh] overflow-y-auto bg-[#24130C] rounded-3xl border-2 border-[#78350F] shadow-[0_16px_50px_rgba(0,0,0,0.9)] text-white focus:outline-hidden ${className}`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
