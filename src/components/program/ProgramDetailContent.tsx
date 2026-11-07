@@ -296,7 +296,7 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
                     Daya Tampung & Kuota Penerimaan
                   </h2>
                   <span className="text-[10px] sm:text-[11px] font-bold text-[#FDE68A] bg-[#190E08] border border-[#78350F] px-2 sm:px-2.5 py-0.5 rounded-full">
-                    TA {quota?.academicYear || '2024/2025'}
+                    Kuota TA {quota?.academicYear || program.academicYear} — dapat berubah
                   </span>
                 </div>
                 <p className="text-[11px] sm:text-xs text-amber-200/80 mt-0.5">
@@ -307,7 +307,7 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
 
             <div className="flex items-center gap-1.5 self-start sm:self-auto text-xs font-semibold text-amber-200 bg-[#190E08] px-3 py-1.5 rounded-xl border border-[#78350F]">
               <Building2 className="w-3.5 h-3.5 text-amber-400" />
-              <span>Tahun Akademik {quota?.academicYear || '2024/2025'}</span>
+              <span>Kuota TA {quota?.academicYear || program.academicYear} — dapat berubah{quota?.lastVerified ? ` (data per ${quota.lastVerified})` : ''}</span>
             </div>
           </div>
 

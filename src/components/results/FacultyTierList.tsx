@@ -332,7 +332,7 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                                 <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-amber-200/90 font-mono">
                                   <span className="font-semibold text-[#FDE68A] flex items-center gap-1">
                                     <Users className="w-3.5 h-3.5 text-amber-400" />
-                                    Daya Tampung (TA 2024/2025, dapat berubah): {quota.totalCapacity}
+                                    Daya Tampung: {quota.totalCapacity} (Kuota TA {quota.academicYear} — dapat berubah{quota.lastVerified ? `, data per ${quota.lastVerified}` : ''})
                                   </span>
                                   <span>•</span>
                                   <span>SNBP: {quota.snbpQuota}</span>

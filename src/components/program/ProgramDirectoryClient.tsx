@@ -3,6 +3,7 @@
 import React, { useState, useMemo, memo } from 'react';
 import Link from 'next/link';
 import { Faculty, StudyProgram } from '@/data/types';
+import { getQuotaByProgramId } from '@/data/quotas';
 import {
   Search,
   Sparkles,
@@ -14,6 +15,7 @@ import {
   ArrowRight,
   Layers,
   RotateCcw,
+  Users,
 } from 'lucide-react';
 import { retroAudio } from '@/lib/retroAudio';
 
@@ -38,6 +40,8 @@ const ProgramCard = memo(function ProgramCard({
   program: StudyProgram;
   faculty?: Faculty;
 }) {
+  const quota = getQuotaByProgramId(program.id);
+
   return (
     <article className="flex flex-col justify-between bg-[#1A0E08] border-2 border-[#78350F] hover:border-[#F59E0B] p-4 sm:p-5 rounded-2xl transition-all shadow-[2px_2px_0_0_#000] hover:shadow-[4px_4px_0_0_#78350F]">
       <div>
@@ -68,9 +72,22 @@ const ProgramCard = memo(function ProgramCard({
         </h4>
 
         {/* Short Description */}
-        <p className="text-xs text-amber-100/80 leading-relaxed line-clamp-3 mb-4">
+        <p className="text-xs text-amber-100/80 leading-relaxed line-clamp-3 mb-3">
           {program.description}
         </p>
+
+        {/* Quota Badge */}
+        {quota && (
+          <div className="mb-3 text-[10.5px] font-mono text-amber-200/90 flex flex-wrap items-center gap-1.5 bg-[#24130C] px-2.5 py-1.5 rounded-lg border border-[#78350F]/50">
+            <Users className="w-3 h-3 text-amber-400 shrink-0" />
+            <span>
+              Daya Tampung: <strong className="text-[#FDE68A]">{quota.totalCapacity}</strong>
+            </span>
+            <span className="text-[9.5px] text-amber-300/70">
+              (Kuota TA {quota.academicYear} — dapat berubah{quota.lastVerified ? `, data per ${quota.lastVerified}` : ''})
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Action Footer */}

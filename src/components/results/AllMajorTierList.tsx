@@ -103,7 +103,7 @@ const ProgramCard = React.memo(function ProgramCard({
               {quota && (
                 <div className="mt-2.5 flex flex-wrap items-center gap-1.5 text-xs">
                   <span className="font-semibold text-amber-200/90 uppercase tracking-wider text-xs mr-1 font-mono">
-                    Alokasi Kuota (TA 2024/2025, dapat berubah):
+                    Kuota TA {quota.academicYear} — dapat berubah{quota.lastVerified ? ` (data per ${quota.lastVerified})` : ''}:
                   </span>
                   <span className="px-2.5 py-1 bg-[#24130C] text-blue-300 rounded border border-blue-900/60 font-medium font-mono text-xs">
                     SNBP: <strong className="text-blue-200">{quota.snbpQuota}</strong> ({quota.totalCapacity && quota.snbpQuota ? Math.round((quota.snbpQuota / quota.totalCapacity) * 100) : '-'}%)

@@ -124,7 +124,7 @@ export function ProgramComparisonModal({
                 <div className="bg-[#24130C] p-3.5 rounded-2xl border border-[#78350F] text-xs space-y-1 mb-4">
                   <div className="font-bold text-amber-300 flex items-center gap-1.5">
                     <Users className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Daya Tampung (TA 2024/2025, dapat berubah): {quota?.totalCapacity ? `${quota.totalCapacity} Kursi` : 'Belum rilis'}</span>
+                    <span>Daya Tampung: {quota?.totalCapacity ? `${quota.totalCapacity} Kursi` : 'Belum rilis'} (Kuota TA {quota?.academicYear || program.academicYear} — dapat berubah{quota?.lastVerified ? `, data per ${quota.lastVerified}` : ''})</span>
                   </div>
                   {quota?.totalCapacity && (
                     <div className="text-[11px] text-amber-100/80 pt-1">
