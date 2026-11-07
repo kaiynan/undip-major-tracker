@@ -197,6 +197,18 @@ export function FullScreenCampusMap({
       } else if (e.key === '-' || e.key === '_' || e.key === 'Subtract') {
         e.preventDefault();
         setZoom((prev) => Math.max(prev - 0.35, 0.65));
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setPan((prev) => ({ ...prev, x: prev.x + 60 }));
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        setPan((prev) => ({ ...prev, x: prev.x - 60 }));
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setPan((prev) => ({ ...prev, y: prev.y + 60 }));
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setPan((prev) => ({ ...prev, y: prev.y - 60 }));
       }
     };
 
@@ -291,14 +303,19 @@ export function FullScreenCampusMap({
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 w-full h-full bg-[#140B07] overflow-hidden select-none touch-none ${className}`}
+      tabIndex={0}
+      aria-label="Peta Interaktif Kampus UNDIP Tembalang (Gunakan tanda panah untuk menggeser, + dan - untuk zoom)"
+      className={`fixed inset-0 w-full h-full bg-[#140B07] overflow-hidden select-none touch-none focus:outline-none ${className}`}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
     >
-      {/* 1. TOP-LEFT HUD: VIRTUAL CAMPUS COMPASS & CONTROLS (Positioned cleanly below header on left) */}
-      <div className="absolute top-20 left-3 sm:top-20 sm:left-4 z-20 flex flex-wrap items-center gap-2 pointer-events-auto">
+      {/* 1. TOP-LEFT HUD: VIRTUAL CAMPUS COMPASS & CONTROLS (Positioned cleanly below header toolbar) */}
+      <div
+        className="absolute left-3 sm:left-4 z-20 flex flex-wrap items-center gap-2 pointer-events-auto"
+        style={{ top: 'calc(var(--navbar-h, 56px) + 72px)' }}
+      >
         <div className="flex items-center gap-2 bg-[#190E08]/90 backdrop-blur-md px-3 py-2 rounded-2xl border-2 border-[#78350F] shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
           <div className="w-7 h-7 rounded-xl bg-[#78350F] text-[#FDE68A] flex items-center justify-center border border-[#F59E0B]">
             <Compass className="w-4 h-4 text-[#FDE68A] animate-spin-slow motion-reduce:animate-none" />
@@ -353,10 +370,15 @@ export function FullScreenCampusMap({
         </div>
       </div>
 
-      {/* 2. BOTTOM HUD: QUICK FACULTY EXPLORATION SELECTOR DOCK (Shown in Full-Screen Map Mode) */}
+      {/* 2. BOTTOM HUD: QUICK FACULTY EXPLORATION SELECTOR DOCK WITH EDGE FADES (Shown in Full-Screen Map Mode) */}
       {!panelOpen && (
         <div className="absolute bottom-4 inset-x-3 sm:inset-x-4 z-20 pointer-events-auto max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-200">
-          <div className="flex items-center gap-1.5 overflow-x-auto p-1.5 bg-[#190E08]/90 backdrop-blur-md rounded-2xl border-2 border-[#78350F] shadow-[0_6px_20px_rgba(0,0,0,0.6)] scrollbar-none">
+          <div className="relative">
+            {/* Left Edge Fade */}
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#190E08] to-transparent pointer-events-none z-10 rounded-l-2xl" />
+            {/* Right Edge Fade */}
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#190E08] to-transparent pointer-events-none z-10 rounded-r-2xl" />
+            <div className="flex items-center gap-1.5 overflow-x-auto p-1.5 px-4 bg-[#190E08]/90 backdrop-blur-md rounded-2xl border-2 border-[#78350F] shadow-[0_6px_20px_rgba(0,0,0,0.6)] scrollbar-none">
             <button
               onClick={() => handleResetOverview()}
               aria-label={`Tampilkan tinjauan seluruh kampus (${campusFacultyLocations.length} lokasi)`}
@@ -399,6 +421,7 @@ export function FullScreenCampusMap({
                 </button>
               );
             })}
+            </div>
           </div>
         </div>
       )}
@@ -424,6 +447,11 @@ export function FullScreenCampusMap({
         >
           {/* DEFINITIONS & TEXTURES */}
           <defs>
+            <g id="pixel-tree">
+              <rect x="6" y="14" width="4" height="8" fill="#451A03" />
+              <polygon points="8,0 0,14 16,14" fill="#15803D" />
+              <polygon points="8,4 2,12 14,12" fill="#22C55E" />
+            </g>
             <pattern id="fullCampusPaving" width="24" height="24" patternUnits="userSpaceOnUse">
               <rect width="24" height="24" fill="#2E180E" />
               <rect x="0" y="0" width="22" height="11" fill="#3D2114" />
@@ -659,60 +687,79 @@ export function FullScreenCampusMap({
 
                 <FacultyBuildingIllustration facultyId={loc.id} isHighlighted={isSelected || isHovered} mode="overview" />
 
-                {/* Ground Marker Label */}
-                <g transform="translate(10, 105)">
-                  <rect
-                    x="0"
-                    y="0"
-                    width="160"
-                    height="28"
-                    rx="8"
-                    fill={isSelected ? '#78350F' : '#190E08'}
-                    stroke={isSelected ? '#F59E0B' : '#78350F'}
-                    strokeWidth={isSelected ? '2' : '1'}
-                    opacity="0.95"
-                  />
-                  <text
-                    x="12"
-                    y="18"
-                    fill={isSelected ? '#FFFBEB' : '#FDE68A'}
-                    fontSize="12"
-                    fontWeight="bold"
-                    fontFamily="monospace"
-                  >
-                    {loc.shortName} • {loc.name.replace('Fakultas ', '').replace('Sekolah ', '')}
-                  </text>
+                {/* Ground Marker Label: badge first, compact width, counter-scaled on phones */}
+                {(() => {
+                  const offsetX = loc.labelOffset?.x || 0;
+                  const offsetY = loc.labelOffset?.y || 0;
+                  const shortTitle = loc.shortName;
+                  const hasScore = !!score;
+                  const textX = hasScore ? 28 : 10;
+                  const pillWidth = hasScore ? (shortTitle.length > 3 ? 88 : 78) : (shortTitle.length > 3 ? 66 : 54);
+                  const pillHeight = 24;
+                  const counterScale = Math.min(1.6, Math.max(1, 1.25 / zoom));
 
-                  {score && (
-                    <g transform="translate(136, 4)">
+                  return (
+                    <g
+                      transform={`translate(${10 + offsetX}, ${105 + offsetY}) scale(${counterScale})`}
+                      style={{ transformOrigin: '0 0' }}
+                    >
                       <rect
                         x="0"
                         y="0"
-                        width="20"
-                        height="20"
-                        rx="5"
-                        fill={
-                          score.tier === 'S'
-                            ? '#F59E0B'
-                            : score.tier === 'A'
-                            ? '#3B82F6'
-                            : '#78350F'
-                        }
+                        width={pillWidth}
+                        height={pillHeight}
+                        rx="6"
+                        fill={isSelected ? '#78350F' : '#190E08'}
+                        stroke={isSelected ? '#F59E0B' : '#78350F'}
+                        strokeWidth={isSelected ? '2' : '1'}
+                        opacity="0.95"
                       />
+
+                      {score && (
+                        <g transform="translate(3, 2.5)">
+                          <rect
+                            x="0"
+                            y="0"
+                            width="19"
+                            height="19"
+                            rx="4"
+                            fill={
+                              score.tier === 'S'
+                                ? '#F59E0B'
+                                : score.tier === 'A'
+                                ? '#3B82F6'
+                                : score.tier === 'B'
+                                ? '#F97316'
+                                : '#78350F'
+                            }
+                          />
+                          <text
+                            x="9.5"
+                            y="13.5"
+                            fill="#FFFFFF"
+                            fontSize="11"
+                            fontWeight="black"
+                            textAnchor="middle"
+                            fontFamily="monospace"
+                          >
+                            {score.tier}
+                          </text>
+                        </g>
+                      )}
+
                       <text
-                        x="10"
-                        y="14"
-                        fill="#FFFFFF"
-                        fontSize="11"
-                        fontWeight="black"
-                        textAnchor="middle"
+                        x={textX}
+                        y="16"
+                        fill={isSelected ? '#FFFBEB' : '#FDE68A'}
+                        fontSize="11.5"
+                        fontWeight="bold"
                         fontFamily="monospace"
                       >
-                        {score.tier}
+                        {shortTitle}
                       </text>
                     </g>
-                  )}
-                </g>
+                  );
+                })()}
               </g>
             );
           })}
@@ -737,8 +784,8 @@ export function FullScreenCampusMap({
             </g>
           )}
 
-          {/* CAMPUS TREES & FORESTRY */}
-          <g id="campus-trees" fill="#166534" stroke="#14532D" strokeWidth="2">
+          {/* CAMPUS TREES & FORESTRY (Optimized via SVG <use>) */}
+          <g id="campus-trees">
             {[
               [520, 240], [580, 260], [640, 220], [860, 240], [920, 200],
               [340, 520], [320, 600], [330, 780], [380, 880], [420, 1000],
@@ -746,14 +793,32 @@ export function FullScreenCampusMap({
               [1100, 420], [1160, 360], [1480, 340], [1520, 460], [1620, 640],
               [1480, 760], [1560, 860], [1400, 980], [1300, 1080], [1160, 1180],
             ].map(([tx, ty], i) => (
-              <g key={i} transform={`translate(${tx}, ${ty})`}>
-                <rect x="6" y="14" width="4" height="8" fill="#451A03" />
-                <polygon points="8,0 0,14 16,14" fill="#15803D" />
-                <polygon points="8,4 2,12 14,12" fill="#22C55E" />
-              </g>
+              <use key={i} href="#pixel-tree" x={tx} y={ty} />
             ))}
           </g>
         </svg>
+      </div>
+
+      {/* 4. Mini Legend, North Arrow & Simplified Campus Disclaimer */}
+      <div className="absolute bottom-4 left-3 z-10 hidden sm:flex flex-col gap-1.5 bg-[#190E08]/90 backdrop-blur-md p-2.5 rounded-2xl border border-[#78350F] shadow-lg text-[10px] pointer-events-none max-w-xs">
+        <div className="flex items-center gap-3">
+          {/* North Arrow */}
+          <div className="flex items-center gap-1 bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F] text-[#FDE68A]">
+            <span className="font-pixel text-[#F59E0B] text-[9px] font-bold">▲</span>
+            <span className="font-pixel text-white text-[9px] font-bold">U</span>
+            <span className="font-mono text-[9px] text-amber-200/80 ml-0.5">UTARA</span>
+          </div>
+          {/* Tier Legend */}
+          <div className="flex items-center gap-2 font-mono text-[10px] text-amber-100">
+            <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#F59E0B]" /> S</span>
+            <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#3B82F6]" /> A</span>
+            <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#F97316]" /> B</span>
+            <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#78350F]" /> C</span>
+          </div>
+        </div>
+        <p className="text-[9px] text-amber-200/70 font-mono italic">
+          Ilustrasi kampus — posisi bangunan disederhanakan
+        </p>
       </div>
 
       {/* 4. FLOATING ARCHITECTURAL DETAILS CARD (IN FOCUS MODE) */}

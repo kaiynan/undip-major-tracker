@@ -1,22 +1,18 @@
 // =============================================================================
 // UNDIP Major Matcher — Verified Campus Geographic & Architectural Data
 // =============================================================================
-// Reconstructed based on verified route specifications and official UNDIP
+// Reconstructed based on verified route specifications and OpenStreetMap / Satellite
 // Tembalang GIS coordinates and masterplan:
-// - Entrance (North): UPT Lab (right), Jogging Track & PMB (left).
-// - Junction to Student Centre & UNDIP Tower.
-// - Branch to FISIP, Architecture, Civil Engineering, and PWK.
-// - Geology building leading to the First Roundabout (Bundaran Pertama).
-// - Prof. Soedarto Building (GSG), Geodesy, Computer Engineering, and Naval Architecture.
-// - Faculty of Engineering Dean's Office, Taman Inspirasi, and Widya Puraya Core
-//   (Taman Widya Puraya, Prince Diponegoro White Horse Statue, Rectorate).
-// - Road left to Art Centre, FISIP, Law (FH), Humanities (FIB), and Vocational School (SV).
-// - Road right to Electrical Engineering, then Three-Way Junction.
-// - Left branch to Psychology (FPsi).
-// - Right branch to FEB (left side) and FSM (right side).
-// - Right turn to Medicine (FK) and RSND (behind FK).
-// - Continuing forward to Public Health (FKM), Marine & Fisheries (FPIK),
-//   Mechanical, Industrial, Environmental, Chemical Engineering, and Animal/Agro Sciences (FPP).
+// - Entrance (North): UPT Lab (West/Right of travel), PMB & Track (East/Left of travel).
+// - Junction to Student Centre & UNDIP Tower (East).
+// - Branch to Arsitektur, Sipil, and PWK (East).
+// - Geology building leading to Bundaran Pertama (Roundabout 1).
+// - GSG Prof. Soedarto (West), Geodesi, Komputer, and Perkapalan.
+// - Dekanat FT, Taman Inspirasi, and Widya Puraya Core (Rektorat & Patung Kuda).
+// - Note on directions: Traveling Southward from Entrance Gate (Utara -> Selatan):
+//   * Cabang Kiri perjalanan = Arah Timur (FISIP, FH, FIB, SV, FPsi)
+//   * Cabang Kanan perjalanan = Arah Barat (UPT Lab, GSG, FT, FPP)
+//   * Lurus ke Selatan = Widya Puraya, Pertigaan Timur, FEB, FSM, FK, RSND, FKM, FPIK
 // =============================================================================
 
 export interface CampusFacultyLocation {
@@ -34,6 +30,13 @@ export interface CampusFacultyLocation {
   mapPosition: {
     x: number; // 0 - 2000
     y: number; // 0 - 1400
+  };
+  /**
+   * Optional micro-offset for ground pin label to prevent neighbouring collisions
+   */
+  labelOffset?: {
+    x: number;
+    y: number;
   };
   landmarkName: string;
   architecturalStyle: {
@@ -66,6 +69,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Barat',
     realCoordinates: { lat: -7.052, lng: 110.435 },
     mapPosition: { x: 720, y: 500 },
+    labelOffset: { x: -10, y: 0 },
     landmarkName: 'Gedung Dekanat FT & Jembatan Kaca Penghubung',
     architecturalStyle: {
       silhouette: 'Gedung bertingkat modern dengan jembatan penghubung dan atrium kaca luas',
@@ -74,8 +78,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Fasad bata merah terakota khas teknik berpadu kisi-kisi aluminium abu-abu dan kaca tirai biru gelap',
       distinctiveFeatures: ['Jembatan penghubung antar-sayap', 'Plaza teknik luas', 'Monumen gir teknik'],
     },
-    referenceSource: 'Masterplan Resmi UNDIP & Arsip Geografis FT Tembalang',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fisip',
@@ -84,6 +88,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Timur',
     realCoordinates: { lat: -7.05, lng: 110.444 },
     mapPosition: { x: 1540, y: 300 },
+    labelOffset: { x: 0, y: -8 },
     landmarkName: 'Gedung Dekanat & Ruang Kuliah Bersama FISIP',
     architecturalStyle: {
       silhouette: 'Kompleks multisedimenter bata ekspos dengan inner-court terbuka dan koridor angin sejuk',
@@ -92,8 +97,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Dinding terakota oranye kecokelatan dipadu jendela kisi louvre kayu dan kanopi peneduh pejalan kaki',
       distinctiveFeatures: ['Panggung amfiteater terbuka', 'Breezeway koridor angin', 'Taman diskusi mahasiswa'],
     },
-    referenceSource: 'Peta Zona FISIP UNDIP Tembalang Timur',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fh',
@@ -102,6 +107,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Timur',
     realCoordinates: { lat: -7.052, lng: 110.445 },
     mapPosition: { x: 1540, y: 440 },
+    labelOffset: { x: 10, y: 0 },
     landmarkName: 'Gedung Prof. Satjipto Rahardjo FH',
     architecturalStyle: {
       silhouette: 'Gedung megah berkarakter yudisial dengan kolonade pilar formal tegak dan atap limasan berwibawa',
@@ -110,8 +116,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Deretan pilar neo-klasik putih gading menopang entablatur resmi, melambangkan keadilan dan supremasi hukum',
       distinctiveFeatures: ['Kolonade pilar keadilan', 'Ruang sidang peradilan semu', 'Plaza yustisia'],
     },
-    referenceSource: 'Profil Fasilitas FH UNDIP & Peta Tata Ruang Tembalang',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fib',
@@ -120,6 +126,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Timur',
     realCoordinates: { lat: -7.053, lng: 110.442 },
     mapPosition: { x: 1320, y: 500 },
+    labelOffset: { x: -15, y: 0 },
     landmarkName: 'Gedung Dekanat & Pendopo Seni Budaya FIB',
     architecturalStyle: {
       silhouette: 'Struktur bernuansa vernakular tradisional Jawa dengan pendopo joglo kayu berukir dan taman bambu',
@@ -128,8 +135,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Elemen kayu jati ekspos, pilar pendopo kayu berukir, berpadu dinding batu kali dan plesteran hangat',
       distinctiveFeatures: ['Pendopo pentas seni budaya', 'Taman rimbun bambu & mahoni', 'Gedung gamelan karawitan'],
     },
-    referenceSource: 'Profil Kebudayaan FIB UNDIP & Peta Kampus Tembalang',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'sv',
@@ -138,6 +145,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Timur',
     realCoordinates: { lat: -7.053, lng: 110.448 },
     mapPosition: { x: 1760, y: 500 },
+    labelOffset: { x: 10, y: 0 },
     landmarkName: 'Menara Vokasi & Gedung Teaching Factory (SV)',
     architecturalStyle: {
       silhouette: 'Menara tinggi modern multi-lantai berpadu workshop bengkel terapan industri',
@@ -146,8 +154,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Fasad kaca modern dengan panel komposit biru tua dan abu-abu metalik bergaya industri terapan 4.0',
       distinctiveFeatures: ['Menara perkuliahan Vokasi', 'Bengkel rekayasa terapan', 'Plaza inkubator bisnis terapan'],
     },
-    referenceSource: 'Direktorat Sarpras & Masterplan Sekolah Vokasi UNDIP',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fpsi',
@@ -156,6 +164,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Timur',
     realCoordinates: { lat: -7.055, lng: 110.446 },
     mapPosition: { x: 1440, y: 740 },
+    labelOffset: { x: 0, y: 8 },
     landmarkName: 'Gedung Dekanat & Laboratorium Psikodiagnostik FPsi',
     architecturalStyle: {
       silhouette: 'Gedung ramah humanistik bertingkat rendah dengan inner garden tenang untuk konseling dan observasi',
@@ -164,8 +173,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Dinding bernuansa hangat terakota lembut dan krem pastel yang menenangkan dan ramah',
       distinctiveFeatures: ['Taman zen refleksi diri', 'Ruang konseling observasi one-way mirror', 'Lobi ramah interaksi'],
     },
-    referenceSource: 'Profil Sarana Prasarana Fakultas Psikologi UNDIP Tembalang',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'feb',
@@ -174,6 +183,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Timur',
     realCoordinates: { lat: -7.056, lng: 110.444 },
     mapPosition: { x: 1320, y: 900 },
+    labelOffset: { x: 10, y: 0 },
     landmarkName: 'Gedung Pertamina Hall & Dekanat FEB',
     architecturalStyle: {
       silhouette: 'Gedung dekanat simetris prestisius dengan hall kubah melengkung dan pilar kokoh',
@@ -182,8 +192,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Kombinasi dinding bata terakota hangat dengan portico pilar putih gading dan kubah sentral',
       distinctiveFeatures: ['Auditorium Hall Pertamina', 'Pilar gerbang megah', 'Plaza pertukaran bursa efek'],
     },
-    referenceSource: 'Dokumentasi Arsitektur FEB UNDIP Tembalang Timur',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fsm',
@@ -192,7 +202,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Pusat',
     realCoordinates: { lat: -7.056, lng: 110.439 },
     mapPosition: { x: 1000, y: 920 },
-    landmarkName: 'Gedung Acintyacunyata FSM',
+    labelOffset: { x: 0, y: 0 },
+    landmarkName: 'Gedung Acintya Prasada FSM',
     architecturalStyle: {
       silhouette: 'Struktur sains modern bertingkat empat dengan sayap laboratorium komputasi dan sains dasar',
       dominantColors: ['#0284C7', '#0F172A', '#E2E8F0', '#38BDF8'],
@@ -200,8 +211,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Dinding putih krem beraksen garis vertikal biru elektrik dan jendela laboratorium berpola modular rapi',
       distinctiveFeatures: ['Menara observasi kubah kecil', 'Fasad kisi surya geometris', 'Taman sains botanika'],
     },
-    referenceSource: 'Masterplan Kampus UNDIP Tembalang & Profil FSM UNDIP',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fk',
@@ -210,6 +221,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Selatan',
     realCoordinates: { lat: -7.058, lng: 110.443 },
     mapPosition: { x: 1240, y: 1080 },
+    labelOffset: { x: 0, y: 0 },
     landmarkName: 'Kompleks Fakultas Kedokteran & RSND (Rumah Sakit Nasional Diponegoro)',
     architecturalStyle: {
       silhouette: 'Kompleks rumah sakit pendidikan dan gedung dekanat kedokteran megah bertingkat',
@@ -218,8 +230,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Dinding putih klinis bersih beraksen hijau zamrud medis, lobi kaca ganda, dan sayap rawat terpadu',
       distinctiveFeatures: ['Emblem silang medis hijau', 'Drop-off lobi luas', 'Akses terhubung ke paviliun RSND'],
     },
-    referenceSource: 'Direktorat Sarana Prasarana UNDIP & GIS RSND Kampus Tembalang',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fkm',
@@ -228,6 +240,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Selatan',
     realCoordinates: { lat: -7.058, lng: 110.438 },
     mapPosition: { x: 960, y: 1140 },
+    labelOffset: { x: 25, y: 0 },
     landmarkName: 'Gedung Dekanat & Laboratorium Terpadu FKM',
     architecturalStyle: {
       silhouette: 'Gedung bertingkat tiga yang asri dengan teras terbuka dan laboratorium sanitasi lingkungan',
@@ -236,8 +249,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Fasad bernuansa hijau toska cerah dan krem bersih dengan selasar sirkulasi udara optimal',
       distinctiveFeatures: ['Sayap lab epidemiologi & K3', 'Taman toga tanaman obat', 'Plaza promosi kesehatan'],
     },
-    referenceSource: 'Masterplan FKM UNDIP Kampus Tembalang Selatan',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fpik',
@@ -246,6 +259,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Selatan',
     realCoordinates: { lat: -7.058, lng: 110.435 },
     mapPosition: { x: 760, y: 1140 },
+    labelOffset: { x: -25, y: 0 },
     landmarkName: 'Gedung Marine Science Center & Hatchery FPIK',
     architecturalStyle: {
       silhouette: 'Gedung bernuansa maritim dengan aksen haluan kapal dan kolam percontohan akuakultur',
@@ -254,8 +268,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Dinding biru bahari dengan garis putih ombak, jendela bulat kapal, serta instalasi akuarium riset perairan',
       distinctiveFeatures: ['Kolam percobaan basah', 'Hatchery benih ikan', 'Laboratorium oseanografi terpadu'],
     },
-    referenceSource: 'Dokumen Kelautan FPIK UNDIP & Peta Citra Satelit Kampus Selatan',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
   {
     id: 'fpp',
@@ -264,6 +278,7 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
     zone: 'Zona Selatan',
     realCoordinates: { lat: -7.058, lng: 110.431 },
     mapPosition: { x: 480, y: 1140 },
+    labelOffset: { x: 0, y: 0 },
     landmarkName: 'Agro-Kompleks Green House & Dekanat FPP',
     architecturalStyle: {
       silhouette: 'Kompleks agrosains dengan green house kaca bening, kandang percontohan modern, dan laboratorium pangan',
@@ -272,8 +287,8 @@ export const campusFacultyLocations: CampusFacultyLocation[] = [
       facadeDescription: 'Warna hijau daun dan bata tanah liat dengan hamparan kebun percobaan agroteknologi di sekitarnya',
       distinctiveFeatures: ['Green house riset hidroponik', 'Lahan ternak mini percontohan', 'Laboratorium teknologi pangan'],
     },
-    referenceSource: 'Peta Agro-Kompleks FPP UNDIP Tembalang Barat Daya',
-    verificationDate: '2026-11-06',
+    referenceSource: 'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang',
+    verificationDate: '2026-11-07',
   },
 ];
 
@@ -381,7 +396,7 @@ export const campusLandmarks: CampusLandmarkLocation[] = [
     name: 'Pertigaan Tiga Arah (FPsi, FEB, FSM)',
     zone: 'Zona Pusat',
     mapPosition: { x: 1080, y: 800 },
-    description: 'Persimpangan strategis bercabang ke kiri menuju Psikologi, dan ke kanan menuju FEB & FSM',
+    description: 'Persimpangan strategis bercabang ke kiri (Timur) menuju Psikologi, dan ke kanan/selatan menuju FEB & FSM',
   },
   {
     id: 'rsnd',

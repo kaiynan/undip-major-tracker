@@ -128,11 +128,6 @@ export function Navbar() {
     };
   }, [pathname]);
 
-  // Hide global navbar on /results to prevent double stacked headers (Requirement 6)
-  if (pathname === '/results') {
-    return null;
-  }
-
   const handleNavClick = (item: NavItem, e: React.MouseEvent) => {
     // If clicked while intro is playing, cleanly skip intro first
     if (typeof window !== 'undefined') {
@@ -178,7 +173,7 @@ export function Navbar() {
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
-        <div className="grid grid-cols-[auto_1fr_auto] 2xl:grid-cols-[1fr_auto_1fr] items-center h-14 sm:h-16 gap-2 sm:gap-4">
+        <div className="grid grid-cols-[auto_1fr_auto] xl:grid-cols-[1fr_auto_1fr] items-center h-14 sm:h-16 gap-2 sm:gap-4">
           {/* 1. Left Column: Brand Identity */}
           <div className="flex items-center justify-start min-w-0 shrink-0">
             <Link
@@ -202,9 +197,9 @@ export function Navbar() {
             </Link>
           </div>
 
-          {/* 2. Middle Column: Symmetrical Inline Nav (2xl+) */}
+          {/* 2. Middle Column: Symmetrical Inline Nav (xl+) */}
           <div className="flex items-center justify-center min-w-0">
-            <nav className="hidden 2xl:flex items-center gap-2">
+            <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-2">
               {NAV_ITEMS.map((item) => {
                 const isActive = (pathname !== '/' ? getInitialActive(pathname) : activeSection) === item.id;
                 return (
@@ -277,13 +272,13 @@ export function Navbar() {
               </Link>
             )}
 
-            {/* Mobile / Tablet menu trigger (2xl:hidden) */}
+            {/* Mobile / Tablet menu trigger (xl:hidden) */}
             <button
               onClick={() => {
                 retroAudio.playBlip(500);
                 setMobileMenuOpen(!mobileMenuOpen);
               }}
-              className="2xl:hidden p-2 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
+              className="xl:hidden p-2 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
               aria-label="Buka Menu Navigasi"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -292,9 +287,9 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile / Tablet Dropdown Menu (2xl:hidden) */}
+      {/* Mobile / Tablet Dropdown Menu (xl:hidden) */}
       {mobileMenuOpen && (
-        <div className="2xl:hidden bg-[#1A0E08] border-t-2 border-[#78350F] px-4 py-4 space-y-2.5 shadow-2xl animate-fade-in">
+        <div className="xl:hidden bg-[#1A0E08] border-t-2 border-[#78350F] px-4 py-4 space-y-2.5 shadow-2xl animate-fade-in">
           {NAV_ITEMS.map((item) => {
             const isActive = (pathname !== '/' ? getInitialActive(pathname) : activeSection) === item.id;
             return (

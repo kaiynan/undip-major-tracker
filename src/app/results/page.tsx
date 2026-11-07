@@ -233,7 +233,10 @@ export default function ResultsPage() {
       />
 
       {/* 2. Top Floating Navigation & Action Bar (Clean Single Header on /results) */}
-      <header className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-30 flex items-center justify-between gap-1.5 sm:gap-2.5 bg-[#24130C]/95 backdrop-blur-md text-white px-2.5 py-2 sm:px-5 sm:py-3 rounded-2xl border-2 border-[#78350F] shadow-xl pt-[max(0.5rem,env(safe-area-inset-top))] max-w-[calc(100vw-16px)] sm:max-w-none">
+      <header
+        className="fixed left-2 right-2 sm:left-4 sm:right-4 z-30 flex items-center justify-between gap-1.5 sm:gap-2.5 bg-[#24130C]/95 backdrop-blur-md text-white px-2.5 py-2 sm:px-5 sm:py-3 rounded-2xl border-2 border-[#78350F] shadow-xl max-w-[calc(100vw-16px)] sm:max-w-none"
+        style={{ top: 'calc(var(--navbar-h, 56px) + 8px)' }}
+      >
         {/* Left: Brand Badge */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <Link
@@ -672,9 +675,9 @@ export default function ResultsPage() {
         </aside>
       )}
 
-      {/* 4. Minimized Result Trigger Floating Pill (when isPanelOpen === false) */}
+      {/* 4. Minimized Result Trigger Floating Pill (when isPanelOpen === false, stacked cleanly above bottom chip bar) */}
       {!isPanelOpen && (
-        <div className="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-6 sm:w-auto z-30 flex justify-center sm:block animate-in fade-in slide-in-from-bottom-4">
+        <div className="fixed bottom-20 left-3 right-3 sm:left-auto sm:right-6 sm:bottom-20 sm:w-auto z-30 flex justify-center sm:block animate-in fade-in slide-in-from-bottom-4">
           <button
             onClick={() => setIsPanelOpen(true)}
             className="w-full sm:w-auto flex items-center justify-between sm:justify-start gap-3 bg-[#24130C]/95 backdrop-blur-md hover:bg-[#341A10] text-white px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl shadow-2xl border-2 border-[#F59E0B] transition-all cursor-pointer group min-h-[44px]"

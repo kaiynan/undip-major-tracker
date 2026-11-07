@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
   campusFacultyLocations,
 } from '@/data/campusLocations';
@@ -41,6 +41,19 @@ export function PixelCampusMap({
     setUserZoom(1);
     setManualPan({ x: 0, y: 0 });
   }
+
+  // Native non-passive wheel listener
+  useEffect(() => {
+    const el = mapContainerRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const delta = e.deltaY > 0 ? -0.15 : 0.15;
+      setUserZoom((prev) => Math.min(Math.max(0.7, prev + delta), 2.5));
+    };
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
 
   // Score lookup map
   const scoreMap = useMemo(() => {
@@ -405,61 +418,75 @@ export function PixelCampusMap({
                   isHighlighted={isSelected || isHovered}
                 />
 
-                {/* Ground Pin Label & Tier Marker */}
-                <g transform="translate(10, 105)">
-                  <rect
-                    x="0"
-                    y="0"
-                    width="160"
-                    height="28"
-                    rx="8"
-                    fill={isSelected ? '#78350F' : '#190E08'}
-                    stroke={isSelected ? '#F59E0B' : '#78350F'}
-                    strokeWidth={isSelected ? '2' : '1'}
-                    opacity="0.95"
-                  />
-                  <text
-                    x="12"
-                    y="18"
-                    fill={isSelected ? '#FFFBEB' : '#FDE68A'}
-                    fontSize="12"
-                    fontWeight="bold"
-                    fontFamily="monospace"
-                  >
-                    {loc.shortName} • {loc.name.replace('Fakultas ', '').replace('Sekolah ', '')}
-                  </text>
+                {/* Ground Pin Label & Tier Marker (Badge first, compact width) */}
+                {(() => {
+                  const offsetX = loc.labelOffset?.x || 0;
+                  const offsetY = loc.labelOffset?.y || 0;
+                  const shortTitle = loc.shortName;
+                  const hasScore = !!score;
+                  const textX = hasScore ? 28 : 10;
+                  const pillWidth = hasScore ? (shortTitle.length > 3 ? 88 : 78) : (shortTitle.length > 3 ? 66 : 54);
+                  const pillHeight = 24;
 
-                  {/* Tier Pill */}
-                  {score && (
-                    <g transform="translate(136, 4)">
+                  return (
+                    <g transform={`translate(${10 + offsetX}, ${105 + offsetY})`}>
                       <rect
                         x="0"
                         y="0"
-                        width="20"
-                        height="20"
-                        rx="5"
-                        fill={
-                          score.tier === 'S'
-                            ? '#F59E0B'
-                            : score.tier === 'A'
-                            ? '#3B82F6'
-                            : '#78350F'
-                        }
+                        width={pillWidth}
+                        height={pillHeight}
+                        rx="6"
+                        fill={isSelected ? '#78350F' : '#190E08'}
+                        stroke={isSelected ? '#F59E0B' : '#78350F'}
+                        strokeWidth={isSelected ? '2' : '1'}
+                        opacity="0.95"
                       />
+
+                      {score && (
+                        <g transform="translate(3, 2.5)">
+                          <rect
+                            x="0"
+                            y="0"
+                            width="19"
+                            height="19"
+                            rx="4"
+                            fill={
+                              score.tier === 'S'
+                                ? '#F59E0B'
+                                : score.tier === 'A'
+                                ? '#3B82F6'
+                                : score.tier === 'B'
+                                ? '#F97316'
+                                : '#78350F'
+                            }
+                          />
+                          <text
+                            x="9.5"
+                            y="13.5"
+                            fill="#FFFFFF"
+                            fontSize="11"
+                            fontWeight="black"
+                            textAnchor="middle"
+                            fontFamily="monospace"
+                          >
+                            {score.tier}
+                          </text>
+                        </g>
+                      )}
+
                       <text
-                        x="10"
-                        y="14"
-                        fill="#FFFFFF"
-                        fontSize="11"
-                        fontWeight="black"
-                        textAnchor="middle"
+                        x={textX}
+                        y="16"
+                        fill={isSelected ? '#FFFBEB' : '#FDE68A'}
+                        fontSize="11.5"
+                        fontWeight="bold"
                         fontFamily="monospace"
                       >
-                        {score.tier}
+                        {shortTitle}
                       </text>
                     </g>
-                  )}
-                </g>
+                  );
+                })()}
               </g>
             );
           })}
