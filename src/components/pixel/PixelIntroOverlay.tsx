@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { PixelGateScene } from './PixelGateScene';
 import { retroAudio } from '@/lib/retroAudio';
@@ -21,6 +21,36 @@ export function PixelIntroOverlay({
   const [frame, setFrame] = useState<0 | 1 | 2 | 3>(0);
   const [zoomLevel, setZoomLevel] = useState(1);
   const [loadingProgress, setLoadingProgress] = useState(0);
+
+  const lastTickStepRef = useRef(0);
+  const completePlayedRef = useRef(false);
+
+  // Attempt to resume audio context, unlocking on first pointerdown/keydown
+  useEffect(() => {
+    retroAudio.resumeContext().catch(() => {});
+    const unlock = () => {
+      retroAudio.resumeContext().catch(() => {});
+    };
+    window.addEventListener('pointerdown', unlock, { passive: true });
+    window.addEventListener('keydown', unlock, { passive: true });
+    return () => {
+      window.removeEventListener('pointerdown', unlock);
+      window.removeEventListener('keydown', unlock);
+    };
+  }, []);
+
+  // Frame 1 Loading SFX: ticks roughly every 10% step (skipped if already passed)
+  useEffect(() => {
+    if (frame !== 0) return;
+    const currentStep = Math.floor(loadingProgress / 10);
+    if (currentStep > lastTickStepRef.current && currentStep < 10) {
+      lastTickStepRef.current = currentStep;
+      retroAudio.playLoadingTick(loadingProgress);
+    } else if (loadingProgress >= 100 && !completePlayedRef.current) {
+      completePlayedRef.current = true;
+      retroAudio.playLoadingComplete();
+    }
+  }, [loadingProgress, frame]);
 
   const handleComplete = useCallback(() => {
     if (typeof window !== 'undefined') {

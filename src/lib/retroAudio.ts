@@ -16,16 +16,20 @@ class RetroAudioEngine {
         this.muted = false;
       }
 
-      // Unlock mobile Web Audio on first touch/click
+      // Unlock mobile Web Audio on first touch/click/pointer/key
       const unlockAudio = () => {
         if (this.ctx && this.ctx.state === 'suspended') {
           this.ctx.resume().catch(() => {});
         }
         window.removeEventListener('touchstart', unlockAudio);
+        window.removeEventListener('pointerdown', unlockAudio);
         window.removeEventListener('click', unlockAudio);
+        window.removeEventListener('keydown', unlockAudio);
       };
       window.addEventListener('touchstart', unlockAudio, { passive: true });
+      window.addEventListener('pointerdown', unlockAudio, { passive: true });
       window.addEventListener('click', unlockAudio, { passive: true });
+      window.addEventListener('keydown', unlockAudio, { passive: true });
     }
   }
 
@@ -65,6 +69,84 @@ class RetroAudioEngine {
   public toggleMute(): boolean {
     this.setMuted(!this.muted);
     return this.muted;
+  }
+
+  public async resumeContext(): Promise<boolean> {
+    const ctx = this.initContext();
+    if (!ctx) return false;
+    if (ctx.state === 'suspended') {
+      try {
+        await ctx.resume();
+        return (ctx.state as string) === 'running';
+      } catch {
+        return false;
+      }
+    }
+    return ctx.state === 'running';
+  }
+
+  // Loading tick: very short square-wave blip, pitch rising slightly with progress
+  public playLoadingTick(progress: number) {
+    if (this.muted) return;
+    const ctx = this.initContext();
+    if (!ctx || ctx.state === 'suspended') return;
+
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'square';
+      // Pitch rising slightly with progress: 420 Hz at 0% to 640 Hz at 100%
+      const clamped = Math.max(0, Math.min(100, progress));
+      const freq = 420 + (clamped / 100) * 220;
+      const t = ctx.currentTime;
+      osc.frequency.setValueAtTime(freq, t);
+
+      // Very short blip (duration 0.03s), low volume (peak gain <= 0.05)
+      gain.gain.setValueAtTime(0.035, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.03);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(t);
+      osc.stop(t + 0.03);
+    } catch {
+      // Audio context blocked / suspended safe fallback
+    }
+  }
+
+  // Loading complete: short rising 3-note chime when the bar reaches 100%
+  public playLoadingComplete() {
+    if (this.muted) return;
+    const ctx = this.initContext();
+    if (!ctx || ctx.state === 'suspended') return;
+
+    try {
+      const notes = [587.33, 739.99, 880.0]; // D5, F#5, A5
+      const baseTime = ctx.currentTime;
+
+      notes.forEach((freq, idx) => {
+        const noteStart = baseTime + idx * 0.06;
+        const noteDuration = idx === notes.length - 1 ? 0.2 : 0.07;
+
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, noteStart);
+
+        // Peak gain <= 0.05
+        gain.gain.setValueAtTime(0.04, noteStart);
+        gain.gain.exponentialRampToValueAtTime(0.001, noteStart + noteDuration);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(noteStart);
+        osc.stop(noteStart + noteDuration);
+      });
+    } catch {
+      // Safe fallback
+    }
   }
 
   // Quick 8-bit blip (hover or small button click)
