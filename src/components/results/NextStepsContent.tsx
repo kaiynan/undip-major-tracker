@@ -18,6 +18,28 @@ import {
 } from 'lucide-react';
 import { retroAudio } from '@/lib/retroAudio';
 
+function StatusBadge({ status }: { status: 'official' | 'reference' | 'pending' }) {
+  if (status === 'official') {
+    return (
+      <span className="font-mono text-[10px] text-emerald-300 font-bold bg-[#140B07] px-2 py-0.5 rounded border border-emerald-900/60 shrink-0">
+        Resmi
+      </span>
+    );
+  }
+  if (status === 'reference') {
+    return (
+      <span className="font-mono text-[10px] text-amber-300 font-bold bg-[#140B07] px-2 py-0.5 rounded border border-amber-800/60 shrink-0">
+        Acuan (belum resmi)
+      </span>
+    );
+  }
+  return (
+    <span className="font-mono text-[10px] text-stone-400 font-bold bg-[#140B07] px-2 py-0.5 rounded border border-stone-700/60 shrink-0">
+      Perlu verifikasi
+    </span>
+  );
+}
+
 export function NextStepsContent() {
   const [openSection, setOpenSection] = useState<'ukt' | 'kipk' | 'calendar' | 'all'>('all');
 
@@ -63,12 +85,10 @@ export function NextStepsContent() {
                 <h3 className="font-pixel text-xs sm:text-sm text-[#FDE68A] truncate">
                   {ukt.title}
                 </h3>
-                <span className="font-mono text-[10px] text-emerald-300 font-bold bg-[#140B07] px-2 py-0.5 rounded border border-emerald-900/60 shrink-0">
-                  Resmi
-                </span>
+                <StatusBadge status={ukt.status} />
               </div>
               <p className="text-[11px] text-amber-200/70 truncate hidden sm:block mt-0.5">
-                8 Golongan UKT & Kebijakan Bebas Uang Pangkal
+                Struktur Golongan UKT & Informasi Biaya Kuliah
               </p>
             </div>
           </div>
@@ -92,7 +112,7 @@ export function NextStepsContent() {
             <div className="bg-[#2A160E] border border-amber-600/60 rounded-xl p-3.5 text-xs text-amber-200/90 space-y-1">
               <div className="flex items-center gap-2 font-bold text-[#FDE68A]">
                 <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Bebas Uang Pangkal (IPI) di SNBP & SNBT</span>
+                <span>Ketentuan Biaya Kuliah & Bebas IPI</span>
               </div>
               <p className="text-[11px] text-amber-100/80 leading-relaxed">
                 {ukt.ipiNote}
@@ -110,13 +130,25 @@ export function NextStepsContent() {
                     key={g.group}
                     className="bg-[#140B07] border border-[#78350F] rounded-xl p-3 space-y-1"
                   >
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between gap-2">
                       <span className="font-pixel text-[10px] text-[#FDE68A] font-bold">
                         {g.label}
                       </span>
-                      <span className="font-mono text-xs text-emerald-300 font-bold bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]/60">
-                        {g.nominalRange}
-                      </span>
+                      {g.nominalRange === 'Lihat tabel resmi' ? (
+                        <a
+                          href={ukt.officialDecisionUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 font-mono text-[11px] text-amber-400 hover:text-amber-300 font-bold bg-[#24130C] px-2.5 py-1 rounded border border-[#78350F]/60 underline min-h-[44px]"
+                        >
+                          <span>Lihat tabel resmi</span>
+                          <ExternalLink className="w-3 h-3 shrink-0" />
+                        </a>
+                      ) : (
+                        <span className="font-mono text-xs text-emerald-300 font-bold bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]/60">
+                          {g.nominalRange}
+                        </span>
+                      )}
                     </div>
                     <p className="text-[11px] text-amber-100/70 leading-relaxed">
                       {g.description}
@@ -130,7 +162,9 @@ export function NextStepsContent() {
             <div className="pt-3 border-t border-[#78350F]/60 flex flex-wrap items-center justify-between gap-2 text-xs">
               <span className="text-[10px] text-amber-300/80 italic flex items-center gap-1.5">
                 <Info className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                {ukt.verificationNote}
+                {ukt.status === 'official' && ukt.evidence
+                  ? `Terverifikasi per ${ukt.retrievedAt} (${ukt.evidence})`
+                  : 'Belum diverifikasi — cek situs resmi'}
               </span>
               <a
                 href={ukt.officialDecisionUrl}
@@ -162,12 +196,10 @@ export function NextStepsContent() {
                 <h3 className="font-pixel text-xs sm:text-sm text-[#FDE68A] truncate">
                   {kipk.title}
                 </h3>
-                <span className="font-mono text-[10px] text-blue-300 font-bold bg-[#140B07] px-2 py-0.5 rounded border border-blue-900/60 shrink-0">
-                  Beasiswa 100%
-                </span>
+                <StatusBadge status={kipk.status} />
               </div>
               <p className="text-[11px] text-amber-200/70 truncate hidden sm:block mt-0.5">
-                Syarat Kelayakan, Manfaat Biaya Hidup, & Alur Pendaftaran
+                Syarat Kelayakan, Manfaat Bantuan, & Alur Pendaftaran
               </p>
             </div>
           </div>
@@ -192,7 +224,7 @@ export function NextStepsContent() {
               <h4 className="font-pixel text-[10px] sm:text-xs text-amber-300 uppercase tracking-wide">
                 Manfaat Beasiswa KIP-Kuliah:
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {kipk.benefits.map((b, i) => (
                   <div
                     key={i}
@@ -265,7 +297,9 @@ export function NextStepsContent() {
             {/* Official Portal Button */}
             <div className="pt-3 border-t border-[#78350F]/60 flex flex-wrap items-center justify-between gap-2">
               <span className="text-[10px] text-amber-200/60 font-mono">
-                Sumber Resmi: Kemendikbudristek RI (Terverifikasi per {kipk.retrievedAt})
+                {kipk.status === 'official' && kipk.evidence
+                  ? `Sumber Resmi (Terverifikasi per ${kipk.retrievedAt} — ${kipk.evidence})`
+                  : 'Belum diverifikasi — cek situs resmi'}
               </span>
               <a
                 href={kipk.portalUrl}
@@ -297,9 +331,7 @@ export function NextStepsContent() {
                 <h3 className="font-pixel text-xs sm:text-sm text-[#FDE68A] truncate">
                   {calendar.title}
                 </h3>
-                <span className="font-mono text-[10px] text-amber-300 font-bold bg-[#140B07] px-2 py-0.5 rounded border border-[#78350F] shrink-0">
-                  SNBP • SNBT • UM
-                </span>
+                <StatusBadge status={calendar.status} />
               </div>
               <p className="text-[11px] text-amber-200/70 truncate hidden sm:block mt-0.5">
                 Estimasi Linimasa dan Pola Seleksi Masuk UNDIP
@@ -379,25 +411,33 @@ export function NextStepsContent() {
 
             {/* Official Portals Footer Links */}
             <div className="pt-3 border-t border-[#78350F]/60 flex flex-wrap items-center justify-between gap-3 text-xs">
-              <a
-                href="https://snpmb.bppp.kemdikbud.go.id/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-bold text-amber-400 hover:text-amber-300 underline min-h-[44px] py-2 cursor-pointer"
-              >
-                <span>Portal Resmi SNPMB BPPP</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+              <span className="text-[10px] text-amber-200/60 font-mono">
+                {calendar.status === 'official' && calendar.evidence
+                  ? `Terverifikasi per ${calendar.retrievedAt} (${calendar.evidence})`
+                  : 'Belum diverifikasi — cek situs resmi'}
+              </span>
 
-              <a
-                href="https://pmb.undip.ac.id/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-bold text-amber-400 hover:text-amber-300 underline min-h-[44px] py-2 cursor-pointer"
-              >
-                <span>Portal Resmi PMB UNDIP</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="https://snpmb.bppp.kemdikbud.go.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-bold text-amber-400 hover:text-amber-300 underline min-h-[44px] py-2 cursor-pointer"
+                >
+                  <span>Portal SNPMB</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+
+                <a
+                  href="https://pmb.undip.ac.id/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-bold text-amber-400 hover:text-amber-300 underline min-h-[44px] py-2 cursor-pointer"
+                >
+                  <span>Portal PMB UNDIP</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
           </div>
         )}
