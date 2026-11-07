@@ -463,6 +463,26 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
               )}
             </div>
           </div>
+
+          {/* Next Steps CTA Link (UKT, KIP-Kuliah, Kalender Seleksi) */}
+          <div className="bg-[#190E08] border-2 border-[#F59E0B] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3.5 shadow-[2px_2px_0_0_#000]">
+            <div className="space-y-0.5 text-center sm:text-left">
+              <div className="flex items-center justify-center sm:justify-start gap-2 text-[#FDE68A] font-pixel text-xs sm:text-sm">
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>Langkah Selanjutnya: Biaya UKT, KIP-K & Seleksi</span>
+              </div>
+              <p className="text-[11px] sm:text-xs text-amber-100/80 leading-relaxed max-w-xl">
+                Pelajari struktur 8 Golongan UKT, peluang beasiswa 100% KIP-Kuliah, dan kalender seleksi masuk UNDIP (SNBP, SNBT, UM).
+              </p>
+            </div>
+            <Link
+              href="/results?tab=next-steps#langkah-selanjutnya"
+              className="inline-flex items-center gap-1.5 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-bold px-4 py-2.5 rounded-xl text-xs font-pixel transition-all shadow-[2px_2px_0_0_#000] shrink-0 min-h-[44px] cursor-pointer"
+            >
+              <span>Buka Langkah Selanjutnya</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
 
         {/* Competencies and Learning Outcomes (CPL) */}

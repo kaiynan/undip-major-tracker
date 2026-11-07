@@ -16,6 +16,7 @@ import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { ScoreBar } from '@/components/ui/ScoreBar';
 import { FullScreenCampusMap } from '@/components/pixel/FullScreenCampusMap';
+import { NextStepsContent } from '@/components/results/NextStepsContent';
 import { retroAudio } from '@/lib/retroAudio';
 import {
   Trophy,
@@ -33,6 +34,7 @@ import {
   ChevronRight,
   Volume2,
   VolumeX,
+  Sparkles,
   Scale,
 } from 'lucide-react';
 
@@ -55,14 +57,34 @@ export default function ResultsPage() {
     getScoreForProgram,
   } = useQuestionnaire();
 
-  // Active view tab: Output 1 (all majors) vs Output 2 (faculties)
-  const [activeTab, setActiveTab] = useState<'all-majors' | 'faculties'>('all-majors');
+  // Floating panel visibility toggle ("Peta Penuh" mode)
+  const [isPanelOpen, setIsPanelOpen] = useState(true);
+
+  // Active view tab: Output 1 (all majors) vs Output 2 (faculties) vs Next Steps (UKT, KIP-K, Calendar)
+  const [activeTab, setActiveTab] = useState<'all-majors' | 'faculties' | 'next-steps'>(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('tab') === 'next-steps' || window.location.hash === '#langkah-selanjutnya') {
+        return 'next-steps';
+      }
+    }
+    return 'all-majors';
+  });
 
   // Selected faculty for camera centering and cross-filtering between Map and Tier Lists
   const [selectedFacultyId, setSelectedFacultyId] = useState<string | null>(null);
 
-  // Floating panel visibility toggle ("Peta Penuh" mode)
-  const [isPanelOpen, setIsPanelOpen] = useState(true);
+  // Listen for hashchange events for dynamic deep-links
+  React.useEffect(() => {
+    const handleHash = () => {
+      if (window.location.hash === '#langkah-selanjutnya') {
+        setActiveTab('next-steps');
+        setIsPanelOpen(true);
+      }
+    };
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
 
   // Bottom Sheet 3-position snap state: 'collapsed' | 'half' | 'expanded'
   const [sheetPosition, setSheetPosition] = useState<SheetPosition>('half');
@@ -257,24 +279,23 @@ export default function ResultsPage() {
           )}
         </div>
 
-        {/* Center: Output 1 vs Output 2 Tabs */}
+        {/* Center: Output 1 vs Output 2 vs Next Steps Tabs */}
         <div className="flex items-center bg-[#190E08] p-0.5 sm:p-1 rounded-xl border border-[#78350F] shrink-0">
           <button
             onClick={() => {
               setActiveTab('all-majors');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+            className={`flex items-center justify-center gap-1 sm:gap-1.5 p-2 sm:px-3 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] min-w-[40px] sm:min-w-0 ${
               activeTab === 'all-majors'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                 : 'text-amber-200/90 hover:text-white'
             }`}
+            title="Output 1: 67 Program Studi"
             aria-label="Lihat Output 1: 67 Program Studi"
           >
-            <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-            <span className="hidden md:inline">Output 1:</span>
+            <GraduationCap className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">67 Jurusan</span>
-            <span className="sm:hidden text-[11px]">67 Prodi</span>
           </button>
 
           <button
@@ -282,17 +303,33 @@ export default function ResultsPage() {
               setActiveTab('faculties');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+            className={`flex items-center justify-center gap-1 sm:gap-1.5 p-2 sm:px-3 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] min-w-[40px] sm:min-w-0 ${
               activeTab === 'faculties'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                 : 'text-amber-200/90 hover:text-white'
             }`}
+            title="Output 2: 12 Fakultas"
             aria-label="Lihat Output 2: 12 Fakultas"
           >
-            <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-            <span className="hidden md:inline">Output 2:</span>
+            <Building2 className="w-4 h-4 shrink-0" />
             <span className="hidden sm:inline">12 Fakultas</span>
-            <span className="sm:hidden text-[11px]">12 Fak</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setActiveTab('next-steps');
+              if (!isPanelOpen) setIsPanelOpen(true);
+            }}
+            className={`flex items-center justify-center gap-1 sm:gap-1.5 p-2 sm:px-3 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] min-w-[40px] sm:min-w-0 ${
+              activeTab === 'next-steps'
+                ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
+                : 'text-amber-200/90 hover:text-white'
+            }`}
+            title="Langkah Selanjutnya: Biaya UKT, KIP-Kuliah & Kalender Seleksi"
+            aria-label="Lihat Langkah Selanjutnya: UKT, KIP-Kuliah & Kalender"
+          >
+            <Sparkles className="w-4 h-4 shrink-0" />
+            <span className="hidden sm:inline">Langkah Selanjutnya</span>
           </button>
         </div>
 
@@ -445,30 +482,45 @@ export default function ResultsPage() {
             </div>
 
             {/* In-Panel Output Switcher Tabs */}
-            <div className="grid grid-cols-2 gap-2 bg-[#140B07] p-1.5 rounded-xl border border-[#78350F]">
+            <div className="grid grid-cols-3 gap-1.5 bg-[#140B07] p-1.5 rounded-xl border border-[#78350F]">
               <button
                 onClick={() => setActiveTab('all-majors')}
-                className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1.5 sm:px-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
                   activeTab === 'all-majors'
                     ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                     : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
                 }`}
                 aria-label="Tampilkan Output 1: 67 Jurusan"
               >
-                <GraduationCap className="w-4 h-4" />
-                <span>Output 1: 67 Jurusan</span>
+                <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline">67 Jurusan</span>
+                <span className="sm:hidden text-[10px]">67 Prodi</span>
               </button>
               <button
                 onClick={() => setActiveTab('faculties')}
-                className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1.5 sm:px-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
                   activeTab === 'faculties'
                     ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                     : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
                 }`}
                 aria-label="Tampilkan Output 2: 12 Fakultas"
               >
-                <Building2 className="w-4 h-4" />
-                <span>Output 2: 12 Fakultas</span>
+                <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline">12 Fakultas</span>
+                <span className="sm:hidden text-[10px]">12 Fak</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('next-steps')}
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1.5 sm:px-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+                  activeTab === 'next-steps'
+                    ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
+                    : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
+                }`}
+                aria-label="Tampilkan Langkah Selanjutnya"
+              >
+                <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline">Langkah Selanjutnya</span>
+                <span className="sm:hidden text-[10px]">Langkah</span>
               </button>
             </div>
           </div>
@@ -614,6 +666,11 @@ export default function ResultsPage() {
                 selectedFacultyId={selectedFacultyId}
                 onSelectFaculty={setSelectedFacultyId}
               />
+            )}
+
+            {/* Content Tab 3: Langkah Selanjutnya (UKT, KIP-K, Kalender Seleksi) */}
+            {activeTab === 'next-steps' && (
+              <NextStepsContent />
             )}
 
             {/* Retake Questionnaire Action Button Inside Recommendation Panel */}
