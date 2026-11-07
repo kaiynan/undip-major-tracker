@@ -258,12 +258,12 @@ export function PixelIntroOverlay({
                 className="w-full h-full"
               />
 
-              {/* Moving Forward Atmosphere in Frame 2 */}
+              {/* Moving Forward Atmosphere in Frame 3 */}
               {frame === 2 && (
-                <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none animate-in fade-in duration-300">
-                  <div className="bg-[#0A1428]/85 border-2 border-[#FCD34D] px-6 py-2.5 text-center shadow-[4px_4px_0_0_#000]">
-                    <div className="font-pixel text-xs sm:text-sm text-[#FCD34D] motion-safe:animate-pulse">
-                      MENDEKATI PATUNG KUDA WIDYA PURAYA...
+                <div className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none animate-in fade-in duration-300 px-4">
+                  <div className="bg-[#0A1428]/85 border-2 border-[#FCD34D] px-4 sm:px-6 py-2 sm:py-2.5 text-center shadow-[4px_4px_0_0_#000] max-w-full">
+                    <div className="font-pixel text-[10px] sm:text-xs md:text-sm text-[#FCD34D] motion-safe:animate-pulse tracking-wide leading-relaxed">
+                      Memasuki Universitas Diponegoro
                     </div>
                   </div>
                 </div>
