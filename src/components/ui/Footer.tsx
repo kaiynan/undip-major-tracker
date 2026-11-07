@@ -2,10 +2,16 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Compass, ExternalLink } from 'lucide-react';
-import { faculties } from '@/data/faculties';
+import { usePathname } from 'next/navigation';
+import { ExternalLink } from 'lucide-react';
 
 export function Footer() {
+  const pathname = usePathname();
+
+  // Hide footer on full-screen interactive routes like /results
+  if (pathname === '/results') {
+    return null;
+  }
   return (
     <footer className="bg-[#050A16] text-slate-300 text-sm mt-auto border-t-4 border-[#1E3A8A] pixelated select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

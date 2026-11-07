@@ -111,6 +111,11 @@ export function Navbar() {
     };
   }, [pathname]);
 
+  // Hide global navbar on /results to prevent double stacked headers (Requirement 6)
+  if (pathname === '/results') {
+    return null;
+  }
+
   const handleNavClick = (item: NavItem, e: React.MouseEvent) => {
     setMobileMenuOpen(false);
     retroAudio.playSelect();

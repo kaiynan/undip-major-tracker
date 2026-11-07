@@ -6,20 +6,15 @@ import { FacultyScore, StudyProgram } from '@/data/types';
 import { faculties } from '@/data/faculties';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { TierBadge } from '@/components/ui/TierBadge';
-import { PixelCampusMap } from '@/components/pixel/PixelCampusMap';
 import {
   Building2,
   ChevronDown,
   ChevronUp,
   ExternalLink,
   ArrowRight,
-  GraduationCap,
-  Sparkles,
   Trophy,
   Users,
   MapPin,
-  CheckCircle2,
-  Compass,
 } from 'lucide-react';
 
 interface FacultyTierListProps {
@@ -29,7 +24,7 @@ interface FacultyTierListProps {
   onSelectFaculty?: (facultyId: string | null) => void;
 }
 
-export function FacultyTierList({
+export const FacultyTierList = React.memo(function FacultyTierList({
   facultyScores,
   programs,
   selectedFacultyId: externalSelectedFacultyId,
@@ -368,4 +363,4 @@ export function FacultyTierList({
       </div>
     </div>
   );
-}
+});

@@ -14,6 +14,11 @@ export function MobileBottomNav() {
   const { isComplete, progressPercentage } = useQuestionnaire();
   const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
 
+  // Hide mobile bottom nav on /results to give full height and touch freedom to the interactive map & bottom sheet
+  if (pathname === '/results') {
+    return null;
+  }
+
   const navItems = [
     {
       label: 'BERANDA',

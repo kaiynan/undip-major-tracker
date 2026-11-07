@@ -3,25 +3,16 @@
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import {
   campusFacultyLocations,
-  campusLandmarks,
-  CampusFacultyLocation,
 } from '@/data/campusLocations';
 import { FacultyBuildingIllustration } from './PixelFacultyBuildings';
 import { CampusRoadNetwork } from './CampusRoadNetwork';
-import { faculties } from '@/data/faculties';
 import { FacultyScore } from '@/data/types';
 import {
   Compass,
   ZoomIn,
   ZoomOut,
   RotateCcw,
-  Building2,
-  MapPin,
-  Sparkles,
-  Maximize2,
-  Minimize2,
   X,
-  ExternalLink,
 } from 'lucide-react';
 
 interface FullScreenCampusMapProps {
@@ -41,7 +32,6 @@ export function FullScreenCampusMap({
   className = '',
   isForegroundOpen = true,
   isPanelOpen,
-  onToggleForeground,
 }: FullScreenCampusMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -165,14 +155,53 @@ export function FullScreenCampusMap({
   }, [selectedLocation, panelOpen, viewportSize]);
 
   useEffect(() => {
-    recalculateCamera();
+    const animId = requestAnimationFrame(() => {
+      recalculateCamera();
+    });
+    return () => cancelAnimationFrame(animId);
   }, [recalculateCamera]);
 
-  // Wheel zoom handler
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault();
-    const zoomDelta = e.deltaY > 0 ? -0.15 : 0.15;
-    setZoom((prev) => Math.min(Math.max(0.65, prev + zoomDelta), 3.2));
+  // Native wheel zoom listener with { passive: false } to properly allow e.preventDefault()
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onNativeWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      const zoomDelta = e.deltaY > 0 ? -0.15 : 0.15;
+      setZoom((prev) => Math.min(Math.max(0.65, prev + zoomDelta), 3.2));
+    };
+
+    container.addEventListener('wheel', onNativeWheel, { passive: false });
+    return () => {
+      container.removeEventListener('wheel', onNativeWheel);
+    };
+  }, []);
+
+  // Keyboard zoom shortcuts (+ / -)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
+      if (e.key === '+' || e.key === '=' || e.key === 'Add') {
+        e.preventDefault();
+        setZoom((prev) => Math.min(prev + 0.35, 3.2));
+      } else if (e.key === '-' || e.key === '_' || e.key === 'Subtract') {
+        e.preventDefault();
+        setZoom((prev) => Math.max(prev - 0.35, 0.65));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   // Pointer drag panning & multi-touch pinch zoom
@@ -263,7 +292,6 @@ export function FullScreenCampusMap({
     <div
       ref={containerRef}
       className={`fixed inset-0 w-full h-full bg-[#140B07] overflow-hidden select-none touch-none ${className}`}
-      onWheel={handleWheel}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -273,7 +301,7 @@ export function FullScreenCampusMap({
       <div className="absolute top-20 left-3 sm:top-20 sm:left-4 z-20 flex flex-wrap items-center gap-2 pointer-events-auto">
         <div className="flex items-center gap-2 bg-[#190E08]/90 backdrop-blur-md px-3 py-2 rounded-2xl border-2 border-[#78350F] shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
           <div className="w-7 h-7 rounded-xl bg-[#78350F] text-[#FDE68A] flex items-center justify-center border border-[#F59E0B]">
-            <Compass className="w-4 h-4 text-[#FDE68A] animate-spin-slow" />
+            <Compass className="w-4 h-4 text-[#FDE68A] animate-spin-slow motion-reduce:animate-none" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
@@ -294,27 +322,30 @@ export function FullScreenCampusMap({
         <div className="flex items-center gap-1 bg-[#190E08]/90 backdrop-blur-md p-1.5 rounded-2xl border-2 border-[#78350F] shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
           <button
             onClick={handleZoomIn}
-            className="p-1.5 sm:p-2 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer"
+            className="p-1.5 sm:p-2 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
             title="Perbesar Peta (+)"
+            aria-label="Perbesar Peta (+)"
           >
             <ZoomIn className="w-4 h-4" />
           </button>
           <button
             onClick={handleZoomOut}
-            className="p-1.5 sm:p-2 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer"
+            className="p-1.5 sm:p-2 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
             title="Perkecil Peta (-)"
+            aria-label="Perkecil Peta (-)"
           >
             <ZoomOut className="w-4 h-4" />
           </button>
           <div className="w-px h-5 bg-[#78350F] mx-0.5" />
           <button
             onClick={handleResetOverview}
-            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[36px] ${
               !selectedLocation
                 ? 'bg-[#78350F] text-[#FDE68A] border border-[#F59E0B]'
                 : 'text-amber-200 hover:bg-[#78350F] hover:text-white'
             }`}
             title="Kembali ke Tinjauan Seluruh Kampus"
+            aria-label="Kembali ke Tinjauan Seluruh Kampus"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Overview</span>
@@ -621,7 +652,7 @@ export function FullScreenCampusMap({
                 onMouseLeave={() => setHoveredFacultyId(null)}
               >
                 {isSelected && (
-                  <circle cx="90" cy="60" r="95" fill="#F59E0B" opacity="0.25" className="animate-pulse" />
+                  <circle cx="90" cy="60" r="95" fill="#F59E0B" opacity="0.25" className="animate-pulse motion-reduce:animate-none" />
                 )}
 
                 <FacultyBuildingIllustration facultyId={loc.id} isHighlighted={isSelected || isHovered} mode="overview" />
@@ -695,7 +726,7 @@ export function FullScreenCampusMap({
               className="transition-all duration-500 ease-out animate-fade-in"
             >
               {/* Highlight Aura */}
-              <circle cx="230" cy="150" r="190" fill="#F59E0B" opacity="0.12" className="animate-pulse" />
+              <circle cx="230" cy="150" r="190" fill="#F59E0B" opacity="0.12" className="animate-pulse motion-reduce:animate-none" />
 
               {/* The Majestic 16-Bit Hero Building Recreation */}
               <foreignObject x="0" y="0" width="460" height="300">
@@ -725,7 +756,7 @@ export function FullScreenCampusMap({
 
       {/* 4. FLOATING ARCHITECTURAL DETAILS CARD (IN FOCUS MODE) */}
       {selectedLocation && (
-        <div className="absolute top-16 left-3 sm:top-auto sm:bottom-6 sm:left-4 max-w-sm w-[calc(100vw-24px)] sm:w-84 z-20 bg-[#24130C]/95 backdrop-blur-md p-3.5 sm:p-5 rounded-3xl border-2 border-[#F59E0B] shadow-[0_8px_30px_rgba(0,0,0,0.7)] text-white pointer-events-auto animate-fade-in">
+        <div className="absolute top-16 left-3 right-3 sm:right-auto sm:top-auto sm:bottom-6 sm:left-4 max-w-sm sm:w-84 z-20 bg-[#24130C]/95 backdrop-blur-md p-3.5 sm:p-5 rounded-3xl border-2 border-[#F59E0B] shadow-[0_8px_30px_rgba(0,0,0,0.7)] text-white pointer-events-auto animate-fade-in">
           <div className="flex items-start justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">

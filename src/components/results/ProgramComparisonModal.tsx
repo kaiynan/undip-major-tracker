@@ -7,7 +7,7 @@ import { faculties } from '@/data/faculties';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { ScoreBar } from '@/components/ui/ScoreBar';
-import { X, Scale, ArrowRight, ExternalLink, Sparkles, Users, CheckCircle2 } from 'lucide-react';
+import { X, Scale, ArrowRight, Users, CheckCircle2 } from 'lucide-react';
 
 interface ProgramComparisonModalProps {
   isOpen: boolean;
