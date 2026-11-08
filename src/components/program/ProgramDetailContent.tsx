@@ -472,14 +472,14 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
             <div className="space-y-0.5 text-center sm:text-left">
               <div className="flex items-center justify-center sm:justify-start gap-2 text-[#FDE68A] font-pixel text-xs sm:text-sm">
                 <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Langkah Selanjutnya: Biaya UKT, KIP-K & Seleksi</span>
+                <span>Langkah Selanjutnya: Biaya, Beasiswa & Jadwal</span>
               </div>
               <p className="text-[11px] sm:text-xs text-amber-100/80 leading-relaxed max-w-xl">
-                Pelajari struktur 8 Golongan UKT, peluang beasiswa 100% KIP-Kuliah, dan kalender seleksi masuk UNDIP (SNBP, SNBT, UM).
+                Pelajari struktur Golongan UKT, program beasiswa KIP-Kuliah, dan kalender seleksi masuk UNDIP (SNBP, SNBT, UM).
               </p>
             </div>
             <Link
-              href="/results?tab=next-steps#langkah-selanjutnya"
+              href="/langkah-selanjutnya"
               className="inline-flex items-center gap-1.5 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-bold px-4 py-2.5 rounded-xl text-xs font-pixel transition-all shadow-[2px_2px_0_0_#000] shrink-0 min-h-[44px] cursor-pointer"
             >
               <span>Buka Langkah Selanjutnya</span>
@@ -542,10 +542,10 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
                   Bukti: {programUkt.evidence}
                 </span>
                 <Link
-                  href="/results?tab=next-steps#langkah-selanjutnya"
+                  href={`/langkah-selanjutnya/biaya-ukt?prodi=${program.id}`}
                   className="text-amber-400 hover:text-amber-300 underline font-semibold inline-flex items-center gap-1 text-xs"
                 >
-                  <span>Lihat perbandingan golongan UKT & panduan KIP-K</span>
+                  <span>Lihat perbandingan golongan UKT & panduan KIP-Kuliah</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
