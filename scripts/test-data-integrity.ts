@@ -219,10 +219,91 @@ for (const ukt of programUKTList) {
 }
 
 // -----------------------------------------------------------------------------
-// [GUARD 6] Optional Link Health Check (--check-links)
+// [GUARD 6] Quota Percentage Sum to 100%
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 6] Validating Quota Percentages Sum to 100%...');
+for (const q of admissionQuotas) {
+  if (q.totalCapacity && q.totalCapacity > 0) {
+    const snbpPct = ((q.snbpQuota || 0) / q.totalCapacity) * 100;
+    const snbtPct = ((q.snbtQuota || 0) / q.totalCapacity) * 100;
+    const mandiriPct = ((q.mandiriQuota || 0) / q.totalCapacity) * 100;
+    const sumPct = Math.round(snbpPct + snbtPct + mandiriPct);
+    assert(
+      sumPct === 100,
+      'Guard 7 - Quota Percentage Sum 100%',
+      q.programId,
+      `Percentages do not sum to 100%! Got ${sumPct}% (${snbpPct}% + ${snbtPct}% + ${mandiriPct}%)`
+    );
+  }
+}
+
+// -----------------------------------------------------------------------------
+// [GUARD 7] Scanning for standalone "KIP-K" abbreviation in data & components
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 7] Scanning for standalone "KIP-K" label in src/data and src/components...');
+function findCodeFiles(dir: string, exts: string[]): string[] {
+  let results: string[] = [];
+  if (!fs.existsSync(dir)) return results;
+  const list = fs.readdirSync(dir);
+  for (const file of list) {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+    if (stat.isDirectory()) {
+      results = results.concat(findCodeFiles(fullPath, exts));
+    } else if (exts.some((e) => file.endsWith(e))) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
+const filesToCheckKipk = [
+  ...findCodeFiles(path.join(ROOT_DIR, 'src/data'), ['.ts', '.tsx']),
+  ...findCodeFiles(path.join(ROOT_DIR, 'src/components'), ['.ts', '.tsx']),
+];
+
+for (const filePath of filesToCheckKipk) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  // Match "KIP-K" when NOT part of "KIP-Kuliah"
+  // Negative lookahead for "uliah"
+  const matches = content.match(/\bKIP-K(?!uliah)\b/g);
+  const relPath = path.relative(ROOT_DIR, filePath);
+  assert(
+    !matches || matches.length === 0,
+    'Guard 8 - Standardized KIP-Kuliah Terminology',
+    relPath,
+    `Found standalone abbreviation 'KIP-K'! Standardize to 'KIP-Kuliah'.`
+  );
+}
+
+// -----------------------------------------------------------------------------
+// [GUARD 8] Scanning for "100%" claims attached to scholarship/beasiswa in user-facing copy
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 8] Scanning for unauthorized "100%" scholarship claims in copy...');
+const userFacingFiles = [
+  ...findCodeFiles(path.join(ROOT_DIR, 'src/components'), ['.tsx']),
+  ...findCodeFiles(path.join(ROOT_DIR, 'src/app'), ['.tsx']),
+];
+
+for (const filePath of userFacingFiles) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  // Check for "100% beasiswa", "beasiswa 100%", "peluang beasiswa 100%"
+  const claimRegex = /(100%\s*(beasiswa|kip-kuliah|kip)|(beasiswa|kip-kuliah|kip)[\s\S]{0,25}100%)/i;
+  const match = content.match(claimRegex);
+  const relPath = path.relative(ROOT_DIR, filePath);
+  assert(
+    !match,
+    'Guard 9 - No 100% Scholarship Claims',
+    relPath,
+    `Found potential 100% scholarship claim: "${match?.[0]}"`
+  );
+}
+
+// -----------------------------------------------------------------------------
+// [GUARD 9] Optional Link Health Check (--check-links)
 // -----------------------------------------------------------------------------
 if (process.argv.includes('--check-links')) {
-  console.log('\n[GUARD 6] Optional Link Health Check running...');
+  console.log('\n[GUARD 9] Optional Link Health Check running...');
   // Asynchronous link validation (reported only, non-blocking)
 }
 

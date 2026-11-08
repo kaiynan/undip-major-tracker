@@ -343,7 +343,7 @@ export function Navbar() {
                 retroAudio.playBlip(520);
                 setMenuOpen(!menuOpen);
               }}
-              className={`p-2 xl:px-3 xl:py-2 flex items-center justify-center gap-1.5 font-pixel text-[9px] border transition-colors cursor-pointer min-h-[44px] min-w-[44px] shrink-0 ${
+              className={`navbar-mobile-toggle p-2 xl:px-3 xl:py-2 flex items-center justify-center gap-1.5 font-pixel text-[9px] border transition-colors cursor-pointer min-h-[44px] min-w-[44px] shrink-0 ${
                 menuOpen
                   ? 'bg-[#9A3412] text-[#FDE68A] border-[#FDE68A] shadow-[2px_2px_0_0_#F59E0B]'
                   : 'bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border-[#78350F] shadow-[2px_2px_0_0_#000]'

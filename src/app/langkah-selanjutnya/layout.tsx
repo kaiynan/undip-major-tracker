@@ -86,15 +86,15 @@ export default function LangkahSelanjutnyaLayout({
   const { prev, next } = getLinearNavigation();
 
   return (
-    <div className="min-h-screen bg-[#0F0804] text-white flex flex-col justify-between selection:bg-[#F59E0B] selection:text-black">
-      <div>
+    <div className="min-h-screen bg-[#0F0804] text-white flex flex-col justify-between selection:bg-[#F59E0B] selection:text-black w-full max-w-full overflow-x-clip">
+      <div className="w-full max-w-full">
         {/* 1. Breadcrumbs */}
-        <div className="bg-[#1A0E08]/80 border-b border-[#78350F]/60 px-4 sm:px-6 py-2.5">
+        <div className="bg-[#1A0E08]/80 border-b border-[#78350F]/60 px-3 sm:px-6 py-2.5 w-full">
           <div className="max-w-5xl mx-auto flex items-center gap-1.5 text-[10px] sm:text-xs font-pixel text-amber-200/80 overflow-x-auto whitespace-nowrap scrollbar-none">
             <Link
               href="/"
               onClick={() => retroAudio.playSelect()}
-              className="flex items-center gap-1 hover:text-[#FDE68A] transition-colors p-1"
+              className="flex items-center gap-1 hover:text-[#FDE68A] transition-colors p-1 shrink-0"
             >
               <Home className="w-3.5 h-3.5" />
               <span>BERANDA</span>
@@ -104,7 +104,7 @@ export default function LangkahSelanjutnyaLayout({
             <Link
               href="/langkah-selanjutnya"
               onClick={() => retroAudio.playSelect()}
-              className={`hover:text-[#FDE68A] transition-colors p-1 ${
+              className={`hover:text-[#FDE68A] transition-colors p-1 shrink-0 ${
                 pathname === '/langkah-selanjutnya' ? 'text-[#FDE68A] font-bold' : ''
               }`}
             >
@@ -114,7 +114,7 @@ export default function LangkahSelanjutnyaLayout({
             {activeSubnav && (
               <>
                 <ChevronRight className="w-3 h-3 text-amber-500/60 shrink-0" />
-                <span className="text-[#FDE68A] font-bold p-1">
+                <span className="text-[#FDE68A] font-bold p-1 truncate max-w-[140px] sm:max-w-none">
                   {activeSubnav.label}
                 </span>
               </>
@@ -125,10 +125,10 @@ export default function LangkahSelanjutnyaLayout({
         {/* 2. Sticky 3-Pill Subnav */}
         <nav
           aria-label="Sub-navigasi Langkah Selanjutnya"
-          className="sticky z-30 bg-[#1A0E08]/95 backdrop-blur-md border-b-2 border-[#78350F] px-4 py-2.5 shadow-[0_4px_12px_rgba(0,0,0,0.5)]"
+          className="sticky z-30 bg-[#1A0E08]/95 backdrop-blur-md border-b-2 border-[#78350F] px-2 sm:px-4 py-2.5 shadow-[0_4px_12px_rgba(0,0,0,0.5)] w-full"
           style={{ top: 'var(--navbar-h, 56px)' }}
         >
-          <div className="max-w-5xl mx-auto flex items-center justify-start sm:justify-center gap-2 overflow-x-auto scrollbar-none py-0.5">
+          <div className="max-w-5xl mx-auto flex items-center justify-start sm:justify-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-none py-0.5">
             {SUBNAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;

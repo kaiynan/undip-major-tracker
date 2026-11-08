@@ -163,7 +163,7 @@ async function testTouchResetButtons() {
   await page.waitForLoadState('domcontentloaded');
   await page.waitForTimeout(500);
 
-  const hamburger = page.locator('button.navbar-mobile-toggle');
+  const hamburger = page.locator('button.navbar-mobile-toggle, button[aria-label="Buka menu"]');
   await hamburger.tap();
   await page.waitForTimeout(400);
 

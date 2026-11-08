@@ -51,20 +51,20 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
     <div className="space-y-6 text-white">
       {/* Header / Intro Card */}
       {!embedded && (
-        <div className="bg-[#1F120B] border-2 border-[#78350F] rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+        <div className="bg-[#1F120B] border-2 border-[#78350F] rounded-2xl p-4 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#2A160E] border-2 border-[#F59E0B] flex items-center justify-center text-[#FDE68A] shadow-[2px_2px_0_0_#000] shrink-0">
                 <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="font-pixel text-sm sm:text-base text-[#FDE68A]">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="font-pixel text-xs xs:text-sm sm:text-base text-[#FDE68A] break-words">
                     {calendar.title}
                   </h1>
                   <StatusBadge status={calendar.status} />
                 </div>
-                <p className="text-xs text-amber-200/80 mt-1 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-amber-200/80 mt-1 leading-relaxed">
                   Alur seleksi masuk jalur SNBP, SNBT, dan Ujian Mandiri UNDIP Tahun Akademik 2026/2027.
                 </p>
               </div>
@@ -78,13 +78,13 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
         {/* Quota Summary Bar from SK Rektor 41/2026 */}
         <div className="bg-[#140B07] border border-[#78350F] rounded-xl p-4 space-y-2">
           <div className="flex items-center justify-between gap-2 flex-wrap pb-2 border-b border-[#78350F]/50">
-            <div className="flex items-center gap-2">
-              <PieChart className="w-4 h-4 text-[#F59E0B]" />
-              <span className="font-pixel text-xs text-[#FDE68A]">
+            <div className="flex items-center gap-2 min-w-0">
+              <PieChart className="w-4 h-4 text-[#F59E0B] shrink-0" />
+              <span className="font-pixel text-xs text-[#FDE68A] truncate">
                 Distribusi Kuota Seleksi 2026/2027
               </span>
             </div>
-            <span className="font-mono text-[10px] text-amber-300">
+            <span className="font-mono text-[10px] text-amber-300 break-words">
               Total Daya Tampung: {quotaStats.grandTotal.toLocaleString('id-ID')} Mahasiswa
             </span>
           </div>
@@ -138,7 +138,7 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
               className="bg-[#140B07] border border-[#78350F] rounded-xl p-4 sm:p-5 space-y-3"
             >
               <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-[#78350F]/50">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <span className="font-pixel text-xs sm:text-sm text-[#FDE68A] font-bold">
                     {pathway.shortName}
                   </span>
@@ -147,7 +147,7 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="font-mono text-[10px] text-amber-300 bg-[#24130C] px-2.5 py-1 rounded border border-[#78350F]/60 font-bold">
+                  <span className="font-mono text-[10px] text-amber-300 bg-[#24130C] px-2.5 py-1 rounded border border-[#78350F]/60 font-bold break-words">
                     Alokasi: {getDynamicQuotaShare(pathway.pathwayId)}
                   </span>
                 </div>
@@ -166,17 +166,17 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
                   {pathway.timeline.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-2.5 sm:p-3 text-xs gap-3"
+                      className="flex flex-col xs:flex-row xs:items-center justify-between p-2.5 sm:p-3 text-xs gap-2 sm:gap-3"
                     >
-                      <div className="flex items-center gap-2 min-w-0">
-                        <span className="w-5 h-5 rounded bg-[#2A160E] text-amber-300 font-pixel text-[9px] flex items-center justify-center shrink-0 border border-[#78350F]/60">
+                      <div className="flex items-start xs:items-center gap-2 min-w-0">
+                        <span className="w-5 h-5 rounded bg-[#2A160E] text-amber-300 font-pixel text-[9px] flex items-center justify-center shrink-0 border border-[#78350F]/60 mt-0.5 xs:mt-0">
                           {idx + 1}
                         </span>
-                        <span className="text-amber-100/90 text-xs truncate">
+                        <span className="text-amber-100/90 text-xs leading-relaxed">
                           {item.stage}
                         </span>
                       </div>
-                      <span className="font-mono text-[10px] sm:text-[11px] text-[#FDE68A] font-bold shrink-0 flex items-center gap-1.5 bg-[#140B07] px-2.5 py-1 rounded border border-[#78350F]/50">
+                      <span className="font-mono text-[10px] sm:text-[11px] text-[#FDE68A] font-bold shrink-0 flex items-center gap-1.5 bg-[#140B07] px-2.5 py-1 rounded border border-[#78350F]/50 self-start xs:self-auto">
                         <Clock className="w-3 h-3 text-amber-400" />
                         {item.estimatedPeriod}
                       </span>
@@ -196,12 +196,12 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
               : 'Menunggu rilis resmi dari SNPMB Kemdikbud & PMB UNDIP'}
           </span>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 w-full sm:w-auto">
             <a
               href="https://snpmb.bppp.kemdikbud.go.id/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-bold text-stone-950 bg-[#F59E0B] hover:bg-[#FBBF24] px-3 py-2 rounded-lg text-xs min-h-[44px] transition-colors shadow-[2px_2px_0_0_#000]"
+              className="inline-flex items-center justify-center gap-1.5 font-bold text-stone-950 bg-[#F59E0B] hover:bg-[#FBBF24] px-3 py-2 rounded-lg text-xs min-h-[44px] transition-colors shadow-[2px_2px_0_0_#000] w-full sm:w-auto"
             >
               <span>Portal Resmi SNPMB</span>
               <ExternalLink className="w-3.5 h-3.5" />
@@ -211,7 +211,7 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
               href="https://pmb.undip.ac.id/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-bold text-[#FDE68A] bg-[#2A160E] hover:bg-[#3D1F13] border border-[#78350F] px-3 py-2 rounded-lg text-xs min-h-[44px] transition-colors"
+              className="inline-flex items-center justify-center gap-1.5 font-bold text-[#FDE68A] bg-[#2A160E] hover:bg-[#3D1F13] border border-[#78350F] px-3 py-2 rounded-lg text-xs min-h-[44px] transition-colors w-full sm:w-auto"
             >
               <span>Portal PMB UNDIP</span>
               <ExternalLink className="w-3.5 h-3.5" />

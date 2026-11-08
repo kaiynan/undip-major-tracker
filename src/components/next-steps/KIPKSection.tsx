@@ -22,20 +22,20 @@ export function KIPKSection({ embedded = false }: KIPKSectionProps) {
     <div className="space-y-6 text-white">
       {/* Header / Intro Card */}
       {!embedded && (
-        <div className="bg-[#1F120B] border-2 border-[#78350F] rounded-2xl p-5 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+        <div className="bg-[#1F120B] border-2 border-[#78350F] rounded-2xl p-4 sm:p-6 shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#2A160E] border-2 border-[#F59E0B] flex items-center justify-center text-[#FDE68A] shadow-[2px_2px_0_0_#000] shrink-0">
                 <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h1 className="font-pixel text-sm sm:text-base text-[#FDE68A]">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="font-pixel text-xs xs:text-sm sm:text-base text-[#FDE68A] break-words">
                     {kipk.title}
                   </h1>
                   <StatusBadge status={kipk.status} />
                 </div>
-                <p className="text-xs text-amber-200/80 mt-1 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-amber-200/80 mt-1 leading-relaxed">
                   Program bantuan biaya pendidikan dan biaya hidup bagi mahasiswa berprestasi dengan keterbatasan ekonomi.
                 </p>
               </div>
@@ -147,12 +147,12 @@ export function KIPKSection({ embedded = false }: KIPKSectionProps) {
                 ? `Terverifikasi (${kipk.evidence})`
                 : 'Menunggu rilis panduan teknis resmi tahun berjalan'}
             </span>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full sm:w-auto">
               <a
                 href={kipk.portalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-[#F59E0B] hover:bg-[#FBBF24] text-stone-950 font-bold px-3 py-2 rounded-lg text-xs transition-colors shadow-[2px_2px_0_0_#000] min-h-[44px]"
+                className="inline-flex items-center justify-center gap-1.5 bg-[#F59E0B] hover:bg-[#FBBF24] text-stone-950 font-bold px-3 py-2 rounded-lg text-xs transition-colors shadow-[2px_2px_0_0_#000] min-h-[44px] w-full sm:w-auto"
               >
                 <span>Portal Resmi KIP-Kuliah</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -161,7 +161,7 @@ export function KIPKSection({ embedded = false }: KIPKSectionProps) {
                 href="https://pmb.undip.ac.id/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] px-3 py-2 rounded-lg text-xs transition-colors min-h-[44px]"
+                className="inline-flex items-center justify-center gap-1.5 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] border border-[#78350F] px-3 py-2 rounded-lg text-xs transition-colors min-h-[44px] w-full sm:w-auto"
               >
                 <span>PMB UNDIP</span>
                 <ExternalLink className="w-3.5 h-3.5" />

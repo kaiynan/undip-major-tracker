@@ -76,6 +76,19 @@ function resolveFilePath(reqPath) {
     if (fs.existsSync(dynamicPath) && fs.statSync(dynamicPath).isFile()) {
       return { filePath: dynamicPath, status: 200 };
     }
+
+    // Handle nested routes e.g. /langkah-selanjutnya/biaya-ukt/__next.langkah-selanjutnya.biaya-ukt.__PAGE__.txt
+    // where on disk it is out/langkah-selanjutnya/biaya-ukt/__next.langkah-selanjutnya/biaya-ukt/__PAGE__.txt
+    const nextIdx = cleanPath.indexOf('/__next.');
+    if (nextIdx !== -1) {
+      const prefix = cleanPath.slice(0, nextIdx);
+      const afterNext = cleanPath.slice(nextIdx + '/__next.'.length).replace('.__PAGE__.txt', '');
+      const segments = afterNext.split('.');
+      const nestedPath = path.join(outDir, prefix, `__next.${segments.join(path.sep)}`, '__PAGE__.txt');
+      if (fs.existsSync(nestedPath) && fs.statSync(nestedPath).isFile()) {
+        return { filePath: nestedPath, status: 200 };
+      }
+    }
   }
 
   // 2. <path>.html - PREFER THIS OVER A SAME-NAMED DIRECTORY

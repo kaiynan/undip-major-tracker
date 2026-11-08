@@ -53,6 +53,10 @@ const ROUTES = [
   { path: '/admin', slug: 'admin' },
   { path: '/offline', slug: 'offline' },
   { path: '/program/ft-sipil', slug: 'program-ft-sipil' },
+  { path: '/langkah-selanjutnya', slug: 'langkah-selanjutnya-hub' },
+  { path: '/langkah-selanjutnya/biaya-ukt', slug: 'langkah-selanjutnya-ukt' },
+  { path: '/langkah-selanjutnya/beasiswa', slug: 'langkah-selanjutnya-beasiswa' },
+  { path: '/langkah-selanjutnya/jadwal-seleksi', slug: 'langkah-selanjutnya-jadwal' },
 ];
 
 const ARTIFACTS_DIR = path.resolve(__dirname, '..', 'test-artifacts', 'prod');
@@ -291,6 +295,73 @@ async function runProdRenderTests() {
         console.log('✓ PASS');
       }
     }
+
+    // Specialized interactive tests for Langkah Selanjutnya & Navbar
+    console.log('\n[INTERACTIVE TESTS] Verifying Langkah Selanjutnya interactions & legacy redirects...');
+
+    const interactiveContext = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const interactivePage = await interactiveContext.newPage();
+
+    // 1. Deep link: /langkah-selanjutnya/biaya-ukt?prodi=ft-arsitektur
+    totalAssertions++;
+    await interactivePage.goto(`${BASE_URL}/langkah-selanjutnya/biaya-ukt?prodi=ft-arsitektur`, { waitUntil: 'networkidle' });
+    const deepLinkText = await interactivePage.textContent('body');
+    if (!deepLinkText.includes('Arsitektur') || !deepLinkText.includes('Rp500.000')) {
+      failures.push(`Deep link ?prodi=ft-arsitektur failed to initialize picker to Arsitektur!`);
+    } else {
+      console.log('  ✓ Deep link ?prodi=ft-arsitektur initialized correctly');
+    }
+
+    // 2. Interactive picker update test
+    totalAssertions++;
+    const buttonToClick = interactivePage.locator('button:has-text("Teknik Kimia")').first();
+    if ((await buttonToClick.count()) > 0) {
+      await buttonToClick.click();
+      await interactivePage.waitForTimeout(200);
+      const urlAfterClick = interactivePage.url();
+      if (!urlAfterClick.includes('prodi=ft-kimia')) {
+        failures.push(`Clicking program in picker did not update URL query string to prodi=ft-kimia! Got: ${urlAfterClick}`);
+      } else {
+        console.log('  ✓ Program picker updated selection and URL parameter seamlessly');
+      }
+    }
+
+    // 3. Subnav active pill assertion
+    totalAssertions++;
+    await interactivePage.goto(`${BASE_URL}/langkah-selanjutnya/beasiswa`, { waitUntil: 'networkidle' });
+    const activePill = await interactivePage.locator('a[aria-current="page"]').textContent();
+    if (!activePill || !activePill.includes('BEASISWA KIP-KULIAH')) {
+      failures.push(`Active subnav pill on /langkah-selanjutnya/beasiswa is not 'BEASISWA KIP-KULIAH'! Got: ${activePill}`);
+    } else {
+      console.log('  ✓ Active subnav pill correctly matches route on /langkah-selanjutnya/beasiswa');
+    }
+
+    // 4. Legacy redirect: /results?tab=next-steps -> /langkah-selanjutnya
+    totalAssertions++;
+    await interactivePage.goto(`${BASE_URL}/results?tab=next-steps`, { waitUntil: 'networkidle' });
+    await interactivePage.waitForTimeout(300);
+    const redirectedUrl = interactivePage.url();
+    if (!redirectedUrl.includes('/langkah-selanjutnya')) {
+      failures.push(`Legacy /results?tab=next-steps did not redirect to /langkah-selanjutnya! Got: ${redirectedUrl}`);
+    } else {
+      console.log('  ✓ Legacy /results?tab=next-steps correctly redirected to /langkah-selanjutnya');
+    }
+
+    await interactiveContext.close();
+
+    // 5. Mobile bottom nav test on mobile viewport
+    totalAssertions++;
+    const mobileContext = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
+    const mobilePage = await mobileContext.newPage();
+    await mobilePage.goto(`${BASE_URL}/langkah-selanjutnya`, { waitUntil: 'networkidle' });
+    const bottomNavItems = mobilePage.locator('nav[aria-label="Navigasi Bawah Mobile dan Tablet"] a');
+    const bottomNavCount = await bottomNavItems.count();
+    if (bottomNavCount !== 5) {
+      failures.push(`Mobile bottom nav expected 5 items, got ${bottomNavCount}!`);
+    } else {
+      console.log(`  ✓ Mobile bottom nav contains exact 5 items (Beranda, Tes, Hasil, Prodi, Info)`);
+    }
+    await mobileContext.close();
   } finally {
     await browser.close();
     if (serverProcess) {

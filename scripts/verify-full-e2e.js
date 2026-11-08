@@ -24,6 +24,10 @@ const ROUTES = [
   '/program-studi',
   '/program/ft-sipil',
   '/admin',
+  '/langkah-selanjutnya',
+  '/langkah-selanjutnya/biaya-ukt',
+  '/langkah-selanjutnya/beasiswa',
+  '/langkah-selanjutnya/jadwal-seleksi',
 ];
 
 async function runComprehensiveVerification() {
@@ -95,9 +99,21 @@ async function runComprehensiveVerification() {
     if (vp.width === 390 && vp.height === 844) {
       console.log('\n  [Interactive Checks at 390x844]');
 
-      // 1. Audio toggle check
+      // 1. Audio toggle check (opens menu if not directly visible)
       await page.goto(`${BASE_URL}/`);
-      const soundBtn = page.locator('header button[aria-label*="Suara"]');
+      await page.waitForTimeout(400);
+      const introOverlay = page.locator('[aria-label="Animasi Pembuka Gerbang UNDIP Tembalang"]');
+      if (await introOverlay.isVisible()) {
+        await page.keyboard.press('Escape');
+        await page.waitForTimeout(400);
+      }
+      let soundBtn = page.locator('button[aria-label*="Suara"]');
+      if (!(await soundBtn.isVisible())) {
+        const menuBtn = page.locator('button.navbar-mobile-toggle, button[aria-label="Buka menu"]');
+        await menuBtn.click();
+        await page.waitForTimeout(300);
+      }
+      soundBtn = page.locator('button[aria-label*="Suara"]');
       const initialAria = await soundBtn.getAttribute('aria-label');
       await soundBtn.click();
       await page.waitForTimeout(200);
@@ -114,12 +130,12 @@ async function runComprehensiveVerification() {
       const isExpandedAfter = await firstFacultyAccordion.getAttribute('aria-expanded');
       console.log(`  ✓ Program directory accordion toggle: expanded=${isExpandedBefore} -> expanded=${isExpandedAfter}`);
 
-      // 3. /results?tab=next-steps deep-link check
+      // 3. /results?tab=next-steps deep-link check (redirects to /langkah-selanjutnya)
       await page.goto(`${BASE_URL}/results?tab=next-steps#langkah-selanjutnya`);
-      await page.waitForTimeout(500);
-      const nextStepsHeader = page.locator('h2:has-text("Panduan Langkah Selanjutnya")');
-      const isNextStepsVisible = await nextStepsHeader.isVisible();
-      console.log(`  ✓ Deep-link to Langkah Selanjutnya tab visible: ${isNextStepsVisible}`);
+      await page.waitForTimeout(600);
+      const hubHeading = page.locator('h1:has-text("Langkah Selanjutnya"), h2:has-text("Langkah Selanjutnya")');
+      const isHubVisible = await hubHeading.first().isVisible();
+      console.log(`  ✓ Legacy /results?tab=next-steps redirected: url=${page.url()}, heading visible=${isHubVisible}`);
     }
 
     await context.close();

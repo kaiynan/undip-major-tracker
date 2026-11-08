@@ -10,7 +10,6 @@ import { retroAudio } from '@/lib/retroAudio';
 import {
   Banknote,
   Search,
-  Filter,
   ExternalLink,
   ShieldCheck,
   Info,
@@ -144,7 +143,7 @@ export function UKTSection({ embedded = false }: UKTSectionProps) {
               </p>
             </div>
 
-            <div className="flex items-center gap-3 bg-[#24130C] px-3.5 py-2 rounded-xl border border-[#78350F]">
+            <div className="flex flex-wrap items-center justify-between gap-2 bg-[#24130C] px-3.5 py-2 rounded-xl border border-[#78350F] max-w-full">
               <span className="text-[11px] text-amber-200/70 font-mono">Rentang Nominal:</span>
               <span className="font-mono text-xs sm:text-sm font-bold text-emerald-400">
                 {minAmount} s.d. {maxAmount}
@@ -200,34 +199,36 @@ export function UKTSection({ embedded = false }: UKTSectionProps) {
               />
             </div>
 
-            {/* Filter by Faculty */}
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-amber-400 shrink-0 hidden sm:block" />
-              <select
-                value={selectedFaculty}
-                onChange={(e) => setSelectedFaculty(e.target.value)}
-                aria-label="Filter berdasarkan Fakultas"
-                className="bg-[#140B07] border border-[#78350F] text-amber-100 text-xs rounded-xl px-3 py-2 min-h-[44px] cursor-pointer"
-              >
-                <option value="all">Semua Fakultas</option>
-                {faculties.map((f) => (
-                  <option key={f.id} value={f.id}>
-                    {f.shortName} — {f.name}
-                  </option>
-                ))}
-              </select>
+            {/* Filter by Faculty & Degree */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full sm:w-auto">
+              <div className="relative min-w-0">
+                <select
+                  value={selectedFaculty}
+                  onChange={(e) => setSelectedFaculty(e.target.value)}
+                  aria-label="Filter berdasarkan Fakultas"
+                  className="w-full max-w-full bg-[#140B07] border border-[#78350F] text-amber-100 text-xs rounded-xl px-2.5 py-2 min-h-[44px] cursor-pointer truncate"
+                >
+                  <option value="all">Semua Fakultas</option>
+                  {faculties.map((f) => (
+                    <option key={f.id} value={f.id}>
+                      {f.shortName} — {f.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-              {/* Filter by Degree */}
-              <select
-                value={selectedDegree}
-                onChange={(e) => setSelectedDegree(e.target.value as 'all' | 'S1' | 'D4')}
-                aria-label="Filter Jenjang Pendidikan"
-                className="bg-[#140B07] border border-[#78350F] text-amber-100 text-xs rounded-xl px-3 py-2 min-h-[44px] cursor-pointer"
-              >
-                <option value="all">Semua Jenjang</option>
-                <option value="S1">Sarjana (S1)</option>
-                <option value="D4">Vokasi (D4)</option>
-              </select>
+              <div className="relative min-w-0">
+                <select
+                  value={selectedDegree}
+                  onChange={(e) => setSelectedDegree(e.target.value as 'all' | 'S1' | 'D4')}
+                  aria-label="Filter Jenjang Pendidikan"
+                  className="w-full max-w-full bg-[#140B07] border border-[#78350F] text-amber-100 text-xs rounded-xl px-2.5 py-2 min-h-[44px] cursor-pointer truncate"
+                >
+                  <option value="all">Semua Jenjang</option>
+                  <option value="S1">Sarjana (S1)</option>
+                  <option value="D4">Vokasi (D4)</option>
+                </select>
+              </div>
             </div>
           </div>
 
