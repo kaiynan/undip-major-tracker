@@ -537,15 +537,15 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
                 ))}
               </div>
 
-              <div className="text-[11px] text-amber-200/70 pt-2 border-t border-[#78350F]/50 flex flex-wrap items-center justify-between gap-2">
+              <div className="text-[11px] text-amber-200/70 pt-2 border-t border-[#78350F]/50 flex flex-wrap items-center justify-between gap-3">
                 <span className="italic">
                   Bukti: {programUkt.evidence}
                 </span>
                 <Link
                   href={`/langkah-selanjutnya/biaya-ukt?prodi=${program.id}`}
-                  className="text-amber-400 hover:text-amber-300 underline font-semibold inline-flex items-center gap-1 text-xs"
+                  className="inline-flex items-center gap-1.5 bg-[#190E08] hover:bg-[#2A160E] border border-[#78350F] text-[#FDE68A] hover:text-white px-3 py-2 rounded-xl text-xs font-pixel transition-colors min-h-[44px]"
                 >
-                  <span>Lihat perbandingan golongan UKT & panduan KIP-Kuliah</span>
+                  <span>Buka di Halaman Biaya UKT</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
