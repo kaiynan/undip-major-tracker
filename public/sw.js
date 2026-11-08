@@ -1,9 +1,14 @@
-const CACHE_NAME = 'undip-major-matcher-v1';
+const CACHE_NAME = 'undip-major-matcher-v2';
 
 const PRECACHE_URLS = [
   '/',
   '/questionnaire',
   '/results',
+  '/program-studi',
+  '/langkah-selanjutnya',
+  '/langkah-selanjutnya/biaya-ukt',
+  '/langkah-selanjutnya/beasiswa',
+  '/langkah-selanjutnya/jadwal-seleksi',
   '/offline',
   '/manifest.webmanifest',
   '/icons/icon.svg',
