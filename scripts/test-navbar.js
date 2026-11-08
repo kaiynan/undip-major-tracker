@@ -24,6 +24,7 @@ async function runNavbarTests() {
       // Initial navigation
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`${BASE_URL}${route}`, { waitUntil: 'networkidle' });
+      await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(400);
 
       for (let width = 320; width <= 2560; width += 20) {

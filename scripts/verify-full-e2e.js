@@ -22,7 +22,7 @@ const ROUTES = [
   '/questionnaire',
   '/results',
   '/program-studi',
-  '/program/teknik-sipil',
+  '/program/ft-sipil',
   '/admin',
 ];
 
@@ -65,6 +65,7 @@ async function runComprehensiveVerification() {
     for (const route of ROUTES) {
       const targetUrl = `${BASE_URL}${route}`;
       await page.goto(targetUrl, { waitUntil: 'domcontentloaded' });
+      await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(400);
 
       // Check horizontal overflow

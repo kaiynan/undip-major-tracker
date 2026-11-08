@@ -39,6 +39,7 @@ async function testTouchResetButtons() {
   console.log('\n[1] Questionnaire Reset Button & Confirmation Modal...');
   await page.goto(`${BASE_URL}/questionnaire`);
   await page.waitForLoadState('domcontentloaded');
+  await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(600);
 
   // Answer question 1 first
@@ -77,6 +78,7 @@ async function testTouchResetButtons() {
   await fillAnswers();
   await page.goto(`${BASE_URL}/results`);
   await page.waitForLoadState('domcontentloaded');
+  await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(600);
 
   const hRetakeBtn = page.locator('header button[aria-label="Ulangi Kuisioner (Reset & Isi Ulang)"]');
@@ -190,6 +192,7 @@ async function testTouchResetButtons() {
   await fillAnswers();
   await page.goto(`${BASE_URL}/results`);
   await page.waitForLoadState('domcontentloaded');
+  await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(600);
 
   const searchInput = page.locator('input[placeholder*="Cari"]');

@@ -25,7 +25,7 @@ Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP)
    - 11 Program Sarjana Terapan (D4) Sekolah Vokasi (termasuk TISPA, TRKP, TLI, TRKI, RPM, dll.).
    - 2 Program Sarjana (S1) PSDKU (Agribisnis Batang & Administrasi Publik Rembang).
 4. **Integrasi Daya Tampung Resmi (SNBP, SNBT, Mandiri):**
-   - Kuota kursi resmi tahun akademik 2024/2025 per jalur seleksi.
+   - Kuota kursi resmi tahun akademik 2026/2027 per jalur seleksi (SK Rektor No. 41/2026).
    - Visualisasi proporsi jalur dan perbandingan kuota tanpa mengubah skor minat HMIM.
 5. **Hybrid Mobile & Progressive Web App (PWA):**
    - Desain responsif (360px – 1440px+).
@@ -99,9 +99,11 @@ Buka [http://localhost:3000](http://localhost:3000) pada peramban.
 
 ### Menjalankan Build Produksi
 
+Aplikasi menggunakan `output: "export"` (static HTML export). Perhatikan bahwa `next start` **tidak dapat digunakan** untuk static export; gunakan `npm run serve:out` untuk menjalankan server lokal static build.
+
 ```bash
 npm run build
-npm start
+npm run serve:out
 ```
 
 ---

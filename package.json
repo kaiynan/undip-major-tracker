@@ -5,13 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "node scripts/test-build-css.js",
     "start": "next start",
+    "serve:out": "node scripts/serve-out.js out 3222",
     "lint": "eslint",
     "test": "tsx src/lib/engine.test.ts && tsx scripts/test-data-integrity.ts",
     "test:data": "tsx scripts/test-data-integrity.ts",
+    "test:build-css": "node scripts/test-build-css.js",
+    "test:prod": "node scripts/test-prod-render.js",
+    "verify:prod": "npm run build && npm run test:prod",
     "test:navbar": "node scripts/test-navbar.js",
     "test:touch-reset": "node scripts/test-touch-reset.js",
-    "test:e2e": "node scripts/verify-full-e2e.js"
+    "test:e2e": "node scripts/verify-full-e2e.js",
+    "test:all:prod": "npm run build && node scripts/run-all-prod-tests.js"
   },
   "dependencies": {
     "@capacitor/android": "7.6.10",
