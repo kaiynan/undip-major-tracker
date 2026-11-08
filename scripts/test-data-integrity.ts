@@ -19,6 +19,7 @@ import { nextStepsData } from '../src/data/nextSteps';
 import { studyPrograms } from '../src/data/programs';
 import { admissionQuotas } from '../src/data/quotas';
 import { programUKTList } from '../src/data/ukt';
+import { isPsdku } from '../src/data/types';
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const SOURCES_DIR = path.join(ROOT_DIR, 'docs', 'sources');
@@ -245,10 +246,10 @@ for (const q of admissionQuotas) {
 // -----------------------------------------------------------------------------
 console.log('\n[GUARD 5] Validating Official UKT Database (src/data/ukt.ts)...');
 assert(
-  programUKTList.length === 67,
+  programUKTList.length === 70,
   'Guard 6 - UKT Completeness',
   'programUKTList',
-  `Expected UKT entries for all 67 programs, found ${programUKTList.length}`
+  `Expected UKT entries for all 70 programs, found ${programUKTList.length}`
 );
 
 for (const ukt of programUKTList) {
@@ -350,6 +351,31 @@ for (const filePath of userFacingFiles) {
     'Guard 9 - No 100% Scholarship Claims',
     relPath,
     `Found potential 100% scholarship claim: "${match?.[0]}"`
+  );
+}
+
+// -----------------------------------------------------------------------------
+// [GUARD 10] Validating Program Counts Consistency (Ranked vs Listed)
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 10] Validating Program Counts Consistency (Ranked vs Listed)...');
+const totalProgs = studyPrograms.length;
+const rankedProgs = studyPrograms.filter((p) => !isPsdku(p)).length;
+const psdkuProgs = studyPrograms.filter((p) => isPsdku(p)).length;
+
+assert(totalProgs === 70, 'Guard 10 - Total Programs Listed', 'studyPrograms', `Expected 70 total programs, got ${totalProgs}`);
+assert(rankedProgs === 65, 'Guard 10 - Ranked Programs Count', 'studyPrograms', `Expected 65 ranked programs, got ${rankedProgs}`);
+assert(psdkuProgs === 5, 'Guard 10 - PSDKU Programs Count', 'studyPrograms', `Expected 5 PSDKU programs, got ${psdkuProgs}`);
+
+// Scan user facing code files for outdated hard-coded counts ("67 Program Studi", "67 Jurusan", "67 Prodi")
+for (const filePath of userFacingFiles) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const outdatedMatches = content.match(/\b67\s*(program\s*studi|jurusan|prodi)\b/gi);
+  const relPath = path.relative(ROOT_DIR, filePath);
+  assert(
+    !outdatedMatches || outdatedMatches.length === 0,
+    'Guard 10 - No Outdated 67 Counts',
+    relPath,
+    `Found outdated count reference: "${outdatedMatches?.[0]}"! Update count to reflect real data (${rankedProgs} ranked / ${psdkuProgs} PSDKU / ${totalProgs} total).`
   );
 }
 

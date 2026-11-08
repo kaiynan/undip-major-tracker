@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useSyncExternalStore, ReactNode } from 'react';
-import { UserAnswers, ProgramScore, FacultyScore, DimensionScore } from '@/data/types';
+import { UserAnswers, ProgramScore, FacultyScore, DimensionScore, isPsdku } from '@/data/types';
 import { questions } from '@/data/questions';
 import { studyPrograms } from '@/data/programs';
 import { faculties } from '@/data/faculties';
@@ -179,8 +179,14 @@ export function QuestionnaireProvider({ children }: { children: ReactNode }) {
     }
 
     const dims = calculateDimensionScores(answers, questions);
-    const pScores = calculateAllScores(answers, studyPrograms, questions, DEFAULT_CONFIG);
-    const fScores = calculateFacultyScores(pScores, studyPrograms, faculties, DEFAULT_CONFIG);
+    const nonPsdkuPrograms = studyPrograms.filter((p) => !isPsdku(p));
+    const allProgramScores = calculateAllScores(answers, studyPrograms, questions, DEFAULT_CONFIG);
+    // Exclude PSDKU from presentation layer rankings
+    const pScores = allProgramScores.filter((score) => {
+      const prog = studyPrograms.find((p) => p.id === score.programId);
+      return !isPsdku(prog);
+    });
+    const fScores = calculateFacultyScores(pScores, nonPsdkuPrograms, faculties, DEFAULT_CONFIG);
 
     // Compute user summary
     const riasecKeys = ['R', 'I', 'A', 'S', 'E', 'C'];

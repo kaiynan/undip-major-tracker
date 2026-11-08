@@ -66,7 +66,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/results" className="hover:text-white transition-colors">
-                  ▶ Peringkat 67 Program Studi
+                  ▶ Peringkat 65 Program Studi
                 </Link>
               </li>
               <li>

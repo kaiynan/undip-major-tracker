@@ -299,11 +299,11 @@ export default function ResultsPage() {
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                 : 'text-amber-200/90 hover:text-white'
             }`}
-            title="Output 1: 67 Program Studi"
-            aria-label="Lihat Output 1: 67 Program Studi"
+            title="Output 1: 65 Program Studi di Peringkat"
+            aria-label="Lihat Output 1: 65 Program Studi di Peringkat"
           >
             <GraduationCap className="w-4 h-4 shrink-0" />
-            <span className="hidden sm:inline">67 Jurusan</span>
+            <span className="hidden sm:inline">65 Jurusan</span>
           </button>
 
           <button
@@ -481,11 +481,11 @@ export default function ResultsPage() {
                     ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                     : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
                 }`}
-                aria-label="Tampilkan Output 1: 67 Jurusan"
+                aria-label="Tampilkan Output 1: 65 Jurusan di Peringkat"
               >
                 <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                <span className="hidden sm:inline">67 Jurusan</span>
-                <span className="sm:hidden text-[10px]">67 Prodi</span>
+                <span className="hidden sm:inline">65 Jurusan</span>
+                <span className="sm:hidden text-[10px]">65 Prodi</span>
               </button>
               <button
                 onClick={() => setActiveTab('faculties')}

@@ -57,6 +57,18 @@ export interface AdmissionQuota {
   status: 'verified' | 'provisional' | 'unavailable';
 }
 
+export type CampusLocation = 'semarang' | 'psdku-pekalongan' | 'psdku-batang' | 'psdku-rembang';
+
+export function isPsdku(
+  program: { campus?: CampusLocation | string; campusLocation?: string; id?: string } | null | undefined
+): boolean {
+  if (!program) return false;
+  if (program.campus && program.campus !== 'semarang') return true;
+  if (typeof program.campusLocation === 'string' && program.campusLocation.toLowerCase().includes('psdku')) return true;
+  if (typeof program.id === 'string' && program.id.startsWith('psdku-')) return true;
+  return false;
+}
+
 /**
  * Representasi sebuah Program Studi di UNDIP beserta profil minatnya.
  *
@@ -74,7 +86,8 @@ export interface StudyProgram {
   departmentSourceUrl?: string; // URL bukti atau path file bukti
   departmentEvidence?: string; // Kutipan dokumen bukti
   degreeLevel: 'S1' | 'D4' | 'S2' | 'S3' | 'Profesi' | 'Spesialis';
-  campusLocation?: string; // e.g., 'Semarang (Kampus Utama)', 'Batang', 'Rembang'
+  campus?: CampusLocation; // 'semarang' | 'psdku-pekalongan' | 'psdku-batang' | 'psdku-rembang' (default semarang)
+  campusLocation?: string; // e.g., 'Semarang (Kampus Utama)', 'Batang (PSDKU)', 'Rembang (PSDKU)'
   description: string;
   websiteUrl: string;
   learningOutcomes: string[];

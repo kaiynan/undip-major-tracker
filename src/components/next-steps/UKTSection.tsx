@@ -237,7 +237,7 @@ export function UKTSection({ embedded = false }: UKTSectionProps) {
           {/* Quick Select Program Cards */}
           <div className="space-y-2">
             <div className="flex items-center justify-between text-xs text-amber-200/70">
-              <span>Menampilkan {filteredPrograms.length} dari 67 program studi:</span>
+              <span>Menampilkan {filteredPrograms.length} dari {programUKTList.length} program studi:</span>
               <span className="text-[10px] font-mono">Klik untuk melihat rincian golongan</span>
             </div>
 

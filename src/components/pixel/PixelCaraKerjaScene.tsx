@@ -34,7 +34,7 @@ const STEPS = [
     title: 'Eksplorasi Program Studi',
     Icon: GraduationCap,
     description:
-      'Pelajari profil kurikulum autentik, capaian pembelajaran (CPL), prospek karier, serta daya tampung resmi penerimaan mahasiswa baru (SNBP, SNBT, Mandiri) di 67 program studi.',
+      'Pelajari profil kurikulum autentik, capaian pembelajaran (CPL), prospek karier, serta daya tampung resmi penerimaan mahasiswa baru (SNBP, SNBT, Mandiri) di 65 program studi di peringkat dan 5 program PSDKU.',
   },
 ];
 

@@ -13,7 +13,7 @@ import { faculties } from '../data/faculties';
 import { studyPrograms } from '../data/programs';
 import { admissionQuotas, getQuotaByProgramId } from '../data/quotas';
 import { algorithmConfig } from '../data/config';
-import { UserAnswers, TierThreshold } from '../data/types';
+import { UserAnswers, TierThreshold, isPsdku } from '../data/types';
 
 console.log('===========================================================');
 console.log('UNDIP MAJOR MATCHER — HMIM RECOMMENDATION ENGINE TESTS');
@@ -49,8 +49,8 @@ console.log('\n[TEST 2] Database Counts & Verification...');
 if (faculties.length !== 12) {
   throw new Error(`Expected 12 faculties, found ${faculties.length}`);
 }
-if (studyPrograms.length !== 67) {
-  throw new Error(`Expected 67 study programs, found ${studyPrograms.length}`);
+if (studyPrograms.length !== 70) {
+  throw new Error(`Expected 70 study programs (65 Semarang + 5 PSDKU), found ${studyPrograms.length}`);
 }
 // Ensure all programs belong to a valid faculty
 for (const prog of studyPrograms) {
@@ -59,7 +59,7 @@ for (const prog of studyPrograms) {
     throw new Error(`Program ${prog.id} has invalid facultyId: ${prog.facultyId}`);
   }
 }
-console.log(`  ✓ 12 Faculties/Schools and 67 Undergraduate & Applied Bachelor Programs validated without dangling IDs`);
+console.log(`  ✓ 12 Faculties/Schools and 70 Programs (65 Semarang + 5 PSDKU) validated without dangling IDs`);
 
 // -----------------------------------------------------------------------------
 // Test 3: Mathematical Cosine Similarity Properties
@@ -203,8 +203,8 @@ console.log('  ✓ Engine is completely deterministic and handles partial respon
 // Test 10: Quota Database Verification & Score Invariance
 // -----------------------------------------------------------------------------
 console.log('\n[TEST 10] Quota Database Completeness & Score Invariance...');
-if (admissionQuotas.length !== 67) {
-  throw new Error(`Expected 67 quota entries matching 67 programs, found ${admissionQuotas.length}`);
+if (admissionQuotas.length !== 70) {
+  throw new Error(`Expected 70 quota entries matching 70 programs, found ${admissionQuotas.length}`);
 }
 
 for (const prog of studyPrograms) {
@@ -220,9 +220,60 @@ for (const prog of studyPrograms) {
     }
   }
 }
-console.log(`  ✓ All 67 study programs have verified admission quotas (SNBP + SNBT + Mandiri = Total)`);
+console.log(`  ✓ All 70 study programs have verified admission quotas (SNBP + SNBT + Mandiri = Total)`);
 console.log(`  ✓ HMIM recommendation scores remain purely interest-based and decoupled from quotas`);
 
+// -----------------------------------------------------------------------------
+// Test 11: PSDKU Exclusion from Ranked Output
+// -----------------------------------------------------------------------------
+console.log('\n[TEST 11] PSDKU Exclusion from Ranked Output...');
+
+const sampleSets: { name: string; answers: UserAnswers }[] = [
+  {
+    name: 'Industrial & Tech Skewed',
+    answers: industrialChemAnswers,
+  },
+  {
+    name: 'Balanced Answers (3s and 4s)',
+    answers: Object.fromEntries(questions.map((q) => [q.id, (q.id % 2 === 0 ? 4 : 3)])),
+  },
+  {
+    name: 'High Social & Humanities',
+    answers: Object.fromEntries(questions.map((q) => [q.id, q.dimension === 'riasec' ? 5 : 2])),
+  },
+];
+
+for (const sample of sampleSets) {
+  const allScores = calculateAllScores(sample.answers, studyPrograms, questions);
+  // Presentation layer filtering
+  const ranked = allScores.filter((score) => {
+    const prog = studyPrograms.find((p) => p.id === score.programId);
+    return !isPsdku(prog);
+  });
+
+  // Assert exact count of ranked programs
+  if (ranked.length !== 65) {
+    throw new Error(`[${sample.name}] Expected exactly 65 ranked programs, got ${ranked.length}`);
+  }
+
+  // Assert that zero PSDKU IDs appear in ranked output
+  for (const item of ranked) {
+    const prog = studyPrograms.find((p) => p.id === item.programId);
+    if (isPsdku(prog)) {
+      throw new Error(`[${sample.name}] PSDKU program ${item.programId} (${prog?.name}) leaked into ranked output!`);
+    }
+  }
+
+  // Assert faculty score calculation excludes PSDKU
+  const nonPsdkuPrograms = studyPrograms.filter((p) => !isPsdku(p));
+  const facScores = calculateFacultyScores(ranked, nonPsdkuPrograms, faculties);
+  if (facScores.length !== 12) {
+    throw new Error(`[${sample.name}] Expected 12 faculty scores, got ${facScores.length}`);
+  }
+}
+console.log('  ✓ 3 distinct sample answer sets verified: 0 PSDKU programs appear in ranked output');
+console.log('  ✓ Exactly 65 programs ranked and 12 faculty aggregates computed without PSDKU leakage');
+
 console.log('\n===========================================================');
-console.log('ALL 10 TEST SUITES COMPLETED WITH ZERO ERRORS!');
+console.log('ALL 11 TEST SUITES COMPLETED WITH ZERO ERRORS!');
 console.log('===========================================================');

@@ -421,7 +421,7 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
           <strong className="text-[#FDE68A] font-semibold">
             Hybrid Multi-Dimensional Interest Matching (HMIM)
           </strong>{' '}
-          untuk 67 program studi Sarjana dan Vokasi UNDIP.
+          untuk 65 program studi di peringkat dan 5 program PSDKU di daftar Sarjana dan Vokasi UNDIP.
         </p>
 
         {/* Academic Domains Exploration Trigger */}

@@ -13,7 +13,7 @@ const CALCULATION_STEPS = [
   { label: 'Menghitung Vektor Preferensi RIASEC (Bobot 20%)', icon: Brain, duration: 450 },
   { label: 'Memetakan Keselarasan 12 Rumpun Bidang Ilmu (Bobot 35%)', icon: Cpu, duration: 450 },
   { label: 'Menilai Gaya Belajar & Profil Kurikulum Autentik (Bobot 45%)', icon: Sparkles, duration: 450 },
-  { label: 'Menghitung Cosine Similarity 67 Program Studi UNDIP', icon: Database, duration: 450 },
+  { label: 'Menghitung Cosine Similarity 65 Program Studi UNDIP', icon: Database, duration: 450 },
   { label: 'Menyusun Peringkat & Peta Eksplorasi Kampus Tembalang', icon: CheckCircle2, duration: 350 },
 ];
 
@@ -71,7 +71,7 @@ export function PixelCalculationTransition({ onComplete }: PixelCalculationTrans
             Menganalisis Kecocokan Minat
           </h2>
           <p className="text-xs text-amber-200/80 mt-1.5 leading-relaxed">
-            Menghitung kecocokan 36 respons kuesioner dengan kurikulum dan profil 67 program studi Universitas Diponegoro.
+            Menghitung kecocokan 36 respons kuesioner dengan kurikulum dan profil 65 program studi di peringkat Universitas Diponegoro.
           </p>
 
           {/* Stepped Process Indicator */}

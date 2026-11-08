@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { studyPrograms, getProgramById } from '@/data/programs';
 import { faculties } from '@/data/faculties';
+import { isPsdku } from '@/data/types';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { getUKTByProgramId } from '@/data/ukt';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
@@ -156,8 +157,16 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
               </div>
             </div>
 
-            {/* Match Score Display Card */}
-            {score ? (
+            {/* Match Score Display Card or PSDKU Note */}
+            {isPsdku(program) ? (
+              <div className="bg-[#190E08] p-4 sm:p-5 rounded-2xl border-2 border-amber-600/70 text-center shrink-0 w-full sm:w-auto lg:w-56 text-xs text-amber-200/90 flex flex-col items-center justify-center shadow-inner space-y-1.5">
+                <MapPin className="w-6 h-6 text-[#F59E0B]" />
+                <span className="font-bold text-[#FDE68A] font-pixel text-[11px]">Kampus PSDKU</span>
+                <span className="text-[11px] text-amber-200/80 font-mono leading-tight">
+                  Program PSDKU tidak ikut dalam peringkat kecocokan
+                </span>
+              </div>
+            ) : score ? (
               <div className="bg-[#190E08] p-4 sm:p-6 rounded-2xl border-2 border-[#78350F] text-center shrink-0 w-full sm:w-auto lg:w-48 shadow-inner flex sm:flex-col items-center justify-between sm:justify-center gap-3">
                 <div className="text-left sm:text-center">
                   <div className="text-[10px] uppercase tracking-wider font-bold text-amber-300/80">
@@ -186,6 +195,21 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
             )}
           </div>
         </div>
+
+        {/* PSDKU Specific Information Notice */}
+        {isPsdku(program) && (
+          <div className="bg-[#24130C] rounded-2xl p-4 sm:p-5 border-2 border-amber-600/70 text-white flex items-start gap-3 shadow-[0_4px_16px_rgba(0,0,0,0.4)]">
+            <Info className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+            <div className="space-y-1 text-xs">
+              <h2 className="font-pixel text-xs text-[#FDE68A]">
+                Program PSDKU tidak ikut dalam peringkat kecocokan
+              </h2>
+              <p className="text-amber-100/90 leading-relaxed font-sans">
+                Program studi ini diselenggarakan di Kampus PSDKU UNDIP ({program.campusLocation || 'Luar Semarang'}). Program PSDKU tidak ikut dalam peringkat kecocokan, namun data daya tampung dan biaya kuliah UKT tetap resmi dan terverifikasi.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Personalized "Why This Program Matches You" Section (HMIM Recommendation) */}
         {score && (

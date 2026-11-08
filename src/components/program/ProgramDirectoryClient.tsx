@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, memo } from 'react';
 import Link from 'next/link';
-import { Faculty, StudyProgram } from '@/data/types';
+import { Faculty, StudyProgram, isPsdku } from '@/data/types';
 import { getQuotaByProgramId } from '@/data/quotas';
 import {
   Search,
@@ -16,6 +16,7 @@ import {
   Layers,
   RotateCcw,
   Users,
+  MapPin,
 } from 'lucide-react';
 import { retroAudio } from '@/lib/retroAudio';
 
@@ -33,6 +34,14 @@ interface GroupedPrograms {
   totalPrograms: number;
 }
 
+function getCampusBadge(program: StudyProgram): string | null {
+  if (program.campus === 'psdku-pekalongan' || program.campusLocation?.includes('Pekalongan')) return 'Pekalongan';
+  if (program.campus === 'psdku-batang' || program.campusLocation?.includes('Batang')) return 'Batang';
+  if (program.campus === 'psdku-rembang' || program.campusLocation?.includes('Rembang')) return 'Rembang';
+  if (isPsdku(program)) return 'PSDKU';
+  return null;
+}
+
 const ProgramCard = memo(function ProgramCard({
   program,
   faculty,
@@ -41,6 +50,7 @@ const ProgramCard = memo(function ProgramCard({
   faculty?: Faculty;
 }) {
   const quota = getQuotaByProgramId(program.id);
+  const campusBadge = getCampusBadge(program);
 
   return (
     <article className="flex flex-col justify-between bg-[#1A0E08] border-2 border-[#78350F] hover:border-[#F59E0B] p-4 sm:p-5 rounded-2xl transition-all shadow-[2px_2px_0_0_#000] hover:shadow-[4px_4px_0_0_#78350F]">
@@ -59,6 +69,12 @@ const ProgramCard = memo(function ProgramCard({
           <span className="text-[10px] font-mono text-amber-200/80 bg-[#2A160E] px-2 py-0.5 rounded border border-[#78350F]/60">
             {faculty?.shortName || program.facultyId.toUpperCase()}
           </span>
+          {campusBadge && (
+            <span className="text-[10px] font-mono font-bold text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-600 flex items-center gap-1">
+              <MapPin className="w-2.5 h-2.5 text-amber-400" />
+              <span>PSDKU {campusBadge}</span>
+            </span>
+          )}
           {program.department && (
             <span className="text-[10px] font-mono text-amber-400/90 bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F]/40 truncate max-w-[200px]">
               {program.department}
@@ -145,7 +161,9 @@ export function ProgramDirectoryClient({
   const filteredPrograms = useMemo(() => {
     const term = searchTerm.trim().toLowerCase();
     return programs.filter((p) => {
-      if (selectedFaculty !== 'all' && p.facultyId !== selectedFaculty) {
+      if (selectedFaculty === 'psdku') {
+        if (!isPsdku(p)) return false;
+      } else if (selectedFaculty !== 'all' && p.facultyId !== selectedFaculty) {
         return false;
       }
       if (selectedDegree !== 'all' && p.degreeLevel !== selectedDegree) {
@@ -154,10 +172,13 @@ export function ProgramDirectoryClient({
       if (!term) return true;
 
       const faculty = facultyMap.get(p.facultyId);
+      const campusLabel = getCampusBadge(p) || '';
       const searchHaystack = [
         p.name,
         p.description,
         p.department || '',
+        p.campusLocation || '',
+        campusLabel,
         faculty?.name || '',
         faculty?.shortName || '',
         p.degreeLevel,
@@ -171,12 +192,15 @@ export function ProgramDirectoryClient({
     });
   }, [programs, searchTerm, selectedFaculty, selectedDegree, facultyMap]);
 
-  // Grouped structure: Faculty -> Department -> Program
+  // Grouped structure for Semarang faculties
   const groupedData: GroupedPrograms[] = useMemo(() => {
+    if (selectedFaculty === 'psdku') return [];
     const result: GroupedPrograms[] = [];
 
     faculties.forEach((fac) => {
-      const facPrograms = filteredPrograms.filter((p) => p.facultyId === fac.id);
+      const facPrograms = filteredPrograms.filter(
+        (p) => !isPsdku(p) && p.facultyId === fac.id
+      );
       if (facPrograms.length === 0) return;
 
       // Group by department within this faculty
@@ -210,7 +234,21 @@ export function ProgramDirectoryClient({
     });
 
     return result;
-  }, [faculties, filteredPrograms]);
+  }, [faculties, filteredPrograms, selectedFaculty]);
+
+  // Dedicated PSDKU Group
+  const psdkuGroupData = useMemo(() => {
+    if (selectedFaculty !== 'all' && selectedFaculty !== 'psdku') {
+      // If a specific faculty like FT is selected, check if there are PSDKU programs under it
+      const facPsdku = filteredPrograms.filter(
+        (p) => isPsdku(p) && p.facultyId === selectedFaculty
+      );
+      if (facPsdku.length === 0) return null;
+      return facPsdku;
+    }
+    const psdkuList = filteredPrograms.filter((p) => isPsdku(p));
+    return psdkuList.length > 0 ? psdkuList : null;
+  }, [filteredPrograms, selectedFaculty]);
 
   const toggleFaculty = (facId: string) => {
     retroAudio.playBlip(550);
@@ -256,8 +294,8 @@ export function ProgramDirectoryClient({
             DAFTAR PROGRAM STUDI
           </h1>
           <p className="text-xs sm:text-sm text-amber-100/80 max-w-2xl mx-auto leading-relaxed">
-            Eksplorasi lengkap 67 program studi S1 & D4 di 12 Fakultas dan Sekolah UNDIP.
-            Dikelompokkan berdasarkan Fakultas dan Departemen resmi.
+            Eksplorasi lengkap {programs.length} program studi ({programs.filter(p => !isPsdku(p)).length} program studi di peringkat dan {programs.filter(p => isPsdku(p)).length} program PSDKU di daftar) di 12 Fakultas dan Sekolah UNDIP.
+            Dikelompokkan berdasarkan Fakultas, Departemen, dan Kampus PSDKU Luar Semarang.
           </p>
         </div>
 
@@ -296,7 +334,10 @@ export function ProgramDirectoryClient({
                 className="w-full bg-transparent text-xs text-amber-100 focus:outline-hidden cursor-pointer"
                 aria-label="Filter berdasarkan Fakultas"
               >
-                <option value="all" className="bg-[#1A0E08]">Semua Fakultas (12)</option>
+                <option value="all" className="bg-[#1A0E08]">Semua Fakultas & PSDKU ({programs.length})</option>
+                <option value="psdku" className="bg-[#1A0E08]">
+                  PSDKU (Kampus Luar Semarang) ({programs.filter(isPsdku).length})
+                </option>
                 {faculties.map((f) => (
                   <option key={f.id} value={f.id} className="bg-[#1A0E08]">
                     {f.name} ({f.shortName})
@@ -327,7 +368,7 @@ export function ProgramDirectoryClient({
                 <strong className="text-[#FDE68A] font-bold">
                   {filteredPrograms.length}
                 </strong>{' '}
-                prodi
+                prodi ({filteredPrograms.filter((p) => !isPsdku(p)).length} peringkat, {filteredPrograms.filter((p) => isPsdku(p)).length} PSDKU)
               </span>
               {(searchTerm || selectedFaculty !== 'all' || selectedDegree !== 'all') && (
                 <button
@@ -344,7 +385,7 @@ export function ProgramDirectoryClient({
         </div>
 
         {/* Empty State */}
-        {groupedData.length === 0 && (
+        {groupedData.length === 0 && (!psdkuGroupData || psdkuGroupData.length === 0) && (
           <div className="bg-[#1F120B] border-2 border-[#78350F] rounded-2xl p-8 sm:p-12 text-center space-y-4">
             <div className="w-14 h-14 rounded-2xl bg-[#140B07] border-2 border-[#78350F] flex items-center justify-center text-amber-400 mx-auto">
               <Layers className="w-7 h-7" />
@@ -449,6 +490,72 @@ export function ProgramDirectoryClient({
               </section>
             );
           })}
+
+          {/* Dedicated PSDKU Group: "PSDKU (Kampus Luar Semarang)" */}
+          {psdkuGroupData && (
+            <section
+              id="group-psdku"
+              className="bg-[#1F120B] border-2 border-amber-600/80 rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(0,0,0,0.4)] transition-all"
+            >
+              <button
+                onClick={() => toggleFaculty('psdku')}
+                aria-expanded={expandedFaculties['psdku'] ?? true}
+                className="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-[#2A160E] hover:bg-[#341A10] transition-colors cursor-pointer border-b border-amber-600/60 min-h-[56px]"
+              >
+                <div className="flex items-center gap-3 min-w-0 pr-2">
+                  <div className="w-8 h-8 rounded-xl bg-[#140B07] border border-[#F59E0B] flex items-center justify-center text-[#F59E0B] shrink-0">
+                    <MapPin className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h2 className="font-pixel text-xs sm:text-sm text-[#FDE68A] truncate">
+                        PSDKU (Kampus Luar Semarang)
+                      </h2>
+                      <span className="font-mono text-[10px] text-amber-300 font-bold bg-[#140B07] px-2 py-0.5 rounded border border-[#78350F] shrink-0">
+                        PSDKU
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-amber-200/80 truncate hidden sm:block mt-0.5 font-sans">
+                      Program Studi di Luar Kampus Utama (Pekalongan, Batang, Rembang) — Tidak ikut dalam peringkat kecocokan
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <span className="font-mono text-xs bg-[#140B07] text-[#FDE68A] px-2.5 py-1 rounded-full border border-amber-600 font-bold">
+                    {psdkuGroupData.length} Prodi
+                  </span>
+                  <div className="text-amber-400">
+                    {(expandedFaculties['psdku'] ?? true) ? (
+                      <ChevronDown className="w-5 h-5" />
+                    ) : (
+                      <ChevronRight className="w-5 h-5" />
+                    )}
+                  </div>
+                </div>
+              </button>
+
+              {(expandedFaculties['psdku'] ?? true) && (
+                <div className="p-4 sm:p-6 space-y-4 animate-in fade-in duration-200 bg-[#140B07]/50">
+                  <div className="bg-[#1A0E08] border border-amber-600/50 rounded-xl p-3 text-xs text-amber-200/90 flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>
+                      Program PSDKU berlokasi di kampus UNDIP di luar Semarang. Kurikulum dan ijazah resmi setara dengan Kampus Utama Semarang. Program PSDKU tidak ikut dalam peringkat kecocokan.
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    {psdkuGroupData.map((program) => (
+                      <ProgramCard
+                        key={program.id}
+                        program={program}
+                        faculty={facultyMap.get(program.facultyId)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
+          )}
         </div>
       </div>
     </div>
