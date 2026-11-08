@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { nextStepsData } from '@/data/nextSteps';
 import { programUKTList, ProgramUKT } from '@/data/ukt';
@@ -14,6 +15,7 @@ import {
   ShieldCheck,
   Info,
   CheckCircle2,
+  ArrowRight,
 } from 'lucide-react';
 
 interface UKTSectionProps {
@@ -283,7 +285,7 @@ export function UKTSection({ embedded = false }: UKTSectionProps) {
         </div>
 
         {/* 4. Ketentuan IPI & Subsidi Note */}
-        <div className="bg-[#2A160E] border border-amber-600/60 rounded-xl p-4 text-xs text-amber-200/90 space-y-2">
+        <div className="bg-[#2A160E] border border-amber-600/60 rounded-xl p-4 text-xs text-amber-200/90 space-y-2.5">
           <div className="flex items-center gap-2 font-bold text-[#FDE68A]">
             <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
             <span>Ketentuan Iuran Pengembangan Institusi (IPI)</span>
@@ -291,6 +293,19 @@ export function UKTSection({ embedded = false }: UKTSectionProps) {
           <p className="text-xs text-amber-100/80 leading-relaxed">
             {ukt.ipiNote}
           </p>
+          <div className="pt-2 border-t border-[#78350F]/60 flex items-center justify-between flex-wrap gap-2">
+            <span className="text-[11px] text-amber-200/80">
+              Rincian 4 sub-jalur UM, biaya registrasi & opsi pembebasan IPI:
+            </span>
+            <Link
+              href="/langkah-selanjutnya/jadwal-seleksi#jalur-um"
+              onClick={() => retroAudio.playSelect()}
+              className="inline-flex items-center gap-1.5 text-[#FDE68A] hover:text-[#F59E0B] font-mono text-xs font-bold underline underline-offset-4 transition-colors"
+            >
+              <span>Jalur UM & IPI</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
 
         {/* 5. Struktur 8 Golongan Umum */}

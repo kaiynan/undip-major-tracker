@@ -67,3 +67,9 @@ Untuk dapat menaikkan status data yang masih `pending` menjadi `official`, pemil
    - Pedoman Teknis / Panduan Pendaftaran KIP-Kuliah resmi dari Puslapdik Kemdikbudristek (mencakup kriteria desil ekonomi, batas pendapatan orang tua, dan pembagian klaster biaya hidup mahasiswa).
 4. **`departemen-<fakultas>.pdf` atau `departemen-<fakultas>.png`**:
    - Salinan Peraturan Rektor tentang Organisasi dan Tata Kelola (OTK) Fakultas atau struktur organisasi resmi fakultas di lingkungan UNDIP jika ingin menampilkan sub-pengelompokan departemen untuk Program Sarjana (FT, FSM, FEB, FISIP, FIB, FPP, FPIK, FK).
+5. **`biaya-pendaftaran-um-<tahun>.pdf`**:
+   - Dokumen keputusan resmi penetapan tarif pendaftaran Ujian Mandiri (UM SBUB, UM SNBT S1, UM S1, UM Vokasi). Saat ini berstatus `reference` berdasarkan keterangan panitia Roadshow 2026.
+6. **`ipi-undip-<tahun>.pdf`**:
+   - Keputusan Rektor tentang penetapan besaran Iuran Pengembangan Institusi (IPI) / Uang Pangkal per program studi jalur Ujian Mandiri.
+7. **`juknis-sktm-tidak-mampu-<tahun>.pdf`**:
+   - Petunjuk teknis dan syarat dokumen opsi "Tidak Mampu" untuk pembebasan IPI dan penetapan golongan UKT jalur Ujian Mandiri.

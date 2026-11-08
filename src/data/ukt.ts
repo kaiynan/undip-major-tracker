@@ -27,7 +27,7 @@ export interface ProgramUKT {
 }
 
 const SOURCE_FILE = 'docs/sources/Biaya-Pendidikan-Program-Sarjana-dan-Diploma4-SNBP-SNBT.pdf';
-const SOURCE_URL = 'https://pmb.undip.ac.id/biaya-pendidikan/';
+const SOURCE_URL = 'https://pmb.undip.ac.id/';
 const RETRIEVED_AT = '2026-01-14';
 const ACADEMIC_YEAR = '2026/2027';
 

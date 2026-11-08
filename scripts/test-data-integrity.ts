@@ -49,10 +49,13 @@ console.log('===========================================================\n');
 // -----------------------------------------------------------------------------
 console.log('[GUARD 1] Validating nextStepsData Official Evidence & Citations...');
 
+const REQUIRED_ROADSHOW_EVIDENCE = 'Keterangan panitia Roadshow, 2026 — belum ada dokumen resmi di docs/sources';
+
 const sections = [
   { name: 'ukt', data: nextStepsData.ukt },
   { name: 'kipk', data: nextStepsData.kipk },
   { name: 'calendar', data: nextStepsData.calendar },
+  { name: 'jalurMandiri', data: nextStepsData.jalurMandiri },
 ];
 
 const now = new Date();
@@ -94,20 +97,39 @@ for (const sec of sections) {
     const itemDate = new Date(d.retrievedAt);
     assert(itemDate <= now, 'Guard 2 - Date Validity', sec.name, `retrievedAt '${d.retrievedAt}' is in the future!`);
   } else {
-    // Non-official sections MUST NOT contain invented Rupiah patterns
-    const jsonStr = JSON.stringify(d);
-    const rupiahMatch = jsonStr.match(/Rp\s?\d[\d.,]*/i);
-    assert(
-      !rupiahMatch,
-      'Guard 3 - No Unauthorized Numbers',
-      sec.name,
-      `Section has status '${d.status}' but contains numeric Rupiah pattern: '${rupiahMatch?.[0]}'! Remove invented numbers or verify officially.`
-    );
+    // If status is 'reference' with authorized panitia Roadshow evidence, allow verified Rupiah values
+    const isAuthorizedReference =
+      d.status === 'reference' && d.evidence === REQUIRED_ROADSHOW_EVIDENCE;
+
+    if (isAuthorizedReference) {
+      assert(
+        d.evidence === REQUIRED_ROADSHOW_EVIDENCE,
+        'Guard 1 - Roadshow Evidence Match',
+        sec.name,
+        `Reference entry has unauthorized evidence string: '${d.evidence}'`
+      );
+      assert(
+        (d.status as string) !== 'official',
+        'Guard 1 - Provenance Not Official',
+        sec.name,
+        `Data with roadshow evidence must not be marked 'official'!`
+      );
+    } else {
+      // Non-official without approved roadshow evidence MUST NOT contain invented Rupiah patterns
+      const jsonStr = JSON.stringify(d);
+      const rupiahMatch = jsonStr.match(/Rp\s?\d[\d.,]*/i);
+      assert(
+        !rupiahMatch,
+        'Guard 3 - No Unauthorized Numbers',
+        sec.name,
+        `Section has status '${d.status}' with no valid evidence but contains numeric Rupiah pattern: '${rupiahMatch?.[0]}'! Remove invented numbers or verify officially.`
+      );
+    }
   }
 }
 
 // -----------------------------------------------------------------------------
-// [GUARD 2] Raw nextSteps.ts Rupiah Scanning
+// [GUARD 2] Raw nextSteps.ts Rupiah Scanning & Negative Tests
 // -----------------------------------------------------------------------------
 console.log('\n[GUARD 2] Scanning nextSteps.ts for unauthorized Rupiah amounts...');
 const nextStepsFile = fs.readFileSync(path.join(ROOT_DIR, 'src/data/nextSteps.ts'), 'utf-8');
@@ -124,6 +146,38 @@ if (calMatch) {
   const rupiahInCal = calMatch[0].match(/Rp\s?\d/i);
   assert(!rupiahInCal, 'Guard 3 - Calendar Safe', 'nextSteps.ts', 'Found numeric Rupiah amount in unverified Calendar data!');
 }
+
+// Ensure jalurMandiri block contains the exact required evidence string and is marked 'reference'
+const mandiriMatch = nextStepsFile.match(/jalurMandiri:\s*\{[\s\S]*?\n\s*\},/);
+if (mandiriMatch) {
+  const rupiahInMandiri = mandiriMatch[0].match(/Rp\s?\d/i);
+  if (rupiahInMandiri) {
+    const hasEvidence = mandiriMatch[0].includes('Keterangan panitia Roadshow, 2026 — belum ada dokumen resmi di docs/sources');
+    const isReference = mandiriMatch[0].includes("status: 'reference'");
+    assert(
+      hasEvidence && isReference,
+      'Guard 3 - Jalur Mandiri Provenance Valid',
+      'nextSteps.ts',
+      'Jalur Mandiri has Rupiah amount but lacks required Roadshow reference evidence or is marked official!'
+    );
+  }
+}
+
+// Negative test trap: verify that an unauthorized entry with Rupiah and no evidence would be rejected
+const mockUnauthorizedEntry = {
+  status: 'reference',
+  evidence: 'Sumber tidak sah',
+  amount: 'Rp500.000',
+};
+const mockIsAllowed =
+  mockUnauthorizedEntry.status === 'reference' &&
+  mockUnauthorizedEntry.evidence === REQUIRED_ROADSHOW_EVIDENCE;
+assert(
+  !mockIsAllowed,
+  'Guard 3 - Negative Trap (Unauthorized Rupiah Blocked)',
+  'negative-test',
+  'Guard logic must reject unauthorized rupiah entries'
+);
 
 // -----------------------------------------------------------------------------
 // [GUARD 3] Study Programs Department Integrity

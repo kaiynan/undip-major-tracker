@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { nextStepsData } from '@/data/nextSteps';
 import { admissionQuotas } from '@/data/quotas';
 import { StatusBadge } from './StatusBadge';
+import { JalurMandiriBlock } from './JalurMandiriBlock';
 import {
   Calendar,
   Clock,
@@ -187,6 +188,9 @@ export function CalendarSection({ embedded = false }: CalendarSectionProps) {
             </div>
           ))}
         </div>
+
+        {/* Jalur Ujian Mandiri UNDIP Block */}
+        <JalurMandiriBlock />
 
         {/* Verification & Official External Links */}
         <div className="pt-3 border-t border-[#78350F]/60 flex flex-wrap items-center justify-between gap-3 text-xs">

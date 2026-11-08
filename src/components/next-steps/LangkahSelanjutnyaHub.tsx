@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { retroAudio } from '@/lib/retroAudio';
+import { JalurMandiriBlock } from './JalurMandiriBlock';
 import {
   Banknote,
   GraduationCap,
@@ -120,6 +121,9 @@ export function LangkahSelanjutnyaHub() {
           );
         })}
       </div>
+
+      {/* 3. Jalur Ujian Mandiri UNDIP Block */}
+      <JalurMandiriBlock />
 
       {/* 3. Quick Link Back to Questionnaire */}
       <section className="bg-[#140B07] border-2 border-[#78350F] rounded-2xl p-5 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
