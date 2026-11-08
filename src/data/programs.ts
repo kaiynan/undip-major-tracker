@@ -16,7 +16,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-sipil',
     name: 'Teknik Sipil',
     facultyId: 'ft',
-    department: 'Departemen Teknik Sipil',
     degreeLevel: 'S1',
     description:
       'Mempelajari perencanaan, perancangan, konstruksi, dan manajemen infrastruktur seperti jembatan, jalan raya, bendungan, gedung bertingkat, serta pelabuhan yang tahan bencana.',
@@ -49,7 +48,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-arsitektur',
     name: 'Arsitektur',
     facultyId: 'ft',
-    department: 'Departemen Arsitektur',
     degreeLevel: 'S1',
     description:
       'Menggabungkan seni, teknologi rekayasa bangunan, dan ilmu lingkungan untuk merancang ruang huni, estetika bangunan, tata ruang kota, dan permukiman berkelanjutan.',
@@ -78,7 +76,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-kimia',
     name: 'Teknik Kimia',
     facultyId: 'ft',
-    department: 'Departemen Teknik Kimia',
     degreeLevel: 'S1',
     description:
       'Mempelajari konversi bahan mentah menjadi produk bernilai tinggi secara industri melalui proses kimiawi, fisika, termodinamika, perancangan reaktor, dan pemisahan energi.',
@@ -107,7 +104,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-mesin',
     name: 'Teknik Mesin',
     facultyId: 'ft',
-    department: 'Departemen Teknik Mesin',
     degreeLevel: 'S1',
     description:
       'Mempelajari prinsip mekanika, termofluida, perancangan mesin manufaktur, otomotif, konversi energi terbarukan, serta robotika dan material teknik.',
@@ -136,7 +132,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-elektro',
     name: 'Teknik Elektro',
     facultyId: 'ft',
-    department: 'Departemen Teknik Elektro',
     degreeLevel: 'S1',
     description:
       'Mempelajari sistem tenaga listrik, elektronika terintegrasi, telekomunikasi sinyal, sistem kendali cerdas, serta teknologi energi baru terbarukan.',
@@ -165,7 +160,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-pwk',
     name: 'Perencanaan Wilayah dan Kota (PWK)',
     facultyId: 'ft',
-    department: 'Departemen Perencanaan Wilayah dan Kota',
     degreeLevel: 'S1',
     description:
       'Mempelajari penataan ruang spasial perkotaan dan perdesaan, kebijakan tata guna lahan, transportasi publik, mitigasi bencana, serta pembangunan berkelanjutan.',
@@ -194,7 +188,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-industri',
     name: 'Teknik Industri',
     facultyId: 'ft',
-    department: 'Departemen Teknik Industri',
     degreeLevel: 'S1',
     description:
       'Mempelajari integrasi manusia, mesin, material, informasi, dan energi untuk mengoptimalkan sistem manufaktur dan rantai pasok industri secara efisien dan ergonomis.',
@@ -223,7 +216,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-lingkungan',
     name: 'Teknik Lingkungan',
     facultyId: 'ft',
-    department: 'Departemen Teknik Lingkungan',
     degreeLevel: 'S1',
     description:
       'Mempelajari teknologi penyediaan air minum, pengolahan limbah cair dan padat, pengendalian pencemaran udara, analisis dampak lingkungan (AMDAL), dan sanitasi lingkungan.',
@@ -252,7 +244,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-perkapalan',
     name: 'Teknik Perkapalan',
     facultyId: 'ft',
-    department: 'Departemen Teknik Perkapalan',
     degreeLevel: 'S1',
     description:
       'Mempelajari perancangan lambung kapal, hidrodinamika kelautan, sistem permesinan kapal, teknologi galangan, dan keselamatan transportasi laut maritim.',
@@ -281,7 +272,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-geologi',
     name: 'Teknik Geologi',
     facultyId: 'ft',
-    department: 'Departemen Teknik Geologi',
     degreeLevel: 'S1',
     description:
       'Mempelajari komposisi bumi, struktur batuan, eksplorasi minyak bumi, gas, mineral tambang, geotermal energi, serta mitigasi bencana geologi seperti gempa dan longsor.',
@@ -310,7 +300,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-geodesi',
     name: 'Teknik Geodesi',
     facultyId: 'ft',
-    department: 'Departemen Teknik Geodesi',
     degreeLevel: 'S1',
     description:
       'Mempelajari penentuan posisi dan bentuk bumi, pemetaan satelit GPS/GNSS, fotogrametri drone, penginderaan jauh, kadaster pertanahan, dan hidrografi kelautan.',
@@ -339,7 +328,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'ft-komputer',
     name: 'Teknik Komputer',
     facultyId: 'ft',
-    department: 'Departemen Teknik Komputer',
     degreeLevel: 'S1',
     description:
       'Mempelajari integrasi rekayasa perangkat keras dan lunak, sistem embedded, Internet of Things (IoT), jaringan komputer telekomunikasi, dan keamanan siber.',
@@ -372,7 +360,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fsm-matematika',
     name: 'Matematika',
     facultyId: 'fsm',
-    department: 'Departemen Matematika',
     degreeLevel: 'S1',
     description:
       'Mempelajari fondasi logika matematika murni dan terapan, kalkulus, aljabar linier, persamaan diferensial, pemodelan matematika sistem fisik/keuangan, dan optimasi.',
@@ -401,7 +388,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fsm-biologi',
     name: 'Biologi',
     facultyId: 'fsm',
-    department: 'Departemen Biologi',
     degreeLevel: 'S1',
     description:
       'Mempelajari biosains, keanekaragaman hayati, genetika molekuler, fisiologi tumbuhan dan hewan, mikrobiologi, ekologi konservasi, dan bioteknologi hayati.',
@@ -430,7 +416,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fsm-kimia',
     name: 'Kimia',
     facultyId: 'fsm',
-    department: 'Departemen Kimia',
     degreeLevel: 'S1',
     description:
       'Mempelajari struktur molekul, sintesis senyawa organik dan anorganik, kimia fisik materi, instrumen analisis spektroskopi/kromatografi, dan inovasi material maju.',
@@ -459,7 +444,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fsm-fisika',
     name: 'Fisika',
     facultyId: 'fsm',
-    department: 'Departemen Fisika',
     degreeLevel: 'S1',
     description:
       'Mempelajari hukum dasar alam semesta, mekanika kuantum, relativitas, fisika zat padat, optik laser, instrumentasi geofisika, dan fisika medis radiasi.',
@@ -488,7 +472,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fsm-statistika',
     name: 'Statistika',
     facultyId: 'fsm',
-    department: 'Departemen Matematika',
     degreeLevel: 'S1',
     description:
       'Mempelajari teori peluang, pemodelan statistik inferensial, perancangan survei/eksperimen, analisis deret waktu, machine learning data science, dan aktuaria bisnis.',
@@ -517,7 +500,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fsm-informatika',
     name: 'Informatika',
     facultyId: 'fsm',
-    department: 'Departemen Informatika',
     degreeLevel: 'S1',
     description:
       'Mempelajari rekayasa perangkat lunak modern, kecerdasan buatan (AI/Machine Learning), komputasi cloud, algoritma struktur data, keamanan siber, dan web/mobile dev.',
@@ -546,7 +528,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fsm-bioteknologi',
     name: 'Bioteknologi',
     facultyId: 'fsm',
-    department: 'Departemen Biologi',
     degreeLevel: 'S1',
     description:
       'Mempelajari pemanfaatan mikroba dan rekayasa genetika DNA untuk inovasi medis, pangan fungsional, bioremediasi lingkungan, dan bioindustri berkelanjutan.',
@@ -579,7 +560,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fk-kedokteran',
     name: 'Kedokteran',
     facultyId: 'fk',
-    department: 'Departemen Kedokteran',
     degreeLevel: 'S1',
     description:
       'Mempelajari anatomi tubuh manusia, fisiologi organ, patologi klinis penyakit, farmakoterapi, diagnosis medis, ketrampilan klinis, dan pelayanan kesehatan holistik.',
@@ -608,7 +588,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fk-keperawatan',
     name: 'Keperawatan',
     facultyId: 'fk',
-    department: 'Departemen Ilmu Keperawatan',
     degreeLevel: 'S1',
     description:
       'Mempelajari asuhan keperawatan profesional bagi pasien di rumah sakit dan komunitas, perawatan medikal bedah, gawat darurat, keperawatan anak, jiwa, dan maternitas.',
@@ -637,7 +616,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fk-gizi',
     name: 'Ilmu Gizi',
     facultyId: 'fk',
-    department: 'Departemen Ilmu Gizi',
     degreeLevel: 'S1',
     description:
       'Mempelajari hubungan asupan nutrisi pangan dengan kesehatan tubuh, terapi diet medis penyakit degeneratif, manajemen gizi institusi, dan penanganan stunting masyarakat.',
@@ -666,7 +644,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fk-farmasi',
     name: 'Farmasi',
     facultyId: 'fk',
-    department: 'Departemen Farmasi',
     degreeLevel: 'S1',
     description:
       'Mempelajari formulasi sediaan obat, farmakologi mekanisme obat, kimia medisinal sintesis bahan aktif obat herbal/sintetik, pengawasan mutu, dan pelayanan farmasi klinis.',
@@ -695,7 +672,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fk-kedokteran-gigi',
     name: 'Kedokteran Gigi',
     facultyId: 'fk',
-    department: 'Departemen Kedokteran Gigi',
     degreeLevel: 'S1',
     description:
       'Mempelajari anatomi oromaksilofasial, patologi penyakit gigi dan mulut, prosedur restorasi estetik, ortodonsia, bedah mulut minor, dan pencegahan karies gigi masyarakat.',
@@ -728,7 +704,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'feb-manajemen',
     name: 'Manajemen',
     facultyId: 'feb',
-    department: 'Departemen Manajemen',
     degreeLevel: 'S1',
     description:
       'Mempelajari pengelolaan organisasi bisnis, kepemimpinan strategis, manajemen pemasaran modern, manajemen keuangan korporasi, SDM, operasional, dan kewirausahaan inovatif.',
@@ -757,7 +732,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'feb-iesp',
     name: 'Ekonomi (IESP)',
     facultyId: 'feb',
-    department: 'Departemen Ilmu Ekonomi',
     degreeLevel: 'S1',
     description:
       'Mempelajari teori ekonomi makro-mikro, kebijakan fiskal dan moneter bank sentral, ekonometrika analisis data empiris, perdagangan internasional, dan pembangunan regional.',
@@ -786,7 +760,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'feb-akuntansi',
     name: 'Akuntansi',
     facultyId: 'feb',
-    department: 'Departemen Akuntansi',
     degreeLevel: 'S1',
     description:
       'Mempelajari penyusunan laporan keuangan berstandar IFRS, audit kepatuhan eksternal/internal, sistem informasi akuntansi digital, perpajakan, dan akuntansi manajemen biaya.',
@@ -815,7 +788,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'feb-ekonomi-islam',
     name: 'Ekonomi Islam',
     facultyId: 'feb',
-    department: 'Departemen Ilmu Ekonomi',
     degreeLevel: 'S1',
     description:
       'Mempelajari prinsip syariah dalam ekonomi, perbankan syariah, pasar modal syariah, manajemen zakat, infak, wakaf (ZISWAF), dan hukum muamalah bisnis Islam.',
@@ -844,7 +816,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'feb-bisnis-digital',
     name: 'Bisnis Digital',
     facultyId: 'feb',
-    department: 'Departemen Manajemen',
     degreeLevel: 'S1',
     description:
       'Mempelajari perancangan model bisnis digital, e-commerce analytics, product management startup, strategi adopsi AI dalam bisnis, fintech, dan customer journey digital.',
@@ -909,7 +880,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fisip-adm-publik',
     name: 'Administrasi Publik',
     facultyId: 'fisip',
-    department: 'Departemen Ilmu Administrasi Publik',
     degreeLevel: 'S1',
     description:
       'Mempelajari tata kelola birokrasi pemerintahan, formulasi dan evaluasi kebijakan publik, inovasi pelayanan publik digital (e-government), dan manajemen anggaran daerah.',
@@ -938,7 +908,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fisip-adm-bisnis',
     name: 'Administrasi Bisnis',
     facultyId: 'fisip',
-    department: 'Departemen Ilmu Administrasi Bisnis',
     degreeLevel: 'S1',
     description:
       'Mempelajari pengelolaan operasional niaga perusahaan, tata kelola korporasi, strategi ekspansi bisnis global, kewirausahaan rintisan, dan rantai distribusi komersial.',
@@ -967,7 +936,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fisip-pemerintahan',
     name: 'Ilmu Pemerintahan',
     facultyId: 'fisip',
-    department: 'Departemen Politik dan Pemerintahan',
     degreeLevel: 'S1',
     description:
       'Mempelajari dinamika kekuasaan negara, demokrasi elektoral, otonomi daerah dan desentralisasi, tata hubungan legislatif-eksekutif, dan resolusi konflik politik.',
@@ -996,7 +964,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fisip-komunikasi',
     name: 'Ilmu Komunikasi',
     facultyId: 'fisip',
-    department: 'Departemen Ilmu Komunikasi',
     degreeLevel: 'S1',
     description:
       'Mempelajari produksi konten media massa, penyiaran televisi/radio, jurnalisme investigasi, public relations korporasi, strategi periklanan kreatif, dan media sosial.',
@@ -1025,7 +992,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fisip-hi',
     name: 'Hubungan Internasional',
     facultyId: 'fisip',
-    department: 'Departemen Hubungan Internasional',
     degreeLevel: 'S1',
     description:
       'Mempelajari diplomasi antarnegara, negosiasi geopolitik global, keamanan transnasional, ekonomi politik global, hukum internasional, dan organisasi multilateral (PBB, ASEAN).',
@@ -1058,7 +1024,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fib-sastra-indonesia',
     name: 'Sastra Indonesia',
     facultyId: 'fib',
-    department: 'Departemen Sastra Indonesia',
     degreeLevel: 'S1',
     description:
       'Mempelajari linguistik bahasa Indonesia, apresiasi dan kritik karya sastra puisi/prosa/drama, filologi naskah kuno nusantara, penyuntingan naskah, dan penulisan kreatif.',
@@ -1087,7 +1052,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fib-sastra-inggris',
     name: 'Sastra Inggris',
     facultyId: 'fib',
-    department: 'Departemen Sastra Inggris',
     degreeLevel: 'S1',
     description:
       'Mempelajari linguistik bahasa Inggris, sastra dan kebudayaan Barat, penerjemahan dokumen resmi dan karya sastra (translation & interpreting), serta komunikasi profesional global.',
@@ -1116,7 +1080,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fib-sejarah',
     name: 'Sejarah',
     facultyId: 'fib',
-    department: 'Departemen Sejarah',
     degreeLevel: 'S1',
     description:
       'Mempelajari rekonstruksi peristiwa masa lampau, metodologi kritik sumber sejarah (arsip kolonial, lisan), sejarah maritim Indonesia, sejarah diplomasi, dan historiografi kritis.',
@@ -1145,7 +1108,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fib-perpustakaan',
     name: 'Ilmu Perpustakaan',
     facultyId: 'fib',
-    department: 'Departemen Ilmu Informasi dan Perpustakaan',
     degreeLevel: 'S1',
     description:
       'Mempelajari pengelolaan informasi digital, arsitektur data perpustakaan, digital archiving, kurasi metadata katalog, dan literasi informasi masyarakat modern.',
@@ -1174,7 +1136,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fib-bahasa-jepang',
     name: 'Bahasa dan Kebudayaan Jepang',
     facultyId: 'fib',
-    department: 'Departemen Bahasa dan Kebudayaan Jepang',
     degreeLevel: 'S1',
     description:
       'Mempelajari kemahiran bahasa Jepang tingkat lanjut (JLPT N2/N1), linguistik, sastra, budaya kerja korporasi Jepang, penerjemahan, dan hubungan sosial budaya Jepang-Indonesia.',
@@ -1203,7 +1164,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fib-antropologi',
     name: 'Antropologi Sosial',
     facultyId: 'fib',
-    department: 'Departemen Antropologi Sosial',
     degreeLevel: 'S1',
     description:
       'Mempelajari keanekaragaman etnis suku bangsa, sistem kekerabatan, religi ritual tradisional, perubahan budaya masyarakat maritim-pedesaan, dan metode etnografi partisipatif.',
@@ -1296,7 +1256,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpik-akuakultur',
     name: 'Akuakultur',
     facultyId: 'fpik',
-    department: 'Departemen Akuakultur',
     degreeLevel: 'S1',
     description:
       'Mempelajari teknologi budidaya biota perairan (ikan, udang, rumput laut), formulasi pakan nutrisi ikan, genetika pembenihan unggul, dan manajemen kualitas air tambak modern.',
@@ -1325,7 +1284,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpik-msp',
     name: 'Manajemen Sumberdaya Perairan',
     facultyId: 'fpik',
-    department: 'Departemen Manajemen Sumberdaya Perairan',
     degreeLevel: 'S1',
     description:
       'Mempelajari konservasi ekosistem perairan darat dan pesisir (mangrove, terumbu karang), dinamika populasi ikan, penilaian daya dukung lingkungan perairan, dan AMDAL perairan.',
@@ -1354,7 +1312,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpik-thp',
     name: 'Teknologi Hasil Perikanan',
     facultyId: 'fpik',
-    department: 'Departemen Teknologi Hasil Perikanan',
     degreeLevel: 'S1',
     description:
       'Mempelajari penanganan pascapanen ikan, biokimia pembusukan hasil laut, inovasi produk olahan pangan perikanan nilai tambah, ekstraksi senyawa bioaktif laut, dan HACCP keamanan pangan.',
@@ -1383,7 +1340,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpik-psp',
     name: 'Pemanfaatan Sumberdaya Perikanan',
     facultyId: 'fpik',
-    department: 'Departemen Perikanan Tangkap',
     degreeLevel: 'S1',
     description:
       'Mempelajari teknologi kapal penangkap ikan ramah lingkungan, oseanografi perikanan daerah penangkapan (fishing ground), navigasi radar sonar, dan manajemen pelabuhan perikanan samudera.',
@@ -1412,7 +1368,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpik-kelautan',
     name: 'Ilmu Kelautan',
     facultyId: 'fpik',
-    department: 'Departemen Ilmu Kelautan',
     degreeLevel: 'S1',
     description:
       'Mempelajari biosains laut dalam, ekologi terumbu karang tropis, bioteknologi laut mikroalga, pemetaan habitat bentik bawah air (scuba diving ilmiah), dan mitigasi perubahan iklim laut.',
@@ -1441,7 +1396,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpik-oseanografi',
     name: 'Oseanografi',
     facultyId: 'fpik',
-    department: 'Departemen Oseanografi',
     degreeLevel: 'S1',
     description:
       'Mempelajari dinamika arus laut, gelombang tsunami, pasang surut, interaksi laut-atmosfer badai siklon tropis, pemodelan numerik sirkulasi samudra, dan geologi laut dalam.',
@@ -1474,7 +1428,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpp-peternakan',
     name: 'Peternakan',
     facultyId: 'fpp',
-    department: 'Departemen Peternakan',
     degreeLevel: 'S1',
     description:
       'Mempelajari pemuliaan genetika ternak ruminansia/unggas, formulasi ransum pakan ternak bernutrisi tinggi, teknologi reproduksi inseminasi buatan, dan manajemen industri peternakan komersial.',
@@ -1503,7 +1456,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpp-tek-pangan',
     name: 'Teknologi Pangan',
     facultyId: 'fpp',
-    department: 'Departemen Teknologi Pangan',
     degreeLevel: 'S1',
     description:
       'Mempelajari sifat kimia-fisika bahan pangan, pengolahan pengawetan pangan industri, fermentasi makanan, mikrobiologi keamanan pangan, analisis sensori, dan kemasan pangan modern.',
@@ -1532,7 +1484,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpp-agroekotek',
     name: 'Agroekoteknologi',
     facultyId: 'fpp',
-    department: 'Departemen Pertanian',
     degreeLevel: 'S1',
     description:
       'Mempelajari budidaya tanaman hortikultura/perkebunan presisi, kesuburan tanah dan nutrisi hara, pengendalian hama penyakit terpadu (PHT), bioteknologi pemuliaan benih, dan smart farming.',
@@ -1561,7 +1512,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'fpp-agribisnis',
     name: 'Agribisnis',
     facultyId: 'fpp',
-    department: 'Departemen Pertanian',
     degreeLevel: 'S1',
     description:
       'Mempelajari rantai pasok komoditas pertanian dari hulu ke hilir, manajemen finansial usaha tani, pemasaran digital produk organik, kebijakan ketahanan pangan, dan kewirausahaan agropreneur.',
@@ -1627,6 +1577,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Teknologi Rekayasa Kimia Industri',
     facultyId: 'sv',
     department: 'Departemen Teknologi Industri',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 1.1)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada pengoperasian unit proses pabrik kimia skala penuh, sintesis polimer dan bioproduk terapan, trouble-shooting instrumen perpipaan, dan kontrol proses kimia.',
@@ -1656,6 +1608,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Rekayasa Perancangan Mekanik',
     facultyId: 'sv',
     department: 'Departemen Teknologi Industri',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 1.2)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada gambar teknik 3D modeling mekanik (SolidWorks/Inventor), fabrikasi manufaktur mesin presisi (mesin bubut CNC, milling), dan perakitan mesin industri.',
@@ -1685,6 +1639,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Teknologi Rekayasa Otomasi',
     facultyId: 'sv',
     department: 'Departemen Teknologi Industri',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 1.3)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada pemrograman Programmable Logic Controller (PLC), sistem SCADA monitoring industri, robotika perakitan manufaktur, dan sensorik cerdas mekatronika.',
@@ -1714,6 +1670,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Teknik Infrastruktur Sipil dan Perancangan Arsitektur (TISPA)',
     facultyId: 'sv',
     department: 'Departemen Sipil dan Perencanaan',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 2.2)',
     degreeLevel: 'D4',
     campusLocation: 'Semarang (Tembalang)',
     description:
@@ -1744,6 +1702,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Teknologi Rekayasa Konstruksi Perkapalan',
     facultyId: 'sv',
     department: 'Departemen Teknologi Industri',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 1.4)',
     degreeLevel: 'D4',
     campusLocation: 'Semarang (Tembalang)',
     description:
@@ -1774,6 +1734,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Teknik Listrik Industri',
     facultyId: 'sv',
     department: 'Departemen Teknologi Industri',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 1.5)',
     degreeLevel: 'D4',
     campusLocation: 'Semarang (Tembalang)',
     description:
@@ -1804,6 +1766,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Perencanaan Tata Ruang dan Pertanahan',
     facultyId: 'sv',
     department: 'Departemen Sipil dan Perencanaan',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 2.1)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada pemetaan kadaster pendaftaran tanah (BPN), survei drone fotogrametri lahan, penyusunan peta rencana detail zonasi kabupaten/kota, dan hukum agraria terapan.',
@@ -1833,6 +1797,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Akuntansi Perpajakan',
     facultyId: 'sv',
     department: 'Departemen Bisnis dan Keuangan',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 3.1)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada penghitungan Surat Pemberitahuan (SPT) masa dan tahunan, aplikasi e-Faktur dan e-Bupot kantor pajak, audit kepatuhan pajak korporasi, dan pembukuan akuntansi terapan.',
@@ -1862,6 +1828,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Manajemen dan Administrasi Logistik',
     facultyId: 'sv',
     department: 'Departemen Bisnis dan Keuangan',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 3.2)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada tata kelola pergudangan (Warehouse Management System), manajemen armada distribusi kargo, kepabeanan ekspor-impor, dan operasional pengadaan logistik.',
@@ -1891,6 +1859,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Informasi dan Hubungan Masyarakat',
     facultyId: 'sv',
     department: 'Departemen Informasi dan Budaya',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 4.2)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada produksi konten media promosi kehumasan instansi/perusahaan, master of ceremonies (MC), pengelolaan media sosial, media relations, dan protokoler acara.',
@@ -1920,6 +1890,8 @@ export const studyPrograms: StudyProgram[] = [
     name: 'Bahasa Asing Terapan',
     facultyId: 'sv',
     department: 'Departemen Informasi dan Budaya',
+    departmentSourceUrl: 'docs/sources/SK-NO-41-TENTANG-PENETAPAN-DAYA-TAMPUNG-VOKASI-DAN-SARJANA-TAHUN-2026-2027.pdf',
+    departmentEvidence: 'SK Rektor UNDIP No. 41/UN7.A/HK/I/2026, Lampiran I (No. 4.1)',
     degreeLevel: 'D4',
     description:
       'Program sarjana terapan yang fokus pada kemahiran bahasa Inggris dan bahasa Mandarin/Jepang untuk korespondensi bisnis internasional, pemandu wisata inbound, dan penjurubahasaan terapan.',
@@ -1948,7 +1920,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'psdku-agribisnis-batang',
     name: 'Agribisnis (Kampus Batang)',
     facultyId: 'fpp',
-    department: 'Departemen Pertanian',
     degreeLevel: 'S1',
     campusLocation: 'Batang (PSDKU)',
     description:
@@ -1978,7 +1949,6 @@ export const studyPrograms: StudyProgram[] = [
     id: 'psdku-adm-publik-rembang',
     name: 'Administrasi Publik (Kampus Rembang)',
     facultyId: 'fisip',
-    department: 'Departemen Ilmu Administrasi Publik',
     degreeLevel: 'S1',
     campusLocation: 'Rembang (PSDKU)',
     description:
