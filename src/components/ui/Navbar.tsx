@@ -8,7 +8,7 @@ import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { retroAudio } from '@/lib/retroAudio';
 
 interface NavItem {
-  id: 'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'hasil' | 'admin';
+  id: 'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'admin';
   label: string;
   href: string;
 }
@@ -18,7 +18,6 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'cara-kerja', label: 'CARA KERJA', href: '/#cara-kerja' },
   { id: 'tentang-kami', label: 'TENTANG KAMI', href: '/#tentang-kami' },
   { id: 'jelajahi', label: 'DAFTAR PROGRAM STUDI', href: '/program-studi' },
-  { id: 'hasil', label: 'HASIL MATCH', href: '/results' },
   { id: 'admin', label: 'ALGORITMA HMIM', href: '/admin' },
 ];
 
@@ -72,9 +71,9 @@ export function Navbar() {
     }
   };
 
-  const getInitialActive = (path: string): 'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'hasil' | 'admin' => {
+  const getInitialActive = (path: string): 'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'admin' | null => {
     if (path === '/program-studi' || path.startsWith('/program/')) return 'jelajahi';
-    if (path === '/results') return 'hasil';
+    if (path === '/results') return null;
     if (path === '/admin') return 'admin';
     if (typeof window !== 'undefined' && window.location.hash) {
       const hash = window.location.hash.replace('#', '');
@@ -85,7 +84,7 @@ export function Navbar() {
     return 'beranda';
   };
 
-  const [activeSection, setActiveSection] = useState<'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'hasil' | 'admin'>(() => getInitialActive(pathname));
+  const [activeSection, setActiveSection] = useState<'beranda' | 'cara-kerja' | 'tentang-kami' | 'jelajahi' | 'admin' | null>(() => getInitialActive(pathname));
 
   // Handle active navigation state on homepage scroll
   useEffect(() => {
