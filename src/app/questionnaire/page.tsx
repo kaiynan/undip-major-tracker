@@ -3,7 +3,9 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { questions } from '@/data/questions';
+import { studyPrograms } from '@/data/programs';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
+import { PdfExportButton } from '@/components/results/PdfExportButton';
 import { QuestionCard } from '@/components/questionnaire/QuestionCard';
 import { QuestionOverviewModal } from '@/components/questionnaire/QuestionOverviewModal';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
@@ -62,6 +64,9 @@ export default function QuestionnairePage() {
     totalQuestions,
     isComplete,
     hydrated,
+    programScores,
+    facultyScores,
+    userSummary,
   } = useQuestionnaire();
 
   // Lazy initialize currentIndex to the first unanswered question from storage if resuming
@@ -460,16 +465,25 @@ export default function QuestionnairePage() {
 
           <div className="w-full sm:w-auto">
             {isComplete ? (
-              <button
-                onClick={handleSubmit}
-                disabled={isGallopingAway}
-                aria-label="Lihat hasil rekomendasi program studi (seluruh 36 pertanyaan telah terisi)"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#059669] hover:bg-[#047857] text-white font-extrabold px-7 py-3.5 rounded-2xl shadow-md hover:shadow-lg border-2 border-[#6EE7B7] transition-all text-sm cursor-pointer disabled:opacity-75 min-h-[44px]"
-              >
-                <CheckCircle2 className="w-4 h-4 text-[#6EE7B7]" />
-                <span>Lihat Hasil Rekomendasi (36/36 Terisi)</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+              <div className="flex flex-col sm:flex-row items-center gap-2.5 w-full sm:w-auto">
+                <button
+                  onClick={handleSubmit}
+                  disabled={isGallopingAway}
+                  aria-label="Lihat hasil rekomendasi program studi (seluruh 36 pertanyaan telah terisi)"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#059669] hover:bg-[#047857] text-white font-extrabold px-6 py-3.5 rounded-2xl shadow-md hover:shadow-lg border-2 border-[#6EE7B7] transition-all text-sm cursor-pointer disabled:opacity-75 min-h-[44px]"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-[#6EE7B7]" />
+                  <span>Lihat Hasil (36/36)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+                <PdfExportButton
+                  programScores={programScores}
+                  facultyScores={facultyScores}
+                  programs={studyPrograms}
+                  userSummary={userSummary}
+                  variant="primary"
+                />
+              </div>
             ) : (
               <button
                 onClick={handleSubmit}

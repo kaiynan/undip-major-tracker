@@ -10,6 +10,7 @@ import { AllMajorTierList } from '@/components/results/AllMajorTierList';
 import { FacultyTierList } from '@/components/results/FacultyTierList';
 import { ProgramComparisonModal } from '@/components/results/ProgramComparisonModal';
 import { ShareModal } from '@/components/results/ShareModal';
+import { PdfExportButton } from '@/components/results/PdfExportButton';
 import { IncompleteQuestionnaireModal } from '@/components/modals/IncompleteQuestionnaireModal';
 import { RetakeConfirmModal } from '@/components/modals/RetakeConfirmModal';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
@@ -369,8 +370,17 @@ export default function ResultsPage() {
             data-testid="btn-bagikan-hasil"
           >
             <Share2 className="w-4 h-4 text-[#F59E0B]" />
-            <span className="hidden sm:inline text-xs font-bold font-pixel">Bagikan Hasil</span>
+            <span className="hidden sm:inline text-xs font-bold font-pixel">Bagikan</span>
           </button>
+
+          {/* PDF Export Button (Compact Header) */}
+          <PdfExportButton
+            programScores={programScores}
+            facultyScores={facultyScores}
+            programs={studyPrograms}
+            userSummary={userSummary}
+            variant="compact"
+          />
 
           {/* Retake Questionnaire Button */}
           <button
@@ -485,6 +495,14 @@ export default function ResultsPage() {
                 <Share2 className="w-3.5 h-3.5 text-[#F59E0B]" />
                 <span>Bagikan Hasil</span>
               </button>
+
+              <PdfExportButton
+                programScores={programScores}
+                facultyScores={facultyScores}
+                programs={studyPrograms}
+                userSummary={userSummary}
+                className="flex-1"
+              />
             </div>
 
             {/* In-Panel Output Switcher Tabs */}
