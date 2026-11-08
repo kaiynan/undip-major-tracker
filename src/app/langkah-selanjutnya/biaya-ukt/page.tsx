@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import React, { Suspense } from 'react';
 import { UKTSection } from '@/components/next-steps/UKTSection';
+import { APP_NAME } from '@/config/brand';
 
 export const metadata: Metadata = {
-  title: 'Biaya Kuliah (UKT) — UNDIP Major Matcher 2027',
+  title: `Biaya Kuliah (UKT) — ${APP_NAME} 2027`,
   description:
     'Rincian besaran Uang Kuliah Tunggal (UKT) resmi Golongan 1 s.d. 8 per program studi Universitas Diponegoro TA 2026/2027.',
 };

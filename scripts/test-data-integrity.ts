@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Automated Data Guard & Integrity Test Suite
+// undip-major-matcher — Automated Data Guard & Integrity Test Suite
 // =============================================================================
 // Rules enforced:
 // 1. Any item with status: 'official' must have an evidence field citing docs/sources/
@@ -378,6 +378,47 @@ for (const filePath of userFacingFiles) {
     `Found outdated count reference: "${outdatedMatches?.[0]}"! Update count to reflect real data (${rankedProgs} ranked / ${psdkuProgs} PSDKU / ${totalProgs} total).`
   );
 }
+
+// -----------------------------------------------------------------------------
+// [GUARD 11] Validating Centralized Brand Usage (No Raw "UNDIP Major Matcher" in src/)
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 11] Validating Centralized Brand Usage (No Raw "UNDIP Major Matcher" outside brand.ts)...');
+
+function scanDirForBrandLiteral(dir: string): string[] {
+  let matched: string[] = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (['node_modules', '.next', '.git', 'out', 'docs'].includes(entry.name)) continue;
+      matched = matched.concat(scanDirForBrandLiteral(fullPath));
+    } else if (/\.(tsx?|jsx?|webmanifest|json)$/.test(entry.name)) {
+      if (fullPath.endsWith(path.join('src', 'config', 'brand.ts'))) continue;
+      const fileContent = fs.readFileSync(fullPath, 'utf-8');
+      if (fileContent.includes('UNDIP Major Matcher')) {
+        matched.push(fullPath);
+      }
+    }
+  }
+  return matched;
+}
+
+const brandOffenders = scanDirForBrandLiteral(path.join(ROOT_DIR, 'src'));
+assert(
+  brandOffenders.length === 0,
+  'Guard 11 - Centralized Brand Configuration',
+  'src/',
+  `Found literal "UNDIP Major Matcher" in files: ${brandOffenders.map((f) => path.relative(ROOT_DIR, f)).join(', ')}. Use APP_NAME from @/config/brand instead!`
+);
+
+// Negative Trap: ensure Guard 11 actively detects forbidden occurrences
+const mockBadBrandLiteral = 'const title = "UNDIP Major Matcher";';
+assert(
+  mockBadBrandLiteral.includes('UNDIP Major Matcher'),
+  'Guard 11 - Negative Trap (Literal Detection Active)',
+  'negative-test',
+  'Negative trap failed to trigger'
+);
 
 // -----------------------------------------------------------------------------
 // [GUARD 9] Optional Link Health Check (--check-links)

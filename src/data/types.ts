@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Core Type Definitions
+// undip-major-matcher — Core Type Definitions
 // =============================================================================
 // Semua interface dan tipe data yang digunakan di seluruh aplikasi.
 // =============================================================================

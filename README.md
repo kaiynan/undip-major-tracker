@@ -1,8 +1,10 @@
-# UNDIP Major Matcher — Find Your Future at UNDIP
+# UNDIP Major Matcher — Find Your Potential, Define Your Next Move
 
 Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis **Hybrid Multi-Dimensional Interest Matching (HMIM)** untuk siswa SMA/SMK/MA.
+Diselenggarakan dalam rangka **Roadshow Sedulur Serang Diponegoro 2027 — Unlock The Unseen**.
 
-> **Tagline:** *"Find Your Future at UNDIP."*  
+> **Tagline:** *"Find Your Potential, Define Your Next Move"*  
+> **Tema:** *"Roadshow Sedulur Serang Diponegoro 2027 — Unlock The Unseen"*  
 > **Disclaimer:** Aplikasi ini adalah instrumen eksplorasi minat akademik dan rekomendasi prodi, **bukan diagnosis psikologis klinis atau penentu kelulusan seleksi masuk PTN**.
 
 ---
@@ -20,10 +22,10 @@ Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP)
    - Tier klasifikasi: **S** (85–100, Sangat Cocok), **A** (75–84.9, Rekomendasi Utama), **B** (65–74.9, Cukup Cocok), **C** (50–64.9, Potensi Alternatif), **D** (0–49.9, Eksplorasi Alternatif). Label Tier D menggunakan pendekatan suportif disertai penjelasan *"Bukan berarti tidak bisa — jelajahi alasan dan pilihan lainnya."*
    - Perumusan skor agregat fakultas: $Score_F = \frac{S_1 + S_2 + S_3}{n}$ (rata-rata 3 prodi tertinggi).
    - **Critical Consistency Rule:** Skor dan tier setiap prodi 100% identik di View 1 (*All Major Tier List*) dan View 2 (*Faculty Tier List*).
-3. **Database Resmi 67 Program Studi Terverifikasi:**
-   - 54 Program Sarjana (S1) Kampus Utama.
+3. **Database Resmi 70 Program Studi Terverifikasi:**
+   - 54 Program Sarjana (S1) Kampus Utama Semarang.
    - 11 Program Sarjana Terapan (D4) Sekolah Vokasi (termasuk TISPA, TRKP, TLI, TRKI, RPM, dll.).
-   - 2 Program Sarjana (S1) PSDKU (Agribisnis Batang & Administrasi Publik Rembang).
+   - 5 Program PSDKU (PWK Pekalongan, Teknik Industri Batang, Agribisnis Batang, Informatika Rembang, Administrasi Publik Rembang). Program PSDKU disajikan pada direktori prodi khusus dan dikecualikan dari pemeringkatan kuesioner.
 4. **Integrasi Daya Tampung Resmi (SNBP, SNBT, Mandiri):**
    - Kuota kursi resmi tahun akademik 2026/2027 per jalur seleksi (SK Rektor No. 41/2026).
    - Visualisasi proporsi jalur dan perbandingan kuota tanpa mengubah skor minat HMIM.
@@ -123,7 +125,7 @@ npm run serve:out
 2. Instal Capacitor CLI & platform yang diinginkan:
    ```bash
    npm install @capacitor/core @capacitor/cli @capacitor/android
-   npx cap init "UNDIP Major Matcher" "id.ac.undip.majormatcher" --web-dir out
+   npx cap init "UNDIP Matcher" "id.ac.undip.majormatcher" --web-dir out
    npx cap add android
    npx cap sync
    npx cap open android

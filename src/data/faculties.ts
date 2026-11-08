@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Data Fakultas / Sekolah
+// undip-major-matcher — Data Fakultas / Sekolah
 // =============================================================================
 // Data semua fakultas dan sekolah di Universitas Diponegoro.
 // Status: provisional — belum diverifikasi dari sumber resmi.

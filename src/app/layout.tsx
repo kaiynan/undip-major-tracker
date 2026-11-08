@@ -7,6 +7,7 @@ import { Footer } from '@/components/ui/Footer';
 import { MobileBottomNav } from '@/components/ui/MobileBottomNav';
 import { PwaRegistrar } from '@/components/ui/PwaRegistrar';
 import { Suspense } from 'react';
+import { APP_NAME, APP_NAME_SHORT, TAGLINE, EVENT_NAME, SITE_URL } from '@/config/brand';
 
 const geistSans = localFont({
   src: '../../public/fonts/geist-sans.woff2',
@@ -29,14 +30,22 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'UNDIP Major Matcher — Find Your Future at UNDIP',
+  title: `${APP_NAME} — ${TAGLINE}`,
   description:
-    'Platform rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis Hybrid Multi-Dimensional Interest Matching (HMIM) untuk siswa SMA/SMK/MA.',
+    `Platform rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis Hybrid Multi-Dimensional Interest Matching (HMIM) untuk siswa SMA/SMK/MA. ${EVENT_NAME}.`,
   manifest: '/manifest.webmanifest',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'UNDIP Matcher',
+    title: APP_NAME_SHORT,
+  },
+  openGraph: {
+    title: `${APP_NAME} — ${TAGLINE}`,
+    description: `Temukan jurusan impian di Universitas Diponegoro melalui ${APP_NAME}. ${TAGLINE}.`,
+    url: SITE_URL,
+    siteName: APP_NAME,
+    locale: 'id_ID',
+    type: 'website',
   },
   icons: {
     icon: '/icons/icon.svg',

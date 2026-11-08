@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { WifiOff, RefreshCw, Home, Trophy } from 'lucide-react';
+import { APP_NAME } from '@/config/brand';
 
 export default function OfflinePage() {
   const handleReload = () => {
@@ -54,7 +55,7 @@ export default function OfflinePage() {
         </div>
 
         <div className="mt-6 pt-4 border-t border-slate-100 text-[11px] text-slate-400">
-          Aplikasi ini mendukung Progressive Web App (PWA) untuk akses cepat dan hemat kuota.
+          {APP_NAME} mendukung Progressive Web App (PWA) untuk akses cepat dan hemat kuota.
         </div>
       </div>
     </div>

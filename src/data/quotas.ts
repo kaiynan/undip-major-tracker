@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Database Daya Tampung & Kuota Penerimaan Mahasiswa Baru
+// undip-major-matcher — Database Daya Tampung & Kuota Penerimaan Mahasiswa Baru
 // =============================================================================
 // Berdasarkan Keputusan Rektor Universitas Diponegoro Nomor: 41/UN7.A/HK/I/2026
 // tentang Penetapan Daya Tampung Penerimaan Mahasiswa Baru Program Vokasi

@@ -3,9 +3,10 @@ import type { Metadata } from 'next';
 import { faculties } from '@/data/faculties';
 import { studyPrograms } from '@/data/programs';
 import { ProgramDirectoryClient } from '@/components/program/ProgramDirectoryClient';
+import { APP_NAME } from '@/config/brand';
 
 export const metadata: Metadata = {
-  title: 'Daftar Program Studi S1 & D4 Universitas Diponegoro | UNDIP Major Matcher',
+  title: `Daftar Program Studi S1 & D4 Universitas Diponegoro | ${APP_NAME}`,
   description:
     'Eksplorasi lengkap 70 program studi (65 program studi di peringkat dan 5 program PSDKU di daftar) Sarjana (S1) dan Sarjana Terapan (D4) di 12 Fakultas dan Sekolah Universitas Diponegoro (UNDIP) dengan daya tampung resmi, CPL, dan prospek karir.',
   keywords: [

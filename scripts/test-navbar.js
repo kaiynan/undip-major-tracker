@@ -95,6 +95,44 @@ async function runNavbarTests() {
         }
       }
 
+      // Stress test: brand name up to ~22 chars at viewports <= 430px
+      console.log(`  🔍 Testing ~22 character brand name stress test at <= 430px on ${route}...`);
+      for (const mobileWidth of [320, 360, 390, 430]) {
+        await page.setViewportSize({ width: mobileWidth, height: 800 });
+        await page.waitForTimeout(50);
+        totalChecks++;
+
+        const stressResult = await page.evaluate(() => {
+          const brandText = document.querySelector('[data-testid="navbar-brand-text"]');
+          if (!brandText) return { error: 'No brandText' };
+
+          // Injected ~22 char name in mobile stack: "UNDIP" + "MAJOR MATCHER 2027"
+          const mobileSpans = brandText.querySelectorAll('.navbar-brand-mobile span');
+          if (mobileSpans.length >= 2) {
+            mobileSpans[0].textContent = 'UNDIP';
+            mobileSpans[1].textContent = 'MAJOR MATCHER 2027';
+          }
+
+          const hasOverflow = document.documentElement.scrollWidth > window.innerWidth;
+          let brandTruncated = false;
+          const spans = Array.from(brandText.querySelectorAll('span, p')).filter((el) => {
+            const style = window.getComputedStyle(el);
+            return style.display !== 'none' && style.visibility !== 'hidden' && el.offsetWidth > 0;
+          });
+          brandTruncated = spans.some((s) => s.scrollWidth > s.clientWidth + 1);
+          return { hasOverflow, brandTruncated };
+        });
+
+        if (stressResult.hasOverflow) {
+          console.error(`❌ [${route} @ ${mobileWidth}px with 22-char brand] Horizontal overflow!`);
+          failures++;
+        }
+        if (stressResult.brandTruncated) {
+          console.error(`❌ [${route} @ ${mobileWidth}px with 22-char brand] Brand truncated!`);
+          failures++;
+        }
+      }
+
       await context.close();
       console.log(`  ✓ Route ${route} completed across all 113 viewport widths (320px - 2560px)`);
     }

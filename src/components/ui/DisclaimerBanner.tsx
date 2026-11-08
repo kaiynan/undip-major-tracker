@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AlertCircle, ChevronDown, ChevronUp, Compass } from 'lucide-react';
+import { APP_NAME } from '@/config/brand';
 
 interface DisclaimerBannerProps {
   compact?: boolean;
@@ -38,7 +39,7 @@ export function DisclaimerBanner({ compact = false }: DisclaimerBannerProps) {
           </div>
 
           <p className="mt-1 text-xs text-amber-200/80 leading-relaxed">
-            UNDIP Major Matcher merupakan platform eksplorasi minat yang membantu calon mahasiswa
+            {APP_NAME} merupakan platform eksplorasi minat yang membantu calon mahasiswa
             mengenali program studi Universitas Diponegoro yang memiliki kesesuaian dengan preferensi
             dan ketertarikan akademik mereka.
           </p>

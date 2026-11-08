@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Panduan Langkah Selanjutnya (DATA VERIFIED)
+// undip-major-matcher — Panduan Langkah Selanjutnya (DATA VERIFIED)
 // =============================================================================
 // Seluruh data berstatus 'official' wajib memiliki `evidence` yang merujuk
 // langsung ke dokumen fisik di docs/sources/ dan tanggal rilis resmi.

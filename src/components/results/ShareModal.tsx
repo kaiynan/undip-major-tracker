@@ -6,6 +6,7 @@ import { StudyProgram } from '@/data/types';
 import { faculties } from '@/data/faculties';
 import { X, Copy, Check, Share2, MessageCircle, AlertCircle } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
+import { APP_NAME, EVENT_NAME, SITE_URL } from '@/config/brand';
 
 interface ShareModalProps {
   isOpen: boolean;
@@ -56,8 +57,8 @@ export function ShareModal({
     ? `${facultyData?.name || topFaculty.facultyId} (Tier ${topFaculty.tier || 'D'} — ${topFaculty.aggregateScore ?? 0}%)`
     : '- Belum ada data fakultas -';
 
-  const summaryText = `Hasil Rekomendasi UNDIP Major Matcher
-Roadshow Sedulur Serang Diponegoro 2027
+  const summaryText = `Hasil Rekomendasi ${APP_NAME}
+${EVENT_NAME}
 
 Top Program Studi Paling Cocok:
 ${programListText}
@@ -69,7 +70,7 @@ Tipe Minat: ${userSummary?.topRiasec && userSummary.topRiasec.length > 0 ? userS
 Bidang Utama: ${userSummary?.topDomain?.label || '-'}
 Gaya Belajar: ${userSummary?.topLearning?.label || '-'}
 
-Temukan jurusan masa depanmu di Universitas Diponegoro melalui UNDIP Major Matcher!`;
+Temukan jurusan masa depanmu di Universitas Diponegoro melalui ${APP_NAME}! (${SITE_URL})`;
 
   const handleCopy = async () => {
     setCopyError(false);

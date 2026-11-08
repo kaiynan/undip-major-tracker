@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
+import { APP_NAME, EVENT_NAME, TAGLINE, THEME } from '@/config/brand';
 
 export function Footer() {
   const pathname = usePathname();
@@ -24,10 +25,13 @@ export function Footer() {
               </div>
               <div>
                 <span className="font-pixel text-xs sm:text-sm text-white tracking-wide block">
-                  UNDIP Major Matcher
+                  {APP_NAME}
                 </span>
-                <span className="font-mono text-xs text-amber-200/80">
-                  Retro Adventure Edition
+                <span className="font-mono text-xs text-amber-200/80 block">
+                  {TAGLINE}
+                </span>
+                <span className="font-pixel text-[9px] text-[#FCD34D] mt-1 block">
+                  {EVENT_NAME}
                 </span>
               </div>
             </div>
@@ -131,15 +135,17 @@ export function Footer() {
             <span>DISCLAIMER RESMI PLATFORM</span>
           </h5>
           <p className="text-xs text-slate-300 leading-relaxed font-normal">
-            &ldquo;UNDIP Major Matcher merupakan platform eksplorasi minat yang membantu calon mahasiswa mengenali program studi Universitas Diponegoro yang memiliki kesesuaian dengan preferensi dan ketertarikan mereka. Hasil rekomendasi <strong>bukan merupakan tes psikologi profesional</strong>, <strong>tidak mengukur kecerdasan atau kemampuan akademik</strong>, <strong>tidak memprediksi peluang diterima di UNDIP</strong>, dan <strong>tidak menjamin keberhasilan akademik maupun karier</strong>. Gunakan hasil ini sebagai referensi awal untuk mengenal program studi dan melakukan eksplorasi lebih lanjut.&rdquo;
+            &ldquo;{APP_NAME} merupakan platform eksplorasi minat yang membantu calon mahasiswa mengenali program studi Universitas Diponegoro yang memiliki kesesuaian dengan preferensi dan ketertarikan mereka. Hasil rekomendasi <strong>bukan merupakan tes psikologi profesional</strong>, <strong>tidak mengukur kecerdasan atau kemampuan akademik</strong>, <strong>tidak memprediksi peluang diterima di UNDIP</strong>, dan <strong>tidak menjamin keberhasilan akademik maupun karier</strong>. Gunakan hasil ini sebagai referensi awal untuk mengenal program studi dan melakukan eksplorasi lebih lanjut.&rdquo;
           </p>
         </div>
 
         {/* Bottom copyright */}
         <div className="pt-6 border-t-2 border-[#1E293B] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2 font-mono">
-          <p>{`© ${new Date().getFullYear()} UNDIP Major Matcher. Proyek Eksplorasi Minat Mahasiswa Baru UNDIP.`}</p>
+          <p>{`© ${new Date().getFullYear()} ${APP_NAME}. ${EVENT_NAME}.`}</p>
           <div className="flex items-center gap-4">
-            <span className="text-[#F59E0B]">HMIM Engine v1.0</span>
+            <span className="text-[#F59E0B]">Tema: {THEME}</span>
+            <span>•</span>
+            <span>HMIM Engine v1.0</span>
             <span>•</span>
             <span>Universitas Diponegoro</span>
           </div>

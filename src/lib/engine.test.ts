@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Comprehensive Engine Test Suite
+// undip-major-matcher — Comprehensive Engine Test Suite
 // =============================================================================
 import {
   calculateAllScores,

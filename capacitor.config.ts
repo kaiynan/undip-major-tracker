@@ -1,3 +1,5 @@
+import { APP_NAME } from './src/config/brand';
+
 /**
  * Konfigurasi Capacitor untuk pembungkusan hybrid mobile (Android & iOS).
  * Jalankan `npx cap sync` dan `npx cap open android` setelah build statis (`next build`).
@@ -17,7 +19,7 @@ export interface CapacitorConfig {
 
 const config: CapacitorConfig = {
   appId: 'id.ac.undip.majormatcher',
-  appName: 'UNDIP Major Matcher',
+  appName: APP_NAME,
   webDir: 'out',
   bundledWebRuntime: false,
   server: {

@@ -6,7 +6,9 @@ import {
   Compass,
   Microscope,
   BookOpen,
+  Sparkles,
 } from 'lucide-react';
+import { APP_NAME, EVENT_NAME, TAGLINE } from '@/config/brand';
 
 const DIMENSIONS = [
   {
@@ -53,9 +55,20 @@ export function PixelTentangKamiScene() {
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Section Heading: Clean, Minimal & Consistent */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 bg-[#2A160E] border border-[#F59E0B] px-3.5 py-1.5 shadow-[2px_2px_0_0_#000]">
+            <Sparkles className="w-3.5 h-3.5 text-[#F59E0B]" />
+            <span className="font-pixel text-[9px] sm:text-[10px] text-[#FDE68A] uppercase tracking-wider">
+              {EVENT_NAME}
+            </span>
+          </div>
+
           <h2 className="font-pixel text-lg sm:text-2xl text-white tracking-wide">
-            Tentang UNDIP Major Matcher
+            Tentang {APP_NAME}
           </h2>
+
+          <p className="font-mono text-xs text-[#F59E0B] italic">
+            &ldquo;{TAGLINE}&rdquo;
+          </p>
 
           <p className="text-xs sm:text-sm text-amber-100/80 leading-relaxed font-normal">
             Platform eksplorasi akademik yang dikembangkan untuk menjembatani rasa ingin tahu calon mahasiswa baru dengan karakteristik 65 program studi di peringkat dan 5 program PSDKU Universitas Diponegoro secara terstruktur, adil, dan obyektif.

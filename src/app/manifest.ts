@@ -1,13 +1,14 @@
 import { MetadataRoute } from 'next';
+import { APP_NAME, APP_NAME_SHORT, TAGLINE } from '@/config/brand';
 
 export const dynamic = 'force-static';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'UNDIP Major Matcher — Rekomendasi Program Studi',
-    short_name: 'UNDIP Matcher',
+    name: `${APP_NAME} — Rekomendasi Program Studi`,
+    short_name: APP_NAME_SHORT,
     description:
-      'Platform rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis Hybrid Multi-Dimensional Interest Matching (HMIM).',
+      `${APP_NAME} — ${TAGLINE}. Platform rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis Hybrid Multi-Dimensional Interest Matching (HMIM).`,
     start_url: '/',
     display: 'standalone',
     background_color: '#190E08',

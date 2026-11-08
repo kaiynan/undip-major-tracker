@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — HMIM (Hybrid Multi-Dimensional Interest Matching) Engine
+// undip-major-matcher — HMIM (Hybrid Multi-Dimensional Interest Matching) Engine
 // =============================================================================
 // Mesin rekomendasi yang mencocokkan profil minat pengguna (dari 36 pertanyaan
 // kuesioner) terhadap profil program studi dan fakultas di UNDIP.

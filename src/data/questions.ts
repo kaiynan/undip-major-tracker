@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Kuesioner 36 Pertanyaan
+// undip-major-matcher — Kuesioner 36 Pertanyaan
 // =============================================================================
 // 36 pertanyaan dalam bahasa Indonesia, dibagi ke 4 dimensi:
 //   A. RIASEC (8 pertanyaan, ID 1-8)

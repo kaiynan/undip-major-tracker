@@ -6,6 +6,7 @@ import { retroAudio } from '@/lib/retroAudio';
 import { PixelDiponegoroStatue } from './PixelDiponegoroStatue';
 import { ChevronUp, ChevronDown, Volume2, VolumeX } from 'lucide-react';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
+import { TAGLINE } from '@/config/brand';
 
 const subscribeReducedMotion = (callback: () => void) => {
   if (typeof window === 'undefined') return () => {};
@@ -257,11 +258,16 @@ export function PixelHorseStatueHero({
               className="pointer-events-auto bg-[#1A0E08]/95 backdrop-blur-md px-6 sm:px-10 py-4 sm:py-6 border-4 border-[#F59E0B] shadow-[0_0_35px_rgba(245,158,11,0.6),4px_4px_0_0_#451A03] flex flex-col items-center gap-2 sm:gap-2.5 text-center transition-all hover:scale-105 active:scale-95 cursor-pointer w-[92%] sm:w-auto sm:min-w-[420px] max-w-lg pixelated touch-manipulation select-none"
               aria-label="Tekan untuk Mulai Kuisioner Minat 36 Pertanyaan"
             >
-              <div className="flex items-center gap-2">
-                <span className="font-pixel text-[9px] sm:text-[10px] text-[#FDE68A] tracking-wider sm:tracking-widest uppercase">
-                  UNIVERSITAS DIPONEGORO
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex items-center gap-2">
+                  <span className="font-pixel text-[9px] sm:text-[10px] text-[#FDE68A] tracking-wider sm:tracking-widest uppercase">
+                    UNIVERSITAS DIPONEGORO
+                  </span>
+                  <span className="w-2.5 h-2.5 bg-[#F59E0B] inline-block animate-pulse" />
+                </div>
+                <span className="font-mono text-[10px] sm:text-xs text-amber-200/90 font-medium tracking-wide">
+                  {TAGLINE}
                 </span>
-                <span className="w-2.5 h-2.5 bg-[#F59E0B] inline-block animate-pulse" />
               </div>
 
               {/* The Central Blinking Retro Arcade Prompt */}

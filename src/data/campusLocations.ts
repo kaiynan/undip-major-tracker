@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Verified Campus Geographic & Architectural Data
+// undip-major-matcher — Verified Campus Geographic & Architectural Data
 // =============================================================================
 // Reconstructed based on verified route specifications and OpenStreetMap / Satellite
 // Tembalang GIS coordinates and masterplan:

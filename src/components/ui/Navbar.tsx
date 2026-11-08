@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X, ArrowRight, Volume2, VolumeX, RotateCcw, ChevronRight } from 'lucide-react';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { retroAudio } from '@/lib/retroAudio';
+import { APP_NAME } from '@/config/brand';
 
 interface InlineNavItem {
   id: 'beranda' | 'jelajahi' | 'langkah-selanjutnya';
@@ -243,7 +244,7 @@ export function Navbar() {
                 retroAudio.playSelect();
               }}
               className="flex items-center gap-1 sm:gap-2 group cursor-pointer shrink-0 min-h-[44px] min-w-[44px]"
-              aria-label="Undip Major Matcher - Beranda"
+              aria-label={`${APP_NAME} - Beranda`}
             >
               <div className="w-7 h-7 sm:w-8 sm:h-8 bg-[#2A160E] border-2 border-[#F59E0B] flex items-center justify-center text-[#FDE68A] shadow-[2px_2px_0_0_#000] group-hover:bg-[#3D1F13] transition-colors shrink-0">
                 <span className="font-pixel text-[11px] sm:text-xs">U</span>
@@ -252,16 +253,16 @@ export function Navbar() {
                 {/* On phone <= 430px: two-line stack so full name is visible without truncation */}
                 <div className="navbar-brand-mobile leading-none gap-0.5">
                   <span className="font-pixel text-[7.5px] text-[#FDE68A] tracking-wider leading-none whitespace-nowrap">
-                    UNDIP
+                    {APP_NAME.split(' ')[0]}
                   </span>
                   <span className="font-pixel text-[6.5px] text-white tracking-tight leading-none whitespace-nowrap">
-                    MAJOR MATCHER
+                    {APP_NAME.split(' ').slice(1).join(' ')}
                   </span>
                 </div>
                 {/* On screens > 430px: single line */}
                 <div className="navbar-brand-desktop gap-1.5">
                   <span className="font-pixel text-[8.5px] md:text-xs text-white tracking-wide shrink-0 whitespace-nowrap">
-                    UNDIP MAJOR MATCHER
+                    {APP_NAME}
                   </span>
                 </div>
                 <p className="navbar-tagline text-[10px] text-amber-200/80 font-mono whitespace-nowrap">

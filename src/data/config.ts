@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Konfigurasi Algoritma
+// undip-major-matcher — Konfigurasi Algoritma
 // =============================================================================
 // Konfigurasi bobot dimensi dan ambang batas tier untuk algoritma pencocokan.
 // =============================================================================

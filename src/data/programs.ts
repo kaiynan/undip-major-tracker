@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Database Program Studi Universitas Diponegoro
+// undip-major-matcher — Database Program Studi Universitas Diponegoro
 // =============================================================================
 // Database 54 program studi S1 dan D4 (Sarjana Terapan) di 12 fakultas/sekolah UNDIP.
 // Dilengkapi profil unik 4 dimensi (RIASEC, Domain, Learning, Curriculum)

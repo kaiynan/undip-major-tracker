@@ -1,5 +1,5 @@
 // =============================================================================
-// UNDIP Major Matcher — Database Uang Kuliah Tunggal (UKT) Resmi TA 2026/2027
+// undip-major-matcher — Database Uang Kuliah Tunggal (UKT) Resmi TA 2026/2027
 // =============================================================================
 // Seluruh nominal diambil langsung dari dokumen resmi:
 // "UKT PROGRAM SARJANA JALUR SNBP/SNBT/UM SBUB/UM REGULER GOLONGAN TIDAK MAMPU

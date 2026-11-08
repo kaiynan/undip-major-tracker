@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { PixelGateScene } from './PixelGateScene';
 import { retroAudio } from '@/lib/retroAudio';
 import { FastForward } from 'lucide-react';
+import { APP_NAME, EVENT_NAME, TAGLINE } from '@/config/brand';
 
 interface PixelIntroOverlayProps {
   onComplete: () => void;
@@ -218,12 +219,15 @@ export function PixelIntroOverlay({
                 </div>
               </div>
 
-              <div className="font-pixel text-[10px] sm:text-xs text-[#93C5FD] tracking-wider sm:tracking-widest uppercase">
-                Roadshow Sedulur Serang Diponegoro 2027
+              <div className="font-pixel text-[9px] sm:text-[10px] text-[#93C5FD] tracking-wider uppercase">
+                {EVENT_NAME}
               </div>
-              <h1 className="font-pixel text-lg sm:text-2xl md:text-3xl text-white tracking-wide">
-                Define Your Next Move
+              <h1 className="font-pixel text-base sm:text-xl md:text-2xl text-white tracking-wide">
+                {APP_NAME}
               </h1>
+              <p className="font-mono text-xs text-[#FDE68A]">
+                {TAGLINE}
+              </p>
 
               {/* Indikator Loading tepat diatas box loading: Loading NN% */}
               <div className="w-full text-center mt-3 mb-1.5" aria-hidden="true">
@@ -275,7 +279,7 @@ export function PixelIntroOverlay({
         {/* Bottom Subtitle / Prompt Bar */}
         <div className="relative z-30 p-3 sm:p-5 text-center bg-[#081226]/90 border-t-2 border-[#1E293B]">
           <p className="font-pixel text-[9px] sm:text-[10px] text-slate-200">
-            Find Your Potential, Discover Your Future
+            {TAGLINE}
           </p>
         </div>
 
