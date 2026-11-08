@@ -71,6 +71,8 @@ export interface StudyProgram {
   name: string;
   facultyId: string;
   department?: string; // Departemen resmi di bawah Fakultas/Sekolah
+  departmentSourceUrl?: string; // URL bukti atau path file bukti
+  departmentEvidence?: string; // Kutipan dokumen bukti
   degreeLevel: 'S1' | 'D4' | 'S2' | 'S3' | 'Profesi' | 'Spesialis';
   campusLocation?: string; // e.g., 'Semarang (Kampus Utama)', 'Batang', 'Rembang'
   description: string;

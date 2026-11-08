@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { studyPrograms, getProgramById } from '@/data/programs';
 import { faculties } from '@/data/faculties';
 import { getQuotaByProgramId } from '@/data/quotas';
+import { getUKTByProgramId } from '@/data/ukt';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
@@ -26,6 +27,7 @@ import {
   MapPin,
   Info,
   ArrowRight,
+  Banknote,
 } from 'lucide-react';
 
 interface ProgramDetailContentProps {
@@ -43,6 +45,7 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
   const program = getProgramById(programId);
   const faculty = faculties.find((f) => f.id === program?.facultyId);
   const quota = getQuotaByProgramId(programId);
+  const programUkt = getUKTByProgramId(programId);
   const score = getScoreForProgram(programId);
   const isComparing = comparisonIds.includes(programId);
 
@@ -484,6 +487,71 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
             </Link>
           </div>
         </div>
+
+        {/* Official Program UKT */}
+        {programUkt && (
+          <div className="bg-[#24130C] rounded-2xl sm:rounded-3xl p-4 sm:p-8 border-2 border-[#78350F] shadow-[0_4px_24px_rgba(0,0,0,0.5)] space-y-4 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#78350F]/60">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-[#78350F] text-[#FDE68A] border border-[#F59E0B] flex items-center justify-center shrink-0">
+                  <Banknote className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                    <h2 className="text-base sm:text-lg font-black text-[#FFFBEB] font-pixel">
+                      Tarif Uang Kuliah Tunggal (UKT)
+                    </h2>
+                    <span className="text-[10px] sm:text-[11px] font-mono font-bold text-emerald-300 bg-[#140B07] border border-emerald-900/60 px-2 py-0.5 rounded">
+                      Resmi
+                    </span>
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-amber-200/80 mt-0.5">
+                    Tarif resmi per semester untuk {program.name} ({program.degreeLevel}) TA {programUkt.academicYear}.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs text-amber-300/80 italic">
+                <Info className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>Terverifikasi per {programUkt.retrievedAt}</span>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+                {programUkt.groups.map((g) => (
+                  <div
+                    key={g.group}
+                    className="bg-[#190E08] border border-[#78350F] rounded-xl p-3 space-y-1"
+                  >
+                    <div className="text-[10px] text-amber-300 uppercase tracking-wider font-bold">
+                      Golongan {g.group}
+                    </div>
+                    <div className="font-mono text-xs sm:text-sm font-bold text-emerald-400">
+                      {g.formatted}
+                    </div>
+                    <div className="text-[10px] text-amber-100/60">
+                      per semester
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="text-[11px] text-amber-200/70 pt-2 border-t border-[#78350F]/50 flex flex-wrap items-center justify-between gap-2">
+                <span className="italic">
+                  Bukti: {programUkt.evidence}
+                </span>
+                <Link
+                  href="/results?tab=next-steps#langkah-selanjutnya"
+                  className="text-amber-400 hover:text-amber-300 underline font-semibold inline-flex items-center gap-1 text-xs"
+                >
+                  <span>Lihat perbandingan golongan UKT & panduan KIP-K</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Competencies and Learning Outcomes (CPL) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">

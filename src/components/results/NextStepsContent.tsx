@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { nextStepsData } from '@/data/nextSteps';
+import { programUKTList } from '@/data/ukt';
 import {
   Banknote,
   GraduationCap,
@@ -42,6 +43,7 @@ function StatusBadge({ status }: { status: 'official' | 'reference' | 'pending' 
 
 export function NextStepsContent() {
   const [openSection, setOpenSection] = useState<'ukt' | 'kipk' | 'calendar' | 'all'>('all');
+  const [selectedProgramId, setSelectedProgramId] = useState<string>('ft-sipil');
 
   const toggleSection = (section: 'ukt' | 'kipk' | 'calendar') => {
     retroAudio.playBlip(600);
@@ -49,6 +51,7 @@ export function NextStepsContent() {
   };
 
   const { ukt, kipk, calendar, disclaimerFooter } = nextStepsData;
+  const selectedProgramUKT = programUKTList.find((p) => p.programId === selectedProgramId) || programUKTList[0];
 
   return (
     <div className="space-y-6 text-white animate-in fade-in duration-200">
@@ -157,6 +160,55 @@ export function NextStepsContent() {
                 ))}
               </div>
             </div>
+
+            {/* Per-Program Official UKT Explorer */}
+            {selectedProgramUKT && (
+              <div className="bg-[#140B07] border border-[#78350F] rounded-xl p-3.5 sm:p-4 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#78350F]/50">
+                  <div>
+                    <h4 className="font-pixel text-[11px] sm:text-xs text-[#FDE68A]">
+                      Cek Tarif UKT Resmi per Program Studi:
+                    </h4>
+                    <p className="text-[10px] text-amber-200/70">
+                      Besaran UKT Golongan 1 s.d. {selectedProgramUKT.groups.length} resmi TA {selectedProgramUKT.academicYear}.
+                    </p>
+                  </div>
+                  <select
+                    value={selectedProgramId}
+                    onChange={(e) => setSelectedProgramId(e.target.value)}
+                    aria-label="Pilih Program Studi untuk cek UKT"
+                    className="bg-[#24130C] border border-[#78350F] text-[#FFFBEB] text-xs rounded-lg px-3 py-2 font-mono min-h-[44px] cursor-pointer"
+                  >
+                    {programUKTList.map((p) => (
+                      <option key={p.programId} value={p.programId}>
+                        {p.programName} ({p.degreeLevel})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {selectedProgramUKT.groups.map((g) => (
+                    <div
+                      key={g.group}
+                      className="bg-[#1F120B] border border-[#78350F]/70 rounded-lg p-2.5 text-center space-y-0.5"
+                    >
+                      <span className="text-[10px] text-amber-300 font-bold block uppercase tracking-wider">
+                        Golongan {g.group}
+                      </span>
+                      <span className="font-mono text-xs sm:text-sm font-bold text-emerald-400 block">
+                        {g.formatted}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="text-[10px] text-amber-200/60 italic flex items-center justify-between gap-2 pt-1">
+                  <span>Bukti: {selectedProgramUKT.evidence}</span>
+                  <span className="text-emerald-400 font-bold">Status: Resmi</span>
+                </div>
+              </div>
+            )}
 
             {/* Verification Note & Citation */}
             <div className="pt-3 border-t border-[#78350F]/60 flex flex-wrap items-center justify-between gap-2 text-xs">

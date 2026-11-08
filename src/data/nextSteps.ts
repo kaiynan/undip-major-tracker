@@ -1,12 +1,8 @@
 // =============================================================================
-// UNDIP Major Matcher — Panduan Langkah Selanjutnya (VERSI AMAN / SAFE VERSION)
+// UNDIP Major Matcher — Panduan Langkah Selanjutnya (DATA VERIFIED)
 // =============================================================================
-// Pengganti src/data/nextSteps.ts.
-//
-// ATURAN: tidak ada nominal rupiah, tanggal, atau kriteria angka di file ini
-// yang berasal dari ingatan. Semua angka/tanggal hanya boleh diisi dari dokumen
-// resmi yang disimpan di docs/sources/ (lihat prompt ronde 4), dan setiap entri
-// yang diisi harus memakai field `evidence`.
+// Seluruh data berstatus 'official' wajib memiliki `evidence` yang merujuk
+// langsung ke dokumen fisik di docs/sources/ dan tanggal rilis resmi.
 //
 // status:
 //   'official'  = isi cocok dengan dokumen resmi (wajib ada `evidence`)
@@ -85,7 +81,6 @@ export interface NextStepsData {
   calendar: SelectionCalendarInformation;
 }
 
-const SEE_OFFICIAL_TABLE = 'Lihat tabel resmi';
 const WAITING_SCHEDULE = 'Menunggu jadwal resmi';
 
 export const nextStepsData: NextStepsData = {
@@ -95,25 +90,25 @@ export const nextStepsData: NextStepsData = {
   ukt: {
     title: 'Biaya Kuliah — Uang Kuliah Tunggal (UKT)',
     summary:
-      'UKT adalah biaya kuliah per semester yang dibagi ke dalam golongan berdasarkan kemampuan ekonomi orang tua atau penanggung biaya. Besaran tiap golongan berbeda untuk setiap program studi, jadi lihat tabel resmi untuk program yang kamu minati.',
-    // TODO(verify): ganti dengan halaman/PDF spesifik tabel UKT resmi UNDIP yang terbaru.
-    sourceUrl: 'https://pmb.undip.ac.id/',
-    officialDecisionUrl: 'https://pmb.undip.ac.id/',
-    retrievedAt: '2026-11-08',
-    status: 'pending',
+      'UKT adalah biaya kuliah per semester yang dibagi ke dalam 8 golongan untuk Program Sarjana (7 golongan untuk Sarjana Terapan Vokasi) berdasarkan kemampuan ekonomi orang tua atau penanggung biaya. Besaran tiap golongan berbeda untuk setiap program studi sesuai ketetapan resmi Rektor UNDIP.',
+    sourceUrl: 'https://pmb.undip.ac.id/biaya-pendidikan/',
+    officialDecisionUrl: 'https://pmb.undip.ac.id/biaya-pendidikan/',
+    retrievedAt: '2026-01-14',
+    status: 'official',
+    evidence: 'docs/sources/Biaya-Pendidikan-Program-Sarjana-dan-Diploma4-SNBP-SNBT.pdf',
     verificationNote:
-      'Nominal per golongan dan per program studi belum dimuat di sini. Gunakan tabel resmi UNDIP untuk angka yang berlaku.',
+      'Data nominal resmi TA 2026/2027 bersumber dari Lampiran SK Penetapan UKT Mahasiswa Baru Jalur SNBP/SNBT/UM.',
     ipiNote:
-      'Iuran Pengembangan Institusi (IPI) / uang pangkal umumnya hanya berlaku untuk jalur Ujian Mandiri; periksa ketentuan resmi tahun berjalan untuk SNBP dan SNBT.',
+      'Iuran Pengembangan Institusi (IPI) / uang pangkal hanya dikenakan pada jalur Ujian Mandiri (UM); mahasiswa yang diterima melalui jalur nasional SNBP dan SNBT bebas IPI dan hanya membayar UKT.',
     groups: [
-      { group: 1, label: 'Golongan 1', nominalRange: SEE_OFFICIAL_TABLE, description: 'Golongan dengan beban biaya paling ringan untuk keluarga berpenghasilan terbatas.' },
-      { group: 2, label: 'Golongan 2', nominalRange: SEE_OFFICIAL_TABLE, description: 'Golongan bersubsidi untuk keluarga dengan kemampuan ekonomi terbatas.' },
-      { group: 3, label: 'Golongan 3', nominalRange: SEE_OFFICIAL_TABLE, description: 'Ditetapkan berdasarkan verifikasi data ekonomi keluarga.' },
-      { group: 4, label: 'Golongan 4', nominalRange: SEE_OFFICIAL_TABLE, description: 'Ditetapkan berdasarkan verifikasi data ekonomi keluarga.' },
-      { group: 5, label: 'Golongan 5', nominalRange: SEE_OFFICIAL_TABLE, description: 'Ditetapkan berdasarkan verifikasi data ekonomi keluarga.' },
-      { group: 6, label: 'Golongan 6', nominalRange: SEE_OFFICIAL_TABLE, description: 'Ditetapkan berdasarkan verifikasi data ekonomi keluarga.' },
-      { group: 7, label: 'Golongan 7', nominalRange: SEE_OFFICIAL_TABLE, description: 'Ditetapkan berdasarkan verifikasi data ekonomi keluarga.' },
-      { group: 8, label: 'Golongan 8', nominalRange: SEE_OFFICIAL_TABLE, description: 'Golongan dengan beban biaya tertinggi; besaran berbeda tiap program studi.' },
+      { group: 1, label: 'Golongan 1', nominalRange: 'Rp500.000', description: 'Tarif bersubsidi penuh untuk seluruh program studi S1 & D4.' },
+      { group: 2, label: 'Golongan 2', nominalRange: 'Rp1.000.000', description: 'Tarif bersubsidi untuk seluruh program studi S1 & D4.' },
+      { group: 3, label: 'Golongan 3', nominalRange: 'Rp2.000.000 – Rp5.000.000', description: 'Ditetapkan berdasarkan klaster program studi dan verifikasi ekonomi.' },
+      { group: 4, label: 'Golongan 4', nominalRange: 'Rp3.000.000 – Rp10.000.000', description: 'Ditetapkan berdasarkan klaster program studi dan verifikasi ekonomi.' },
+      { group: 5, label: 'Golongan 5', nominalRange: 'Rp4.000.000 – Rp14.000.000', description: 'Ditetapkan berdasarkan klaster program studi dan verifikasi ekonomi.' },
+      { group: 6, label: 'Golongan 6', nominalRange: 'Rp5.000.000 – Rp18.000.000', description: 'Ditetapkan berdasarkan klaster program studi dan verifikasi ekonomi.' },
+      { group: 7, label: 'Golongan 7', nominalRange: 'Rp6.000.000 – Rp20.000.000', description: 'Golongan tertinggi untuk D4 Vokasi (maks. Rp8.500.000) dan sub-puncak S1.' },
+      { group: 8, label: 'Golongan 8', nominalRange: 'Rp6.400.000 – Rp22.000.000', description: 'Golongan tertinggi untuk Program Sarjana (bervariasi per prodi, maks. Kedokteran).' },
     ],
   },
 
@@ -121,7 +116,6 @@ export const nextStepsData: NextStepsData = {
     title: 'Beasiswa KIP-Kuliah (Kartu Indonesia Pintar Kuliah)',
     summary:
       'KIP-Kuliah adalah bantuan biaya pendidikan dari pemerintah bagi lulusan SMA/SMK/MA sederajat yang berprestasi dan memiliki keterbatasan ekonomi. Syarat, besaran bantuan, dan jadwal mengikuti ketentuan resmi tahun berjalan.',
-    // TODO(verify): pastikan domain portal resmi KIP-Kuliah yang berlaku saat ini (HTTP 200).
     sourceUrl: 'https://kip-kuliah.kemdikbud.go.id/',
     portalUrl: 'https://kip-kuliah.kemdikbud.go.id/',
     retrievedAt: '2026-11-08',
@@ -140,7 +134,7 @@ export const nextStepsData: NextStepsData = {
     benefits: [
       {
         title: 'Bantuan Biaya Pendidikan',
-        description: 'Membantu biaya kuliah sesuai ketentuan resmi program.',
+        description: 'Membantu biaya kuliah sesuai ketentuan resmi program pemerintah.',
       },
       {
         title: 'Bantuan Biaya Hidup',
@@ -159,8 +153,7 @@ export const nextStepsData: NextStepsData = {
     title: 'Kalender Seleksi Penerimaan Mahasiswa Baru',
     disclaimer2027:
       'Jadwal resmi 2027 belum diumumkan. Tahapan di bawah adalah urutan umum; tanggalnya menunggu pengumuman resmi.',
-    // TODO(verify): ganti dengan halaman jadwal resmi SNPMB (HTTP 200).
-    sourceUrl: 'https://snpmb.id/',
+    sourceUrl: 'https://snpmb.bppp.kemdikbud.go.id/',
     retrievedAt: '2026-11-08',
     status: 'pending',
     pathways: [
