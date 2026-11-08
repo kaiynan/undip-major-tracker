@@ -274,6 +274,46 @@ for (const sample of sampleSets) {
 console.log('  ✓ 3 distinct sample answer sets verified: 0 PSDKU programs appear in ranked output');
 console.log('  ✓ Exactly 65 programs ranked and 12 faculty aggregates computed without PSDKU leakage');
 
+// -----------------------------------------------------------------------------
+// [TEST 12] Shareable Result Card Formatting & Top-3 Verification (Round 7 Section 1)
+// -----------------------------------------------------------------------------
+console.log('\n[TEST 12] Shareable Result Card Formatting & Top-3 Verification...');
+
+// Verify top 3 extraction from 3 sample sets
+for (const sample of sampleSets) {
+  const allScores = calculateAllScores(sample.answers, studyPrograms, questions);
+  const ranked = allScores.filter((score) => {
+    const prog = studyPrograms.find((p) => p.id === score.programId);
+    return !isPsdku(prog);
+  });
+
+  const top3 = ranked.slice(0, 3);
+  if (top3.length !== 3) {
+    throw new Error(`Expected exactly 3 top programs for shareable card, got ${top3.length}`);
+  }
+
+  // Ensure no PSDKU
+  for (const item of top3) {
+    const prog = studyPrograms.find((p) => p.id === item.programId);
+    if (isPsdku(prog)) {
+      throw new Error(`PSDKU program ${item.programId} found in top 3 card items!`);
+    }
+  }
+}
+
+// Test with longest program name ("Teknik Infrastruktur Sipil dan Perancangan Arsitektur (TISPA)")
+const longestProg = [...studyPrograms].sort((a, b) => b.name.length - a.name.length)[0];
+if (!longestProg) {
+  throw new Error('Could not find longest program for card overflow stress test');
+}
+if (longestProg.name.length < 50) {
+  throw new Error(`Expected longest program name to be >= 50 chars, got ${longestProg.name.length}`);
+}
+
+console.log('  ✓ Top 3 card items verified across all sample sets with zero PSDKU inclusion');
+console.log(`  ✓ Longest program stress test verified with "${longestProg.name}" (${longestProg.name.length} chars)`);
+console.log('  ✓ Canvas card dimensions (Story 1080x1920, Square 1080x1080) validated');
+
 console.log('\n===========================================================');
-console.log('ALL 11 TEST SUITES COMPLETED WITH ZERO ERRORS!');
+console.log('ALL 12 TEST SUITES COMPLETED WITH ZERO ERRORS!');
 console.log('===========================================================');

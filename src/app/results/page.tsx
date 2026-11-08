@@ -363,11 +363,13 @@ export default function ResultsPage() {
           {/* Share Button */}
           <button
             onClick={() => setIsShareOpen(true)}
-            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-200 hover:text-white border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="p-2 sm:px-3 sm:py-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-200 hover:text-white border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5"
             title="Bagikan Hasil"
             aria-label="Bagikan Hasil Rekomendasi"
+            data-testid="btn-bagikan-hasil"
           >
-            <Share2 className="w-4 h-4" />
+            <Share2 className="w-4 h-4 text-[#F59E0B]" />
+            <span className="hidden sm:inline text-xs font-bold font-pixel">Bagikan Hasil</span>
           </button>
 
           {/* Retake Questionnaire Button */}
@@ -470,6 +472,19 @@ export default function ResultsPage() {
                   <Minimize2 className="w-4 h-4" />
                 </button>
               </div>
+            </div>
+
+            {/* Quick Share / Export Actions */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setIsShareOpen(true)}
+                className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] hover:text-white border-2 border-[#F59E0B] rounded-xl text-xs font-bold font-pixel shadow-[2px_2px_0_0_#000] transition-colors cursor-pointer min-h-[44px]"
+                data-testid="btn-bagikan-hasil-panel"
+                aria-label="Bagikan Hasil Rekomendasi"
+              >
+                <Share2 className="w-3.5 h-3.5 text-[#F59E0B]" />
+                <span>Bagikan Hasil</span>
+              </button>
             </div>
 
             {/* In-Panel Output Switcher Tabs */}
