@@ -384,31 +384,8 @@ export async function generateResultsPdf(data: PdfExportData): Promise<Blob> {
 export async function downloadOrSharePdf(
   blob: Blob,
   fileName: string = `hasil-rekomendasi-undip-${getPdfDateString()}.pdf`
-): Promise<'downloaded' | 'shared' | 'cancelled'> {
-  const file = new File([blob], fileName, { type: 'application/pdf' });
-
-  // On iOS / mobile where Web Share API supports PDF files
-  if (
-    typeof navigator !== 'undefined' &&
-    navigator.canShare &&
-    navigator.canShare({ files: [file] })
-  ) {
-    try {
-      await navigator.share({
-        files: [file],
-        title: `Laporan Hasil Rekomendasi - ${APP_NAME}`,
-        text: `Laporan lengkap rekomendasi program studi Universitas Diponegoro (${TAGLINE}).`,
-      });
-      return 'shared';
-    } catch (err: unknown) {
-      if (err instanceof Error && err.name === 'AbortError') {
-        return 'cancelled';
-      }
-      // If user share failed, fall back to browser download
-    }
-  }
-
-  // Fallback: Browser download
+): Promise<'downloaded'> {
+  // Direct client-side browser file download trigger via anchor element
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;

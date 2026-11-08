@@ -68,7 +68,7 @@ export function PdfExportButton({
       const result = await downloadOrSharePdf(blob, fileName);
 
       const elapsed = Date.now() - startTime;
-      if (result === 'downloaded' || result === 'shared') {
+      if (result === 'downloaded') {
         showToast(`PDF berhasil dibuat (${(elapsed / 1000).toFixed(1)}s) & tersimpan`);
         onSuccess?.();
       }
