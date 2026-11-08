@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { retroAudio } from '@/lib/retroAudio';
-import { Home, Compass, Trophy, SlidersHorizontal } from 'lucide-react';
+import { Home, Compass, Trophy, GraduationCap, Info } from 'lucide-react';
 
 const subscribeNoop = () => () => {};
 
@@ -27,7 +27,7 @@ export function MobileBottomNav() {
       isActive: pathname === '/',
     },
     {
-      label: 'QUEST',
+      label: 'TES',
       href: '/questionnaire',
       icon: Compass,
       isActive: pathname === '/questionnaire',
@@ -40,21 +40,27 @@ export function MobileBottomNav() {
       label: 'HASIL',
       href: '/results',
       icon: Trophy,
-      isActive: pathname === '/results' || pathname.startsWith('/program/'),
+      isActive: pathname === '/results',
       badge: mounted && isComplete ? 'SIAP' : null,
     },
     {
-      label: 'ALGORITMA',
-      href: '/admin',
-      icon: SlidersHorizontal,
-      isActive: pathname === '/admin',
+      label: 'PRODI',
+      href: '/program-studi',
+      icon: GraduationCap,
+      isActive: pathname === '/program-studi' || pathname.startsWith('/program/'),
+    },
+    {
+      label: 'INFO',
+      href: '/langkah-selanjutnya',
+      icon: Info,
+      isActive: pathname.startsWith('/langkah-selanjutnya'),
     },
   ];
 
   return (
     <nav
       aria-label="Navigasi Bawah Mobile dan Tablet"
-      className="2xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1A0E08]/95 backdrop-blur-md border-t-2 border-[#78350F] shadow-[0_-4px_16px_rgba(0,0,0,0.6)] px-2 py-1.5 select-none pixelated"
+      className="2xl:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#1A0E08]/95 backdrop-blur-md border-t-2 border-[#78350F] shadow-[0_-4px_16px_rgba(0,0,0,0.6)] px-1 sm:px-2 py-1.5 select-none pixelated"
       style={{ paddingBottom: 'max(0.375rem, env(safe-area-inset-bottom))' }}
     >
       <div className="flex items-center justify-around max-w-lg mx-auto">
@@ -68,7 +74,7 @@ export function MobileBottomNav() {
               href={item.href}
               aria-label={item.label}
               onClick={() => retroAudio.playSelect()}
-              className={`flex-1 flex flex-col items-center justify-center py-1 px-1 transition-all relative min-h-[48px] ${
+              className={`flex-1 flex flex-col items-center justify-center py-1 px-0.5 transition-all relative min-h-[48px] ${
                 active
                   ? 'text-[#FDE68A] font-bold'
                   : 'text-amber-200/90 hover:text-white'
