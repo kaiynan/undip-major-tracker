@@ -316,8 +316,8 @@ export function PixelHorseStatueHero({
         </button>
       </div>
 
-      {/* Floating Retro Sound Control */}
-      <div className={`absolute top-3 right-3 z-30 flex items-center gap-2 transition-opacity duration-300 ${isStarting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      {/* Floating Retro Sound Control - Repositioned on mobile below scroll cue to prevent overlap */}
+      <div className={`absolute top-20 sm:top-4 right-3 sm:right-4 z-30 flex items-center gap-2 transition-opacity duration-300 ${isStarting ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <button
           onClick={handleToggleAudio}
           className="bg-[#2A160E]/90 hover:bg-[#3D1F13] text-[#FDE68A] p-2.5 border-2 border-[#F59E0B] shadow-[2px_2px_0_0_#000] pixelated cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"

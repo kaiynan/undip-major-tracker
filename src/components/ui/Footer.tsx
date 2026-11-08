@@ -137,7 +137,7 @@ export function Footer() {
 
         {/* Bottom copyright */}
         <div className="pt-6 border-t-2 border-[#1E293B] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2 font-mono">
-          <p>© 2025 UNDIP Major Matcher. Proyek Eksplorasi Minat Mahasiswa Baru UNDIP.</p>
+          <p>{`© ${new Date().getFullYear()} UNDIP Major Matcher. Proyek Eksplorasi Minat Mahasiswa Baru UNDIP.`}</p>
           <div className="flex items-center gap-4">
             <span className="text-[#F59E0B]">HMIM Engine v1.0</span>
             <span>•</span>
