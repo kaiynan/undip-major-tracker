@@ -9,6 +9,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { APP_NAME, EVENT_NAME, TAGLINE } from '@/config/brand';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 
 const DIMENSIONS = [
   {
@@ -117,6 +118,9 @@ export function PixelTentangKamiScene() {
             })}
           </div>
         </div>
+
+        {/* SERADIP Consultation Card (Prompt G Round 9 Section 4) */}
+        <ConsultCta variant="card" />
       </div>
     </section>
   );

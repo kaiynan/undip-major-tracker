@@ -12,6 +12,7 @@ import { APP_NAME, EVENT_NAME, TAGLINE, SITE_URL, SHORT_URL } from '@/config/bra
 import { ProgramScore, FacultyScore, StudyProgram, Faculty, DimensionScore } from '@/data/types';
 import { isPsdku } from '@/data/types';
 import { getMatchReasons } from '@/lib/matchReasons';
+import { isContactReady, buildWaLink } from '@/config/contact';
 
 export interface PdfExportData {
   nickname?: string;
@@ -364,11 +365,42 @@ export async function generateResultsPdf(data: PdfExportData): Promise<Blob> {
 
   notesY += 23;
 
-  // Section 5: Disclaimer Box
+  // Section 5: SERADIP Consultation Block (Prompt G Round 9 Section 4)
+  if (isContactReady()) {
+    if (notesY > pageHeight - 50) {
+      doc.addPage();
+      notesY = 22;
+    }
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(15, 23, 42);
+    doc.text('5. Konsultasi Pendampingan Mahasiswa (SERADIP)', marginX, notesY);
+    notesY += 4;
+
+    doc.setFillColor(236, 253, 245); // Light emerald
+    doc.setDrawColor(16, 185, 129); // Emerald-500
+    doc.roundedRect(marginX, notesY, pageWidth - marginX * 2, 14, 1, 1, 'FD');
+
+    doc.setFontSize(7.8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(6, 78, 59); // Emerald-900
+    doc.text('Butuh bimbingan dan diskusi lebih lanjut mengenai hasil rekomendasi jurusanmu?', marginX + 4, notesY + 5);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(4, 120, 87);
+    const consultNotice = `Hubungi mahasiswa aktif UNDIP tim SERADIP via WhatsApp: ${buildWaLink('Halo Kak SERADIP, saya ingin konsultasi hasil tes minat UNDIP.')}`;
+    const splitConsult = doc.splitTextToSize(consultNotice, pageWidth - marginX * 2 - 8);
+    doc.text(splitConsult, marginX + 4, notesY + 9);
+
+    notesY += 19;
+  }
+
+  // Section 6: Disclaimer Box
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text('5. Disclaimer & Batasan Rekomendasi', marginX, notesY);
+  doc.text(`${isContactReady() ? '6' : '5'}. Disclaimer & Batasan Rekomendasi`, marginX, notesY);
   notesY += 4;
 
   doc.setFillColor(255, 247, 237); // Warm orange tint

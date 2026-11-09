@@ -17,6 +17,7 @@ import { ComparePickerModal } from '@/components/program/ComparePickerModal';
 import { ProgramRichDetails } from '@/components/program/ProgramRichDetails';
 import { MatchReasonsBlock } from '@/components/results/MatchReasonsBlock';
 import { getMatchReasons } from '@/lib/matchReasons';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 import {
   ArrowLeft,
   ExternalLink,
@@ -682,6 +683,15 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
             </a>
           </div>
         )}
+
+        {/* SERADIP Consultation Inline Link (Prompt G Round 9 Section 4) */}
+        <div className="flex justify-center pt-1 pb-1">
+          <ConsultCta
+            variant="inline"
+            topProgramNames={[program.name]}
+            buttonText={`Tanya Kakak SERADIP tentang ${program.name}`}
+          />
+        </div>
 
         {/* Mandatory Official Disclaimer */}
         <DisclaimerBanner />

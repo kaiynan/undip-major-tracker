@@ -12,7 +12,7 @@ import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { isPsdku } from '@/data/types';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { FavoriteButton } from '@/components/ui/FavoriteButton';
-import { SeradipContactButton } from '@/components/ui/SeradipContactButton';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 import { APP_NAME } from '@/config/brand';
 import {
   Scale,
@@ -98,12 +98,6 @@ function BandingkanContent() {
       window.print();
     }
   };
-
-  // Pre-generate consultation message for SERADIP
-  const consultationMessage = useMemo(() => {
-    const names = validPrograms.map((p) => p.name).join(' dan ');
-    return `Halo Kak SERADIP, saya sedang membandingkan pilihan program studi di UNDIP: ${names}. Boleh minta saran dan pertimbangan kakak?`;
-  }, [validPrograms]);
 
   // If less than 2 valid programs are present
   if (validPrograms.length < 2) {
@@ -547,14 +541,15 @@ function BandingkanContent() {
           </div>
         </div>
 
-        {/* Bottom Placement: SERADIP Consultation */}
+        {/* Bottom Placement: SERADIP Consultation (Prompt G Round 9 Section 4) */}
         <div className="pt-6 border-t border-[#78350F]/70 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
           <div className="text-xs text-amber-200/70 text-center sm:text-left">
             Bingung menentukan pilihan di antara program studi di atas?
           </div>
-          <SeradipContactButton
-            message={consultationMessage}
-            label="Konsultasi Perbandingan dengan SERADIP"
+          <ConsultCta
+            variant="inline"
+            topProgramNames={validPrograms.map((p) => p.name)}
+            buttonText="Konsultasi Perbandingan dengan SERADIP"
           />
         </div>
       </div>

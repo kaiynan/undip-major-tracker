@@ -10,7 +10,7 @@ import { faculties } from '@/data/faculties';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { isPsdku } from '@/data/types';
 import { TierBadge } from '@/components/ui/TierBadge';
-import { SeradipContactButton } from '@/components/ui/SeradipContactButton';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 import {
   Heart,
   Scale,
@@ -67,12 +67,6 @@ export default function FavoritPage() {
     retroAudio.playSelect();
     router.push(`/bandingkan?ids=${selectedForCompare.join(',')}`);
   };
-
-  // Prefilled message for SERADIP consultation
-  const consultationMessage = useMemo(() => {
-    const names = favoritePrograms.map((p) => p.name).join(', ');
-    return `Halo Kak SERADIP, saya ingin konsultasi mengenai pilihan program studi favorit saya di UNDIP: ${names}`;
-  }, [favoritePrograms]);
 
   return (
     <div className="relative min-h-screen pb-24 pt-6 text-slate-100 bg-[#140B07] border-t-2 border-[#78350F]">
@@ -322,14 +316,15 @@ export default function FavoritPage() {
               })}
             </div>
 
-            {/* Bottom Section: SERADIP Consultation Placement */}
+            {/* Bottom Section: SERADIP Consultation Placement (Prompt G Round 9 Section 4) */}
             <div className="pt-6 border-t border-[#78350F]/70 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-xs text-amber-200/70 text-center sm:text-left">
                 Butuh pertimbangan lebih lanjut mengenai pilihan jurusan Anda?
               </div>
-              <SeradipContactButton
-                message={consultationMessage}
-                label="Konsultasi Pilihan Favorit dengan SERADIP"
+              <ConsultCta
+                variant="inline"
+                topProgramNames={favoritePrograms.map((p) => p.name)}
+                buttonText="Konsultasi Pilihan Favorit dengan SERADIP"
               />
             </div>
           </div>

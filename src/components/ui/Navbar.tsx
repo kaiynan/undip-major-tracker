@@ -8,6 +8,7 @@ import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { useFavorites } from '@/contexts/FavoritesContext';
 import { retroAudio } from '@/lib/retroAudio';
 import { APP_NAME } from '@/config/brand';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 
 interface InlineNavItem {
   id: 'beranda' | 'jelajahi' | 'langkah-selanjutnya';
@@ -526,6 +527,15 @@ export function Navbar() {
                   <span>Algoritma HMIM</span>
                   <ChevronRight className="w-3.5 h-3.5 text-amber-300/70" />
                 </Link>
+
+                {/* SERADIP Consultation Link (Prompt G Round 9 Section 4) */}
+                <div className="pt-0.5">
+                  <ConsultCta
+                    variant="link"
+                    buttonText="Konsultasi SERADIP"
+                    className="w-full flex items-center justify-between px-3 py-2 bg-[#24130C] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] font-pixel text-[9px]"
+                  />
+                </div>
 
                 <button
                   onClick={handleReplayIntro}

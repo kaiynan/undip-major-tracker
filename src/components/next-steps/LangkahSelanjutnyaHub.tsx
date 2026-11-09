@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { retroAudio } from '@/lib/retroAudio';
 import { getScholarshipsCount } from '@/data/scholarships';
 import { JalurMandiriBlock } from './JalurMandiriBlock';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 import {
   Banknote,
   GraduationCap,
@@ -151,6 +152,9 @@ export function LangkahSelanjutnyaHub() {
           <ArrowRight className="w-3.5 h-3.5 shrink-0" />
         </Link>
       </section>
+
+      {/* 4. SERADIP Consultation Hub Card (Prompt G Round 9 Section 4) */}
+      <ConsultCta variant="card" />
     </div>
   );
 }

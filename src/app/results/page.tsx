@@ -14,8 +14,7 @@ import { PdfExportButton } from '@/components/results/PdfExportButton';
 import { IncompleteQuestionnaireModal } from '@/components/modals/IncompleteQuestionnaireModal';
 import { RetakeConfirmModal } from '@/components/modals/RetakeConfirmModal';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
-import { SeradipContactButton } from '@/components/ui/SeradipContactButton';
-import { APP_NAME } from '@/config/brand';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { ScoreBar } from '@/components/ui/ScoreBar';
 import { FullScreenCampusMap } from '@/components/pixel/FullScreenCampusMap';
@@ -781,17 +780,11 @@ export default function ResultsPage() {
               </button>
             </div>
 
-            {/* SERADIP WhatsApp Consultation Button (Section 5B) */}
-            <div className="flex justify-center pt-1 pb-1">
-              <SeradipContactButton
-                message={
-                  programScores.length >= 3
-                    ? `Halo Kak SERADIP, saya baru saja menyelesaikan tes minat di ${APP_NAME}. Top 3 prodi rekomendasi saya adalah:\n1. ${studyPrograms.find((p) => p.id === programScores[0]?.programId)?.name || ''}\n2. ${studyPrograms.find((p) => p.id === programScores[1]?.programId)?.name || ''}\n3. ${studyPrograms.find((p) => p.id === programScores[2]?.programId)?.name || ''}\nBoleh minta bimbingan dan konsultasi lebih lanjut?`
-                    : `Halo Kak SERADIP, saya ingin konsultasi mengenai pilihan jurusan kuliah di Universitas Diponegoro.`
-                }
-                label="Tanya Kakak SERADIP tentang Hasilmu"
-              />
-            </div>
+            {/* SERADIP WhatsApp Consultation Card (Prompt G Round 9 Section 4) */}
+            <ConsultCta
+              variant="card"
+              topProgramNames={top3ProgramNames}
+            />
 
             {/* Disclaimer */}
             <DisclaimerBanner />

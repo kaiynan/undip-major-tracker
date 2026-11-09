@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ExternalLink } from 'lucide-react';
 import { APP_NAME, EVENT_NAME, TAGLINE, THEME } from '@/config/brand';
+import { ConsultCta } from '@/components/contact/ConsultCta';
 
 export function Footer() {
   const pathname = usePathname();
@@ -77,6 +78,9 @@ export function Footer() {
                 <Link href="/admin" className="hover:text-white transition-colors">
                   ▶ Transparansi Rumus HMIM
                 </Link>
+              </li>
+              <li>
+                <ConsultCta variant="link" buttonText="Konsultasi SERADIP" />
               </li>
             </ul>
           </div>

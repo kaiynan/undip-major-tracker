@@ -579,6 +579,88 @@ for (const s of scholarshipsData) {
 }
 
 // -----------------------------------------------------------------------------
+// [GUARD 14] SERADIP Consultation Contact Integrity (src/config/contact.ts)
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 14] Validating SERADIP Consultation Contact Integrity...');
+import { CONTACT_CONFIG, isContactReady, buildWaLink } from '../src/config/contact';
+
+// Test 1: Baseline readiness (default without env var must be false)
+const originalPhone = CONTACT_CONFIG.phone;
+CONTACT_CONFIG.phone = '';
+assert(
+  !isContactReady(),
+  'Guard 14 - Graceful Degradation When Empty',
+  'contact.ts',
+  'isContactReady() must return false when phone is empty string'
+);
+assert(
+  buildWaLink('Test') === '#',
+  'Guard 14 - Safe Fallback wa.me URL',
+  'contact.ts',
+  'buildWaLink() must return "#" when isContactReady() is false'
+);
+
+// Test 2: Active readiness when phone is provided
+CONTACT_CONFIG.phone = '+62 812-3456-7890';
+assert(
+  isContactReady(),
+  'Guard 14 - Active Readiness When Configured',
+  'contact.ts',
+  'isContactReady() must return true when valid phone is set'
+);
+const testLink = buildWaLink('Halo Kakak SERADIP, saya mau tanya.');
+assert(
+  testLink.startsWith('https://wa.me/6281234567890?text='),
+  'Guard 14 - Correct wa.me Deep Link Format',
+  'contact.ts',
+  `Expected wa.me URL with clean digits, got '${testLink}'`
+);
+assert(
+  testLink.includes(encodeURIComponent('Halo Kakak SERADIP, saya mau tanya.')),
+  'Guard 14 - Encoded Message Text',
+  'contact.ts',
+  'Message string must be URI encoded in WhatsApp deep link'
+);
+// Restore original config
+CONTACT_CONFIG.phone = originalPhone;
+
+// Test 3: No hardcoded phone numbers in src/ outside config/contact.ts
+function scanDirForFiles(dir: string): string[] {
+  let matched: string[] = [];
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      if (['node_modules', '.next', '.git', 'out', 'docs'].includes(entry.name)) continue;
+      matched = matched.concat(scanDirForFiles(fullPath));
+    } else if (/\.(tsx?|jsx?|json)$/.test(entry.name)) {
+      matched.push(fullPath);
+    }
+  }
+  return matched;
+}
+
+const phoneRegex = /(?:\+62|08)[0-9]{8,12}\b/;
+const allSrcFiles = scanDirForFiles(path.join(ROOT_DIR, 'src'));
+const forbiddenFiles: string[] = [];
+
+for (const file of allSrcFiles) {
+  const norm = file.replace(/\\/g, '/');
+  if (norm.endsWith('config/contact.ts')) continue;
+  const content = fs.readFileSync(file, 'utf-8');
+  if (phoneRegex.test(content)) {
+    forbiddenFiles.push(path.relative(ROOT_DIR, file));
+  }
+}
+
+assert(
+  forbiddenFiles.length === 0,
+  'Guard 14 - Zero Hardcoded Phone Numbers Outside contact.ts',
+  forbiddenFiles.join(', ') || 'Clean',
+  `Found hardcoded phone numbers in: ${forbiddenFiles.join(', ')}`
+);
+
+// -----------------------------------------------------------------------------
 // [GUARD 9] Optional Link Health Check (--check-links)
 // -----------------------------------------------------------------------------
 if (process.argv.includes('--check-links')) {
