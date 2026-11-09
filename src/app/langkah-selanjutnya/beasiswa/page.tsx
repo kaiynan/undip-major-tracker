@@ -1,13 +1,22 @@
 import type { Metadata } from 'next';
 import { KIPKSection } from '@/components/next-steps/KIPKSection';
+import { ScholarshipCatalogue } from '@/components/next-steps/ScholarshipCatalogue';
 import { APP_NAME } from '@/config/brand';
 
 export const metadata: Metadata = {
-  title: `Beasiswa KIP-Kuliah — ${APP_NAME} 2027`,
+  title: `Informasi Beasiswa Lengkap & KIP-Kuliah — ${APP_NAME} 2027`,
   description:
-    'Informasi dan panduan resmi beasiswa KIP-Kuliah untuk calon mahasiswa baru Universitas Diponegoro 2026/2027.',
+    'Panduan resmi beasiswa KIP-Kuliah dan katalog beasiswa pemerintah, yayasan, dan korporasi untuk mahasiswa Universitas Diponegoro TA 2026/2027.',
 };
 
 export default function BeasiswaPage() {
-  return <KIPKSection />;
+  return (
+    <div className="space-y-8">
+      {/* Existing KIP-Kuliah Content */}
+      <KIPKSection />
+
+      {/* Catalogue Beasiswa Lainnya */}
+      <ScholarshipCatalogue />
+    </div>
+  );
 }

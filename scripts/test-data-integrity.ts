@@ -21,6 +21,7 @@ import { admissionQuotas } from '../src/data/quotas';
 import { programUKTList } from '../src/data/ukt';
 import { isPsdku } from '../src/data/types';
 import { programDetailsRecord, ProgramDetail } from '../src/data/programDetails';
+import { scholarshipsData } from '../src/data/scholarships';
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const SOURCES_DIR = path.join(ROOT_DIR, 'docs', 'sources');
@@ -486,6 +487,95 @@ for (const [id, details] of Object.entries(programDetailsRecord)) {
       );
     }
   }
+}
+
+// -----------------------------------------------------------------------------
+// [GUARD 13] Scholarships Catalogue Integrity (src/data/scholarships.ts)
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 13] Validating Scholarships Catalogue Integrity...');
+assert(
+  scholarshipsData.length >= 8,
+  'Guard 13 - Scholarship Count (>= 8)',
+  'scholarshipsData',
+  `Expected at least 8 scholarships in catalogue, found ${scholarshipsData.length}`
+);
+
+for (const s of scholarshipsData) {
+  assert(
+    !!s.id && !!s.nama && !!s.penyelenggara && !!s.kategoriPenyelenggara,
+    'Guard 13 - Required Identification',
+    s.id,
+    `Missing core identification fields`
+  );
+
+  assert(
+    Array.isArray(s.jenjang) && s.jenjang.length > 0,
+    'Guard 13 - Jenjang Array',
+    s.id,
+    `jenjang must be non-empty array of S1/D4`
+  );
+
+  assert(
+    Array.isArray(s.syaratUmum) && s.syaratUmum.length >= 3,
+    'Guard 13 - Syarat Umum Points (>= 3)',
+    s.id,
+    `syaratUmum must contain at least 3 points, found ${s.syaratUmum?.length}`
+  );
+
+  assert(
+    !!s.periodeBuka && s.periodeBuka.includes('dapat berubah'),
+    'Guard 13 - Periode Buka Disclaimer',
+    s.id,
+    `periodeBuka must include 'dapat berubah'`
+  );
+
+  assert(
+    !!s.sourceUrl && s.sourceUrl.startsWith('http'),
+    'Guard 13 - SourceUrl Format',
+    s.id,
+    `sourceUrl must start with http`
+  );
+
+  assert(
+    !!s.linkResmi && s.linkResmi.startsWith('http'),
+    'Guard 13 - LinkResmi Format',
+    s.id,
+    `linkResmi must start with http`
+  );
+
+  const sDate = new Date(s.retrievedAt);
+  assert(
+    !isNaN(sDate.getTime()) && sDate <= now,
+    'Guard 13 - RetrievedAt Valid & Not Future',
+    s.id,
+    `retrievedAt '${s.retrievedAt}' is invalid or in the future`
+  );
+
+  assert(
+    s.status === 'official' || s.status === 'pending',
+    'Guard 13 - Status Official/Pending',
+    s.id,
+    `status must be official or pending, found '${s.status}'`
+  );
+
+  // Negative Guard: No invented nominals in scholarship data
+  const sSerialized = JSON.stringify(s);
+  const rupiahMatch = sSerialized.match(/Rp\s?\d/i);
+  assert(
+    !rupiahMatch,
+    'Guard 13 - No Invented Rupiah Amounts',
+    s.id,
+    `Found unauthorized numeric Rupiah amount in scholarship: '${rupiahMatch?.[0]}'`
+  );
+
+  // Standalone KIP-K check
+  const kipkMatch = sSerialized.match(/\bKIP-K(?!uliah)\b/g);
+  assert(
+    !kipkMatch || kipkMatch.length === 0,
+    'Guard 13 - Standardized KIP-Kuliah Terminology',
+    s.id,
+    `Found standalone abbreviation 'KIP-K' in scholarship data! Standardize to 'KIP-Kuliah'.`
+  );
 }
 
 // -----------------------------------------------------------------------------

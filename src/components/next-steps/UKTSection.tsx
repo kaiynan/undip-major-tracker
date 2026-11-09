@@ -6,6 +6,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { nextStepsData } from '@/data/nextSteps';
 import { programUKTList, ProgramUKT } from '@/data/ukt';
 import { faculties } from '@/data/faculties';
+import { getScholarshipsCount } from '@/data/scholarships';
 import { StatusBadge } from './StatusBadge';
 import { retroAudio } from '@/lib/retroAudio';
 import {
@@ -333,6 +334,26 @@ export function UKTSection({ embedded = false }: UKTSectionProps) {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Cross-link to Scholarships Catalogue */}
+        <div className="bg-[#190E08] border-2 border-[#F59E0B] rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-[2px_2px_0_0_#000]">
+          <div className="space-y-0.5 text-center sm:text-left">
+            <span className="font-pixel text-xs sm:text-sm text-[#FDE68A] flex items-center justify-center sm:justify-start gap-2">
+              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>Mencari bantuan biaya? Lihat {getScholarshipsCount()} beasiswa terdata</span>
+            </span>
+            <p className="text-[11px] sm:text-xs text-amber-100/80 leading-relaxed">
+              Tersedia beasiswa KIP-Kuliah, beasiswa pemerintah, yayasan filantropi, korporasi, hingga keringanan UKT internal UNDIP.
+            </p>
+          </div>
+          <Link
+            href="/langkah-selanjutnya/beasiswa"
+            className="inline-flex items-center gap-1.5 bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-bold px-4 py-2.5 rounded-xl text-xs font-pixel transition-all shadow-[2px_2px_0_0_#000] shrink-0 min-h-[44px] cursor-pointer"
+          >
+            <span>Katalog Beasiswa</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
         {/* 6. Footer Citation & Link */}

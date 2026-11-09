@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { retroAudio } from '@/lib/retroAudio';
+import { getScholarshipsCount } from '@/data/scholarships';
 import { JalurMandiriBlock } from './JalurMandiriBlock';
 import {
   Banknote,
@@ -29,14 +30,14 @@ export function LangkahSelanjutnyaHub() {
     },
     {
       id: 'beasiswa',
-      title: 'Beasiswa KIP-Kuliah',
-      subtitle: 'Bantuan Biaya Pendidikan & Biaya Hidup',
+      title: 'Beasiswa & KIP-Kuliah',
+      subtitle: `${getScholarshipsCount()} beasiswa terdata`,
       blurb:
-        'Bebas biaya UKT & bantuan biaya hidup bagi mahasiswa pemegang KIP-Kuliah / KIP / PIP / PKH. Pahami kriteria kelayakan dan alur pengajuan resmi.',
+        `Katalog ${getScholarshipsCount()} beasiswa terdata: KIP-Kuliah, beasiswa pemerintah, yayasan filantropi, korporasi, hingga keringanan internal UNDIP bagi mahasiswa jenjang S1 & D4.`,
       href: '/langkah-selanjutnya/beasiswa',
       icon: GraduationCap,
-      ctaLabel: 'Panduan Beasiswa',
-      badge: 'BANTUAN KULIAH',
+      ctaLabel: 'Katalog Beasiswa',
+      badge: `${getScholarshipsCount()} BEASISWA TERDATA`,
     },
     {
       id: 'jadwal-seleksi',
