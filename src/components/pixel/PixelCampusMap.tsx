@@ -556,6 +556,11 @@ export function PixelCampusMap({
           </div>
         </div>
       )}
+
+      {/* Map Attribution Badge */}
+      <div className="absolute bottom-2 right-2 z-10 text-[9px] font-mono text-amber-200/70 bg-black/60 px-2 py-0.5 rounded border border-[#78350F]/40 backdrop-blur-xs select-none">
+        © OpenStreetMap contributors
+      </div>
     </div>
   );
 }

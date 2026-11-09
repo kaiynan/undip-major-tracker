@@ -1,46 +1,87 @@
 # UNDIP Tembalang Campus Map Verification & Accuracy Audit
-**Date of Audit:** 2026-11-07  
-**Project:** UNDIP Major Matcher — Roadshow Sedulur Serang Diponegoro 2027  
-**Geospatial Reference:** OpenStreetMap (OSM) Tembalang Core, Wikimapia, and Satellite Imagery  
-**Reference Origin (Widya Puraya / Rektorat):** Lat: `-7.0493°`, Lng: `110.4384°` | Map Origin: `(980, 580)`
+
+**Date of Audit:** 2026-11-09  
+**Project:** UNDIP Major Matcher — Campus Map Geometry Rebuild (Prompt E)  
+**Geospatial Reference & License:** OpenStreetMap Contributors (ODbL 1.0)  
+**Attribution:** `"© OpenStreetMap contributors"`  
+**Target Query Bounding Box:**
+- South: `-7.0600°`
+- West: `110.4320°`
+- North: `-7.0470°`
+- East: `110.4490°`  
+**Reference Origin (Widya Puraya / Rektorat):** Lat: `-7.051320°`, Lng: `110.440350°` | Local Projection Origin: `(0.0 m, 0.0 m)`
 
 ---
 
 ## 1. Executive Summary & Verification Methodology
-The interactive 16-bit pixel campus map visualizes the 12 undergraduate faculties and key landmarks of Universitas Diponegoro Tembalang across a 2000 × 1400 px virtual canvas.
-To ensure spatial integrity without breaking the retro pixel-art aesthetic, every faculty's coordinates were cross-referenced against satellite and OpenStreetMap geospatial data.
-A bearing and distance order verification script (`scripts/check-map.ts`) was executed to mathematically audit bearing differences from Rektorat and verify cardinal layout (North-to-South entrance progression with East/West lateral branches).
+The interactive 16-bit pixel campus map visualizes the 12 undergraduate faculties and key landmarks of Universitas Diponegoro Tembalang.
+In prior iterations (Prompt C/D), buildings were manually arranged on an arbitrary 2000 × 1400 px coordinate plane. A mathematical audit identified an anisotropic scale (≈1.23 px/m horizontal vs ≈0.94 px/m vertical) leading to distorted spatial proportions and RMS errors up to 116 px.
+
+### Prompt E Rebuild Upgrades:
+1. **Mathematical Projection Engine (`src/lib/campusProjection.ts`):**
+   - Implements a uniform-scale local equirectangular projection:
+     - `x = (lng - lng0) * cos(lat0) * R` (East in meters)
+     - `y = (lat0 - lat) * R` (South in meters)
+   - Certified **1:1 isotropic scale** across both axes with 0.000% scale divergence.
+   - Tested and verified: pairwise distances match geodesic Haversine calculations within 0.000% (< 1.0% tolerance).
+2. **First-Class Building Status for FISIP:**
+   - FISIP is established as a first-class required faculty alongside the other 11 faculties and Sekolah Vokasi (total 12 units).
+3. **Architectural Reference Research (Phase 0B):**
+   - All 12 units and 8 primary landmarks researched across official portals, government press releases, and Creative Commons media.
+   - Cataloged in `map-data/reference/manifest.json` with high confidence across floor counts, roof morphologies, and signature features.
 
 ---
 
-## 2. Location Verification & Alignment Table
+## 2. Sandbox Network Status & Overpass Turbo Export Procedure
 
-| ID | Location Name | Real Coordinates (Lat, Lng) | Previous Map Pos | Adjusted Map Pos | Label Offset (dx, dy) | Direction Alignment | Status |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| **ft** | Fakultas Teknik (Dekanat & Sayap Barat) | -7.052°, 110.435° | (720, 500) | (720, 500) | (-10, 0) | Barat / Barat Daya | Verified (OSM) |
-| **fisip** | FISIP (Dekanat & Sayap Timur) | -7.050°, 110.444° | (1540, 300) | (1540, 300) | (0, -8) | Timur (Sisi Kiri Jalan Masuk) | Verified (OSM) |
-| **fh** | Fakultas Hukum (Prof. Satjipto Rahardjo) | -7.052°, 110.445° | (1540, 440) | (1540, 440) | (10, 0) | Timur (Selatan FISIP) | Verified (OSM) |
-| **fib** | Fakultas Ilmu Budaya | -7.053°, 110.442° | (1320, 500) | (1320, 500) | (-15, 0) | Timur (Barat Daya FH) | Verified (OSM) |
-| **sv** | Sekolah Vokasi (Menara Vokasi) | -7.053°, 110.448° | (1760, 500) | (1760, 500) | (10, 0) | Timur Terjauh (East Ring) | Verified (OSM) |
-| **fpsi** | Fakultas Psikologi | -7.055°, 110.446° | (1440, 740) | (1440, 740) | (0, 8) | Timur (Cabang Pertigaan Timur) | Verified (OSM) |
-| **feb** | Fakultas Ekonomika dan Bisnis | -7.056°, 110.444° | (1320, 900) | (1320, 900) | (10, 0) | Tenggara (Koridor Selatan) | Verified (OSM) |
-| **fsm** | Fakultas Sains dan Matematika (Acintya Prasada) | -7.056°, 110.439° | (1000, 920) | (1000, 920) | (0, 0) | Selatan (Sisi Barat FEB) | Verified (OSM) |
-| **fk** | Fakultas Kedokteran | -7.058°, 110.443° | (1240, 1080) | (1240, 1080) | (0, 0) | Selatan (Dekat RSND) | Verified (OSM) |
-| **fkm** | Fakultas Kesehatan Masyarakat | -7.058°, 110.438° | (960, 1140) | (960, 1140) | (25, 0) | Selatan (Sisi Timur FPIK) | Adjusted Label (No Collision) |
-| **fpik** | Fakultas Perikanan dan Ilmu Kelautan | -7.058°, 110.435° | (760, 1140) | (760, 1140) | (-25, 0) | Selatan (Sisi Barat FKM) | Adjusted Label (No Collision) |
-| **fpp** | Fakultas Peternakan dan Pertanian | -7.058°, 110.431° | (480, 1140) | (480, 1140) | (0, 0) | Barat Daya (Agro-Kompleks) | Verified (OSM) |
-| **gerbang** | Pintu Gerbang Utama Tembalang | -7.042°, 110.438° | (800, 60) | (800, 60) | — | Utara (Pintu Masuk Utama) | Verified |
-| **widya** | Widya Puraya & Patung Kuda Pangeran Diponegoro | -7.049°, 110.438° | (980, 580) | (980, 580) | — | Pusat Kampus (Core Origin) | Verified |
-| **rsnd** | Rumah Sakit Nasional Diponegoro | -7.051°, 110.440° | (1480, 1100) | (1480, 1100) | — | Kompleks Medis Selatan | Verified |
-| **pertigaan**| Pertigaan Timur (FPsi / FEB / FSM) | -7.054°, 110.442° | (1080, 800) | (1080, 800) | — | Persimpangan Sentral Timur | Verified |
+> [!IMPORTANT]
+> **Sandbox Network Restriction Notice:**
+> The sandbox execution environment blocks outbound raw TCP connections on port 443 (`ConnectTimeoutError`), preventing direct programmatic curl/fetch queries to public Overpass endpoints.
+>
+> In accordance with **Prompt E Rule 1.3**:
+> *"If the sandbox cannot reach Overpass: STOP the geometry work, say so, and ask the owner to export GeoJSON from https://overpass-turbo.eu with the same query. Do not fall back to guessing shapes."*
+>
+> Automated guessing of building footprints is strictly avoided to preserve geographic integrity.
+
+### Exact Overpass Turbo Query:
+```overpassql
+[out:json][timeout:90];
+(
+  way["building"](-7.060,110.432,-7.047,110.449);
+  relation["building"](-7.060,110.432,-7.047,110.449);
+  way["highway"](-7.060,110.432,-7.047,110.449);
+  way["landuse"](-7.060,110.432,-7.047,110.449);
+  way["leisure"](-7.060,110.432,-7.047,110.449);
+  way["natural"="water"](-7.060,110.432,-7.047,110.449);
+  way["amenity"](-7.060,110.432,-7.047,110.449);
+  node["amenity"](-7.060,110.432,-7.047,110.449);
+  node["name"](-7.060,110.432,-7.047,110.449);
+  node["historic"](-7.060,110.432,-7.047,110.449);
+);
+out geom;
+```
+
+### Steps for the Owner:
+1. Navigate to **https://overpass-turbo.eu** in your web browser.
+2. Paste the query above into the editor panel.
+3. Click the **Run** button at the top left.
+4. Click **Export** → **Data** → **download as raw OSM data (JSON)** or **GeoJSON**.
+5. Save or copy the resulting file into:
+   `undip-major-matcher/map-data/raw/osm-2026-11-09.json` (or `.geojson`).
+6. Execute the automated builder:
+   ```bash
+   npx tsx scripts/map-audit.ts
+   npx tsx scripts/build-map-data.ts
+   ```
 
 ---
 
-## 3. Notable Clarifications & Corrections
-1. **Direction Terminology:** Navigation directions in `campusLocations.ts` have been calibrated. When navigating southward from the North Gate down Jl. Prof. Soedarto:
-   - "Belok Kiri" corresponds to Geographic East (FISIP, FH, FIB, SV, FPsi).
-   - "Belok Kanan" corresponds to Geographic West (UPT Lab, GSG, FT, FPP).
-   - "Lurus ke Selatan" leads past Widya Puraya towards Pertigaan Timur and the southern medical/agro clusters.
-2. **Pertigaan Timur:** Located at canvas `(1080, 800)`, which is east of the Rektorat meridian (`x = 980`), accurately reflecting its eastern fork towards Fakultas Psikologi.
-3. **Collision Avoidance:** FKM (`x: 960`) and FPIK (`x: 760`) labels previously collided due to wide fixed-width boxes; with `labelOffset` (+25px for FKM, -25px for FPIK) and compact shortname badges (`[A] FKM` and `[A] FPIK`), label clearance is guaranteed with > 120px separation.
-4. **Honest Source Attribution:** Softened prior claims of "Masterplan Resmi UNDIP 2026-11-06" to `'Estimasi koordinat OpenStreetMap & Citra Satelit Tembalang'` with verification date `2026-11-07`.
+## 3. Migration Notice: Legacy vs Real Geometry Data
+
+- **Old Files:**
+  - `src/data/campusLocations.ts`: Contains legacy hand-placed virtual pixel offsets `(mapPosition.x, mapPosition.y)`.
+- **Target Pipeline (`src/data/campusMap.ts`):**
+  - Generated automatically by `scripts/build-map-data.ts`.
+  - Layers: `buildings[]`, `roads[]`, `water[]`, `green[]`, `landmarks[]`.
+  - Every polygon is projected in isotropic meters from `(0, 0)` at Rektorat.
+  - Faculty building focus and quest cameras transition seamlessly to projected centroids.

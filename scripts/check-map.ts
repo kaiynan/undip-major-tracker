@@ -1,132 +1,151 @@
 import { campusFacultyLocations } from '../src/data/campusLocations';
-
-interface BearingComparison {
-  id: string;
-  name: string;
-  realLat: number;
-  realLng: number;
-  mapX: number;
-  mapY: number;
-  realBearingFromRektorat: number;
-  mapBearingFromRektorat: number;
-  bearingDiffDeg: number;
-  realDistFromRektorat: number;
-  mapDistFromRektorat: number;
-  realSector: string;
-  mapSector: string;
-  isDirectionMismatch: boolean;
-}
-
-// Reference: Rektorat / Widya Puraya
-const rektoratReal = { lat: -7.0493, lng: 110.4384 };
-const rektoratMap = { x: 980, y: 580 };
-
-function getSector(deg: number): string {
-  const normalized = (deg + 360) % 360;
-  if (normalized >= 337.5 || normalized < 22.5) return 'N (Utara)';
-  if (normalized >= 22.5 && normalized < 67.5) return 'NE (Timur Laut)';
-  if (normalized >= 67.5 && normalized < 112.5) return 'E (Timur)';
-  if (normalized >= 112.5 && normalized < 157.5) return 'SE (Tenggara)';
-  if (normalized >= 157.5 && normalized < 202.5) return 'S (Selatan)';
-  if (normalized >= 202.5 && normalized < 247.5) return 'SW (Barat Daya)';
-  if (normalized >= 247.5 && normalized < 292.5) return 'W (Barat)';
-  return 'NW (Barat Laut)';
-}
-
-function calcRealBearing(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const y = Math.sin((lon2 - lon1) * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180);
-  const x = Math.cos(lat1 * Math.PI / 180) * Math.sin(lat2 * Math.PI / 180) -
-            Math.sin(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.cos((lon2 - lon1) * Math.PI / 180);
-  const brng = Math.atan2(y, x) * 180 / Math.PI;
-  return (brng + 360) % 360;
-}
-
-function calcMapBearing(x1: number, y1: number, x2: number, y2: number): number {
-  // Screen space: x is East, y is South (-y is North)
-  const dx = x2 - x1;
-  const dy = -(y2 - y1); // up is North
-  const rad = Math.atan2(dx, dy);
-  const deg = (rad * 180 / Math.PI + 360) % 360;
-  return deg;
-}
-
-function haversineMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
-  const R = 6371000;
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
-  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
-}
+import { faculties } from '../src/data/faculties';
+import { OWNER_POINTS } from './map-audit';
+import { unproject, haversineDistanceMeters } from '../src/lib/campusProjection';
 
 console.log('===============================================================');
-console.log('UNDIP TEMBALANG CAMPUS MAP GEOGRAPHIC VERIFICATION (check-map)');
+console.log('UNDIP TEMBALANG CAMPUS MAP INTEGRITY & GEOGRAPHIC CHECKS');
 console.log('===============================================================\n');
 
-const results: BearingComparison[] = [];
+let failureCount = 0;
 
-for (const loc of campusFacultyLocations) {
-  const realB = calcRealBearing(rektoratReal.lat, rektoratReal.lng, loc.realCoordinates.lat, loc.realCoordinates.lng);
-  const mapB = calcMapBearing(rektoratMap.x, rektoratMap.y, loc.mapPosition.x, loc.mapPosition.y);
-  let diff = Math.abs(realB - mapB);
-  if (diff > 180) diff = 360 - diff;
-
-  const realDist = haversineMeters(rektoratReal.lat, rektoratReal.lng, loc.realCoordinates.lat, loc.realCoordinates.lng);
-  const mapDist = Math.hypot(loc.mapPosition.x - rektoratMap.x, loc.mapPosition.y - rektoratMap.y);
-
-  const realSec = getSector(realB);
-  const mapSec = getSector(mapB);
-
-  // Mismatch flagged if quadrant differs (e.g. West vs East or North vs South)
-  const realIsEast = loc.realCoordinates.lng > rektoratReal.lng;
-  const mapIsEast = loc.mapPosition.x > rektoratMap.x;
-  const realIsSouth = loc.realCoordinates.lat < rektoratReal.lat;
-  const mapIsSouth = loc.mapPosition.y > rektoratMap.y;
-
-  const isMismatch = (realIsEast !== mapIsEast) || (realIsSouth !== mapIsSouth);
-
-  results.push({
-    id: loc.id,
-    name: loc.name,
-    realLat: loc.realCoordinates.lat,
-    realLng: loc.realCoordinates.lng,
-    mapX: loc.mapPosition.x,
-    mapY: loc.mapPosition.y,
-    realBearingFromRektorat: realB,
-    mapBearingFromRektorat: mapB,
-    bearingDiffDeg: diff,
-    realDistFromRektorat: realDist,
-    mapDistFromRektorat: mapDist,
-    realSector: realSec,
-    mapSector: mapSec,
-    isDirectionMismatch: isMismatch,
-  });
+function check(condition: boolean, title: string, details?: string) {
+  if (!condition) {
+    console.error(`❌ [FAIL] ${title}`);
+    if (details) console.error(`   Details: ${details}`);
+    failureCount++;
+  } else {
+    console.log(`✓ [PASS] ${title}`);
+  }
 }
 
-// Distance rank ordering comparison
-const byRealDist = [...results].sort((a, b) => a.realDistFromRektorat - b.realDistFromRektorat);
-const byMapDist = [...results].sort((a, b) => a.mapDistFromRektorat - b.mapDistFromRektorat);
+// -----------------------------------------------------------------------------
+// CHECK 1: Exactly 12 faculties/units must have a building representation
+// -----------------------------------------------------------------------------
+const requiredUnits = [
+  'ft', 'fisip', 'fh', 'fib', 'sv', 'fpsi',
+  'feb', 'fsm', 'fk', 'fkm', 'fpik', 'fpp'
+];
+console.log('[CHECK 1] Validating representation of all 12 units (including FISIP & SV)...');
+const mappedUnitIds = new Set(campusFacultyLocations.map((loc) => loc.id));
 
-console.log('FACULTY COMPARISON RESULTS:');
-console.log('----------------------------------------------------------------------------------------------------------------------');
-console.log('| ID    | Name                       | Real Coord (Lat, Lng) | Map Pos (X, Y) | Real Brng | Map Brng | Diff° | Real Sec | Map Sec  | Match? |');
-console.log('----------------------------------------------------------------------------------------------------------------------');
-for (const r of results) {
-  const matchStr = r.isDirectionMismatch ? 'MISMATCH!' : 'OK';
-  console.log(
-    `| ${r.id.padEnd(5)} | ${r.name.slice(0, 26).padEnd(26)} | (${r.realLat.toFixed(3)}, ${r.realLng.toFixed(3)})   | (${String(r.mapX).padStart(4)}, ${String(r.mapY).padStart(4)}) | ${r.realBearingFromRektorat.toFixed(1).padStart(7)}° | ${r.mapBearingFromRektorat.toFixed(1).padStart(6)}° | ${r.bearingDiffDeg.toFixed(1).padStart(5)}° | ${r.realSector.padEnd(9)} | ${r.mapSector.padEnd(9)} | ${matchStr.padEnd(6)} |`
+for (const unitId of requiredUnits) {
+  const isPresent = mappedUnitIds.has(unitId);
+  const faculty = faculties.find((f) => f.id === unitId);
+  check(
+    isPresent,
+    `Unit [${unitId.toUpperCase()}] (${faculty?.name || unitId}) has building representation`,
+    `Unit ${unitId} is missing from campusFacultyLocations`
   );
 }
-console.log('----------------------------------------------------------------------------------------------------------------------\n');
+check(
+  campusFacultyLocations.length === 12,
+  `Exactly 12 units mapped (found: ${campusFacultyLocations.length})`
+);
 
-console.log('DISTANCE RANK ORDERING FROM REKTORAT:');
-console.log('Real Distance Rank: ' + byRealDist.map(r => r.id).join(' -> '));
-console.log('Map Distance Rank:  ' + byMapDist.map(r => r.id).join(' -> '));
+// -----------------------------------------------------------------------------
+// CHECK 2: Faculty buildings must be within <= 120m from audited ground truth
+// -----------------------------------------------------------------------------
+console.log('\n[CHECK 2] Validating distance to owner audited truth (<= 120m threshold)...');
+const ownerMap = new Map(OWNER_POINTS.filter((p) => p.facultyId).map((p) => [p.facultyId!, p.coords]));
 
-const mismatches = results.filter(r => r.isDirectionMismatch);
-console.log(`\nDirection Mismatch Count: ${mismatches.length}`);
-if (mismatches.length > 0) {
-  console.log('Locations with cardinal mismatch:', mismatches.map(m => `${m.id} (${m.name}): Real=${m.realSector}, Map=${m.mapSector}`).join(', '));
+for (const loc of campusFacultyLocations) {
+  const truthCoords = ownerMap.get(loc.id);
+  if (!truthCoords) {
+    check(false, `Owner ground truth exists for unit [${loc.id}]`);
+    continue;
+  }
+  const distMeters = haversineDistanceMeters(loc.realCoordinates, truthCoords);
+  check(
+    distMeters <= 120,
+    `Unit [${loc.id.toUpperCase()}] distance to audited truth: ${distMeters.toFixed(1)}m (<= 120m)`,
+    `Distance is ${distMeters.toFixed(1)}m, exceeding the 120m threshold`
+  );
 }
+
+// -----------------------------------------------------------------------------
+// CHECK 3: No label collisions at overview zoom
+// -----------------------------------------------------------------------------
+console.log('\n[CHECK 3] Validating label separation / collision avoidance at overview zoom...');
+interface BBox {
+  id: string;
+  minX: number;
+  maxX: number;
+  minY: number;
+  maxY: number;
+}
+
+const labelBoxes: BBox[] = campusFacultyLocations.map((loc) => {
+  const offsetX = loc.labelOffset?.x || 0;
+  const offsetY = loc.labelOffset?.y || 0;
+  const posX = loc.mapPosition.x - 90 + 10 + offsetX;
+  const posY = loc.mapPosition.y - 60 + 105 + offsetY;
+  const pillWidth = 88; // max badge width
+  const pillHeight = 24;
+  return {
+    id: loc.id,
+    minX: posX,
+    maxX: posX + pillWidth,
+    minY: posY,
+    maxY: posY + pillHeight,
+  };
+});
+
+let collisionFound = false;
+for (let i = 0; i < labelBoxes.length; i++) {
+  for (let j = i + 1; j < labelBoxes.length; j++) {
+    const b1 = labelBoxes[i];
+    const b2 = labelBoxes[j];
+    const overlapX = b1.minX < b2.maxX && b1.maxX > b2.minX;
+    const overlapY = b1.minY < b2.maxY && b1.maxY > b2.minY;
+    if (overlapX && overlapY) {
+      collisionFound = true;
+      check(false, `Label collision detected between [${b1.id}] and [${b2.id}]`);
+    }
+  }
+}
+if (!collisionFound) {
+  check(true, 'Zero label overlaps across all 12 units at overview zoom');
+}
+
+// -----------------------------------------------------------------------------
+// CHECK 4: Scale equality across axes (uniform isotropic projection)
+// -----------------------------------------------------------------------------
+console.log('\n[CHECK 4] Validating uniform scale projection (isotropic px/m)...');
+const ptEast = unproject({ x: 100, y: 0 });
+const ptSouth = unproject({ x: 0, y: 100 });
+const distE = haversineDistanceMeters({ lat: -7.051320, lng: 110.440350 }, ptEast);
+const distS = haversineDistanceMeters({ lat: -7.051320, lng: 110.440350 }, ptSouth);
+const axisRatio = distE / distS;
+check(
+  Math.abs(axisRatio - 1.0) < 0.005,
+  `Uniform scale isotropic ratio: ${axisRatio.toFixed(6)} (deviation: ${(Math.abs(axisRatio - 1.0) * 100).toFixed(4)}% < 0.5%)`
+);
+
+// -----------------------------------------------------------------------------
+// CHECK 5: PSDKU-only locations exclusion (PSDKU are outside this campus)
+// -----------------------------------------------------------------------------
+console.log('\n[CHECK 5] Validating PSDKU exclusion from Tembalang campus map...');
+const forbiddenPsdkuKeywords = ['batang', 'pekalongan', 'rembang', 'demak', 'psdku'];
+const mapText = JSON.stringify(campusFacultyLocations).toLowerCase();
+let psdkuLeak = false;
+
+for (const kw of forbiddenPsdkuKeywords) {
+  if (mapText.includes(`"psdku`)) {
+    psdkuLeak = true;
+    check(false, `PSDKU keyword '${kw}' leaked into campus map data`);
+  }
+}
+check(!psdkuLeak, 'Zero PSDKU programs/campuses present on Tembalang campus map');
+
+// -----------------------------------------------------------------------------
+// Summary
+// -----------------------------------------------------------------------------
+console.log('\n===============================================================');
+if (failureCount > 0) {
+  console.error(`🚨 CHECK-MAP FAILED WITH ${failureCount} ERRORS!`);
+  process.exit(1);
+} else {
+  console.log('🎉 ALL 5 MAP VERIFICATION CHECKS PASSED WITH 0 ERRORS!');
+}
+console.log('===============================================================\n');

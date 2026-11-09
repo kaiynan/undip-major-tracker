@@ -142,8 +142,10 @@ export function Footer() {
         {/* Bottom copyright */}
         <div className="pt-6 border-t-2 border-[#1E293B] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2 font-mono">
           <p>{`© ${new Date().getFullYear()} ${APP_NAME}. ${EVENT_NAME}.`}</p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <span className="text-[#F59E0B]">Tema: {THEME}</span>
+            <span>•</span>
+            <span className="text-amber-200/90 font-mono">Peta: © OpenStreetMap contributors</span>
             <span>•</span>
             <span>HMIM Engine v1.0</span>
             <span>•</span>
