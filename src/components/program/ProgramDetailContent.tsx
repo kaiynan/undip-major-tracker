@@ -8,20 +8,18 @@ import { faculties } from '@/data/faculties';
 import { isPsdku } from '@/data/types';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { getUKTByProgramId } from '@/data/ukt';
+import { getProgramDetailById } from '@/data/programDetails';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
 import { FavoriteButton } from '@/components/ui/FavoriteButton';
 import { ComparePickerModal } from '@/components/program/ComparePickerModal';
+import { ProgramRichDetails } from '@/components/program/ProgramRichDetails';
 import {
   ArrowLeft,
   ExternalLink,
   Sparkles,
-  BookOpen,
-  GraduationCap,
-  Award,
   Layers,
-  CheckCircle2,
   Building2,
   Check,
   Scale,
@@ -49,6 +47,7 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
   const faculty = faculties.find((f) => f.id === program?.facultyId);
   const quota = getQuotaByProgramId(programId);
   const programUkt = getUKTByProgramId(programId);
+  const detail = getProgramDetailById(programId);
   const score = getScoreForProgram(programId);
   const isComparing = comparisonIds.includes(programId);
 
@@ -592,64 +591,8 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
           </div>
         )}
 
-        {/* Competencies and Learning Outcomes (CPL) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-          {/* Capaian Pembelajaran Lulusan (CPL) */}
-          <div className="bg-[#24130C] rounded-2xl sm:rounded-3xl p-4 sm:p-7 border-2 border-[#78350F] shadow-[0_4px_24px_rgba(0,0,0,0.5)] space-y-4">
-            <div className="flex items-center gap-2 text-[#FFFBEB] font-pixel text-sm pb-3 border-b border-[#78350F]/60">
-              <GraduationCap className="w-5 h-5 text-amber-400" />
-              <span>Capaian Pembelajaran (CPL)</span>
-            </div>
-            <ul className="space-y-3">
-              {program.learningOutcomes.map((outcome, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-amber-100/90 leading-relaxed bg-[#190E08] p-3 rounded-xl border border-[#78350F]/60">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <span>{outcome}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Kompetensi Utama Lulusan */}
-          <div className="bg-[#24130C] rounded-2xl sm:rounded-3xl p-4 sm:p-7 border-2 border-[#78350F] shadow-[0_4px_24px_rgba(0,0,0,0.5)] space-y-4">
-            <div className="flex items-center gap-2 text-[#FFFBEB] font-pixel text-sm pb-3 border-b border-[#78350F]/60">
-              <Award className="w-5 h-5 text-amber-400" />
-              <span>Kompetensi Utama Lulusan</span>
-            </div>
-            <div className="grid grid-cols-1 gap-2.5">
-              {program.competencies.map((comp, idx) => (
-                <div
-                  key={idx}
-                  className="p-3.5 bg-[#190E08] rounded-xl border border-[#78350F]/60 text-xs sm:text-sm font-semibold text-amber-100 flex items-center gap-2.5"
-                >
-                  <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
-                  <span>{comp}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Curriculum Keywords & Course Highlights */}
-        <div className="bg-[#24130C] rounded-2xl sm:rounded-3xl p-4 sm:p-7 border-2 border-[#78350F] shadow-[0_4px_24px_rgba(0,0,0,0.5)] space-y-3">
-          <div className="flex items-center gap-2 text-[#FFFBEB] font-pixel text-sm pb-3 border-b border-[#78350F]/60">
-            <BookOpen className="w-5 h-5 text-amber-400" />
-            <span>Mata Kuliah Inti & Kata Kunci Kurikulum</span>
-          </div>
-          <p className="text-xs text-amber-200/80">
-            Bidang kajian dan fokus pembelajaran yang akan kamu dalami selama berkuliah di program studi ini:
-          </p>
-          <div className="flex flex-wrap gap-2 pt-2">
-            {program.curriculumKeywords.map((kw, idx) => (
-              <span
-                key={idx}
-                className="px-3.5 py-2 bg-[#190E08] text-amber-200 border border-[#78350F] rounded-xl text-xs font-bold shadow-xs hover:border-[#F59E0B] transition-colors"
-              >
-                {kw}
-              </span>
-            ))}
-          </div>
-        </div>
+        {/* Detail Kurikulum, Akreditasi, dan Prospek Karier Terverifikasi */}
+        <ProgramRichDetails program={program} detail={detail} />
 
         {/* Related Programs in the Same Faculty */}
         {relatedPrograms.length > 0 && (

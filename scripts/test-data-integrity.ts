@@ -20,6 +20,7 @@ import { studyPrograms } from '../src/data/programs';
 import { admissionQuotas } from '../src/data/quotas';
 import { programUKTList } from '../src/data/ukt';
 import { isPsdku } from '../src/data/types';
+import { programDetailsRecord, ProgramDetail } from '../src/data/programDetails';
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const SOURCES_DIR = path.join(ROOT_DIR, 'docs', 'sources');
@@ -419,6 +420,73 @@ assert(
   'negative-test',
   'Negative trap failed to trigger'
 );
+
+// -----------------------------------------------------------------------------
+// [GUARD 12] Program Details Provenance & Integrity (src/data/programDetails.ts)
+// -----------------------------------------------------------------------------
+console.log('\n[GUARD 12] Validating Program Details Provenance & Integrity...');
+const detailKeys = Object.keys(programDetailsRecord);
+assert(
+  detailKeys.length === 70,
+  'Guard 12 - Details Count (70 Programs)',
+  'programDetailsRecord',
+  `Expected 70 programs in programDetailsRecord, found ${detailKeys.length}`
+);
+
+const fieldsToCheck: Array<keyof Omit<ProgramDetail, 'programId'>> = [
+  'ringkasan',
+  'mataKuliahKhas',
+  'kompetensiUtama',
+  'prospekKarier',
+  'akreditasi',
+  'lamanResmi',
+];
+
+for (const [id, details] of Object.entries(programDetailsRecord)) {
+  for (const field of fieldsToCheck) {
+    const fg = details[field];
+    if (fg) {
+      assert(
+        !!fg.sourceUrl && typeof fg.sourceUrl === 'string' && fg.sourceUrl.startsWith('http'),
+        'Guard 12 - Field SourceUrl',
+        `${id}.${field}`,
+        `Field group has invalid or missing sourceUrl: '${fg.sourceUrl}'`
+      );
+
+      assert(
+        !!fg.retrievedAt && typeof fg.retrievedAt === 'string',
+        'Guard 12 - Field RetrievedAt',
+        `${id}.${field}`,
+        `Field group has missing retrievedAt date`
+      );
+
+      const d = new Date(fg.retrievedAt);
+      assert(
+        !isNaN(d.getTime()) && d <= now,
+        'Guard 12 - RetrievedAt Not Future',
+        `${id}.${field}`,
+        `retrievedAt date '${fg.retrievedAt}' is invalid or in the future`
+      );
+
+      assert(
+        fg.status === 'official' || fg.status === 'pending',
+        'Guard 12 - Valid Status',
+        `${id}.${field}`,
+        `status must be 'official' or 'pending', found '${fg.status}'`
+      );
+
+      // Verify no salary/wage keywords or inflated promotional statistics
+      const serialized = JSON.stringify(fg.value);
+      const salaryMatch = serialized.match(/(gaji|salary|juta\/bulan|serapan kerja \d+%|jaminan kerja)/i);
+      assert(
+        !salaryMatch,
+        'Guard 12 - No Salary or Employment Guarantee Claims',
+        `${id}.${field}`,
+        `Found forbidden salary or guarantee claim in detail data: '${salaryMatch?.[0]}'`
+      );
+    }
+  }
+}
 
 // -----------------------------------------------------------------------------
 // [GUARD 9] Optional Link Health Check (--check-links)
