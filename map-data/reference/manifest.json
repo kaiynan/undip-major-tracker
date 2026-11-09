@@ -1,0 +1,699 @@
+{
+  "version": "1.0.0",
+  "campus": "Universitas Diponegoro (UNDIP) Tembalang, Semarang",
+  "updatedAt": "2026-11-09T20:30:00+07:00",
+  "buildings": [
+    {
+      "buildingId": "ft",
+      "name": "Fakultas Teknik (Gedung Dekanat Prof. Ir. Eko Budihardjo)",
+      "sources": [
+        {
+          "url": "https://ft.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Teknik Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://id.wikipedia.org/wiki/Fakultas_Teknik_Universitas_Diponegoro",
+          "type": "encyclopedia",
+          "licence": "CC BY-SA 4.0",
+          "author": "Wikipedia Contributors",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        }
+      ],
+      "observed": {
+        "floors": 5,
+        "roofType": "flat-cantilever",
+        "mainColors": ["#1E3A8A", "#991B1B", "#334155", "#E2E8F0"],
+        "facade": "Dinding bata merah terakota dipadu kisi-kisi baja abu-abu gelap dan jendela kaca biru navy khas teknik",
+        "signatureFeatures": [
+          "Engineering Hall lantai 5",
+          "Jembatan kaca / skybridge penghubung sayap",
+          "Plaza teknik luas bertingkat",
+          "Dekat akses Jembatan Sikatak"
+        ],
+        "entranceSide": "north",
+        "notes": "Gedung Dekanat dinamai untuk menghormati mantan Rektor dan Dekan FT Prof. Ir. Eko Budihardjo, M.Sc."
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fisip",
+      "name": "Fakultas Ilmu Sosial dan Ilmu Politik (Gedung Dekanat & Ruang Kuliah Bersama FISIP)",
+      "sources": [
+        {
+          "url": "https://fisip.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Ilmu Sosial dan Ilmu Politik UNDIP",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        },
+        {
+          "url": "https://liputan6.com",
+          "type": "news-report",
+          "licence": "Editorial observation",
+          "author": "Liputan6 Kampus",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2023"
+        }
+      ],
+      "observed": {
+        "floors": 3,
+        "roofType": "pitched-tropical",
+        "mainColors": ["#EA580C", "#78350F", "#F1F5F9", "#334155"],
+        "facade": "Fasad bata terakota oranye kecokelatan dipadu jendela kisi louvre kayu peneduh dan selasar terbuka",
+        "signatureFeatures": [
+          "Ruang teater dan panggung terbuka",
+          "Koridor selasar angin yang sejuk",
+          "Taman diskusi interaktif mahasiswa",
+          "Blok A, B, C terhubung selasar"
+        ],
+        "entranceSide": "west",
+        "notes": "Berada di sisi timur jalan masuk, barat FIB dan selatan SC Menara"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fh",
+      "name": "Fakultas Hukum (Gedung Prof. Dr. Satjipto Rahardjo, S.H. / Gedung H)",
+      "sources": [
+        {
+          "url": "https://fh.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Hukum Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://id.wikipedia.org/wiki/Fakultas_Hukum_Universitas_Diponegoro",
+          "type": "encyclopedia",
+          "licence": "CC BY-SA 4.0",
+          "author": "Wikipedia Contributors",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        }
+      ],
+      "observed": {
+        "floors": 4,
+        "roofType": "hipped-tajuk",
+        "mainColors": ["#991B1B", "#FEF3C7", "#1E293B", "#CBD5E1"],
+        "facade": "Kolonade pilar neo-klasik formal tegak melambangkan wibawa hukum dengan dinding bata merah terakota dan lis krem",
+        "signatureFeatures": [
+          "Deretan pilar megah gerbang yustisia",
+          "Jembatan penghubung (skybridge) ke gedung kelas",
+          "Ruang sidang peradilan semu (Moot Court)",
+          "Plaza Serambi Inspirasi"
+        ],
+        "entranceSide": "west",
+        "notes": "Dinamai tokoh hukum progresif nasional Prof. Dr. Satjipto Rahardjo, S.H."
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fib",
+      "name": "Fakultas Ilmu Budaya (Dekanat & Pendopo Budaya FIB)",
+      "sources": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/File:FIB_UNDIP_-_panoramio.jpg",
+          "type": "wikimedia-commons",
+          "licence": "CC BY-SA 3.0",
+          "author": "Panoramio / Wikimedia Commons contributor",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2015"
+        },
+        {
+          "url": "https://fib.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Ilmu Budaya Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 3,
+        "roofType": "joglo-tajug",
+        "mainColors": ["#78350F", "#D97706", "#451A03", "#FDE68A"],
+        "facade": "Gaya vernakular Nusantara dengan elemen kayu jati ekspos, pilar pendopo kayu berukir, dan dinding plester hangat",
+        "signatureFeatures": [
+          "Pendopo Joglo terbuka tempat pentas karawitan & seni",
+          "Taman bambu dan mahoni asri",
+          "Mimbar kebudayaan mahasiswa",
+          "Gedung laboratorium gamelan"
+        ],
+        "entranceSide": "north",
+        "notes": "Menonjolkan filosofi kearifan lokal Jawa dan ruang interaksi terbuka"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "sv",
+      "name": "Sekolah Vokasi (Gedung Utama Hibah Astra-Sinar Mas & TEFA)",
+      "sources": [
+        {
+          "url": "https://vokasi.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Sekolah Vokasi Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=peresmian-vokasi-jokowi",
+          "type": "official-broadcast",
+          "licence": "Public government / university broadcast observation",
+          "author": "Sekretariat Presiden RI",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2020-08-26"
+        }
+      ],
+      "observed": {
+        "floors": 4,
+        "roofType": "flat-deck",
+        "mainColors": ["#1E40AF", "#0284C7", "#F8FAFC", "#475569"],
+        "facade": "Curtain wall kaca modern dengan panel komposit biru tua dan abu-abu metalik berstandar green building",
+        "signatureFeatures": [
+          "Gedung ramah lingkungan bersertifikasi internasional",
+          "Teaching Factory (TEFA) rekayasa terapan industri",
+          "Plaza inkubator bisnis vokasi",
+          "Menara perkuliahan terapan 4.0"
+        ],
+        "entranceSide": "south",
+        "notes": "Diresmikan langsung oleh Presiden Joko Widodo pada 26 Agustus 2020, hibah dari Astra dan Sinar Mas"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fpsi",
+      "name": "Fakultas Psikologi (Gedung Magenta)",
+      "sources": [
+        {
+          "url": "https://psikologi.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Psikologi Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://undip.ac.id",
+          "type": "university-news",
+          "licence": "Educational reference / fair use observation",
+          "author": "Humas Undip",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        }
+      ],
+      "observed": {
+        "floors": 8,
+        "roofType": "flat-tower",
+        "mainColors": ["#9D174D", "#BE185D", "#FDF2F8", "#334155"],
+        "facade": "Menara pencakar langit kampus setinggi 54 meter dengan fasad bergaris vertikal warna magenta khas pataka fakultas",
+        "signatureFeatures": [
+          "Gedung Magenta setinggi 54 meter dengan 8 lantai",
+          "Pemandangan menghadap ke arah laut Jawa",
+          "Konsep arsitektur bioclimatic and biophilic green building",
+          "Laboratorium psikodiagnostik & ruang konseling one-way mirror"
+        ],
+        "entranceSide": "west",
+        "notes": "Gedung tertinggi di antara fakultas di bukit Tembalang, identik dengan warna magenta"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "feb",
+      "name": "Fakultas Ekonomika dan Bisnis (Dekanat & Pertamina Hall)",
+      "sources": [
+        {
+          "url": "https://feb.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Ekonomika dan Bisnis UNDIP",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://lpmedentsundip.com",
+          "type": "student-press",
+          "licence": "Editorial observation",
+          "author": "LPM Edents FEB Undip",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        }
+      ],
+      "observed": {
+        "floors": 4,
+        "roofType": "hipped-dome",
+        "mainColors": ["#92400E", "#B45309", "#FEF3C7", "#1E3A8A"],
+        "facade": "Dinding bata terakota hangat dipadu portico pilar putih gading simetris dan aula besar",
+        "signatureFeatures": [
+          "Pertamina Hall di lantai 3 gedung Dekanat",
+          "Dekat embung / kolam resapan FEB yang asri",
+          "Galeri Investasi Bursa Efek & Bloomberg Lab",
+          "Kompleks terpadu dengan selasar penghubung"
+        ],
+        "entranceSide": "north",
+        "notes": "Pusat bisnis dan ekonomi dengan hall serbaguna hibah Pertamina"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fsm",
+      "name": "Fakultas Sains dan Matematika (Gedung Acintya Prasada)",
+      "sources": [
+        {
+          "url": "https://fsm.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Sains dan Matematika UNDIP",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://jatengdaily.com/2019/peresmian-gedung-acintya-prasada-fsm-undip",
+          "type": "news-report",
+          "licence": "Editorial observation",
+          "author": "Jateng Daily",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2019-07-17"
+        }
+      ],
+      "observed": {
+        "floors": 6,
+        "roofType": "flat-stepped",
+        "mainColors": ["#0284C7", "#0369A1", "#F1F5F9", "#0F172A"],
+        "facade": "Gedung modern bertingkat 6 dengan dinding putih krem, aksen garis vertikal biru elektrik, dan jendela modular laboratorium",
+        "signatureFeatures": [
+          "Gedung Acintya Prasada megah 6 lantai",
+          "Aula pertemuan dan yudisium di lantai 6",
+          "Bersebelahan dengan Masjid Al-Kautsar dan Gedung D",
+          "Laboratorium sains komputasi, bioteknologi, dan fisika"
+        ],
+        "entranceSide": "east",
+        "notes": "Nama Acintya Prasada berarti gedung megah tak terlampaui dalam bahasa Sanskerta"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fk",
+      "name": "Fakultas Kedokteran (Gedung Dekanat Mayjen dr. R. Soewondo Sastrodiprojo)",
+      "sources": [
+        {
+          "url": "https://fk.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Kedokteran Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://id.wikipedia.org/wiki/Fakultas_Kedokteran_Universitas_Diponegoro",
+          "type": "encyclopedia",
+          "licence": "CC BY-SA 4.0",
+          "author": "Wikipedia Contributors",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        }
+      ],
+      "observed": {
+        "floors": 3,
+        "roofType": "hipped-metal",
+        "mainColors": ["#065F46", "#047857", "#F8FAFC", "#10B981"],
+        "facade": "Dinding putih bersih dengan lis aksen hijau zamrud medis, lobi kaca lapang, dan selasar tertutup",
+        "signatureFeatures": [
+          "Gedung Mayjen dr. R. Soewondo Sastrodiprojo (Dekanat)",
+          "Sirkulasi terpadu menuju RSND (Rumah Sakit Nasional Diponegoro)",
+          "Laboratorium OSCE dan anatomi kedokteran",
+          "Taman asri di tengah sayap perkuliahan"
+        ],
+        "entranceSide": "north",
+        "notes": "Satu kawasan terpadu dengan rumah sakit pendidikan RSND"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fkm",
+      "name": "Fakultas Kesehatan Masyarakat (Gedung Dekanat & Perkuliahan)",
+      "sources": [
+        {
+          "url": "https://fkm.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Kesehatan Masyarakat UNDIP",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 4,
+        "roofType": "hipped-gable",
+        "mainColors": ["#0F766E", "#14B8A6", "#F0FDFA", "#475569"],
+        "facade": "Fasad modern institusi akademik dengan jendela kaca lebar berkusen abu-abu gelap dan selasar sirkulasi sejuk",
+        "signatureFeatures": [
+          "Foyer luas berlantai keramik cerah",
+          "Laboratorium kesehatan lingkungan dan K3",
+          "Taman tanaman obat herbal",
+          "Selasar penghubung antar gedung program studi"
+        ],
+        "entranceSide": "north",
+        "notes": "Gedung dekanat dan ruang kuliah 4 lantai di koridor selatan kampus"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fpik",
+      "name": "Fakultas Perikanan dan Ilmu Kelautan (Gedung A Dekanat FPIK)",
+      "sources": [
+        {
+          "url": "https://fpik.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Perikanan dan Ilmu Kelautan UNDIP",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 3,
+        "roofType": "maritime-curved",
+        "mainColors": ["#0284C7", "#0369A1", "#E0F2FE", "#0C4A6E"],
+        "facade": "Gaya arsitektur bernuansa maritim dengan ornamen garis gelombang biru dan dinding bersih",
+        "signatureFeatures": [
+          "Gedung A pusat Dekanat FPIK lantai 2",
+          "Kolam basah percobaan dan hatchery budidaya ikan",
+          "Laboratorium oseanografi dan navigasi laut",
+          "Monumen jangkar/haluan bahari"
+        ],
+        "entranceSide": "north",
+        "notes": "Kompleks perikanan dan oseanografi dengan instalasi riset perairan"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "fpp",
+      "name": "Fakultas Peternakan dan Pertanian (Gedung drh. Soejono Koesoemowardojo)",
+      "sources": [
+        {
+          "url": "https://fpp.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Fakultas Peternakan dan Pertanian UNDIP",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        },
+        {
+          "url": "https://undip.ac.id/berita/peresmian-gedung-fpp-2023",
+          "type": "university-news",
+          "licence": "Educational reference / fair use observation",
+          "author": "Humas Undip",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2023-08"
+        }
+      ],
+      "observed": {
+        "floors": 5,
+        "roofType": "modern-flat-gable",
+        "mainColors": ["#15803D", "#166534", "#FEF9C3", "#78350F"],
+        "facade": "Gedung baru 5 lantai modern minimalis beraksen hijau daun dan elemen kayu, dipadu kompleks kandang dan greenhouse",
+        "signatureFeatures": [
+          "Gedung drh. Soejono Koesoemowardojo 5 lantai berfasilitas lift",
+          "Greenhouse riset agroteknologi kaca",
+          "Kandang ternak percontohan modern",
+          "Lahan percobaan agrosains terpadu"
+        ],
+        "entranceSide": "east",
+        "notes": "Gedung baru diresmikan Agustus 2023 di koridor barat daya kampus"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "widya-puraya",
+      "name": "Kawasan Rektorat Widya Puraya & Patung Kuda Pangeran Diponegoro",
+      "sources": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/File:Widya_puraya_undip.jpg",
+          "type": "wikimedia-commons",
+          "licence": "CC BY-SA 3.0",
+          "author": "Wikimedia Commons / Panoramio contributor",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2013"
+        },
+        {
+          "url": "https://undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 3,
+        "roofType": "grand-joglo",
+        "mainColors": ["#78350F", "#B45309", "#FEF3C7", "#1E293B"],
+        "facade": "Struktur memanjang simetris 3 lantai dengan atap joglo tumpang tiga khas Jawa, tangga marmer megah, dan pilar teras",
+        "signatureFeatures": [
+          "Atap Joglo tumpang tiga agung",
+          "Lapangan upacara Widya Puraya luas",
+          "Patung Kuda Pangeran Diponegoro",
+          "Pusat administrasi Rektorat universitas"
+        ],
+        "entranceSide": "south",
+        "notes": "Pusat gravitasi visual dan landmark paling terkenal di kampus Tembalang"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "gsg",
+      "name": "Gedung Serbaguna Prof. Soedarto, S.H. (Auditorium GSG)",
+      "sources": [
+        {
+          "url": "https://undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        },
+        {
+          "url": "https://suarabaru.id",
+          "type": "news-report",
+          "licence": "Editorial observation",
+          "author": "Suara Baru",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        }
+      ],
+      "observed": {
+        "floors": 3,
+        "roofType": "besek-dome",
+        "mainColors": ["#475569", "#CBD5E1", "#F8FAFC", "#1E293B"],
+        "facade": "Bangunan auditorium raksasa dengan fasad kisi-kisi lengkung abu-abu perak dan pelataran parkir luas",
+        "signatureFeatures": [
+          "Auditorium konvensi dan wisuda universitas",
+          "Bentuk lengkung berstruktur bentang lebar",
+          "Berada tepat di sebelah barat Bundaran Pertama",
+          "Fasilitas ruang pameran dan resepsi"
+        ],
+        "entranceSide": "east",
+        "notes": "Gedung pertemuan legendaris tempat penyelenggaraan wisuda puluhan ribu alumni"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "gerbang-utama",
+      "name": "Pintu Gerbang Utama & Patung Pangeran Diponegoro Ngesrep",
+      "sources": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/File:Patung_Pangeran_Diponegoro.jpg",
+          "type": "wikimedia-commons",
+          "licence": "CC BY-SA 3.0",
+          "author": "Wikimedia Commons contributor",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2016"
+        },
+        {
+          "url": "https://kumparan.com",
+          "type": "news-report",
+          "licence": "Editorial observation",
+          "author": "Kumparan",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2023"
+        }
+      ],
+      "observed": {
+        "floors": 1,
+        "roofType": "monumental-portal",
+        "mainColors": ["#1E293B", "#F8FAFC", "#D97706", "#991B1B"],
+        "facade": "Monumen patung Pangeran Diponegoro menunggang kuda putih gagah di atas pedestal tinggi diapit gerbang selamat datang",
+        "signatureFeatures": [
+          "Patung Pangeran Diponegoro di atas kuda putih Turangga Seta",
+          "Karya seniman Wahyudi (1980-an)",
+          "Portal gerbang masuk utama Jl. Prof. Soedarto",
+          "Taman pulau bundaran gerbang"
+        ],
+        "entranceSide": "north",
+        "notes": "Landmark penyambut di pintu masuk kampus dari arah Setiabudi / Ngesrep"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "masjid-kampus",
+      "name": "Masjid Kampus Diponegoro (Maskam Undip)",
+      "sources": [
+        {
+          "url": "https://commons.wikimedia.org/wiki/File:Masjid_kampus_universitas_diponegoro.jpg",
+          "type": "wikimedia-commons",
+          "licence": "CC BY-SA 3.0",
+          "author": "Wikimedia Commons contributor",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2018"
+        },
+        {
+          "url": "https://undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 2,
+        "roofType": "brunjung-omah-pencu",
+        "mainColors": ["#15803D", "#78350F", "#F8FAFC", "#D97706"],
+        "facade": "Arsitektur tradisional pesisir Jawa utara tanpa kubah setengah bola, beratap tajuk meruncing omah pencu dengan sokoguru kayu jati",
+        "signatureFeatures": [
+          "Bentuk atap brunjung Omah Pencu pesisir Jawa Demak-Jepara",
+          "Rancangan arsitek senior Prof. Ir. Totok Roesmanto",
+          "Tempat wudhu bawah tanah yang sejuk",
+          "Menara adzan terpisah bergaya minaret Jawa"
+        ],
+        "entranceSide": "east",
+        "notes": "Diresmikan 4 Desember 2009, representasi arsitektur islam vernakular pesisir nusantara"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "rsnd",
+      "name": "Rumah Sakit Nasional Diponegoro (RSND)",
+      "sources": [
+        {
+          "url": "https://rsnd.undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "RSND Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 5,
+        "roofType": "flat-emergency-canopy",
+        "mainColors": ["#047857", "#F8FAFC", "#E2E8F0", "#065F46"],
+        "facade": "Gedung rumah sakit multi-lantai modern dengan kanopi drop-off IGD, dinding putih klinis, dan sayap rawat inap terpadu",
+        "signatureFeatures": [
+          "Lobi IGD luas dengan kanopi darurat",
+          "Paviliun perawatan bertingkat lima",
+          "Terhubung langsung dengan koridor FK Undip",
+          "Ambulans bay & drop-off pasien terpisah"
+        ],
+        "entranceSide": "west",
+        "notes": "Rumah Sakit Perguruan Tinggi Negeri tipe B rujukan utama Jawa Tengah"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "student-centre",
+      "name": "Student Centre & PKM Undip",
+      "sources": [
+        {
+          "url": "https://undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2024"
+        }
+      ],
+      "observed": {
+        "floors": 3,
+        "roofType": "curved-barrel",
+        "mainColors": ["#2563EB", "#F8FAFC", "#EA580C", "#334155"],
+        "facade": "Gedung beratap lengkung modern dengan aula ormawa, sekretariat UKM, dan pujasera mahasiswa",
+        "signatureFeatures": [
+          "Markas 40 Unit Kegiatan Mahasiswa (UKM)",
+          "Pujasera kantin mahasiswa di lantai dasar",
+          "Pendopo panggung ekspresi mahasiswa",
+          "Dekat pertigaan jalan masuk utama"
+        ],
+        "entranceSide": "north",
+        "notes": "Pusat aktivitas ekstrakurikuler mahasiswa Undip Tembalang"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "perpustakaan",
+      "name": "UPT Perpustakaan & Undip Press (Widya Puraya Complex)",
+      "sources": [
+        {
+          "url": "https://undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "UPT Perpustakaan Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 5,
+        "roofType": "stepped-hipped",
+        "mainColors": ["#78350F", "#F1F5F9", "#1E293B", "#D97706"],
+        "facade": "Gedung bertingkat 5 dengan fasad kaca lebar ruang baca berkonsep modern industrial natural",
+        "signatureFeatures": [
+          "The Gade Creative Lounge untuk ruang kolaborasi",
+          "Layanan digital library 5 lantai",
+          "Koleksi tandon dan Regional Information Outlet Bank Dunia",
+          "Terletak di sayap barat daya Widya Puraya"
+        ],
+        "entranceSide": "north",
+        "notes": "Pusat literasi dan repositori karya ilmiah Universitas Diponegoro"
+      },
+      "confidence": "high"
+    },
+    {
+      "buildingId": "taman-inspirasi",
+      "name": "Taman Inspirasi Undip",
+      "sources": [
+        {
+          "url": "https://undip.ac.id",
+          "type": "official-website",
+          "licence": "Educational reference / fair use observation",
+          "author": "Universitas Diponegoro",
+          "retrievedAt": "2026-11-09",
+          "captureDate": "2025"
+        }
+      ],
+      "observed": {
+        "floors": 0,
+        "roofType": "gazebo-open",
+        "mainColors": ["#15803D", "#166534", "#78350F", "#FEF3C7"],
+        "facade": "Taman hijau terbuka dengan jalur pedestrian paving, pepohonan rindang mahoni, dan bangku taman",
+        "signatureFeatures": [
+          "Gazebo diskusi santai beratap joglo mini",
+          "Jalur pedestrian ramah pejalan kaki",
+          "Pemandangan terbuka ke arah Rektorat Widya Puraya",
+          "Area istirahat hijau teduh"
+        ],
+        "entranceSide": "all",
+        "notes": "Taman ikonik di seberang barat Widya Puraya"
+      },
+      "confidence": "high"
+    }
+  ]
+}
