@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useMemo, useSyncExternalStore, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useMemo, useSyncExternalStore, startTransition, ReactNode } from 'react';
 import { UserAnswers, ProgramScore, FacultyScore, DimensionScore, isPsdku } from '@/data/types';
 import { questions } from '@/data/questions';
 import { studyPrograms } from '@/data/programs';
@@ -82,47 +82,48 @@ const LEARNING_LABELS: Record<string, string> = {
 };
 
 export function QuestionnaireProvider({ children }: { children: ReactNode }) {
-  const [answers, setAnswers] = useState<UserAnswers>(() => {
-    if (typeof window === 'undefined') return {};
-    try {
-      const savedAnswers = localStorage.getItem(STORAGE_KEY);
-      return savedAnswers ? JSON.parse(savedAnswers) : {};
-    } catch {
-      return {};
-    }
-  });
-
-  const [comparisonIds, setComparisonIds] = useState<string[]>(() => {
-    if (typeof window === 'undefined') return [];
-    try {
-      const savedComparison = localStorage.getItem(COMPARISON_KEY);
-      return savedComparison ? JSON.parse(savedComparison) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [answers, setAnswers] = useState<UserAnswers>({});
+  const [comparisonIds, setComparisonIds] = useState<string[]>([]);
+  const isInitializedRef = useRef(false);
 
   const hydrated = useSyncExternalStore(subscribeNoop, () => true, () => false);
 
-  // Save to localStorage whenever answers change after hydration
+  // Load saved answers from localStorage after client hydration
   useEffect(() => {
-    if (!hydrated) return;
+    try {
+      const savedAnswers = localStorage.getItem(STORAGE_KEY);
+      const savedComparison = localStorage.getItem(COMPARISON_KEY);
+      startTransition(() => {
+        if (savedAnswers) {
+          setAnswers(JSON.parse(savedAnswers));
+        }
+        if (savedComparison) {
+          setComparisonIds(JSON.parse(savedComparison));
+        }
+      });
+    } catch {}
+    isInitializedRef.current = true;
+  }, []);
+
+  // Save to localStorage whenever answers change after initialization
+  useEffect(() => {
+    if (!isInitializedRef.current) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
     } catch {
       // Ignore storage errors
     }
-  }, [answers, hydrated]);
+  }, [answers]);
 
-  // Save comparison IDs after hydration
+  // Save comparison IDs after initialization
   useEffect(() => {
-    if (!hydrated) return;
+    if (!isInitializedRef.current) return;
     try {
       localStorage.setItem(COMPARISON_KEY, JSON.stringify(comparisonIds));
     } catch {
       // Ignore storage errors
     }
-  }, [comparisonIds, hydrated]);
+  }, [comparisonIds]);
 
   const setAnswer = (questionId: number, value: number) => {
     setAnswers((prev) => ({

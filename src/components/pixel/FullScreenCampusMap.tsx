@@ -44,8 +44,8 @@ export function FullScreenCampusMap({
 
   // Viewport tracking for precise responsive camera math
   const [viewportSize, setViewportSize] = useState<{ width: number; height: number }>({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1920,
-    height: typeof window !== 'undefined' ? window.innerHeight : 1080,
+    width: 1920,
+    height: 1080,
   });
 
   useEffect(() => {
@@ -468,133 +468,156 @@ export function FullScreenCampusMap({
           <rect x="0" y="0" width={MAP_WIDTH} height={MAP_HEIGHT} fill="#141E0D" />
           <rect x="0" y="0" width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#fullCampusForest)" opacity="0.65" />
 
-          {/* CONTINUOUS CAMPUS ROAD NETWORK */}
+          {/* CONTINUOUS CAMPUS ROAD NETWORK (REAL OSM GEOMETRY) */}
           <CampusRoadNetwork />
 
+          {/* WADUK PENDIDIKAN DIPONEGORO (REAL OSM WATER RESERVOIR) */}
+          <g id="waduk-pendidikan-undip">
+            <polygon
+              points="1632.8,625.6 1611.9,527.0 1574.5,540.5 1560.8,547.9 1545.6,550.3 1533.3,549.4 1519.0,552.0 1516.6,556.6 1516.4,562.1 1513.9,567.9 1509.9,571.8 1502.3,571.5 1496.2,570.6 1492.3,579.0 1486.0,592.8 1485.9,600.5 1490.1,629.3 1489.9,657.3 1484.1,675.8 1482.4,684.5 1473.0,687.4 1446.9,691.8 1455.0,697.1 1467.8,705.5 1488.0,715.2 1500.7,717.6 1534.8,715.0 1535.7,716.1 1554.4,702.8 1570.7,681.1 1565.8,659.4 1578.0,638.7 1632.8,625.6"
+              fill="#0284C7"
+              stroke="#0369A1"
+              strokeWidth="4"
+              opacity="0.85"
+            />
+            <rect x="1465" y="605" width="145" height="18" fill="#190E08" rx="4" stroke="#0284C7" strokeWidth="1" />
+            <text x="1537" y="618" fill="#BAE6FD" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              Waduk Pendidikan Undip
+            </text>
+          </g>
+
+          {/* REAL OSM GREEN SPACES & PARKS */}
+          <g id="campus-green-parks">
+            {/* Taman Widya Puraya */}
+            <polygon
+              points="751.7,287.6 751.4,297.5 770.0,326.2 776.3,323.0 793.7,313.9 808.8,304.4 850.9,281.3 828.7,248.7 814.8,244.4 804.0,248.5 791.2,254.2 781.7,260.2 769.1,269.7 753.4,280.3 751.7,287.6"
+              fill="#15803D"
+              stroke="#166534"
+              strokeWidth="2"
+              opacity="0.85"
+            />
+            {/* Lapangan Basket GKB FT */}
+            <polygon
+              points="933.6,428.2 950.3,436.6 937.4,463.1 920.3,454.3 933.6,428.2"
+              fill="#B45309"
+              stroke="#F59E0B"
+              strokeWidth="1.5"
+            />
+            {/* Lapangan Futsal & Stadion Area */}
+            <polygon
+              points="1599.8,821.9 1604.5,832.0 1597.7,835.2 1593.2,825.4 1562.5,839.5 1551.4,815.4 1540.6,792.0 1609.0,760.5 1630.7,807.6 1599.8,821.9"
+              fill="#15803D"
+              stroke="#86EFAC"
+              strokeWidth="1.5"
+              strokeDasharray="4 2"
+            />
+          </g>
+
           {/* PEDESTRIAN PLAZAS & LAPANGAN WIDYA PURAYA */}
-          <rect x="860" y="500" width="240" height="160" fill="url(#fullCampusPaving)" stroke="#78350F" strokeWidth="3" />
-          <circle cx="980" cy="580" r="55" fill="#166534" stroke="#14532D" strokeWidth="4" />
-          <circle cx="800" cy="340" r="42" fill="#166534" stroke="#14532D" strokeWidth="3" />
+          <rect x="910" y="420" width="180" height="120" fill="url(#fullCampusPaving)" stroke="#78350F" strokeWidth="2" rx="4" />
+          <circle cx="1000" cy="480" r="38" fill="#166534" stroke="#14532D" strokeWidth="3" />
 
           {/* 1. PINTU GERBANG UTAMA TEMBALANG */}
-          <g id="gerbang-tembalang" transform="translate(730, 20)">
-            <rect x="20" y="30" width="18" height="50" fill="#78350F" />
-            <rect x="102" y="30" width="18" height="50" fill="#78350F" />
+          <g id="gerbang-tembalang" transform="translate(885, 235)">
+            <rect x="20" y="30" width="18" height="40" fill="#78350F" />
+            <rect x="102" y="30" width="18" height="40" fill="#78350F" />
             <polygon points="10,30 70,10 130,30" fill="#B45309" />
             <rect x="38" y="24" width="64" height="6" fill="#F59E0B" />
-            <text x="70" y="94" fill="#FDE68A" fontSize="12" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+            <text x="70" y="84" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Gerbang Utama Tembalang
             </text>
           </g>
 
-          {/* 2. UPT LABORATORIUM TERPADU (Right of Entrance) */}
-          <g id="landmark-upt-lab" transform="translate(560, 60)">
-            <rect x="10" y="15" width="120" height="40" fill="#1E293B" stroke="#0284C7" strokeWidth="2" rx="4" />
-            <rect x="20" y="20" width="30" height="12" fill="#38BDF8" opacity="0.8" />
-            <rect x="60" y="20" width="30" height="12" fill="#38BDF8" opacity="0.8" />
-            <rect x="15" y="60" width="110" height="18" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="70" y="73" fill="#93C5FD" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          {/* 2. UPT LABORATORIUM TERPADU */}
+          <g id="landmark-upt-lab" transform="translate(820, 290)">
+            <rect x="10" y="15" width="105" height="32" fill="#1E293B" stroke="#0284C7" strokeWidth="2" rx="4" />
+            <rect x="15" y="19" width="24" height="10" fill="#38BDF8" opacity="0.8" />
+            <rect x="45" y="19" width="24" height="10" fill="#38BDF8" opacity="0.8" />
+            <rect x="10" y="50" width="105" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
+            <text x="62" y="62" fill="#93C5FD" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               UPT Lab Terpadu
             </text>
           </g>
 
-          {/* 3. GEDUNG PMB & TREK JOGGING LAMA (Left of Entrance) */}
-          <g id="landmark-pmb" transform="translate(970, 60)">
-            <ellipse cx="65" cy="30" rx="55" ry="24" fill="none" stroke="#DC2626" strokeWidth="6" strokeDasharray="6 3" />
-            <rect x="25" y="15" width="80" height="30" fill="#FEF3C7" stroke="#B45309" strokeWidth="2" rx="4" />
-            <rect x="15" y="58" width="100" height="18" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="65" y="71" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          {/* 3. GEDUNG PMB & TREK JOGGING LAMA */}
+          <g id="landmark-pmb" transform="translate(940, 290)">
+            <ellipse cx="55" cy="24" rx="45" ry="18" fill="none" stroke="#DC2626" strokeWidth="4" strokeDasharray="5 3" />
+            <rect x="20" y="12" width="70" height="24" fill="#FEF3C7" stroke="#B45309" strokeWidth="1.5" rx="3" />
+            <rect x="12" y="46" width="86" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
+            <text x="55" y="58" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               PMB & Jogging Track
             </text>
           </g>
 
-          {/* 4. STUDENT CENTRE & MENARA UNDIP TOWER */}
-          <g id="landmark-sc-tower" transform="translate(1160, 70)">
-            {/* UNDIP Tower high-rise */}
-            <rect x="70" y="5" width="40" height="70" fill="#0F172A" stroke="#38BDF8" strokeWidth="2" rx="2" />
-            <rect x="75" y="10" width="30" height="8" fill="#38BDF8" opacity="0.75" />
-            <rect x="75" y="24" width="30" height="8" fill="#38BDF8" opacity="0.75" />
-            <rect x="75" y="38" width="30" height="8" fill="#38BDF8" opacity="0.75" />
-            {/* Student Centre */}
-            <rect x="10" y="35" width="55" height="40" fill="#451A03" stroke="#F59E0B" strokeWidth="2" rx="4" />
-            <polygon points="10,35 37,20 65,35" fill="#D97706" />
-            <rect x="5" y="80" width="115" height="18" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="62" y="93" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              SC & Menara Undip
-            </text>
-          </g>
-
-          {/* 5. GEDUNG TEKNIK GEOLOGI */}
-          <g id="landmark-geologi" transform="translate(660, 210)">
-            <rect x="10" y="10" width="80" height="30" fill="#78350F" stroke="#F59E0B" strokeWidth="1" rx="4" />
-            <text x="50" y="28" fill="#FEF3C7" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Teknik Geologi
-            </text>
-          </g>
-
-          {/* 6. BUNDARAN PERTAMA */}
-          <g id="bundaran-pertama" transform="translate(760, 300)">
-            <circle cx="40" cy="40" r="30" fill="#15803D" stroke="#166534" strokeWidth="3" />
-            <circle cx="40" cy="40" r="14" fill="#FDE68A" opacity="0.8" />
-            <text x="40" y="78" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Bundaran Pertama
-            </text>
-          </g>
-
-          {/* 7. GSG PROF. SOEDARTO */}
-          <g id="landmark-gsg" transform="translate(500, 280)">
-            <polygon points="40,35 100,5 160,35" fill="#78350F" />
-            <polygon points="20,60 100,28 180,60" fill="#9A3412" />
-            <rect x="30" y="60" width="140" height="35" fill="#FEF3C7" />
-            <text x="100" y="110" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          {/* 4. GSG PROF. SOEDARTO */}
+          <g id="landmark-gsg" transform="translate(800, 395)">
+            <polygon points="35,28 85,5 135,28" fill="#78350F" />
+            <polygon points="15,48 85,22 155,48" fill="#9A3412" />
+            <rect x="25" y="48" width="120" height="30" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" rx="2" />
+            <rect x="15" y="82" width="140" height="18" fill="#190E08" rx="4" stroke="#F59E0B" strokeWidth="1" />
+            <text x="85" y="95" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               GSG Prof. Soedarto
             </text>
           </g>
 
-          {/* 8. KOMPLEKS ARSITEKTUR, TEKNIK SIPIL, & PWK */}
-          <g id="landmark-sipil-arsitektur-pwk" transform="translate(1100, 190)">
-            <rect x="10" y="10" width="130" height="40" fill="#1E293B" stroke="#94A3B8" strokeWidth="2" rx="4" />
-            <polygon points="10,10 75,-5 140,10" fill="#475569" />
-            <rect x="10" y="55" width="130" height="18" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="75" y="68" fill="#94A3B8" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Arsitektur • Sipil • PWK
+          {/* 5. BUNDARAN PERTAMA */}
+          <g id="bundaran-pertama" transform="translate(905, 513)">
+            <circle cx="40" cy="40" r="28" fill="#15803D" stroke="#166534" strokeWidth="3" />
+            <circle cx="40" cy="40" r="14" fill="#FDE68A" opacity="0.8" />
+            <text x="40" y="78" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              Bundaran Pertama
             </text>
           </g>
 
-          {/* 9. TEKNIK KOMPUTER, GEODESI, & PERKAPALAN */}
-          <g id="landmark-komputer-geodesi" transform="translate(910, 310)">
-            <rect x="10" y="10" width="110" height="35" fill="#0F172A" stroke="#38BDF8" strokeWidth="1" rx="4" />
-            <text x="65" y="26" fill="#38BDF8" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Teknik Komputer
-            </text>
-            <text x="65" y="38" fill="#94A3B8" fontSize="8" textAnchor="middle" fontFamily="monospace">
-              Geodesi • Perkapalan
+          {/* 6. ART CENTRE UNDIP */}
+          <g id="landmark-art-centre" transform="translate(820, 560)">
+            <polygon points="10,24 45,8 80,24" fill="#9A3412" />
+            <rect x="15" y="24" width="60" height="22" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" rx="2" />
+            <rect x="5" y="50" width="80" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
+            <text x="45" y="62" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              Art Centre Undip
             </text>
           </g>
 
-          {/* 10. TAMAN INSPIRASI */}
-          <g id="landmark-taman-inspirasi" transform="translate(660, 560)">
-            <ellipse cx="45" cy="30" rx="35" ry="20" fill="#15803D" stroke="#166534" strokeWidth="2" />
-            <rect x="35" y="18" width="20" height="12" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" />
-            <text x="45" y="58" fill="#86EFAC" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          {/* 7. STUDENT CENTRE & MENARA UNDIP TOWER */}
+          <g id="landmark-sc-tower" transform="translate(730, 640)">
+            {/* UNDIP Tower high-rise */}
+            <rect x="65" y="5" width="38" height="65" fill="#0F172A" stroke="#38BDF8" strokeWidth="2" rx="2" />
+            <rect x="70" y="10" width="28" height="8" fill="#38BDF8" opacity="0.75" />
+            <rect x="70" y="22" width="28" height="8" fill="#38BDF8" opacity="0.75" />
+            <rect x="70" y="34" width="28" height="8" fill="#38BDF8" opacity="0.75" />
+            {/* Student Centre */}
+            <rect x="10" y="32" width="50" height="38" fill="#451A03" stroke="#F59E0B" strokeWidth="1.5" rx="3" />
+            <polygon points="10,32 35,18 60,32" fill="#D97706" />
+            <rect x="5" y="74" width="105" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
+            <text x="57" y="86" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              SC & Menara Undip
+            </text>
+          </g>
+
+          {/* 8. TAMAN INSPIRASI */}
+          <g id="landmark-taman-inspirasi" transform="translate(880, 630)">
+            <ellipse cx="45" cy="24" rx="35" ry="16" fill="#15803D" stroke="#166534" strokeWidth="2" />
+            <rect x="35" y="14" width="20" height="10" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" />
+            <text x="45" y="48" fill="#86EFAC" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Taman Inspirasi
             </text>
           </g>
 
-          {/* 11. BUNDARAN PATUNG KUDA PANGERAN DIPONEGORO (WIDYA PURAYA) */}
-          <g id="bundaran-kuda" transform="translate(945, 545)">
-            <rect x="25" y="45" width="20" height="12" fill="#E2E8F0" />
-            <path d="M 32 30 L 42 22 L 40 35 L 45 42 L 30 45 L 26 38 Z" fill="#FFFFFF" />
-            <circle cx="36" cy="20" r="3" fill="#FFFFFF" />
-            <text x="35" y="68" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          {/* 9. BUNDARAN PATUNG KUDA PANGERAN DIPONEGORO (WIDYA PURAYA) */}
+          <g id="bundaran-kuda" transform="translate(975, 455)">
+            <rect x="20" y="42" width="16" height="10" fill="#E2E8F0" />
+            <path d="M 26 28 L 34 22 L 32 32 L 36 38 L 24 40 L 21 34 Z" fill="#FFFFFF" />
+            <circle cx="29" cy="20" r="2.5" fill="#FFFFFF" />
+            <text x="28" y="60" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Patung Kuda Undip
             </text>
           </g>
 
-          {/* 12. GEDUNG REKTORAT (WIDYA PURAYA) */}
+          {/* 10. GEDUNG REKTORAT (WIDYA PURAYA) */}
           <g
             id="landmark-rektorat"
-            transform="translate(890, 410)"
+            transform="translate(910, 410)"
             className="cursor-pointer"
             onClick={() => onSelectFaculty?.(null)}
           >
@@ -605,51 +628,71 @@ export function FullScreenCampusMap({
             </text>
           </g>
 
-          {/* 13. ART CENTRE UNDIP */}
-          <g id="landmark-art-centre" transform="translate(1260, 340)">
-            <polygon points="10,30 50,10 90,30" fill="#9A3412" />
-            <rect x="15" y="30" width="70" height="25" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" rx="2" />
-            <text x="50" y="68" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Art Centre Undip
+          {/* 11. GEDUNG TEKNIK GEOLOGI */}
+          <g id="landmark-geologi" transform="translate(968, 619)">
+            <rect x="10" y="10" width="75" height="26" fill="#78350F" stroke="#F59E0B" strokeWidth="1" rx="4" />
+            <text x="47" y="26" fill="#FEF3C7" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              Teknik Geologi
             </text>
           </g>
 
-          {/* 14. TEKNIK ELEKTRO */}
-          <g id="landmark-elektro" transform="translate(800, 660)">
-            <rect x="10" y="10" width="100" height="35" fill="#1E293B" stroke="#F59E0B" strokeWidth="1" rx="4" />
-            <polygon points="50,10 60,-5 70,10" fill="#3B82F6" />
-            <text x="60" y="28" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          {/* 12. TEKNIK ELEKTRO */}
+          <g id="landmark-elektro" transform="translate(975, 700)">
+            <rect x="10" y="10" width="90" height="30" fill="#1E293B" stroke="#F59E0B" strokeWidth="1" rx="4" />
+            <polygon points="45,10 55,-3 65,10" fill="#3B82F6" />
+            <text x="55" y="26" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Teknik Elektro
             </text>
           </g>
 
+          {/* 13. KOMPLEKS ARSITEKTUR, TEKNIK SIPIL, & PWK */}
+          <g id="landmark-sipil-arsitektur-pwk" transform="translate(840, 790)">
+            <rect x="10" y="10" width="125" height="35" fill="#1E293B" stroke="#94A3B8" strokeWidth="1.5" rx="4" />
+            <polygon points="10,10 72,-3 135,10" fill="#475569" />
+            <rect x="10" y="48" width="125" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
+            <text x="72" y="60" fill="#94A3B8" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              Arsitektur • Sipil • PWK
+            </text>
+          </g>
+
+          {/* 14. TEKNIK KOMPUTER, GEODESI, & PERKAPALAN */}
+          <g id="landmark-komputer-geodesi" transform="translate(980, 750)">
+            <rect x="10" y="10" width="105" height="32" fill="#0F172A" stroke="#38BDF8" strokeWidth="1" rx="4" />
+            <text x="62" y="24" fill="#38BDF8" fontSize="8.5" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              Teknik Komputer
+            </text>
+            <text x="62" y="36" fill="#94A3B8" fontSize="7.5" textAnchor="middle" fontFamily="monospace">
+              Geodesi • Perkapalan
+            </text>
+          </g>
+
           {/* 15. PERTIGAAN TIGA ARAH TIMUR */}
-          <g id="pertigaan-timur" transform="translate(1040, 770)">
-            <circle cx="20" cy="20" r="14" fill="#78350F" stroke="#F59E0B" strokeWidth="2" />
-            <text x="20" y="44" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          <g id="pertigaan-timur" transform="translate(1068, 516)">
+            <circle cx="20" cy="20" r="13" fill="#78350F" stroke="#F59E0B" strokeWidth="2" />
+            <text x="20" y="42" fill="#FDE68A" fontSize="8.5" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Pertigaan Timur
             </text>
           </g>
 
           {/* 16. KOMPLEKS MESIN, INDUSTRI, LINGKUNGAN, & KIMIA */}
-          <g id="landmark-mesin-industri-kimia" transform="translate(540, 940)">
-            <rect x="10" y="10" width="130" height="40" fill="#334155" stroke="#94A3B8" strokeWidth="1" rx="4" />
-            <text x="75" y="28" fill="#FEF3C7" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          <g id="landmark-mesin-industri-kimia" transform="translate(910, 910)">
+            <rect x="10" y="10" width="125" height="36" fill="#334155" stroke="#94A3B8" strokeWidth="1" rx="4" />
+            <text x="72" y="26" fill="#FEF3C7" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Mesin • Industri
             </text>
-            <text x="75" y="42" fill="#94A3B8" fontSize="9" textAnchor="middle" fontFamily="monospace">
+            <text x="72" y="39" fill="#94A3B8" fontSize="8" textAnchor="middle" fontFamily="monospace">
               Lingkungan • Kimia
             </text>
           </g>
 
           {/* 17. RUMAH SAKIT NASIONAL DIPONEGORO (RSND) */}
-          <g id="landmark-rsnd" transform="translate(1420, 1060)">
-            <rect x="10" y="15" width="120" height="50" fill="#F8FAFC" stroke="#047857" strokeWidth="3" rx="6" />
-            <rect x="58" y="22" width="24" height="24" fill="#047857" rx="3" />
-            <polygon points="68,26 72,26 72,42 68,42" fill="#FFFFFF" />
-            <polygon points="62,32 78,32 78,36 62,36" fill="#FFFFFF" />
-            <rect x="5" y="72" width="130" height="18" fill="#190E08" rx="6" stroke="#047857" strokeWidth="1" />
-            <text x="70" y="85" fill="#A7F3D0" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          <g id="landmark-rsnd" transform="translate(1600, 630)">
+            <rect x="10" y="15" width="115" height="46" fill="#F8FAFC" stroke="#047857" strokeWidth="2.5" rx="6" />
+            <rect x="55" y="22" width="22" height="22" fill="#047857" rx="3" />
+            <polygon points="64,25 68,25 68,41 64,41" fill="#FFFFFF" />
+            <polygon points="58,31 74,31 74,35 58,35" fill="#FFFFFF" />
+            <rect x="5" y="66" width="125" height="17" fill="#190E08" rx="5" stroke="#047857" strokeWidth="1" />
+            <text x="67" y="79" fill="#A7F3D0" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Kompleks RSND Undip
             </text>
           </g>

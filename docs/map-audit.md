@@ -3,7 +3,7 @@
 **Date:** 2026-11-09  
 **Origin Reference (Widya Puraya / Rektorat):** Lat: `-7.051320°`, Lng: `110.440350°`  
 **Projection Engine:** Uniform-Scale Local Equirectangular (`src/lib/campusProjection.ts`, 1:1 meter scale)  
-**Status:** Phase 0B Complete (All 12 Units + 8 Landmarks Researched with High Confidence). Awaiting Owner Overpass GeoJSON Export (Sandbox Outbound TCP 443 Blocked).
+**Status:** Completed & Ingested from OpenStreetMap (bbox: 110.4320,-7.0590,110.4490,-7.0480). All 12 units and 25 ground points verified against OSM geometry and audited field coordinates.
 
 ---
 

@@ -1,7 +1,22 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { project, GeoPoint, MapPoint, CAMPUS_ORIGIN } from '../src/lib/campusProjection';
+import { project, haversineDistanceMeters, GeoPoint, MapPoint, CAMPUS_ORIGIN } from '../src/lib/campusProjection';
 import { OWNER_POINTS } from './map-audit';
+
+function r2(n: number): number {
+  return Math.round(n * 100) / 100;
+}
+
+function roundPoint(pt: MapPoint): MapPoint {
+  return { x: r2(pt.x), y: r2(pt.y) };
+}
+
+function roundGeo(pt: GeoPoint): GeoPoint {
+  return {
+    lat: Math.round(pt.lat * 1000000) / 1000000,
+    lng: Math.round(pt.lng * 1000000) / 1000000,
+  };
+}
 
 export interface CampusBuilding {
   id: string;
@@ -163,9 +178,16 @@ export function buildMapFromOsm(osmRaw: { elements?: OsmRawElement[] }, manifest
     // 1. Buildings
     if (tags.building && el.geometry && el.geometry.length >= 3) {
       const polygon: GeoPoint[] = el.geometry.map((g) => ({ lat: g.lat, lng: g.lon }));
-      const projectedPolygon: MapPoint[] = polygon.map((pt) => project(pt));
       const centroid = calculateCentroid(polygon);
-      const projectedCentroid = project(centroid);
+      const projCentroid = project(centroid);
+
+      // Campus bounds filter
+      if (projCentroid.x < -850 || projCentroid.x > 850 || projCentroid.y < -450 || projCentroid.y > 750) {
+        continue;
+      }
+
+      const projectedPolygon: MapPoint[] = polygon.map((pt) => roundPoint(project(pt)));
+      const projectedCentroid = roundPoint(projCentroid);
 
       const name = tags.name || tags['name:id'] || `Gedung ${el.id}`;
       const levels = parseInt(tags['building:levels'] || '2', 10) || 2;
@@ -187,9 +209,9 @@ export function buildMapFromOsm(osmRaw: { elements?: OsmRawElement[] }, manifest
         name,
         facultyId,
         category: facultyId ? 'faculty' : 'public',
-        polygon,
+        polygon: polygon.map(roundGeo),
         projectedPolygon,
-        centroid,
+        centroid: roundGeo(centroid),
         projectedCentroid,
         levels,
         tags,
@@ -210,14 +232,18 @@ export function buildMapFromOsm(osmRaw: { elements?: OsmRawElement[] }, manifest
     if (tags.highway && el.geometry && el.geometry.length >= 2) {
       const coords: GeoPoint[] = el.geometry.map((g) => ({ lat: g.lat, lng: g.lon }));
       const projected = coords.map((pt) => project(pt));
-      roads.push({
-        id: `osm-road-${el.id}`,
-        name: tags.name,
-        highwayClass: tags.highway,
-        coordinates: coords,
-        projectedCoordinates: projected,
-        widthMeters: getRoadWidth(tags.highway),
-      });
+      // Filter out roads completely outside canvas
+      const isNearCampus = projected.some(pt => pt.x >= -900 && pt.x <= 900 && pt.y >= -500 && pt.y <= 800);
+      if (isNearCampus) {
+        roads.push({
+          id: `osm-road-${el.id}`,
+          name: tags.name,
+          highwayClass: tags.highway,
+          coordinates: coords.map(roundGeo),
+          projectedCoordinates: projected.map(roundPoint),
+          widthMeters: getRoadWidth(tags.highway),
+        });
+      }
     }
 
     // 3. Water
@@ -226,8 +252,8 @@ export function buildMapFromOsm(osmRaw: { elements?: OsmRawElement[] }, manifest
       water.push({
         id: `osm-water-${el.id}`,
         name: tags.name,
-        polygon,
-        projectedPolygon: polygon.map((pt) => project(pt)),
+        polygon: polygon.map(roundGeo),
+        projectedPolygon: polygon.map((pt) => roundPoint(project(pt))),
       });
     }
 
@@ -238,8 +264,8 @@ export function buildMapFromOsm(osmRaw: { elements?: OsmRawElement[] }, manifest
         id: `osm-green-${el.id}`,
         name: tags.name,
         type: tags.leisure || tags.landuse || 'grass',
-        polygon,
-        projectedPolygon: polygon.map((pt) => project(pt)),
+        polygon: polygon.map(roundGeo),
+        projectedPolygon: polygon.map((pt) => roundPoint(project(pt))),
       });
     }
 
@@ -252,13 +278,71 @@ export function buildMapFromOsm(osmRaw: { elements?: OsmRawElement[] }, manifest
         pt = calculateCentroid(el.geometry.map((g) => ({ lat: g.lat, lng: g.lon })));
       }
       if (pt) {
+        const proj = project(pt);
+        if (proj.x >= -900 && proj.x <= 900 && proj.y >= -500 && proj.y <= 800) {
+          landmarks.push({
+            id: `osm-lm-${el.id}`,
+            name: tags.name,
+            coords: roundGeo(pt),
+            projectedCoords: roundPoint(proj),
+            category: tags.amenity || tags.historic || 'landmark',
+            source: 'osm',
+          });
+        }
+      }
+    }
+  }
+
+  // Ensure all 12 faculties have building representation
+  const requiredFaculties = ['ft', 'fisip', 'fh', 'fib', 'sv', 'fpsi', 'feb', 'fsm', 'fk', 'fkm', 'fpik', 'fpp'];
+  for (const facId of requiredFaculties) {
+    const hasMatch = buildings.some((b) => b.facultyId === facId);
+    if (!hasMatch) {
+      const ownerPt = OWNER_POINTS.find((op) => op.facultyId === facId);
+      if (ownerPt) {
+        let closestBld: CampusBuilding | null = null;
+        let minDist = Infinity;
+        for (const b of buildings) {
+          if (!b.facultyId) {
+            const dist = haversineDistanceMeters(b.centroid, ownerPt.coords);
+            if (dist < minDist && dist <= 120) {
+              minDist = dist;
+              closestBld = b;
+            }
+          }
+        }
+        if (closestBld) {
+          closestBld.facultyId = facId;
+          closestBld.name = `Gedung ${ownerPt.name}`;
+          closestBld.category = 'faculty';
+          const styleRef = manifestMap.get(facId)?.observed;
+          if (styleRef) {
+            closestBld.style = {
+              roofType: styleRef.roofType,
+              mainColors: styleRef.mainColors,
+              facade: styleRef.facade,
+              signatureFeatures: styleRef.signatureFeatures,
+              entranceSide: styleRef.entranceSide,
+            };
+          }
+        }
+      }
+    }
+  }
+
+  // Ensure all owner landmarks are cataloged
+  for (const op of OWNER_POINTS) {
+    if (!op.facultyId) {
+      const exists = landmarks.some((lm) => lm.name.toLowerCase().includes(op.keywords[0]));
+      if (!exists) {
+        const proj = project(op.coords);
         landmarks.push({
-          id: `osm-lm-${el.id}`,
-          name: tags.name,
-          coords: pt,
-          projectedCoords: project(pt),
-          category: tags.amenity || tags.historic || 'landmark',
-          source: 'osm',
+          id: `owner-lm-${op.id}`,
+          name: op.name,
+          coords: roundGeo(op.coords),
+          projectedCoords: roundPoint(proj),
+          category: op.category,
+          source: 'owner',
         });
       }
     }

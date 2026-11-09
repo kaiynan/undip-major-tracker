@@ -5,6 +5,7 @@ import {
   campusFacultyLocations,
 } from '@/data/campusLocations';
 import { FacultyBuildingIllustration } from './PixelFacultyBuildings';
+import { CampusRoadNetwork } from './CampusRoadNetwork';
 import { FacultyScore } from '@/data/types';
 import {
   Compass,
@@ -247,98 +248,53 @@ export function PixelCampusMap({
           <rect x="0" y="0" width={MAP_WIDTH} height={MAP_HEIGHT} fill="#141E0D" />
           <rect x="0" y="0" width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#campusForest)" opacity="0.6" />
 
+          {/* REAL OSM CAMPUS ROAD NETWORK */}
+          <CampusRoadNetwork />
+
           {/* WATER FEATURE: Waduk Pendidikan Diponegoro (Danau Undip) */}
           <g id="waduk-undip">
-            <path
-              d="M 1200 580 C 1280 540, 1360 560, 1420 620 C 1450 670, 1400 740, 1320 750 C 1240 760, 1180 700, 1170 650 Z"
+            <polygon
+              points="1632.8,625.6 1611.9,527.0 1574.5,540.5 1560.8,547.9 1545.6,550.3 1533.3,549.4 1519.0,552.0 1516.6,556.6 1516.4,562.1 1513.9,567.9 1509.9,571.8 1502.3,571.5 1496.2,570.6 1492.3,579.0 1486.0,592.8 1485.9,600.5 1490.1,629.3 1489.9,657.3 1484.1,675.8 1482.4,684.5 1473.0,687.4 1446.9,691.8 1455.0,697.1 1467.8,705.5 1488.0,715.2 1500.7,717.6 1534.8,715.0 1535.7,716.1 1554.4,702.8 1570.7,681.1 1565.8,659.4 1578.0,638.7 1632.8,625.6"
               fill="#0369A1"
               stroke="#0284C7"
-              strokeWidth="6"
+              strokeWidth="4"
+              opacity="0.85"
             />
-            <path
-              d="M 1220 600 C 1270 570, 1340 580, 1380 630 C 1400 660, 1370 710, 1310 720 C 1260 730, 1200 680, 1200 640 Z"
-              fill="#0284C7"
-              opacity="0.7"
-            />
-            {/* Water reflections */}
-            <line x1="1240" y1="620" x2="1320" y2="620" stroke="#7DD3FC" strokeWidth="3" opacity="0.8" />
-            <line x1="1260" y1="650" x2="1350" y2="650" stroke="#7DD3FC" strokeWidth="3" opacity="0.8" />
-            <line x1="1230" y1="680" x2="1310" y2="680" stroke="#7DD3FC" strokeWidth="3" opacity="0.8" />
-            {/* Lake label */}
-            <text x="1300" y="775" fill="#38BDF8" fontSize="14" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+            <rect x="1465" y="605" width="145" height="18" fill="#190E08" rx="4" stroke="#0284C7" strokeWidth="1" />
+            <text x="1537" y="618" fill="#38BDF8" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Waduk Pendidikan Undip
             </text>
           </g>
 
-          {/* CAMPUS ROAD NETWORK (Jl. Prof. Soedarto Ring Road & Avenues) */}
-          <g id="roads" fill="none" stroke="#3D2619" strokeLinecap="square">
-            {/* Main Outer Ring Road (Jl. Prof. Soedarto) */}
-            <path
-              d="M 700 80 L 700 320 M 700 320 C 500 340, 360 500, 360 700 C 360 900, 420 1140, 620 1220 L 1000 1260 C 1200 1260, 1500 1160, 1660 950 C 1720 850, 1720 700, 1660 550 C 1580 400, 1400 300, 1050 300 L 700 300"
-              strokeWidth="42"
+          {/* REAL OSM GREEN SPACES */}
+          <g id="campus-green-parks">
+            <polygon
+              points="751.7,287.6 751.4,297.5 770.0,326.2 776.3,323.0 793.7,313.9 808.8,304.4 850.9,281.3 828.7,248.7 814.8,244.4 804.0,248.5 791.2,254.2 781.7,260.2 769.1,269.7 753.4,280.3 751.7,287.6"
+              fill="#15803D"
+              stroke="#166534"
+              strokeWidth="2"
+              opacity="0.85"
             />
-            {/* Central Roundabouts and Connecting Roads */}
-            <circle cx="780" cy="320" r="70" strokeWidth="32" />
-            <line x1="780" y1="390" x2="920" y2="520" strokeWidth="36" />
-            <line x1="920" y1="520" x2="1200" y2="520" strokeWidth="32" />
-            <line x1="920" y1="520" x2="920" y2="880" strokeWidth="36" />
-            <line x1="920" y1="880" x2="1180" y2="860" strokeWidth="32" />
-            <line x1="500" y1="460" x2="700" y2="350" strokeWidth="28" />
-            <line x1="380" y1="640" x2="700" y2="640" strokeWidth="28" />
-            <line x1="620" y1="1060" x2="920" y2="1060" strokeWidth="28" />
-            <line x1="1220" y1="380" x2="1000" y2="320" strokeWidth="28" />
-            <line x1="1360" y1="220" x2="1220" y2="380" strokeWidth="24" />
-            <line x1="1440" y1="440" x2="1200" y2="520" strokeWidth="28" />
-            <line x1="1540" y1="560" x2="1680" y2="780" strokeWidth="28" />
-          </g>
-
-          {/* Road Asphalt Inner Fill */}
-          <g id="road-asphalt" fill="none" stroke="#523423" strokeLinecap="square">
-            <path
-              d="M 700 80 L 700 320 M 700 320 C 500 340, 360 500, 360 700 C 360 900, 420 1140, 620 1220 L 1000 1260 C 1200 1260, 1500 1160, 1660 950 C 1720 850, 1720 700, 1660 550 C 1580 400, 1400 300, 1050 300 L 700 300"
-              strokeWidth="32"
-            />
-            <circle cx="780" cy="320" r="70" strokeWidth="24" />
-            <line x1="780" y1="390" x2="920" y2="520" strokeWidth="26" />
-            <line x1="920" y1="520" x2="1200" y2="520" strokeWidth="24" />
-            <line x1="920" y1="520" x2="920" y2="880" strokeWidth="26" />
-            <line x1="920" y1="880" x2="1180" y2="860" strokeWidth="24" />
-            <line x1="500" y1="460" x2="700" y2="350" strokeWidth="20" />
-            <line x1="380" y1="640" x2="700" y2="640" strokeWidth="20" />
-            <line x1="620" y1="1060" x2="920" y2="1060" strokeWidth="20" />
-            <line x1="1220" y1="380" x2="1000" y2="320" strokeWidth="20" />
-            <line x1="1360" y1="220" x2="1220" y2="380" strokeWidth="18" />
-            <line x1="1440" y1="440" x2="1200" y2="520" strokeWidth="20" />
-            <line x1="1540" y1="560" x2="1680" y2="780" strokeWidth="20" />
-          </g>
-
-          {/* Road White Striped Markings */}
-          <g id="road-markings" stroke="#FDE68A" strokeWidth="3" strokeDasharray="14 14" fill="none">
-            <path d="M 700 80 L 700 320" />
-            <circle cx="780" cy="320" r="70" />
-            <line x1="780" y1="390" x2="920" y2="520" />
-            <line x1="920" y1="520" x2="920" y2="880" />
           </g>
 
           {/* CAMPUS PEDESTRIAN PATHWAYS & PLAZAS */}
-          <rect x="840" y="460" width="160" height="140" fill="url(#campusPaving)" stroke="#78350F" strokeWidth="2" />
-          <circle cx="780" cy="320" r="46" fill="#166534" stroke="#14532D" strokeWidth="4" />
+          <rect x="910" y="420" width="180" height="120" fill="url(#campusPaving)" stroke="#78350F" strokeWidth="2" rx="4" />
+          <circle cx="1000" cy="480" r="38" fill="#166534" stroke="#14532D" strokeWidth="3" />
 
           {/* PANGERAN DIPONEGORO MONUMENT CIRCLE */}
-          <g id="monumen-bundaran-kuda" transform="translate(745, 285)">
-            <rect x="25" y="45" width="20" height="12" fill="#E2E8F0" />
-            {/* White equestrian statue silhouette */}
-            <path d="M 32 30 L 42 22 L 40 35 L 45 42 L 30 45 L 26 38 Z" fill="#FFFFFF" />
-            <circle cx="36" cy="20" r="3" fill="#FFFFFF" />
-            <text x="35" y="68" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Bundaran Kuda
+          <g id="monumen-bundaran-kuda" transform="translate(975, 455)">
+            <rect x="20" y="42" width="16" height="10" fill="#E2E8F0" />
+            <path d="M 26 28 L 34 22 L 32 32 L 36 38 L 24 40 L 21 34 Z" fill="#FFFFFF" />
+            <circle cx="29" cy="20" r="2.5" fill="#FFFFFF" />
+            <text x="28" y="60" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+              Patung Kuda Undip
             </text>
           </g>
 
           {/* CENTRAL LANDMARK: GEDUNG REKTORAT & WIDYA PURAYA */}
           <g
             id="landmark-rektorat"
-            transform="translate(820, 440)"
+            transform="translate(910, 410)"
             className="cursor-pointer"
             onClick={() => onSelectFaculty?.(null)}
           >
@@ -350,32 +306,32 @@ export function PixelCampusMap({
           </g>
 
           {/* GSG (Gedung Serba Guna Prof. Sudarto) */}
-          <g id="landmark-gsg" transform="translate(420, 400)">
-            <polygon points="40,40 100,10 160,40" fill="#78350F" />
-            <polygon points="20,70 100,35 180,70" fill="#9A3412" />
-            <rect x="30" y="70" width="140" height="30" fill="#FEF3C7" />
-            <text x="100" y="115" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          <g id="landmark-gsg" transform="translate(800, 395)">
+            <polygon points="35,28 85,5 135,28" fill="#78350F" />
+            <polygon points="15,48 85,22 155,48" fill="#9A3412" />
+            <rect x="25" y="48" width="120" height="30" fill="#FEF3C7" />
+            <text x="85" y="93" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               GSG Prof. Sudarto
             </text>
           </g>
 
           {/* MASJID KAMPUS DIPONEGORO */}
-          <g id="landmark-masjid" transform="translate(640, 440)">
-            <circle cx="80" cy="50" r="28" fill="#047857" />
-            <rect x="50" y="55" width="60" height="35" fill="#F8FAFC" />
-            <polygon points="120,75 125,20 130,75" fill="#065F46" />
-            <text x="80" y="105" fill="#A7F3D0" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+          <g id="landmark-masjid" transform="translate(620, 890)">
+            <circle cx="50" cy="35" r="24" fill="#047857" />
+            <rect x="25" y="40" width="50" height="30" fill="#F8FAFC" />
+            <polygon points="85,60 90,15 95,60" fill="#065F46" />
+            <text x="50" y="85" fill="#A7F3D0" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Masjid Kampus
             </text>
           </g>
 
           {/* CAMPUS ENTRANCE GATE (Gerbang Utama Tembalang) */}
-          <g id="gerbang-tembalang" transform="translate(630, 40)">
-            <rect x="20" y="30" width="18" height="50" fill="#78350F" />
-            <rect x="102" y="30" width="18" height="50" fill="#78350F" />
+          <g id="gerbang-tembalang" transform="translate(885, 235)">
+            <rect x="20" y="30" width="18" height="40" fill="#78350F" />
+            <rect x="102" y="30" width="18" height="40" fill="#78350F" />
             <polygon points="10,30 70,10 130,30" fill="#B45309" />
             <rect x="38" y="24" width="64" height="6" fill="#F59E0B" />
-            <text x="70" y="94" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+            <text x="70" y="84" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Gerbang Utama Tembalang
             </text>
           </g>

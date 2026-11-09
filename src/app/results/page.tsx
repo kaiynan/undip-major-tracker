@@ -58,6 +58,7 @@ export default function ResultsPage() {
     toggleComparison,
     clearComparison,
     getScoreForProgram,
+    hydrated,
   } = useQuestionnaire();
 
   // Floating panel visibility toggle ("Peta Penuh" mode)
@@ -209,6 +210,23 @@ export default function ResultsPage() {
     setIsRetakeModalOpen(false);
     router.push('/questionnaire');
   };
+
+  // Wait for client-side hydration from localStorage before rendering state-specific trees
+  if (!hydrated) {
+    return (
+      <div className="relative w-full max-w-full h-screen overflow-hidden bg-slate-900 select-none flex items-center justify-center">
+        <FullScreenCampusMap
+          facultyScores={[]}
+          selectedFacultyId={null}
+          className="fixed inset-0 z-0"
+        />
+        <div className="relative z-30 flex items-center gap-2 bg-[#24130C]/90 backdrop-blur-md text-amber-200 px-4 py-2 rounded-xl border border-[#78350F] font-pixel text-xs">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0" />
+          <span>Memuat peta dan hasil rekomendasi...</span>
+        </div>
+      </div>
+    );
+  }
 
   // =========================================================================
   // INITIAL STATE: When user has not completed questionnaire (answeredCount === 0)
