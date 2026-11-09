@@ -8,6 +8,7 @@ import { questions } from '@/data/questions';
 import { algorithmConfig } from '@/data/config';
 import { StudyProgram } from '@/data/types';
 import { TierBadge } from '@/components/ui/TierBadge';
+import { INTEREST_SPREAD_THRESHOLD } from '@/lib/interestSpread';
 import {
   HelpCircle,
   Search,
@@ -631,6 +632,19 @@ export default function AdminPage() {
                     )}
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Interest Spread Threshold (Prompt G Round 9) */}
+            <div className="bg-[#24130C] p-6 rounded-2xl border-2 border-[#78350F] shadow-xs space-y-3 md:col-span-2">
+              <h3 className="font-bold text-[#FFFBEB] text-base">Ambang Batas Minat Tersebar (Spread Threshold)</h3>
+              <div className="p-3.5 rounded-xl border border-amber-600/70 bg-[#190E08] text-xs text-amber-100/90 leading-relaxed space-y-1.5">
+                <p>
+                  Ambang batas deteksi minat tersebar ditetapkan sebesar <strong className="text-amber-300 font-mono">{INTEREST_SPREAD_THRESHOLD}%</strong> (selisih skor peringkat #1 dan #5), dihitung dari persentil ke-25 responden terfokus berdasarkan simulasi empiris di <code className="text-amber-300 font-mono">docs/spread-threshold.md</code>.
+                </p>
+                <p className="text-amber-200/70 text-[11px]">
+                  Jika selisih skor prodi #1 dan #5 &le; {INTEREST_SPREAD_THRESHOLD}%, sistem menampilkan banner panduan untuk membandingkan prodi dan berkonsultasi, tanpa mengubah peringkat rekomendasi.
+                </p>
               </div>
             </div>
           </div>

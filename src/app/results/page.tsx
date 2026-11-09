@@ -20,6 +20,8 @@ import { TierBadge } from '@/components/ui/TierBadge';
 import { ScoreBar } from '@/components/ui/ScoreBar';
 import { FullScreenCampusMap } from '@/components/pixel/FullScreenCampusMap';
 import { retroAudio } from '@/lib/retroAudio';
+import { detectInterestSpread } from '@/lib/interestSpread';
+import { InterestSpreadBanner } from '@/components/results/InterestSpreadBanner';
 import {
   Trophy,
   RotateCcw,
@@ -67,6 +69,18 @@ export default function ResultsPage() {
 
   // Selected faculty for camera centering and cross-filtering between Map and Tier Lists
   const [selectedFacultyId, setSelectedFacultyId] = useState<string | null>(null);
+
+  // Detect spread interests when top scores are closely grouped (Prompt G Round 9)
+  const interestSpread = React.useMemo(() => {
+    return detectInterestSpread(programScores);
+  }, [programScores]);
+
+  const top3ProgramNames = React.useMemo(() => {
+    return (programScores || []).slice(0, 3).map((ps) => {
+      const prog = studyPrograms.find((p) => p.id === ps.programId);
+      return prog?.name || ps.programId;
+    });
+  }, [programScores]);
 
   // Client-side redirect for legacy ?tab=next-steps and #langkah-selanjutnya
   React.useEffect(() => {
@@ -683,6 +697,14 @@ export default function ResultsPage() {
                   Tampilkan Semua
                 </button>
               </div>
+            )}
+
+            {/* Interest Spread Advisory Banner (Prompt G Round 9) */}
+            {interestSpread.isSpread && (
+              <InterestSpreadBanner
+                gap1_5={interestSpread.gap1_5}
+                topProgramNames={top3ProgramNames}
+              />
             )}
 
             {/* Content Tab 1: Output 1 (All Major Tier List) */}
