@@ -12,6 +12,7 @@ import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
 import { FavoriteButton } from '@/components/ui/FavoriteButton';
+import { ComparePickerModal } from '@/components/program/ComparePickerModal';
 import {
   ArrowLeft,
   ExternalLink,
@@ -50,6 +51,8 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
   const programUkt = getUKTByProgramId(programId);
   const score = getScoreForProgram(programId);
   const isComparing = comparisonIds.includes(programId);
+
+  const [isPickerOpen, setIsPickerOpen] = React.useState(false);
 
   // Other programs in the same faculty
   const relatedPrograms = React.useMemo(() => {
@@ -100,8 +103,17 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
             <span>Kembali ke Daftar Rekomendasi</span>
           </button>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <FavoriteButton programId={program.id} programName={program.name} showText />
+
+            <button
+              onClick={() => setIsPickerOpen(true)}
+              aria-label={`Bandingkan ${program.name} dengan program studi lain`}
+              className="text-xs px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold flex items-center gap-1.5 sm:gap-2 border-2 bg-[#190E08] text-[#FDE68A] border-[#78350F] hover:bg-[#341A10] hover:border-[#F59E0B] transition-all cursor-pointer shadow-[2px_2px_0_0_#000] min-h-[44px]"
+            >
+              <Scale className="w-3.5 h-3.5 text-amber-400" />
+              <span>Bandingkan dengan...</span>
+            </button>
 
             <button
               onClick={() => toggleComparison(program.id)}
@@ -720,6 +732,13 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
 
         {/* Mandatory Official Disclaimer */}
         <DisclaimerBanner />
+
+        {/* Compare Picker Modal */}
+        <ComparePickerModal
+          isOpen={isPickerOpen}
+          onClose={() => setIsPickerOpen(false)}
+          currentProgram={program}
+        />
       </div>
     </div>
   );
