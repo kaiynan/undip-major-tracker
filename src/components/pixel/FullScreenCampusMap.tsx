@@ -6,13 +6,13 @@ import {
 } from '@/data/campusLocations';
 import { FacultyBuildingIllustration } from './PixelFacultyBuildings';
 import { CampusRoadNetwork } from './CampusRoadNetwork';
+import { FacultyMapTourSheet } from './FacultyMapTourSheet';
 import { FacultyScore } from '@/data/types';
 import {
   Compass,
   ZoomIn,
   ZoomOut,
   RotateCcw,
-  X,
 } from 'lucide-react';
 
 interface FullScreenCampusMapProps {
@@ -672,11 +672,20 @@ export function FullScreenCampusMap({
               <g
                 key={loc.id}
                 id={`marker-${loc.id}`}
+                tabIndex={0}
+                role="button"
+                aria-label={`Fakultas ${loc.name} (${loc.shortName}) - Tekan Enter untuk membuka daftar program studi`}
                 transform={`translate(${posX}, ${posY})`}
-                className="cursor-pointer transition-transform duration-300"
+                className="cursor-pointer transition-transform duration-300 focus:outline-hidden"
                 onClick={() => {
                   if (hasMovedRef.current) return;
                   onSelectFaculty?.(loc.id);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onSelectFaculty?.(loc.id);
+                  }
                 }}
                 onMouseEnter={() => setHoveredFacultyId(loc.id)}
                 onMouseLeave={() => setHoveredFacultyId(null)}
@@ -821,57 +830,17 @@ export function FullScreenCampusMap({
         </p>
       </div>
 
-      {/* 4. FLOATING ARCHITECTURAL DETAILS CARD (IN FOCUS MODE) */}
-      {selectedLocation && (
-        <div className="absolute top-16 left-3 right-3 sm:right-auto sm:top-auto sm:bottom-6 sm:left-4 max-w-sm sm:w-84 z-20 bg-[#24130C]/95 backdrop-blur-md p-3.5 sm:p-5 rounded-3xl border-2 border-[#F59E0B] shadow-[0_8px_30px_rgba(0,0,0,0.7)] text-white pointer-events-auto animate-fade-in">
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-pixel text-[8px] sm:text-[9px] bg-[#78350F] text-[#FDE68A] px-2.5 py-0.5 rounded-full border border-[#F59E0B]">
-                  {selectedLocation.zone}
-                </span>
-                <span className="text-[10px] text-amber-200/70 font-mono">
-                  {selectedLocation.realCoordinates.lat.toFixed(4)}°, {selectedLocation.realCoordinates.lng.toFixed(4)}°
-                </span>
-              </div>
-              <h3 className="text-base sm:text-lg font-black text-[#FFFBEB] mt-1">
-                {selectedLocation.name}
-              </h3>
-              <p className="text-xs text-amber-200/90 font-medium mt-0.5">
-                {selectedLocation.landmarkName}
-              </p>
-            </div>
-            <button
-              onClick={() => onSelectFaculty?.(null)}
-              className="p-2.5 rounded-xl text-amber-200 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
-              title="Kembali ke Tinjauan Peta"
-              aria-label="Kembali ke Tinjauan Peta"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          <div className="mt-3 pt-3 border-t border-[#78350F]/70 space-y-1.5 text-xs text-amber-100/95">
-            <p className="leading-relaxed">
-              <strong className="text-[#FDE68A]">Karakter Arsitektur:</strong>{' '}
-              {selectedLocation.architecturalStyle.facadeDescription}
-            </p>
-            <div className="flex flex-wrap gap-1.5 pt-1">
-              {selectedLocation.architecturalStyle.distinctiveFeatures.map((feat, i) => (
-                <span
-                  key={i}
-                  className="text-xs bg-[#190E08] text-amber-200 px-2.5 py-1 rounded-md border border-[#78350F]/60"
-                >
-                  • {feat}
-                </span>
-              ))}
-            </div>
-            <div className="pt-2 text-xs text-amber-200/80 flex items-center justify-between">
-              <span>Sumber: {selectedLocation.referenceSource}</span>
-              <span>Pembaruan: {selectedLocation.verificationDate}</span>
-            </div>
-          </div>
-        </div>
+      {/* 4. FACULTY CAMPUS TOUR PANEL / BOTTOM SHEET (Prompt G Round 9) */}
+      {selectedFacultyId && (
+        <FacultyMapTourSheet
+          facultyId={selectedFacultyId}
+          onClose={() => onSelectFaculty?.(null)}
+          onFocusFaculty={(id) => {
+            onSelectFaculty?.(id);
+            recalculateCamera();
+          }}
+          isFocusedOnMap={zoom >= 1.8}
+        />
       )}
 
       {/* Map Attribution Badge */}
