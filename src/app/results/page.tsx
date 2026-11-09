@@ -380,6 +380,7 @@ export default function ResultsPage() {
             programScores={programScores}
             facultyScores={facultyScores}
             programs={studyPrograms}
+            dimensionScores={dimensionScores}
             userSummary={userSummary}
             variant="compact"
           />
@@ -502,6 +503,7 @@ export default function ResultsPage() {
                 programScores={programScores}
                 facultyScores={facultyScores}
                 programs={studyPrograms}
+                dimensionScores={dimensionScores}
                 userSummary={userSummary}
                 className="flex-1"
               />

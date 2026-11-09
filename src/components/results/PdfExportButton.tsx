@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { FileDown, Sparkles, Check, AlertCircle } from 'lucide-react';
 import { generateResultsPdf, downloadOrSharePdf, getPdfDateString } from '@/lib/pdfGenerator';
-import { ProgramScore, FacultyScore, StudyProgram } from '@/data/types';
+import { ProgramScore, FacultyScore, StudyProgram, DimensionScore } from '@/data/types';
 import { faculties } from '@/data/faculties';
 import { retroAudio } from '@/lib/retroAudio';
 import { APP_NAME_SHORT } from '@/config/brand';
@@ -12,6 +12,7 @@ interface PdfExportButtonProps {
   programScores: ProgramScore[];
   facultyScores: FacultyScore[];
   programs: StudyProgram[];
+  dimensionScores?: DimensionScore | null;
   userSummary: {
     topRiasec: { code: string; label: string; score: number }[];
     topDomain: { code: string; label: string; score: number };
@@ -27,6 +28,7 @@ export function PdfExportButton({
   programScores,
   facultyScores,
   programs,
+  dimensionScores,
   userSummary,
   nickname,
   className = '',
@@ -61,6 +63,7 @@ export function PdfExportButton({
         facultyScores,
         programs,
         faculties,
+        dimensionScores,
         userSummary,
       });
 

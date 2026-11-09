@@ -7,6 +7,9 @@ import { faculties } from '@/data/faculties';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { FavoriteButton } from '@/components/ui/FavoriteButton';
+import { MatchReasonsBlock } from '@/components/results/MatchReasonsBlock';
+import { getMatchReasons } from '@/lib/matchReasons';
+import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import {
   Building2,
   ChevronDown,
@@ -31,6 +34,7 @@ export const FacultyTierList = React.memo(function FacultyTierList({
   selectedFacultyId: externalSelectedFacultyId,
   onSelectFaculty,
 }: FacultyTierListProps) {
+  const { dimensionScores } = useQuestionnaire();
   // Map programId to studyProgram
   const programMap = useMemo(() => {
     const map = new Map<string, StudyProgram>();
@@ -304,6 +308,7 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                       const prog = programMap.get(ps.programId);
                       if (!prog) return null;
                       const quota = getQuotaByProgramId(prog.id);
+                      const reasons = getMatchReasons(dimensionScores, prog, 2);
 
                       return (
                         <div
@@ -327,6 +332,9 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                               <p className="text-xs text-amber-100/90 line-clamp-1 leading-relaxed">
                                 {prog.description}
                               </p>
+
+                              {/* Personalized Match Reasons (Prompt G Round 9) */}
+                              <MatchReasonsBlock reasons={reasons} />
 
                               {/* Admissions Quotas */}
                               {quota && (

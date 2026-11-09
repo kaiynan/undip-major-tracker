@@ -8,6 +8,9 @@ import { getQuotaByProgramId } from '@/data/quotas';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { ScoreBar } from '@/components/ui/ScoreBar';
 import { FavoriteButton } from '@/components/ui/FavoriteButton';
+import { MatchReasonsBlock } from '@/components/results/MatchReasonsBlock';
+import { getMatchReasons } from '@/lib/matchReasons';
+import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import {
   Search,
   Sparkles,
@@ -27,6 +30,7 @@ interface ProgramCardProps {
   program: StudyProgram;
   faculty?: (typeof faculties)[0];
   quota?: ReturnType<typeof getQuotaByProgramId>;
+  reasons?: string[];
   isComparing: boolean;
   isExpanded: boolean;
   isTopRank: boolean;
@@ -41,6 +45,7 @@ const ProgramCard = React.memo(function ProgramCard({
   program,
   faculty,
   quota,
+  reasons,
   isComparing,
   isExpanded,
   isTopRank,
@@ -99,6 +104,9 @@ const ProgramCard = React.memo(function ProgramCard({
               <p className="text-xs sm:text-sm text-amber-100/90 mt-1 line-clamp-2 leading-relaxed">
                 {program.description}
               </p>
+
+              {/* Personalized Match Reasons (Prompt G Round 9) */}
+              <MatchReasonsBlock reasons={reasons || []} />
 
               {/* Admissions Quota Breakdown Badges */}
               {quota && (
@@ -295,6 +303,7 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
   const [selectedPathway, setSelectedPathway] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'score' | 'quota' | 'name'>('score');
   const [expandedScoreId, setExpandedScoreId] = useState<string | null>(null);
+  const { dimensionScores } = useQuestionnaire();
 
   // Virtualization / progressive card loading to keep initial DOM nodes low
   const [visibleCount, setVisibleCount] = useState(16);
@@ -623,6 +632,7 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
             const isComparing = comparisonIds.includes(program.id);
             const isExpanded = expandedScoreId === score.programId;
             const isTopRank = index === 0 && selectedFaculty === 'all' && selectedTier === 'all';
+            const reasons = getMatchReasons(dimensionScores, program, 2);
 
             return (
               <ProgramCard
@@ -632,6 +642,7 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
                 program={program}
                 faculty={faculty}
                 quota={quota}
+                reasons={reasons}
                 isComparing={isComparing}
                 isExpanded={isExpanded}
                 isTopRank={isTopRank}

@@ -15,6 +15,8 @@ import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
 import { FavoriteButton } from '@/components/ui/FavoriteButton';
 import { ComparePickerModal } from '@/components/program/ComparePickerModal';
 import { ProgramRichDetails } from '@/components/program/ProgramRichDetails';
+import { MatchReasonsBlock } from '@/components/results/MatchReasonsBlock';
+import { getMatchReasons } from '@/lib/matchReasons';
 import {
   ArrowLeft,
   ExternalLink,
@@ -41,6 +43,7 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
     getScoreForProgram,
     comparisonIds,
     toggleComparison,
+    dimensionScores,
   } = useQuestionnaire();
 
   const program = getProgramById(programId);
@@ -50,6 +53,10 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
   const detail = getProgramDetailById(programId);
   const score = getScoreForProgram(programId);
   const isComparing = comparisonIds.includes(programId);
+
+  const matchReasons = React.useMemo(() => {
+    return getMatchReasons(dimensionScores, program, 3);
+  }, [dimensionScores, program]);
 
   const [isPickerOpen, setIsPickerOpen] = React.useState(false);
 
@@ -245,6 +252,9 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
             <p className="text-xs sm:text-sm text-amber-100/90 leading-relaxed bg-[#190E08] p-3.5 sm:p-5 rounded-2xl border border-[#78350F]">
               {score.explanation}
             </p>
+
+            {/* Personalized Match Reasons (Prompt G Round 9) */}
+            <MatchReasonsBlock reasons={matchReasons} variant="full" />
 
             {/* 4 Dimension Score Breakdown Progress Bars */}
             <div className="pt-2">

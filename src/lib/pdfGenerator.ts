@@ -9,8 +9,9 @@
  */
 
 import { APP_NAME, EVENT_NAME, TAGLINE, SITE_URL, SHORT_URL } from '@/config/brand';
-import { ProgramScore, FacultyScore, StudyProgram, Faculty } from '@/data/types';
+import { ProgramScore, FacultyScore, StudyProgram, Faculty, DimensionScore } from '@/data/types';
 import { isPsdku } from '@/data/types';
+import { getMatchReasons } from '@/lib/matchReasons';
 
 export interface PdfExportData {
   nickname?: string;
@@ -18,6 +19,7 @@ export interface PdfExportData {
   facultyScores: FacultyScore[];
   programs: StudyProgram[];
   faculties: Faculty[];
+  dimensionScores?: DimensionScore | null;
   userSummary: {
     topRiasec: { code: string; label: string; score: number }[];
     topDomain: { code: string; label: string; score: number };
@@ -168,7 +170,48 @@ export async function generateResultsPdf(data: PdfExportData): Promise<Blob> {
   doc.setTextColor(51, 65, 85);
   doc.text(`Gaya Belajar Paling Sesuai: ${learningLabel}`, marginX + 90, cursorY + 14.5);
 
-  cursorY += 26;
+  cursorY += 25;
+
+  // ---------------------------------------------------------------------------
+  // 2B. ALASAN KECOCOKAN 3 BESAR (TOP 3 MATCH REASONS - 1 LINE EACH)
+  // ---------------------------------------------------------------------------
+  const top3 = rankedPrograms.slice(0, 3);
+  if (data.dimensionScores && top3.length > 0) {
+    doc.setFontSize(9.5);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(15, 23, 42);
+    doc.text('Alasan Keselarasan 3 Program Studi Teratas:', marginX, cursorY);
+    cursorY += 3.5;
+
+    doc.setFillColor(255, 251, 235); // #FFFBEB
+    doc.setDrawColor(245, 158, 11); // #F59E0B
+    const boxHeight = top3.length * 5 + 3;
+    doc.roundedRect(marginX, cursorY, pageWidth - marginX * 2, boxHeight, 1, 1, 'FD');
+
+    let itemY = cursorY + 4;
+    top3.forEach((ps, idx) => {
+      const prog = programMap.get(ps.programId);
+      const reasons = getMatchReasons(data.dimensionScores, prog, 1);
+      const reasonText = reasons[0] || 'Kesesuaian profil minat akademik secara keseluruhan.';
+
+      doc.setFontSize(7.5);
+      doc.setFont('helvetica', 'bold');
+      doc.setTextColor(120, 53, 15); // #78350F
+      const prefix = `#${idx + 1} ${prog?.name || ps.programId} (${ps.totalScore.toFixed(1)}%): `;
+      doc.text(prefix, marginX + 3, itemY);
+
+      const prefixWidth = doc.getTextWidth(prefix);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(51, 65, 85);
+      const availableWidth = pageWidth - marginX * 2 - 6 - prefixWidth;
+      const truncatedReason = doc.splitTextToSize(reasonText, availableWidth)[0] || reasonText;
+      doc.text(truncatedReason, marginX + 3 + prefixWidth, itemY);
+
+      itemY += 5;
+    });
+
+    cursorY += boxHeight + 5;
+  }
 
   // ---------------------------------------------------------------------------
   // 3. PERINGKAT PROGRAM STUDI (FULL TABLE, EXCLUDING PSDKU)
