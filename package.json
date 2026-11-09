@@ -17,7 +17,8 @@
     "test:navbar": "node scripts/test-navbar.js",
     "test:touch-reset": "node scripts/test-touch-reset.js",
     "test:e2e": "node scripts/verify-full-e2e.js",
-    "test:all:prod": "npm run build && node scripts/run-all-prod-tests.js"
+    "test:all:prod": "npm run build && node scripts/run-all-prod-tests.js",
+    "gen:og": "node scripts/gen-og.js"
   },
   "dependencies": {
     "@capacitor/android": "7.6.10",

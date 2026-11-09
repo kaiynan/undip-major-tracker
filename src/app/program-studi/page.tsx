@@ -3,12 +3,36 @@ import type { Metadata } from 'next';
 import { faculties } from '@/data/faculties';
 import { studyPrograms } from '@/data/programs';
 import { ProgramDirectoryClient } from '@/components/program/ProgramDirectoryClient';
-import { APP_NAME } from '@/config/brand';
+import { APP_NAME, SITE_URL } from '@/config/brand';
 
 export const metadata: Metadata = {
-  title: `Daftar Program Studi S1 & D4 Universitas Diponegoro | ${APP_NAME}`,
+  title: `Daftar 70 Program Studi S1 & D4 — ${APP_NAME}`,
   description:
-    'Eksplorasi lengkap 70 program studi (65 program studi di peringkat dan 5 program PSDKU di daftar) Sarjana (S1) dan Sarjana Terapan (D4) di 12 Fakultas dan Sekolah Universitas Diponegoro (UNDIP) dengan daya tampung resmi, CPL, dan prospek karir.',
+    'Eksplorasi lengkap 70 program studi Sarjana (S1) dan Sarjana Terapan (D4) di 12 Fakultas dan Sekolah Universitas Diponegoro (UNDIP) dengan daya tampung resmi, UKT, dan prospek karier.',
+  openGraph: {
+    title: `Daftar 70 Program Studi S1 & D4 — ${APP_NAME}`,
+    description:
+      'Eksplorasi lengkap 70 program studi Sarjana (S1) dan Sarjana Terapan (D4) di 12 Fakultas dan Sekolah Universitas Diponegoro (UNDIP) dengan daya tampung resmi, UKT, dan prospek karier.',
+    url: `${SITE_URL}/program-studi`,
+    siteName: APP_NAME,
+    locale: 'id_ID',
+    type: 'website',
+    images: [
+      {
+        url: '/og/og-program-studi.png',
+        width: 1200,
+        height: 630,
+        alt: `Daftar 70 Program Studi S1 & D4 — ${APP_NAME}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Daftar 70 Program Studi S1 & D4 — ${APP_NAME}`,
+    description:
+      'Eksplorasi lengkap 70 program studi Sarjana (S1) dan Sarjana Terapan (D4) di 12 Fakultas dan Sekolah Universitas Diponegoro (UNDIP).',
+    images: ['/og/og-program-studi.png'],
+  },
   keywords: [
     'Daftar Program Studi UNDIP',
     'Jurusan UNDIP',

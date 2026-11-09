@@ -31,6 +31,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: `${APP_NAME} — ${TAGLINE}`,
   description:
     `Platform rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis Hybrid Multi-Dimensional Interest Matching (HMIM) untuk siswa SMA/SMK/MA. ${EVENT_NAME}.`,
@@ -47,6 +48,20 @@ export const metadata: Metadata = {
     siteName: APP_NAME,
     locale: 'id_ID',
     type: 'website',
+    images: [
+      {
+        url: '/og/og-default.png',
+        width: 1200,
+        height: 630,
+        alt: `${APP_NAME} — ${TAGLINE}`,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${APP_NAME} — ${TAGLINE}`,
+    description: `Temukan jurusan impian di Universitas Diponegoro melalui ${APP_NAME}. ${TAGLINE}.`,
+    images: ['/og/og-default.png'],
   },
   icons: {
     icon: '/icons/icon.svg',
