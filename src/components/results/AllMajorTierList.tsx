@@ -7,6 +7,7 @@ import { faculties } from '@/data/faculties';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { ScoreBar } from '@/components/ui/ScoreBar';
+import { FavoriteButton } from '@/components/ui/FavoriteButton';
 import {
   Search,
   Sparkles,
@@ -134,6 +135,9 @@ const ProgramCard = React.memo(function ProgramCard({
             </div>
 
             <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+              {/* Favorite Button */}
+              <FavoriteButton programId={program.id} programName={program.name} />
+
               {/* Comparison Pin Button */}
               <button
                 onClick={() => onToggleComparison(program.id)}

@@ -11,6 +11,7 @@ import { getUKTByProgramId } from '@/data/ukt';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
+import { FavoriteButton } from '@/components/ui/FavoriteButton';
 import {
   ArrowLeft,
   ExternalLink,
@@ -100,6 +101,8 @@ export function ProgramDetailContent({ programId }: ProgramDetailContentProps) {
           </button>
 
           <div className="flex items-center gap-2">
+            <FavoriteButton programId={program.id} programName={program.name} showText />
+
             <button
               onClick={() => toggleComparison(program.id)}
               aria-label={isComparing ? `Hapus ${program.name} dari komparasi` : `Tambah ${program.name} ke komparasi prodi`}

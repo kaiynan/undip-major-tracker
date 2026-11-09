@@ -19,6 +19,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { retroAudio } from '@/lib/retroAudio';
+import { FavoriteButton } from '@/components/ui/FavoriteButton';
 
 interface ProgramDirectoryClientProps {
   faculties: Faculty[];
@@ -108,15 +109,19 @@ const ProgramCard = memo(function ProgramCard({
 
       {/* Action Footer */}
       <div className="pt-3 border-t border-[#78350F]/50 flex items-center justify-between gap-2">
-        <Link
-          href={`/program/${program.id}`}
-          onClick={() => retroAudio.playBlip(720)}
-          className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-pixel text-[9px] sm:text-[10px] font-bold border-2 border-amber-600 transition-all cursor-pointer shadow-[2px_2px_0_0_#000] min-h-[44px]"
-          aria-label={`Lihat detail lengkap kurikulum dan prospek prodi ${program.name}`}
-        >
-          <span>Detail</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/program/${program.id}`}
+            onClick={() => retroAudio.playBlip(720)}
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#F59E0B] hover:bg-amber-400 text-stone-950 font-pixel text-[9px] sm:text-[10px] font-bold border-2 border-amber-600 transition-all cursor-pointer shadow-[2px_2px_0_0_#000] min-h-[44px]"
+            aria-label={`Lihat detail lengkap kurikulum dan prospek prodi ${program.name}`}
+          >
+            <span>Detail</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+
+          <FavoriteButton programId={program.id} programName={program.name} />
+        </div>
 
         {program.websiteUrl && (
           <a

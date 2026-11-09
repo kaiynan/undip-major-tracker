@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useRef, useSyncExternalStore, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, ArrowRight, Volume2, VolumeX, RotateCcw, ChevronRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Volume2, VolumeX, RotateCcw, ChevronRight, Heart } from 'lucide-react';
 import { useQuestionnaire } from '@/contexts/QuestionnaireContext';
+import { useFavorites } from '@/contexts/FavoritesContext';
 import { retroAudio } from '@/lib/retroAudio';
 import { APP_NAME } from '@/config/brand';
 
@@ -30,6 +31,7 @@ export function Navbar() {
   const menuPanelRef = useRef<HTMLDivElement>(null);
 
   const { answeredCount, totalQuestions, isComplete } = useQuestionnaire();
+  const { favoritesCount } = useFavorites();
   const [menuOpen, setMenuOpen] = useState(false);
   const mounted = useSyncExternalStore(subscribeNoop, () => true, () => false);
   const [isMuted, setIsMuted] = useState(() => (typeof window !== 'undefined' ? retroAudio.isMuted() : false));
@@ -484,6 +486,31 @@ export function Navbar() {
                 <span>Lainnya</span>
               </div>
               <div className="space-y-1">
+                <Link
+                  href="/favorit"
+                  onClick={() => {
+                    retroAudio.playSelect();
+                    closeMenu(false);
+                  }}
+                  className={`flex items-center justify-between px-3 py-2 font-pixel text-[9px] border transition-colors min-h-[44px] ${
+                    pathname === '/favorit'
+                      ? 'bg-[#9A3412] text-[#FDE68A] border-[#FDE68A]'
+                      : 'bg-[#24130C] text-amber-100 hover:text-white border-[#78350F] hover:bg-[#341A10]'
+                  }`}
+                  aria-label={`Favoritku (${favoritesCount})`}
+                >
+                  <div className="flex items-center gap-2">
+                    <Heart className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                    <span>Favoritku</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-pixel text-[8px] px-1.5 py-0.5 rounded bg-rose-950/80 text-rose-300 border border-rose-700">
+                      {favoritesCount}
+                    </span>
+                    <ChevronRight className="w-3.5 h-3.5 text-amber-300/70" />
+                  </div>
+                </Link>
+
                 <Link
                   href="/admin"
                   onClick={() => {

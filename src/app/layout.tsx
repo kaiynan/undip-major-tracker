@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import { QuestionnaireProvider } from '@/contexts/QuestionnaireContext';
+import { FavoritesProvider } from '@/contexts/FavoritesContext';
 import { Navbar } from '@/components/ui/Navbar';
 import { Footer } from '@/components/ui/Footer';
 import { MobileBottomNav } from '@/components/ui/MobileBottomNav';
@@ -75,18 +76,20 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans">
         <PwaRegistrar />
         <QuestionnaireProvider>
-          <Suspense fallback={<header className="h-16 bg-white border-b border-slate-200" />}>
-            <Navbar />
-          </Suspense>
-          <main className="flex-1 pb-20 md:pb-0">
-            <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center p-8 text-slate-400">Memuat...</div>}>
-              {children}
+          <FavoritesProvider>
+            <Suspense fallback={<header className="h-16 bg-white border-b border-slate-200" />}>
+              <Navbar />
             </Suspense>
-          </main>
-          <Footer />
-          <Suspense fallback={null}>
-            <MobileBottomNav />
-          </Suspense>
+            <main className="flex-1 pb-20 md:pb-0">
+              <Suspense fallback={<div className="min-h-[50vh] flex items-center justify-center p-8 text-slate-400">Memuat...</div>}>
+                {children}
+              </Suspense>
+            </main>
+            <Footer />
+            <Suspense fallback={null}>
+              <MobileBottomNav />
+            </Suspense>
+          </FavoritesProvider>
         </QuestionnaireProvider>
       </body>
     </html>

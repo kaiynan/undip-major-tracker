@@ -6,6 +6,7 @@ import { FacultyScore, StudyProgram } from '@/data/types';
 import { faculties } from '@/data/faculties';
 import { getQuotaByProgramId } from '@/data/quotas';
 import { TierBadge } from '@/components/ui/TierBadge';
+import { FavoriteButton } from '@/components/ui/FavoriteButton';
 import {
   Building2,
   ChevronDown,
@@ -346,7 +347,9 @@ export const FacultyTierList = React.memo(function FacultyTierList({
                           </div>
 
                           {/* Individual Program Score & Action */}
-                          <div className="flex items-center justify-between md:justify-end gap-3 pt-2 md:pt-0 border-t md:border-t-0 border-[#78350F]/60 shrink-0">
+                          <div className="flex items-center justify-between md:justify-end gap-2.5 pt-2 md:pt-0 border-t md:border-t-0 border-[#78350F]/60 shrink-0">
+                            <FavoriteButton programId={prog.id} programName={prog.name} />
+
                             <div className="text-right">
                               <div className="text-xs font-mono text-amber-200/90 font-medium">Skor HMIM</div>
                               <div className="text-base sm:text-lg font-black text-amber-400 font-mono">{ps.totalScore}%</div>
