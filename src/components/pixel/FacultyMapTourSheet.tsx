@@ -99,7 +99,7 @@ export function FacultyMapTourSheet({
       aria-modal="true"
       aria-labelledby="faculty-tour-title"
       data-testid="faculty-map-tour-panel"
-      className="fixed md:absolute bottom-0 md:bottom-4 left-0 md:left-auto md:right-4 w-full md:w-[420px] max-h-[60vh] md:max-h-[calc(100%-4rem)] md:top-16 z-40 bg-[#1E110A]/95 backdrop-blur-md border-t-2 md:border-2 border-[#F59E0B] md:rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden text-slate-100 transition-all duration-200"
+      className="fixed md:absolute bottom-0 md:bottom-4 left-0 md:left-auto md:right-4 w-full md:w-[420px] max-h-[60vh] md:max-h-[calc(100%-7rem)] md:top-24 z-40 bg-[#1E110A]/95 backdrop-blur-md border-t-2 md:border-2 border-[#F59E0B] md:rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden text-slate-100 transition-all duration-200"
       onClick={(e) => e.stopPropagation()}
       onPointerDown={(e) => e.stopPropagation()}
     >
@@ -136,6 +136,7 @@ export function FacultyMapTourSheet({
           ref={closeButtonRef}
           onClick={onClose}
           aria-label="Tutup panel tur kampus"
+          data-testid="btn-close-tour-panel"
           className="p-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-200 hover:text-white border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
         >
           <X className="w-5 h-5 text-amber-300" />

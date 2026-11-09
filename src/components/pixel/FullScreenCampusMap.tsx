@@ -224,7 +224,7 @@ export function FullScreenCampusMap({
   const hasMovedRef = useRef<boolean>(false);
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    if ((e.target as HTMLElement)?.closest('button, a, input, select, textarea, [data-no-drag]')) return;
+    if ((e.target as Element)?.closest('button, a, input, select, textarea, [role="button"], [data-no-drag]')) return;
     pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
     try {
       (e.target as HTMLElement)?.setPointerCapture?.(e.pointerId);
@@ -674,22 +674,39 @@ export function FullScreenCampusMap({
                 id={`marker-${loc.id}`}
                 tabIndex={0}
                 role="button"
+                data-no-drag="true"
                 aria-label={`Fakultas ${loc.name} (${loc.shortName}) - Tekan Enter untuk membuka daftar program studi`}
                 transform={`translate(${posX}, ${posY})`}
                 className="cursor-pointer transition-transform duration-300 focus:outline-hidden"
-                onClick={() => {
-                  if (hasMovedRef.current) return;
+                onPointerDown={(e) => {
+                  e.stopPropagation();
+                  hasMovedRef.current = false;
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
                   onSelectFaculty?.(loc.id);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
+                    e.stopPropagation();
                     onSelectFaculty?.(loc.id);
                   }
                 }}
                 onMouseEnter={() => setHoveredFacultyId(loc.id)}
                 onMouseLeave={() => setHoveredFacultyId(null)}
               >
+                {/* Transparent Hit Area for Touch & Mouse precision */}
+                <rect
+                  x="0"
+                  y="0"
+                  width="180"
+                  height="140"
+                  fill="transparent"
+                  pointerEvents="all"
+                  className="cursor-pointer"
+                />
+
                 {isSelected && (
                   <circle cx="90" cy="60" r="95" fill="#F59E0B" opacity="0.25" className="animate-pulse motion-reduce:animate-none" />
                 )}

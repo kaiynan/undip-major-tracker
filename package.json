@@ -19,6 +19,7 @@
     "test:e2e": "node scripts/verify-full-e2e.js",
     "test:all:prod": "npm run build && node scripts/run-all-prod-tests.js",
     "test:round8": "node scripts/test-round8-production.js",
+    "test:round9": "node scripts/test-round9-production.js",
     "gen:og": "node scripts/gen-og.js"
   },
   "dependencies": {

@@ -270,6 +270,9 @@ export default function ResultsPage() {
         selectedFacultyId={selectedFacultyId}
         onSelectFaculty={(facId) => {
           setSelectedFacultyId(facId);
+          if (facId && isPanelOpen) {
+            setIsPanelOpen(false);
+          }
         }}
         isPanelOpen={isPanelOpen}
         onToggleForeground={() => setIsPanelOpen(!isPanelOpen)}

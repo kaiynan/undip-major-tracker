@@ -28,6 +28,7 @@ export function MatchReasonsBlock({
   if (variant === 'full') {
     return (
       <div
+        data-testid="match-reasons-block"
         className={`bg-[#190E08] p-3.5 sm:p-5 rounded-2xl border border-[#78350F] space-y-2.5 ${className}`}
       >
         <div className="flex items-center gap-2 text-xs font-bold text-amber-300 font-pixel">
@@ -49,6 +50,7 @@ export function MatchReasonsBlock({
   // Compact variant for result card rows and faculty list
   return (
     <div
+      data-testid="match-reasons-block"
       className={`mt-2.5 pt-2 border-t border-[#78350F]/50 space-y-1 text-left ${className}`}
     >
       <div className="flex items-center gap-1.5 text-[11px] font-bold text-amber-300 font-pixel">
