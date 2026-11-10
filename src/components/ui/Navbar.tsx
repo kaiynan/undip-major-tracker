@@ -460,7 +460,7 @@ export function Navbar() {
                       : 'bg-[#24130C] text-amber-100 hover:text-white border-[#78350F] hover:bg-[#341A10]'
                   }`}
                 >
-                  <span>Beasiswa KIP-Kuliah</span>
+                  <span>Beasiswa</span>
                   <ChevronRight className="w-3.5 h-3.5 text-amber-300/70" />
                 </Link>
                 <Link

@@ -37,9 +37,7 @@ export function Footer() {
               </div>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-lg font-normal">
-              Platform eksplorasi minat dan rekomendasi program studi Universitas Diponegoro berbasis
-              arsitektur <strong>Hybrid Multi-Dimensional Interest Matching (HMIM)</strong>. Dirancang khusus
-              untuk membantu calon mahasiswa menemukan jurusan impian secara obyektif dan komprehensif.
+              Platform eksplorasi minat dan rekomendasi program studi Universitas Diponegoro. Dirancang khusus untuk membantu calon mahasiswa menemukan jurusan impian secara obyektif dan komprehensif.
             </p>
           </div>
 

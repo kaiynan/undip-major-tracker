@@ -31,7 +31,7 @@ export function LangkahSelanjutnyaHub() {
     },
     {
       id: 'beasiswa',
-      title: 'Beasiswa & KIP-Kuliah',
+      title: 'Beasiswa',
       subtitle: `${getScholarshipsCount()} beasiswa terdata`,
       blurb:
         `Katalog ${getScholarshipsCount()} beasiswa terdata: KIP-Kuliah, beasiswa pemerintah, yayasan filantropi, korporasi, hingga keringanan internal UNDIP bagi mahasiswa jenjang S1 & D4.`,

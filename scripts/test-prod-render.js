@@ -330,8 +330,8 @@ async function runProdRenderTests() {
     totalAssertions++;
     await interactivePage.goto(`${BASE_URL}/langkah-selanjutnya/beasiswa`, { waitUntil: 'networkidle' });
     const activePill = await interactivePage.locator('a[aria-current="page"]').textContent();
-    if (!activePill || !activePill.includes('BEASISWA KIP-KULIAH')) {
-      failures.push(`Active subnav pill on /langkah-selanjutnya/beasiswa is not 'BEASISWA KIP-KULIAH'! Got: ${activePill}`);
+    if (!activePill || !activePill.includes('BEASISWA')) {
+      failures.push(`Active subnav pill on /langkah-selanjutnya/beasiswa is not 'BEASISWA'! Got: ${activePill}`);
     } else {
       console.log('  ✓ Active subnav pill correctly matches route on /langkah-selanjutnya/beasiswa');
     }

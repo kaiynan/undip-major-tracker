@@ -417,11 +417,7 @@ export function PixelRectorateScene({ onReturnToHorse }: PixelRectorateSceneProp
 
         {/* Supporting Description: Clean, Concise & Direct */}
         <p className="text-sm sm:text-base lg:text-lg text-amber-100/90 max-w-2xl mx-auto leading-relaxed font-normal mb-8 sm:mb-10">
-          Eksplorasi kecocokan minat dan potensi akademikmu melalui evaluasi terstruktur{' '}
-          <strong className="text-[#FDE68A] font-semibold">
-            Hybrid Multi-Dimensional Interest Matching (HMIM)
-          </strong>{' '}
-          untuk 65 program studi di peringkat dan 5 program PSDKU di daftar Sarjana dan Vokasi UNDIP.
+          Eksplorasi kecocokan minat dan potensi akademikmu untuk program studi Sarjana dan Vokasi di Universitas Diponegoro.
         </p>
 
         {/* Academic Domains Exploration Trigger */}

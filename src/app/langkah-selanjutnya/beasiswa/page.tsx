@@ -4,7 +4,7 @@ import { ScholarshipCatalogue } from '@/components/next-steps/ScholarshipCatalog
 import { APP_NAME } from '@/config/brand';
 
 export const metadata: Metadata = {
-  title: `Informasi Beasiswa Lengkap & KIP-Kuliah — ${APP_NAME} 2027`,
+  title: `Beasiswa — ${APP_NAME} 2027`,
   description:
     'Panduan resmi beasiswa KIP-Kuliah dan katalog beasiswa pemerintah, yayasan, dan korporasi untuk mahasiswa Universitas Diponegoro TA 2026/2027.',
 };

@@ -72,7 +72,7 @@ export function PixelTentangKamiScene() {
           </p>
 
           <p className="text-xs sm:text-sm text-amber-100/80 leading-relaxed font-normal">
-            Platform eksplorasi akademik yang dikembangkan untuk menjembatani rasa ingin tahu calon mahasiswa baru dengan karakteristik 65 program studi di peringkat dan 5 program PSDKU Universitas Diponegoro secara terstruktur, adil, dan obyektif.
+            Platform eksplorasi akademik yang dikembangkan untuk menjembatani rasa ingin tahu calon mahasiswa baru dengan karakteristik program studi Sarjana dan Vokasi Universitas Diponegoro secara terstruktur, adil, dan obyektif.
           </p>
         </div>
 

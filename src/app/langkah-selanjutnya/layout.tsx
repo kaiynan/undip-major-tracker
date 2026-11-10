@@ -32,7 +32,7 @@ const SUBNAV_ITEMS: SubNavItem[] = [
   },
   {
     id: 'beasiswa',
-    label: 'BEASISWA KIP-KULIAH',
+    label: 'BEASISWA',
     href: '/langkah-selanjutnya/beasiswa',
     icon: GraduationCap,
   },
@@ -65,7 +65,7 @@ export default function LangkahSelanjutnyaLayout({
     if (pathname === '/langkah-selanjutnya/biaya-ukt') {
       return {
         prev: { label: 'Hub Informasi', href: '/langkah-selanjutnya' },
-        next: { label: 'Beasiswa KIP-Kuliah', href: '/langkah-selanjutnya/beasiswa' },
+        next: { label: 'Beasiswa', href: '/langkah-selanjutnya/beasiswa' },
       };
     }
     if (pathname === '/langkah-selanjutnya/beasiswa') {
@@ -76,7 +76,7 @@ export default function LangkahSelanjutnyaLayout({
     }
     if (pathname === '/langkah-selanjutnya/jadwal-seleksi') {
       return {
-        prev: { label: 'Beasiswa KIP-Kuliah', href: '/langkah-selanjutnya/beasiswa' },
+        prev: { label: 'Beasiswa', href: '/langkah-selanjutnya/beasiswa' },
         next: { label: 'Kembali ke Beranda', href: '/' },
       };
     }
