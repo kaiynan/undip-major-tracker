@@ -124,6 +124,7 @@ export default function AdminPage() {
             </p>
           </div>
 
+          {/* Note: this gate is client-side only (the key ships in the JS bundle) and is not security. */}
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="relative">
               <KeyRound className="w-4 h-4 text-amber-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -134,7 +135,7 @@ export default function AdminPage() {
                   setPasskeyInput(e.target.value);
                   if (passkeyError) setPasskeyError(false);
                 }}
-                placeholder="Kunci Akses Admin (default: undip2027)"
+                placeholder="Kunci Akses Admin"
                 aria-label="Kunci Akses Admin"
                 className={`w-full bg-[#190E08] border ${
                   passkeyError ? 'border-red-500 ring-1 ring-red-500' : 'border-[#78350F]'
