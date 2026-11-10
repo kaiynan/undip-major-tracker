@@ -382,11 +382,54 @@ for (const filePath of userFacingFiles) {
 }
 
 // -----------------------------------------------------------------------------
-// [GUARD 11] Validating Centralized Brand Usage (No Old Brand Literals outside brand.ts)
+// [GUARD 11] Validating Centralized Brand Usage (Unlock The Unseen & No Old Brand Literals)
 // -----------------------------------------------------------------------------
-console.log('\n[GUARD 11] Validating Centralized Brand Usage (No Old Brand Literals outside brand.ts)...');
+console.log('\n[GUARD 11] Validating Centralized Brand Usage (Unlock The Unseen & No Old Brand Literals)...');
 
-const FORBIDDEN_BRAND_LITERALS = ['UNDIP Major Matcher', 'Major Matcher', 'UNDIP Matcher'];
+import { APP_NAME, APP_NAME_SHORT, TAGLINE, THEME } from '../src/config/brand';
+
+assert(
+  APP_NAME === 'Unlock The Unseen',
+  'Guard 11 - Official Brand Name',
+  'brand.ts',
+  `Expected APP_NAME to be 'Unlock The Unseen', got '${APP_NAME}'`
+);
+
+assert(
+  APP_NAME_SHORT === 'Unlock',
+  'Guard 11 - Official Brand Short Name',
+  'brand.ts',
+  `Expected APP_NAME_SHORT to be 'Unlock', got '${APP_NAME_SHORT}'`
+);
+
+assert(
+  APP_NAME_SHORT.length <= 12,
+  'Guard 11 - PWA Short Name Constraint',
+  'brand.ts',
+  `APP_NAME_SHORT must be <= 12 chars for mobile PWA icon labels (got ${APP_NAME_SHORT.length})`
+);
+
+assert(
+  THEME === 'Unlock The Unseen',
+  'Guard 11 - Brand Theme',
+  'brand.ts',
+  `Expected THEME to be 'Unlock The Unseen', got '${THEME}'`
+);
+
+assert(
+  TAGLINE === 'Find Your Potential, Define Your Next Move',
+  'Guard 11 - Official Tagline',
+  'brand.ts',
+  `Expected TAGLINE to be 'Find Your Potential, Define Your Next Move', got '${TAGLINE}'`
+);
+
+const FORBIDDEN_BRAND_LITERALS = [
+  'UNDIP Major Matcher',
+  'Major Matcher',
+  'UNDIP Matcher',
+  'UNDIP Major Tracker',
+  'Major Tracker',
+];
 
 function scanDirForBrandLiteral(dir: string): { file: string; literal: string }[] {
   let matched: { file: string; literal: string }[] = [];
@@ -403,6 +446,11 @@ function scanDirForBrandLiteral(dir: string): { file: string; literal: string }[
         if (fileContent.includes(forbidden)) {
           matched.push({ file: fullPath, literal: forbidden });
         }
+      }
+      // Check for 'Define Your Next Move' used as app name (not part of TAGLINE)
+      const contentWithoutTagline = fileContent.split('Find Your Potential, Define Your Next Move').join('');
+      if (contentWithoutTagline.includes('Define Your Next Move')) {
+        matched.push({ file: fullPath, literal: 'Define Your Next Move (outside TAGLINE)' });
       }
     }
   }

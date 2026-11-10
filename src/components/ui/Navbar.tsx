@@ -256,10 +256,10 @@ export function Navbar() {
                 {/* On phone <= 430px (and < md): two-line stack so full name is visible without truncation */}
                 <div className="navbar-brand-mobile leading-none gap-0.5">
                   <span className="font-pixel text-[7.5px] text-[#FDE68A] tracking-wider leading-none whitespace-nowrap">
-                    DEFINE YOUR
+                    UNLOCK
                   </span>
                   <span className="font-pixel text-[6.5px] text-white tracking-tight leading-none whitespace-nowrap">
-                    NEXT MOVE
+                    THE UNSEEN
                   </span>
                 </div>
                 {/* On screens >= md: single line */}

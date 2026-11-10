@@ -25,7 +25,7 @@ const geistSansBase64 = fs.readFileSync(path.join(FONTS_DIR, 'geist-sans.woff2')
 const geistMonoBase64 = fs.readFileSync(path.join(FONTS_DIR, 'geist-mono.woff2')).toString('base64');
 
 // Brand configuration from brand.ts
-const APP_NAME = 'Define Your Next Move';
+const APP_NAME = 'Unlock The Unseen';
 const TAGLINE = 'Find Your Potential, Define Your Next Move';
 const EVENT_NAME = 'Roadshow Sedulur Serang Diponegoro 2027';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://roadshow-2027.vercel.app';

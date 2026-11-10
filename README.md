@@ -1,4 +1,4 @@
-# Define Your Next Move — Find Your Potential, Define Your Next Move
+# Unlock The Unseen — Find Your Potential, Define Your Next Move
 
 Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis **Hybrid Multi-Dimensional Interest Matching (HMIM)** untuk siswa SMA/SMK/MA.
 Diselenggarakan dalam rangka **Roadshow Sedulur Serang Diponegoro 2027 — Unlock The Unseen**.
