@@ -297,41 +297,44 @@ export default function ResultsPage() {
         className="fixed inset-0 z-0"
       />
 
-      {/* 2. Top Floating Navigation & Action Bar (Clean Single Header on /results) */}
+      {/* 2. Top Floating Navigation & Action Bar (Clean Single Header on /results, thin <= 52px) */}
       <header
-        className="fixed left-2 right-2 sm:left-4 sm:right-4 z-30 flex items-center justify-between gap-1.5 sm:gap-2.5 bg-[#24130C]/95 backdrop-blur-md text-white px-2.5 py-2 sm:px-5 sm:py-3 rounded-2xl border-2 border-[#78350F] shadow-xl max-w-[calc(100vw-16px)] sm:max-w-none"
+        className="fixed left-2 right-2 sm:left-4 sm:right-4 z-30 flex items-center justify-between gap-1.5 sm:gap-2.5 bg-[#24130C]/95 backdrop-blur-md text-white px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl border-2 border-[#78350F] shadow-xl max-w-[calc(100vw-16px)] sm:max-w-none h-[48px] sm:h-[50px]"
         style={{ top: 'calc(var(--navbar-h, 56px) + 8px)' }}
+        aria-label="Toolbar Hasil Rekomendasi"
       >
-        {/* Left: Brand Badge */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        {/* Left: Brand Badge & Retake Link */}
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <Link
             href="/"
-            className="flex items-center gap-1.5 sm:gap-2 font-pixel text-xs text-[#FDE68A] hover:text-amber-300 transition-colors min-h-[44px]"
+            className="flex items-center gap-1 sm:gap-1.5 font-pixel text-xs text-[#FDE68A] hover:text-amber-300 transition-colors p-1.5 rounded-lg hover:bg-[#190E08]"
             aria-label="Kembali ke Beranda"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping motion-reduce:animate-none shrink-0" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping motion-reduce:animate-none shrink-0" />
             <span className="hidden xs:inline">UNDIP MAP</span>
             <span className="xs:hidden">MAP</span>
           </Link>
 
-          {/* Quick status summary badge */}
-          {topProgramData && (
-            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#190E08] border border-[#78350F] text-xs font-bold text-amber-200 min-h-[44px]">
-              <Trophy className="w-4 h-4 text-amber-400 shrink-0" />
-              <span className="text-amber-300 font-normal">Top Match:</span>
-              <span className="text-white truncate max-w-[180px]">{topProgramData.name}</span>
-            </div>
-          )}
+          {/* Retake Questionnaire Action */}
+          <button
+            onClick={() => setIsRetakeModalOpen(true)}
+            className="flex items-center gap-1 px-2 py-1 sm:px-2.5 sm:py-1 rounded-lg bg-[#190E08] hover:bg-[#341A10] text-rose-300 hover:text-rose-200 border border-rose-900/60 transition-colors cursor-pointer text-xs font-bold"
+            title="Ulangi Kuisioner (Reset & Isi Ulang)"
+            aria-label="Ulangi Kuisioner (Reset & Isi Ulang)"
+          >
+            <RotateCcw className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+            <span className="hidden md:inline">Ulangi</span>
+          </button>
         </div>
 
-        {/* Center: Output 1 vs Output 2 vs Next Steps Tabs */}
-        <div className="flex items-center bg-[#190E08] p-0.5 sm:p-1 rounded-xl border border-[#78350F] shrink-0">
+        {/* Center: Output 1 vs Output 2 Switch */}
+        <div className="flex items-center bg-[#190E08] p-0.5 rounded-xl border border-[#78350F] shrink-0">
           <button
             onClick={() => {
               setActiveTab('all-majors');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center justify-center gap-1 sm:gap-1.5 p-2 sm:px-3 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] min-w-[40px] sm:min-w-0 ${
+            className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-xs font-black transition-all cursor-pointer ${
               activeTab === 'all-majors'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                 : 'text-amber-200/90 hover:text-white'
@@ -339,8 +342,9 @@ export default function ResultsPage() {
             title="Output 1: 65 Program Studi di Peringkat"
             aria-label="Lihat Output 1: 65 Program Studi di Peringkat"
           >
-            <GraduationCap className="w-4 h-4 shrink-0" />
+            <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span className="hidden sm:inline">65 Jurusan</span>
+            <span className="sm:hidden text-[10px]">65 Prodi</span>
           </button>
 
           <button
@@ -348,7 +352,7 @@ export default function ResultsPage() {
               setActiveTab('faculties');
               if (!isPanelOpen) setIsPanelOpen(true);
             }}
-            className={`flex items-center justify-center gap-1 sm:gap-1.5 p-2 sm:px-3 sm:py-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] min-w-[40px] sm:min-w-0 ${
+            className={`flex items-center justify-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-lg text-xs font-black transition-all cursor-pointer ${
               activeTab === 'faculties'
                 ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                 : 'text-amber-200/90 hover:text-white'
@@ -356,27 +360,28 @@ export default function ResultsPage() {
             title="Output 2: 12 Fakultas"
             aria-label="Lihat Output 2: 12 Fakultas"
           >
-            <Building2 className="w-4 h-4 shrink-0" />
+            <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span className="hidden sm:inline">12 Fakultas</span>
+            <span className="sm:hidden text-[10px]">12 Fak</span>
           </button>
         </div>
 
-        {/* Right: Sound, Toggle Panel ("Peta Penuh"), Share, and Retake */}
-        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-          {/* Audio Toggle (desktop/tablet only; on phone global Navbar directly above has SFX toggle) */}
+        {/* Right: Sound & Toggle Panel ("Peta Penuh") */}
+        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          {/* Audio Toggle (desktop only) */}
           <button
             onClick={handleToggleSound}
-            className="hidden sm:flex p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] items-center justify-center"
+            className="hidden sm:flex p-1.5 sm:p-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] transition-colors cursor-pointer items-center justify-center"
             title={isMuted ? 'Aktifkan Suara Retro' : 'Bisukan Suara'}
             aria-label={isMuted ? 'Aktifkan Suara Retro' : 'Bisukan Suara Retro'}
           >
-            {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+            {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
           </button>
 
           {/* Toggle Panel Button ("Peta Penuh" / "Buka Panel") */}
           <button
             onClick={() => setIsPanelOpen(!isPanelOpen)}
-            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] ${
+            className={`flex items-center gap-1 sm:gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               isPanelOpen
                 ? 'bg-amber-500 text-stone-950 hover:bg-amber-400 shadow-xs'
                 : 'bg-[#78350F] text-[#FDE68A] hover:bg-[#8D3F12] border border-[#F59E0B]'
@@ -386,66 +391,34 @@ export default function ResultsPage() {
           >
             {isPanelOpen ? (
               <>
-                <Maximize2 className="w-4 h-4 shrink-0" />
+                <Maximize2 className="w-3.5 h-3.5 shrink-0" />
                 <span className="hidden sm:inline">Peta Penuh</span>
               </>
             ) : (
               <>
-                <Layers className="w-4 h-4 shrink-0" />
+                <Layers className="w-3.5 h-3.5 shrink-0" />
                 <span className="hidden sm:inline">Buka Panel</span>
               </>
             )}
           </button>
-
-          {/* Share Button */}
-          <button
-            onClick={() => setIsShareOpen(true)}
-            className="p-2 sm:px-3 sm:py-2 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-amber-200 hover:text-white border border-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5"
-            title="Bagikan Hasil"
-            aria-label="Bagikan Hasil Rekomendasi"
-            data-testid="btn-bagikan-hasil"
-          >
-            <Share2 className="w-4 h-4 text-[#F59E0B]" />
-            <span className="hidden sm:inline text-xs font-bold font-pixel">Bagikan</span>
-          </button>
-
-          {/* PDF Export Button (Compact Header) */}
-          <PdfExportButton
-            programScores={programScores}
-            facultyScores={facultyScores}
-            programs={studyPrograms}
-            dimensionScores={dimensionScores}
-            userSummary={userSummary}
-            variant="compact"
-          />
-
-          {/* Retake Questionnaire Button */}
-          <button
-            onClick={() => setIsRetakeModalOpen(true)}
-            className="p-2 sm:p-2.5 rounded-xl bg-[#190E08] hover:bg-[#341A10] text-rose-300 hover:text-rose-200 border border-rose-900/60 transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
-            title="Ulangi Kuisioner (Reset & Isi Ulang)"
-            aria-label="Ulangi Kuisioner (Reset & Isi Ulang)"
-          >
-            <RotateCcw className="w-4 h-4 text-rose-400" />
-          </button>
         </div>
       </header>
 
-      {/* 3. Floating Foreground Results Panel (Interactive Bottom Sheet on Mobile with 3 Positions) */}
+      {/* 3. Floating Foreground Results Panel (Interactive Bottom Sheet on Mobile with 3 Positions: Peek ~96px, Half ~50%, Full) */}
       {isPanelOpen && (
         <aside
-          className={`fixed bottom-0 left-0 right-0 sm:max-h-none sm:top-20 sm:right-4 sm:bottom-4 sm:left-auto sm:w-[580px] lg:w-[660px] xl:w-[720px] z-20 bg-[#24130C]/98 backdrop-blur-md rounded-t-3xl sm:rounded-3xl border-t-2 sm:border-2 border-[#78350F] shadow-[0_16px_50px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden text-white duration-300 ease-in-out pb-[max(0.75rem,env(safe-area-inset-bottom))] ${
+          className={`fixed bottom-0 left-0 right-0 sm:top-[calc(var(--navbar-h,56px)+var(--map-toolbar-h,50px)+16px)] sm:right-4 sm:bottom-4 sm:left-auto sm:w-[580px] lg:w-[660px] xl:w-[720px] sm:h-auto sm:max-h-none z-20 bg-[#24130C]/98 backdrop-blur-md rounded-t-3xl sm:rounded-3xl border-t-2 sm:border-2 border-[#78350F] shadow-[0_16px_50px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden text-white duration-300 ease-in-out pb-[max(0.75rem,env(safe-area-inset-bottom))] ${
             sheetPosition === 'collapsed'
-              ? 'h-36 max-h-36 sm:h-auto'
+              ? 'h-[96px] max-h-[96px]'
               : sheetPosition === 'expanded'
-              ? 'h-[90vh] max-h-[90vh] landscape:h-[85vh] sm:h-auto'
-              : 'h-[56vh] max-h-[56vh] landscape:h-[80vh] sm:h-auto'
+              ? 'h-[calc(100dvh-var(--navbar-h,56px)-var(--map-toolbar-h,50px)-12px)] max-h-[calc(100dvh-var(--navbar-h,56px)-var(--map-toolbar-h,50px)-12px)]'
+              : 'h-[50vh] max-h-[50vh]'
           }`}
           onWheel={(e) => e.stopPropagation()}
         >
-          {/* Mobile Drag Indicator Handle (3-Position Snapping: Collapsed / Half / Expanded) */}
+          {/* Mobile Drag Indicator Handle (3-Position Snapping: Peek ~96px / Half ~50% / Full) */}
           <div
-            className="flex sm:hidden flex-col items-center justify-center pt-2.5 pb-2 bg-[#190E08]/95 shrink-0 cursor-grab active:cursor-grabbing touch-none select-none border-b border-[#78350F]/40 min-h-[44px]"
+            className="flex sm:hidden flex-col items-center justify-center pt-2 pb-1.5 bg-[#190E08]/95 shrink-0 cursor-grab active:cursor-grabbing touch-none select-none border-b border-[#78350F]/40 min-h-[22px]"
             onPointerDown={handleSheetPointerDown}
             onPointerUp={handleSheetPointerUp}
             onPointerCancel={handleSheetPointerUp}
@@ -454,65 +427,50 @@ export default function ResultsPage() {
             aria-label={`Ubah ukuran panel bawah (Posisi saat ini: ${sheetPosition})`}
             title="Tarik ke atas/bawah untuk mengubah posisi panel"
           >
-            <div className="w-12 h-1.5 rounded-full bg-[#78350F] hover:bg-[#F59E0B] transition-colors" />
-            <div className="flex items-center gap-1 text-xs font-mono text-amber-200/90 mt-1 uppercase tracking-wider">
-              {sheetPosition === 'collapsed' && (
-                <>
-                  <span>▲ Geser ke Atas</span>
-                  <span className="text-amber-400 font-bold">(Ringkasan)</span>
-                </>
-              )}
-              {sheetPosition === 'half' && (
-                <>
-                  <span>▲▼ Geser Panel</span>
-                  <span className="text-amber-400 font-bold">(Sedang)</span>
-                </>
-              )}
-              {sheetPosition === 'expanded' && (
-                <>
-                  <span>▼ Geser ke Bawah</span>
-                  <span className="text-amber-400 font-bold">(Penuh)</span>
-                </>
-              )}
-            </div>
+            <div className="w-10 h-1.5 rounded-full bg-[#78350F] hover:bg-[#F59E0B] transition-colors" />
           </div>
 
           {/* Panel Header */}
-          <div className="px-4 py-3 sm:p-5 border-b-2 border-[#78350F] flex flex-col gap-2.5 sm:gap-3 bg-[#190E08]/95 shrink-0">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-9 h-9 rounded-xl bg-[#78350F] text-[#FDE68A] border border-[#F59E0B] flex items-center justify-center shrink-0">
-                  {activeTab === 'all-majors' ? (
-                    <GraduationCap className="w-4 h-4" />
-                  ) : (
-                    <Building2 className="w-4 h-4" />
+          <div className="px-3.5 py-2.5 sm:px-5 sm:py-3.5 border-b-2 border-[#78350F] flex flex-col gap-2 bg-[#190E08]/95 shrink-0">
+            {/* Title & Tier Badge row: title stays on one line or wraps cleanly; tier badge sits STRICTLY under it */}
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <h2 className="text-xs sm:text-sm font-extrabold text-[#FFFBEB] font-pixel tracking-tight leading-snug">
+                  Hasil Rekomendasi
+                </h2>
+                {/* Tier badge sitting strictly under title (zero overlap on 320px) */}
+                <div className="mt-1 flex items-center gap-1.5 flex-wrap">
+                  <TierBadge tier={topProgram?.tier || 'S'} size="sm" showLabel={false} />
+                  <span className="text-[11px] font-bold text-amber-300">
+                    {topProgram?.tier === 'S'
+                      ? 'Kecocokan Sangat Tinggi'
+                      : topProgram?.tier === 'A'
+                      ? 'Kecocokan Tinggi'
+                      : topProgram?.tier === 'B'
+                      ? 'Kecocokan Cukup'
+                      : 'Potensi Alternatif'}
+                  </span>
+                  {topProgramData && (
+                    <span className="text-[11px] text-amber-200/80 truncate max-w-[130px] sm:max-w-[220px]">
+                      • {topProgramData.name}
+                    </span>
                   )}
-                </div>
-                <div className="min-w-0">
-                  <h2 className="text-sm sm:text-base font-extrabold text-[#FFFBEB] truncate font-pixel">
-                    Panel Rekomendasi HMIM
-                  </h2>
-                  <p className="text-xs text-amber-200/90 truncate">
-                    {selectedFacultyObj
-                      ? `Kamera Terfokus: ${selectedFacultyObj.name} (${selectedFacultyObj.shortName})`
-                      : 'Kamera dan filter tersinkronisasi interaktif dengan peta'}
-                  </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-1.5 shrink-0">
                 {selectedFacultyId && (
                   <button
                     onClick={() => setSelectedFacultyId(null)}
                     aria-label="Reset filter fokus kamera peta"
-                    className="text-xs font-bold px-3 py-1.5 bg-[#24130C] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] rounded-lg transition-colors cursor-pointer min-h-[44px] flex items-center"
+                    className="text-xs font-bold px-2 py-1 bg-[#24130C] hover:bg-[#341A10] text-[#FDE68A] border border-[#78350F] rounded-lg transition-colors cursor-pointer"
                   >
-                    Reset Filter
+                    Reset
                   </button>
                 )}
                 <button
                   onClick={() => setIsPanelOpen(false)}
-                  className="p-2 rounded-xl text-amber-200/90 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+                  className="p-1.5 rounded-xl text-amber-200/90 hover:text-white hover:bg-[#78350F] transition-colors cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center"
                   title="Tutup panel (Lihat Peta Penuh)"
                   aria-label="Tutup panel hasil rekomendasi"
                 >
@@ -521,12 +479,12 @@ export default function ResultsPage() {
               </div>
             </div>
 
-            {/* Quick Share / Export Actions */}
-            <div className="flex items-center gap-2">
+            {/* Single Set of Share / Download PDF Actions (Deduplicated: ONLY here in panel/sheet header) */}
+            <div className="flex items-center gap-2 pt-0.5">
               <button
                 onClick={() => setIsShareOpen(true)}
-                className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] hover:text-white border-2 border-[#F59E0B] rounded-xl text-xs font-bold font-pixel shadow-[2px_2px_0_0_#000] transition-colors cursor-pointer min-h-[44px]"
-                data-testid="btn-bagikan-hasil-panel"
+                className="flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 bg-[#2A160E] hover:bg-[#3D1F13] text-[#FDE68A] hover:text-white border-2 border-[#F59E0B] rounded-xl text-xs font-bold font-pixel shadow-[2px_2px_0_0_#000] transition-colors cursor-pointer min-h-[38px]"
+                data-testid="btn-bagikan-hasil"
                 aria-label="Bagikan Hasil Rekomendasi"
               >
                 <Share2 className="w-3.5 h-3.5 text-[#F59E0B]" />
@@ -539,15 +497,15 @@ export default function ResultsPage() {
                 programs={studyPrograms}
                 dimensionScores={dimensionScores}
                 userSummary={userSummary}
-                className="flex-1"
+                className="flex-1 min-h-[38px]"
               />
             </div>
 
             {/* In-Panel Output Switcher Tabs */}
-            <div className="grid grid-cols-2 gap-1.5 bg-[#140B07] p-1.5 rounded-xl border border-[#78350F]">
+            <div className="grid grid-cols-2 gap-1.5 bg-[#140B07] p-1 rounded-xl border border-[#78350F]">
               <button
                 onClick={() => setActiveTab('all-majors')}
-                className={`flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1.5 sm:px-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 px-1.5 sm:px-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[38px] ${
                   activeTab === 'all-majors'
                     ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                     : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
@@ -560,7 +518,7 @@ export default function ResultsPage() {
               </button>
               <button
                 onClick={() => setActiveTab('faculties')}
-                className={`flex items-center justify-center gap-1 sm:gap-1.5 py-2.5 px-1.5 sm:px-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[44px] ${
+                className={`flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 px-1.5 sm:px-2 rounded-lg text-xs font-black transition-all cursor-pointer min-h-[38px] ${
                   activeTab === 'faculties'
                     ? 'bg-[#F59E0B] text-stone-950 shadow-xs'
                     : 'text-amber-200/90 hover:text-white hover:bg-[#2A150D]'
@@ -574,8 +532,8 @@ export default function ResultsPage() {
             </div>
           </div>
 
-          {/* Panel Scrollable Content Body */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 scrollbar-thin scrollbar-thumb-[#78350F] scrollbar-track-[#190E08]">
+          {/* Panel Scrollable Content Body (Hidden on mobile collapsed/peek ~96px to avoid clipping) */}
+          <div className={`flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 scrollbar-thin scrollbar-thumb-[#78350F] scrollbar-track-[#190E08] pb-32 ${sheetPosition === 'collapsed' ? 'hidden sm:block' : 'block'}`}>
             {/* Banner Link to Langkah Selanjutnya */}
             <Link
               href="/langkah-selanjutnya"

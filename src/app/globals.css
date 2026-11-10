@@ -27,6 +27,8 @@
 
 :root {
   --navbar-h: 56px;
+  --map-toolbar-h: 50px;
+  --sheet-h: 50vh;
   --background: #0B132B;
   --foreground: #F8F7F3;
   --muted-text: #94A3B8;

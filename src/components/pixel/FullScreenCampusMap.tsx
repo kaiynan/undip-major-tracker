@@ -359,10 +359,10 @@ export function FullScreenCampusMap({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
     >
-      {/* 1. TOP-LEFT HUD: VIRTUAL CAMPUS COMPASS & CONTROLS */}
+      {/* 1. TOP-LEFT HUD: VIRTUAL CAMPUS COMPASS & CONTROLS (Strictly below --map-toolbar-h with clean margin) */}
       <div
         className="absolute left-3 sm:left-4 z-20 flex flex-wrap items-center gap-2 pointer-events-auto"
-        style={{ top: 'calc(var(--navbar-h, 56px) + 72px)' }}
+        style={{ top: 'calc(var(--navbar-h, 56px) + var(--map-toolbar-h, 50px) + 16px)' }}
       >
         <div className="flex items-center gap-2 bg-[#190E08]/90 backdrop-blur-md px-3 py-2 rounded-2xl border-2 border-[#78350F] shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
           <div className="w-7 h-7 rounded-xl bg-[#78350F] text-[#FDE68A] flex items-center justify-center border border-[#F59E0B]">
