@@ -164,6 +164,27 @@ async function runRound7Verification() {
       throw new Error('Square card file is 0 bytes');
     }
 
+    // 3. Switch to Landscape format (1920x1080)
+    console.log('  Testing Landscape Format (1920x1080)...');
+    const landscapeFormatBtn = await desktopPage.$('button[aria-label="Format Landscape 1920x1080 (16:9)"]');
+    if (!landscapeFormatBtn) {
+      throw new Error('Landscape format button not found');
+    }
+    await landscapeFormatBtn.click();
+    await desktopPage.waitForTimeout(800);
+
+    const downloadPromiseLandscape = desktopPage.waitForEvent('download', { timeout: 10000 });
+    await downloadBtn.click();
+    const downloadLandscape = await downloadPromiseLandscape;
+    const landscapeCardPath = path.join(ARTIFACTS_DIR, 'round11-card-landscape.png');
+    await downloadLandscape.saveAs(landscapeCardPath);
+
+    const landscapeStats = fs.statSync(landscapeCardPath);
+    console.log(`  ✓ Landscape card downloaded: ${landscapeStats.size} bytes saved to ${landscapeCardPath}`);
+    if (landscapeStats.size === 0) {
+      throw new Error('Landscape card file is 0 bytes');
+    }
+
     // Close modal
     const closeBtn = await desktopPage.$('button[title="Tutup dialog"]');
     if (closeBtn) {
