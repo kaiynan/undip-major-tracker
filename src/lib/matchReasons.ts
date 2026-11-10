@@ -329,3 +329,156 @@ export function getMatchReasons(
 
   return reasons;
 }
+
+// =============================================================================
+// Top 3 Enhanced Recommendation Explanation & Comparison Helpers (Round 11)
+// =============================================================================
+
+export interface TopProgramExplanation {
+  programId: string;
+  programName: string;
+  facultyName: string;
+  rank: number;
+  score: number;
+  tier: string;
+  primaryReason: string;
+  dominantDimension: {
+    name: string;
+    weightPercent: number;
+    subdimension: string;
+    contribution: number;
+  };
+  interestAlignment: string;
+  explorationTip: string;
+  curriculumHighlights: string[];
+}
+
+export interface TopThreeComparison {
+  explanations: TopProgramExplanation[];
+  gap1_2: number;
+  gap2_3: number;
+  comparisonSummary: string;
+}
+
+/**
+ * Builds an in-depth, structured explanation for a top-ranked program
+ * based on its exact score decomposition and curriculum data.
+ */
+export function getTopProgramExplanation(
+  dimensionScores: DimensionScore,
+  program: StudyProgram,
+  score: number,
+  tier: string,
+  rank: number,
+  facultyName: string = ''
+): TopProgramExplanation {
+  const breakdown = computeScoreBreakdown(dimensionScores, program);
+
+  // Determine top contributing dimension
+  const dims: DimensionContribution[] = [
+    breakdown.domain,
+    breakdown.curriculum,
+    breakdown.riasec,
+    breakdown.learning,
+  ].sort((a, b) => b.contribution - a.contribution);
+
+  const topDim = dims[0];
+  const subLabel = topDim.topSubdimensionLabel || topDim.dimensionLabel;
+
+  let primaryReason = '';
+  switch (topDim.dimension) {
+    case 'domain':
+      primaryReason = `Minat pada bidang ${subLabel} memberikan keselarasan terbesar (${topDim.contribution.toFixed(1)} poin) terhadap materi pokok prodi ini.`;
+      break;
+    case 'curriculum':
+      primaryReason = `Ketertarikan pada kurikulum ${subLabel} sejalan dengan kompetensi inti yang dikembangkan dalam pembelajaran prodi ini.`;
+      break;
+    case 'riasec':
+      primaryReason = `Karakter minat ${subLabel}-mu mendukung gaya eksplorasi akademik dan metode studi di prodi ini.`;
+      break;
+    case 'learning':
+      primaryReason = `Preferensi belajar ${subLabel} sangat cocok dengan pola perkuliahan dan praktikum di prodi ini.`;
+      break;
+  }
+
+  const interestAlignment = `Keselarasan didukung oleh ketertarikan pada ${subLabel}, sejalan dengan kurikulum ${program.degreeLevel} ${program.name}.`;
+
+  const highlights = (program.curriculumKeywords && program.curriculumKeywords.length > 0)
+    ? program.curriculumKeywords.slice(0, 3)
+    : (program.competencies && program.competencies.length > 0)
+    ? program.competencies.slice(0, 3)
+    : [];
+
+  const explorationTip = highlights.length > 0
+    ? `Cari tahu lebih lanjut mengenai mata kuliah seperti ${highlights.join(', ')} untuk memahami kegiatan perkuliahannya.`
+    : `Telusuri kurikulum dan prospek bidang ini di laman resmi fakultas.`;
+
+  return {
+    programId: program.id,
+    programName: program.name,
+    facultyName,
+    rank,
+    score,
+    tier,
+    primaryReason,
+    dominantDimension: {
+      name: topDim.dimensionLabel,
+      weightPercent: Math.round(topDim.weight * 100),
+      subdimension: subLabel,
+      contribution: roundTo(topDim.contribution, 2),
+    },
+    interestAlignment,
+    explorationTip,
+    curriculumHighlights: highlights,
+  };
+}
+
+/**
+ * Computes comparative contrast and score gap explanations across top 3 recommendations.
+ */
+export function getTopThreeComparison(
+  dimensionScores: DimensionScore,
+  topThree: { programId: string; totalScore: number; tier: string }[],
+  allPrograms: StudyProgram[],
+  facultyLookup: Record<string, string> = {}
+): TopThreeComparison {
+  const explanations: TopProgramExplanation[] = [];
+
+  for (let i = 0; i < Math.min(3, topThree.length); i++) {
+    const item = topThree[i];
+    const prog = allPrograms.find((p) => p.id === item.programId);
+    if (prog) {
+      const facName = facultyLookup[prog.facultyId] || prog.facultyId;
+      explanations.push(
+        getTopProgramExplanation(dimensionScores, prog, item.totalScore, item.tier, i + 1, facName)
+      );
+    }
+  }
+
+  const gap1_2 = explanations.length >= 2 ? roundTo(Math.abs(explanations[0].score - explanations[1].score), 2) : 0;
+  const gap2_3 = explanations.length >= 3 ? roundTo(Math.abs(explanations[1].score - explanations[2].score), 2) : 0;
+
+  let comparisonSummary = '';
+  if (explanations.length >= 2) {
+    const p1 = explanations[0];
+    const p2 = explanations[1];
+
+    if (gap1_2 < 1.0) {
+      comparisonSummary = `Pilihan #1 (${p1.programName}) dan #2 (${p2.programName}) memiliki skor yang sangat berdekatan (selisih ${gap1_2.toFixed(1)}%), menunjukkan keselarasan minat yang seimbang antara fokus ${p1.dominantDimension.subdimension} dan ${p2.dominantDimension.subdimension}.`;
+    } else {
+      comparisonSummary = `Pilihan #1 (${p1.programName}) unggul ${gap1_2.toFixed(1)}% di atas #2 (${p2.programName}), didorong oleh kecocokan lebih tinggi pada dimensi ${p1.dominantDimension.name}.`;
+    }
+
+    if (explanations.length >= 3) {
+      const p3 = explanations[2];
+      comparisonSummary += ` Sementara pilihan #3 (${p3.programName}) menjadi alternatif kuat berikutnya dengan fokus pada ${p3.dominantDimension.subdimension}.`;
+    }
+  }
+
+  return {
+    explanations,
+    gap1_2,
+    gap2_3,
+    comparisonSummary,
+  };
+}

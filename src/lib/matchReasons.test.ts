@@ -1,4 +1,8 @@
-import { computeScoreBreakdown, getMatchReasons } from './matchReasons';
+import {
+  computeScoreBreakdown,
+  getMatchReasons,
+  getTopThreeComparison,
+} from './matchReasons';
 import {
   calculateDimensionScores,
   calculateProgramScore,
@@ -187,6 +191,54 @@ const lawReasons = getMatchReasons(lawDims, topLawProg);
 console.log(`  Persona 3 (${topLawProg.name}):`);
 lawReasons.forEach((r, idx) => console.log(`    ${idx + 1}. ${r}`));
 if (lawReasons.length < 2) throw new Error('Expected at least 2 reasons for strong law match');
+
+// -----------------------------------------------------------------------------
+// Test 6: Enhanced Top 3 Explanation & Score Gap Comparison (Round 11)
+// -----------------------------------------------------------------------------
+console.log('\n[TEST 6] Validating Enhanced Top 3 Explanation & Score Gap Comparison...');
+
+const sampleTopScores = [
+  { programId: 'ft-industri', totalScore: 89.4, tier: 'S' },
+  { programId: 'ft-elektro', totalScore: 87.3, tier: 'S' },
+  { programId: 'ft-kimia', totalScore: 85.9, tier: 'S' },
+];
+
+const compResult = getTopThreeComparison(techDims, sampleTopScores, studyPrograms);
+
+if (compResult.explanations.length !== 3) {
+  throw new Error(`Expected 3 explanations, got ${compResult.explanations.length}`);
+}
+
+const p1Exp = compResult.explanations[0];
+const p2Exp = compResult.explanations[1];
+const p3Exp = compResult.explanations[2];
+
+// Check distinctness of primary reasons
+if (p1Exp.primaryReason === p2Exp.primaryReason && p2Exp.primaryReason === p3Exp.primaryReason) {
+  throw new Error('Top 3 programs must not have identical generic primary reasons!');
+}
+
+// Check score gap calculations
+const expectedGap1_2 = Number(Math.abs(89.4 - 87.3).toFixed(2));
+const expectedGap2_3 = Number(Math.abs(87.3 - 85.9).toFixed(2));
+
+if (compResult.gap1_2 !== expectedGap1_2) {
+  throw new Error(`gap1_2 mismatch: expected ${expectedGap1_2}, got ${compResult.gap1_2}`);
+}
+
+if (compResult.gap2_3 !== expectedGap2_3) {
+  throw new Error(`gap2_3 mismatch: expected ${expectedGap2_3}, got ${compResult.gap2_3}`);
+}
+
+if (!compResult.comparisonSummary || compResult.comparisonSummary.length < 20) {
+  throw new Error('comparisonSummary is missing or too short');
+}
+
+console.log(`  ✓ Top 1 Explanation: ${p1Exp.programName} -> "${p1Exp.primaryReason}"`);
+console.log(`  ✓ Top 2 Explanation: ${p2Exp.programName} -> "${p2Exp.primaryReason}"`);
+console.log(`  ✓ Top 3 Explanation: ${p3Exp.programName} -> "${p3Exp.primaryReason}"`);
+console.log(`  ✓ Score gap #1 to #2: +${compResult.gap1_2}% | #2 to #3: +${compResult.gap2_3}%`);
+console.log(`  ✓ Comparison Summary: "${compResult.comparisonSummary}"`);
 
 console.log('\n===========================================================');
 console.log('🎉 ALL MATCH REASONS UNIT TESTS PASSED WITH 0 ERRORS!');

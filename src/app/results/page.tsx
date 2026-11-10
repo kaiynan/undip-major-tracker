@@ -16,11 +16,11 @@ import { RetakeConfirmModal } from '@/components/modals/RetakeConfirmModal';
 import { DisclaimerBanner } from '@/components/ui/DisclaimerBanner';
 import { ConsultCta } from '@/components/contact/ConsultCta';
 import { TierBadge } from '@/components/ui/TierBadge';
-import { ScoreBar } from '@/components/ui/ScoreBar';
 import { FullScreenCampusMap } from '@/components/pixel/FullScreenCampusMap';
 import { retroAudio } from '@/lib/retroAudio';
 import { detectInterestSpread } from '@/lib/interestSpread';
 import { InterestSpreadBanner } from '@/components/results/InterestSpreadBanner';
+import { RecommendationInterpretationBlock } from '@/components/results/RecommendationInterpretationBlock';
 import {
   Trophy,
   RotateCcw,
@@ -29,7 +29,6 @@ import {
   Building2,
   GraduationCap,
   ArrowRight,
-  BarChart3,
   MapPin,
   Maximize2,
   Minimize2,
@@ -125,7 +124,6 @@ export default function ResultsPage() {
   // Modals state
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isComparisonOpen, setIsComparisonOpen] = useState(false);
-  const [showDimensionChart, setShowDimensionChart] = useState(false);
 
   // Retro sound toggle state
   const [isMuted, setIsMuted] = useState(() => (typeof window !== 'undefined' ? retroAudio.isMuted() : false));
@@ -191,18 +189,6 @@ export default function ResultsPage() {
   // Top matches
   const topProgram = programScores[0];
   const topProgramData = topProgram ? studyPrograms.find((p) => p.id === topProgram.programId) : null;
-  const topFaculty = facultyScores[0];
-  const topFacultyData = topFaculty ? faculties.find((f) => f.id === topFaculty?.facultyId) : null;
-
-  // Generate personalized narrative synthesis
-  const generateNarrative = () => {
-    if (!userSummary) return '';
-    const riasecTraits = userSummary.topRiasec.map((r) => r.label).join(' dan ');
-    const domainName = userSummary.topDomain.label;
-    const learningStyle = userSummary.topLearning.label;
-
-    return `Kamu memiliki dorongan rasa ingin tahu yang dominan pada rumpun ${domainName}, didukung oleh kecenderungan karakter kerja berorientasi ${riasecTraits}. Dalam proses studi, kamu akan berkembang maksimal melalui lingkungan belajar yang menekankan ${learningStyle.toLowerCase()}.`;
-  };
 
   // Retake handler with clean answer reset
   const handleConfirmRetake = () => {
@@ -584,83 +570,13 @@ export default function ResultsPage() {
               </div>
             )}
 
-            {/* Personalized Academic Interest Summary Card */}
-            <div className="bg-[#190E08] text-white rounded-2xl p-5 sm:p-6 border-2 border-[#78350F] shadow-md relative overflow-hidden">
-              <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#78350F]/70">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-pixel text-[8px] bg-emerald-600 text-stone-950 px-2 py-0.5 rounded font-bold border border-emerald-400">
-                      STAGE CLEAR
-                    </span>
-                    <span className="text-xs text-amber-300 font-bold">
-                      Laporan Eksplorasi Minat HMIM
-                    </span>
-                  </div>
-                  <h3 className="text-lg sm:text-xl font-black text-[#FFFBEB]">
-                    {topProgramData?.name}
-                  </h3>
-                  <p className="text-xs text-amber-200/90">
-                    Jenjang {topProgramData?.degreeLevel} • {topFacultyData?.shortName} • Kecocokan {topProgram?.totalScore}%
-                  </p>
-                </div>
-
-                <TierBadge tier={topProgram?.tier || 'A'} size="md" />
-              </div>
-
-              {/* Personalized Narrative Synthesis */}
-              <p className="text-xs sm:text-sm text-amber-100/95 mt-3 leading-relaxed">
-                {generateNarrative()}
-              </p>
-
-              {/* Toggle Dimension Scores Overview */}
-              <div className="mt-4 pt-3 border-t border-[#78350F]/70 flex items-center justify-between">
-                <button
-                  onClick={() => setShowDimensionChart(!showDimensionChart)}
-                  aria-label={showDimensionChart ? 'Sembunyikan rincian 4 dimensi' : 'Lihat rincian 4 dimensi HMIM'}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-300 hover:text-[#FDE68A] transition-colors cursor-pointer min-h-[44px]"
-                >
-                  <BarChart3 className="w-4 h-4" />
-                  <span>{showDimensionChart ? 'Sembunyikan 4 Dimensi' : 'Lihat Rincian 4 Dimensi HMIM'}</span>
-                </button>
-                <span className="text-xs font-mono text-amber-200/80">
-                  S = 0.20R + 0.35D + 0.20L + 0.25C
-                </span>
-              </div>
-
-              {/* Dimension Breakdown Accordion */}
-              {showDimensionChart && dimensionScores && (
-                <div className="mt-3 p-4 rounded-xl bg-[#140B07] border border-[#78350F]/70 grid grid-cols-2 gap-3 text-xs animate-in fade-in duration-150">
-                  <ScoreBar
-                    label="1. RIASEC"
-                    score={Math.round(dimensionScores.riasec.reduce((a, b) => a + b, 0) / (dimensionScores.riasec.length || 1))}
-                    subLabel="20%"
-                    color="bg-amber-400"
-                    isDark
-                  />
-                  <ScoreBar
-                    label="2. Bidang Ilmu"
-                    score={Math.round(dimensionScores.domain.reduce((a, b) => a + b, 0) / (dimensionScores.domain.length || 1))}
-                    subLabel="35%"
-                    color="bg-emerald-400"
-                    isDark
-                  />
-                  <ScoreBar
-                    label="3. Gaya Belajar"
-                    score={Math.round(dimensionScores.learning.reduce((a, b) => a + b, 0) / (dimensionScores.learning.length || 1))}
-                    subLabel="20%"
-                    color="bg-sky-400"
-                    isDark
-                  />
-                  <ScoreBar
-                    label="4. Kurikulum"
-                    score={Math.round(dimensionScores.curriculum.reduce((a, b) => a + b, 0) / (dimensionScores.curriculum.length || 1))}
-                    subLabel="25%"
-                    color="bg-amber-500"
-                    isDark
-                  />
-                </div>
-              )}
-            </div>
+            {/* Enhanced Personalized Academic Interest Profile & Top 3 Interpretation Block (Prompt K Round 11) */}
+            <RecommendationInterpretationBlock
+              programScores={programScores}
+              programs={studyPrograms}
+              dimensionScores={dimensionScores}
+              userSummary={userSummary}
+            />
 
             {/* Selected Faculty Notification Filter Pill */}
             {selectedFacultyObj && (

@@ -632,7 +632,8 @@ export const AllMajorTierList = React.memo(function AllMajorTierList({
             const isComparing = comparisonIds.includes(program.id);
             const isExpanded = expandedScoreId === score.programId;
             const isTopRank = index === 0 && selectedFaculty === 'all' && selectedTier === 'all';
-            const reasons = getMatchReasons(dimensionScores, program, 2);
+            const isPodium = index < 3 && selectedFaculty === 'all' && selectedTier === 'all';
+            const reasons = getMatchReasons(dimensionScores, program, isPodium ? 3 : 2);
 
             return (
               <ProgramCard

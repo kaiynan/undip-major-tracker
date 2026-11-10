@@ -9,7 +9,7 @@
     "start": "next start",
     "serve:out": "node scripts/serve-out.js out 3222",
     "lint": "eslint",
-    "test": "tsx src/lib/engine.test.ts && tsx src/lib/campusProjection.test.ts && tsx src/lib/matchReasons.test.ts && tsx src/lib/interestSpread.test.ts && tsx src/components/pixel/FacultyMapTourSheet.test.ts && tsx src/components/contact/ConsultCta.test.ts && tsx scripts/test-data-integrity.ts",
+    "test": "tsx src/lib/engine.test.ts && tsx src/lib/campusProjection.test.ts && tsx src/lib/matchReasons.test.ts && tsx src/lib/interestSpread.test.ts && tsx src/lib/interestTitle.test.ts && tsx src/components/pixel/FacultyMapTourSheet.test.ts && tsx src/components/contact/ConsultCta.test.ts && tsx scripts/test-data-integrity.ts",
     "test:data": "tsx scripts/test-data-integrity.ts",
     "test:build-css": "node scripts/test-build-css.js",
     "test:prod": "node scripts/test-prod-render.js",
