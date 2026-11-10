@@ -25,9 +25,11 @@ const geistSansBase64 = fs.readFileSync(path.join(FONTS_DIR, 'geist-sans.woff2')
 const geistMonoBase64 = fs.readFileSync(path.join(FONTS_DIR, 'geist-mono.woff2')).toString('base64');
 
 // Brand configuration from brand.ts
-const APP_NAME = 'UNDIP Major Matcher';
+const APP_NAME = 'Define Your Next Move';
 const TAGLINE = 'Find Your Potential, Define Your Next Move';
 const EVENT_NAME = 'Roadshow Sedulur Serang Diponegoro 2027';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://roadshow-2027.vercel.app';
+const SHORT_URL = SITE_URL.replace(/^https?:\/\//, '').replace(/\/$/, '');
 
 const CARDS = [
   {
@@ -36,7 +38,7 @@ const CARDS = [
     title: APP_NAME,
     subtitle: TAGLINE,
     badge: '70 PROGRAM STUDI • HMIM INTEREST MATCHING',
-    footer: 'undipmajormatcher.com • Unlock The Unseen',
+    footer: `${SHORT_URL} • Unlock The Unseen`,
   },
   {
     fileName: 'og-results.png',
@@ -44,7 +46,7 @@ const CARDS = [
     title: 'Hasil Rekomendasi Jurusan',
     subtitle: 'Analisis Profil Minat 4 Dimensi, Skor Keselarasan, & Tier Peringkat Prodi',
     badge: 'HASIL AKURAT • DECOUPLED FROM QUOTAS',
-    footer: 'undipmajormatcher.com • Hasil Kuisioner Minat',
+    footer: `${SHORT_URL} • Hasil Kuisioner Minat`,
   },
   {
     fileName: 'og-program-studi.png',
@@ -52,7 +54,7 @@ const CARDS = [
     title: 'Direktori 70 Program Studi',
     subtitle: 'Daya Tampung SNBP/SNBT/Mandiri, UKT Resmi, Kurikulum, & Akreditasi',
     badge: '12 FAKULTAS & SEKOLAH • S1 & D4',
-    footer: 'undipmajormatcher.com • Direktori Program Studi',
+    footer: `${SHORT_URL} • Direktori Program Studi`,
   },
   {
     fileName: 'og-langkah-selanjutnya.png',
@@ -60,7 +62,7 @@ const CARDS = [
     title: 'Biaya, Beasiswa & Jadwal',
     subtitle: 'Struktur Golongan UKT 1–8, Beasiswa KIP-Kuliah, & Kalender Seleksi Masuk',
     badge: 'SK REKTOR RESMI • 9 BEASISWA TERVERIFIKASI',
-    footer: 'undipmajormatcher.com • Langkah Selanjutnya',
+    footer: `${SHORT_URL} • Langkah Selanjutnya`,
   },
   {
     fileName: 'og-bandingkan.png',
@@ -68,7 +70,7 @@ const CARDS = [
     title: 'Bandingkan Program Studi',
     subtitle: 'Komparasi Berdampingan: Kuota Masuk, Tarif UKT, Mata Kuliah & Prospek Kerja',
     badge: '2–3 PRODI SEKALIGUS • CETAK RAMAH A4',
-    footer: 'undipmajormatcher.com • Bandingkan Pilihan',
+    footer: `${SHORT_URL} • Bandingkan Pilihan`,
   },
   {
     fileName: 'og-favorit.png',
@@ -76,7 +78,7 @@ const CARDS = [
     title: 'Program Studi Favoritku',
     subtitle: 'Simpan, Pantau, dan Siapkan Strategi Masuk untuk Jurusan Impianmu di UNDIP',
     badge: 'TERSINKRONISASI OFFLINE • MAKSIMAL 12 PRODI',
-    footer: 'undipmajormatcher.com • Jurusan Favorit',
+    footer: `${SHORT_URL} • Jurusan Favorit`,
   },
 ];
 

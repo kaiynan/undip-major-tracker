@@ -1,7 +1,7 @@
-# UNDIP Major Matcher — Audit Integritas Data & Sumber Rujukan
+# Define Your Next Move — Audit Integritas Data & Sumber Rujukan
 ## Roadshow Sedulur Serang Diponegoro 2027 — Verifikasi Ronde 4
 
-Dokumen audit ini mencatat status keabsahan, metode akses, dan bukti rujukan (*evidence*) untuk seluruh data faktual (daya tampung, UKT, KIP-Kuliah, kalender seleksi, dan struktur departemen) yang ditampilkan dalam aplikasi **UNDIP Major Matcher**.
+Dokumen audit ini mencatat status keabsahan, metode akses, dan bukti rujukan (*evidence*) untuk seluruh data faktual (daya tampung, UKT, KIP-Kuliah, kalender seleksi, dan struktur departemen) yang ditampilkan dalam aplikasi **Define Your Next Move**.
 
 ---
 

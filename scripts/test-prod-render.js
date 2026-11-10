@@ -88,7 +88,7 @@ function isServerRunning(urlStr) {
 
 async function runProdRenderTests() {
   console.log('\n==================================================================');
-  console.log('🚀 UNDIP MAJOR MATCHER — PRODUCTION RENDER VERIFICATION');
+  console.log('🚀 DEFINE YOUR NEXT MOVE — PRODUCTION RENDER VERIFICATION');
   console.log('==================================================================');
   console.log(`Base URL: ${BASE_URL}`);
 

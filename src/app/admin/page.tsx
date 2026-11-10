@@ -9,6 +9,7 @@ import { algorithmConfig } from '@/data/config';
 import { StudyProgram } from '@/data/types';
 import { TierBadge } from '@/components/ui/TierBadge';
 import { INTEREST_SPREAD_THRESHOLD } from '@/lib/interestSpread';
+import { APP_NAME_SHORT } from '@/config/brand';
 import {
   HelpCircle,
   Search,
@@ -72,7 +73,7 @@ export default function AdminPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `undip-major-matcher-db-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `${APP_NAME_SHORT.toLowerCase().replace(/\s+/g, '-')}-db-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };

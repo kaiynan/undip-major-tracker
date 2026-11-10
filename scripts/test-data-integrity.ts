@@ -44,7 +44,7 @@ function assert(condition: boolean, category: string, item: string, message: str
 }
 
 console.log('===========================================================');
-console.log('UNDIP MAJOR MATCHER — DATA INTEGRITY & GUARD TESTS');
+console.log('DEFINE YOUR NEXT MOVE — DATA INTEGRITY & GUARD TESTS');
 console.log('===========================================================\n');
 
 // -----------------------------------------------------------------------------
@@ -382,12 +382,14 @@ for (const filePath of userFacingFiles) {
 }
 
 // -----------------------------------------------------------------------------
-// [GUARD 11] Validating Centralized Brand Usage (No Raw "UNDIP Major Matcher" in src/)
+// [GUARD 11] Validating Centralized Brand Usage (No Old Brand Literals outside brand.ts)
 // -----------------------------------------------------------------------------
-console.log('\n[GUARD 11] Validating Centralized Brand Usage (No Raw "UNDIP Major Matcher" outside brand.ts)...');
+console.log('\n[GUARD 11] Validating Centralized Brand Usage (No Old Brand Literals outside brand.ts)...');
 
-function scanDirForBrandLiteral(dir: string): string[] {
-  let matched: string[] = [];
+const FORBIDDEN_BRAND_LITERALS = ['UNDIP Major Matcher', 'Major Matcher', 'UNDIP Matcher'];
+
+function scanDirForBrandLiteral(dir: string): { file: string; literal: string }[] {
+  let matched: { file: string; literal: string }[] = [];
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name);
@@ -397,8 +399,10 @@ function scanDirForBrandLiteral(dir: string): string[] {
     } else if (/\.(tsx?|jsx?|webmanifest|json)$/.test(entry.name)) {
       if (fullPath.endsWith(path.join('src', 'config', 'brand.ts'))) continue;
       const fileContent = fs.readFileSync(fullPath, 'utf-8');
-      if (fileContent.includes('UNDIP Major Matcher')) {
-        matched.push(fullPath);
+      for (const forbidden of FORBIDDEN_BRAND_LITERALS) {
+        if (fileContent.includes(forbidden)) {
+          matched.push({ file: fullPath, literal: forbidden });
+        }
       }
     }
   }
@@ -408,15 +412,15 @@ function scanDirForBrandLiteral(dir: string): string[] {
 const brandOffenders = scanDirForBrandLiteral(path.join(ROOT_DIR, 'src'));
 assert(
   brandOffenders.length === 0,
-  'Guard 11 - Centralized Brand Configuration',
+  'Guard 11 - Centralized Brand Configuration (No Old Brand Literals)',
   'src/',
-  `Found literal "UNDIP Major Matcher" in files: ${brandOffenders.map((f) => path.relative(ROOT_DIR, f)).join(', ')}. Use APP_NAME from @/config/brand instead!`
+  `Found old brand literals in files: ${brandOffenders.map((f) => `${path.relative(ROOT_DIR, f.file)} ("${f.literal}")`).join(', ')}. Use APP_NAME from @/config/brand instead!`
 );
 
 // Negative Trap: ensure Guard 11 actively detects forbidden occurrences
 const mockBadBrandLiteral = 'const title = "UNDIP Major Matcher";';
 assert(
-  mockBadBrandLiteral.includes('UNDIP Major Matcher'),
+  FORBIDDEN_BRAND_LITERALS.some((f) => mockBadBrandLiteral.includes(f)),
   'Guard 11 - Negative Trap (Literal Detection Active)',
   'negative-test',
   'Negative trap failed to trigger'

@@ -8,7 +8,7 @@ import { questions } from '@/data/questions';
 import { UserAnswers, isPsdku } from '@/data/types';
 
 console.log('===========================================================');
-console.log('UNDIP MAJOR MATCHER — INTEREST SPREAD UNIT TESTS');
+console.log('DEFINE YOUR NEXT MOVE — INTEREST SPREAD UNIT TESTS');
 console.log('===========================================================');
 
 // -----------------------------------------------------------------------------

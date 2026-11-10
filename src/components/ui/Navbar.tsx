@@ -253,16 +253,16 @@ export function Navbar() {
                 <span className="font-pixel text-[11px] sm:text-xs">U</span>
               </div>
               <div className="shrink-0 flex flex-col justify-center" data-testid="navbar-brand-text">
-                {/* On phone <= 430px: two-line stack so full name is visible without truncation */}
+                {/* On phone <= 430px (and < md): two-line stack so full name is visible without truncation */}
                 <div className="navbar-brand-mobile leading-none gap-0.5">
                   <span className="font-pixel text-[7.5px] text-[#FDE68A] tracking-wider leading-none whitespace-nowrap">
-                    {APP_NAME.split(' ')[0]}
+                    DEFINE YOUR
                   </span>
                   <span className="font-pixel text-[6.5px] text-white tracking-tight leading-none whitespace-nowrap">
-                    {APP_NAME.split(' ').slice(1).join(' ')}
+                    NEXT MOVE
                   </span>
                 </div>
-                {/* On screens > 430px: single line */}
+                {/* On screens >= md: single line */}
                 <div className="navbar-brand-desktop gap-1.5">
                   <span className="font-pixel text-[8.5px] md:text-xs text-white tracking-wide shrink-0 whitespace-nowrap">
                     {APP_NAME}

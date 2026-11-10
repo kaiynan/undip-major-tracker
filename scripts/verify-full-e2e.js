@@ -32,7 +32,7 @@ const ROUTES = [
 
 async function runComprehensiveVerification() {
   console.log('==================================================================');
-  console.log('🚀 UNDIP MAJOR MATCHER — COMPREHENSIVE E2E VERIFICATION (ROUND 3)');
+  console.log('🚀 DEFINE YOUR NEXT MOVE — COMPREHENSIVE E2E VERIFICATION (ROUND 3)');
   console.log('==================================================================\n');
 
   const browser = await chromium.launch({

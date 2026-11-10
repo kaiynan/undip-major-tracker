@@ -1,7 +1,7 @@
 # UNDIP Tembalang Campus Map Verification & Accuracy Audit
 
 **Date of Audit:** 2026-11-09  
-**Project:** UNDIP Major Matcher — Campus Map Geometry Rebuild (Prompt E)  
+**Project:** Define Your Next Move — Campus Map Geometry Rebuild (Prompt E)  
 **Geospatial Reference & License:** OpenStreetMap Contributors (ODbL 1.0)  
 **Attribution:** `"© OpenStreetMap contributors"`  
 **Target Query Bounding Box:**

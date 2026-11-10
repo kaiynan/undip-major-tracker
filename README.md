@@ -1,4 +1,4 @@
-# UNDIP Major Matcher — Find Your Potential, Define Your Next Move
+# Define Your Next Move — Find Your Potential, Define Your Next Move
 
 Platform eksplorasi dan rekomendasi program studi Universitas Diponegoro (UNDIP) berbasis **Hybrid Multi-Dimensional Interest Matching (HMIM)** untuk siswa SMA/SMK/MA.
 Diselenggarakan dalam rangka **Roadshow Sedulur Serang Diponegoro 2027 — Unlock The Unseen**.
@@ -125,7 +125,7 @@ npm run serve:out
 2. Instal Capacitor CLI & platform yang diinginkan:
    ```bash
    npm install @capacitor/core @capacitor/cli @capacitor/android
-   npx cap init "UNDIP Matcher" "id.ac.undip.majormatcher" --web-dir out
+   npx cap init "Next Move" "id.ac.undip.majormatcher" --web-dir out
    npx cap add android
    npx cap sync
    npx cap open android

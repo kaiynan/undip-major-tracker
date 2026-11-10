@@ -1,7 +1,7 @@
 import { CONTACT_CONFIG, isContactReady, buildWaLink } from '../../config/contact';
 
 console.log('===========================================================');
-console.log('UNDIP MAJOR MATCHER — SERADIP CONSULTATION TESTS');
+console.log('DEFINE YOUR NEXT MOVE — SERADIP CONSULTATION TESTS');
 console.log('===========================================================');
 
 function assert(condition: boolean, testName: string, detail: string) {

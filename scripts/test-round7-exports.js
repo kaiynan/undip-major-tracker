@@ -30,7 +30,7 @@ const PSDKU_PRODI_NAMES = [
 
 async function runRound7Verification() {
   console.log('==================================================================');
-  console.log('🚀 UNDIP MAJOR MATCHER — ROUND 7 EXPORT VERIFICATION (PLAYWRIGHT)');
+  console.log('🚀 DEFINE YOUR NEXT MOVE — ROUND 7 EXPORT VERIFICATION (PLAYWRIGHT)');
   console.log('   Target URL:', BASE_URL);
   console.log('==================================================================\n');
 

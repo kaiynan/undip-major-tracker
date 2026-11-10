@@ -89,7 +89,7 @@ for (let i = 1; i <= 36; i++) {
 
 async function runRound9Tests() {
   console.log('\n==================================================================');
-  console.log('🚀 UNDIP MAJOR MATCHER — ROUND 9 PRODUCTION E2E VERIFICATION');
+  console.log('🚀 DEFINE YOUR NEXT MOVE — ROUND 9 PRODUCTION E2E VERIFICATION');
   console.log('==================================================================');
   console.log(`Target URL: ${BASE_URL}`);
 

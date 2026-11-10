@@ -386,7 +386,7 @@ body {
   display: flex;
   flex-direction: column;
 }
-@media (min-width: 520px) {
+@media (min-width: 768px) {
   .navbar-brand-mobile {
     display: none !important;
   }
@@ -395,7 +395,7 @@ body {
 .navbar-brand-desktop {
   display: none;
 }
-@media (min-width: 520px) {
+@media (min-width: 768px) {
   .navbar-brand-desktop {
     display: flex;
     align-items: center;

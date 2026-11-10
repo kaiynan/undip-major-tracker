@@ -16,7 +16,7 @@ import { algorithmConfig } from '../data/config';
 import { UserAnswers, TierThreshold, isPsdku } from '../data/types';
 
 console.log('===========================================================');
-console.log('UNDIP MAJOR MATCHER — HMIM RECOMMENDATION ENGINE TESTS');
+console.log('DEFINE YOUR NEXT MOVE — HMIM RECOMMENDATION ENGINE TESTS');
 console.log('===========================================================');
 
 // -----------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Compass, FileText, Sparkles, GraduationCap } from 'lucide-react';
+import { APP_NAME } from '@/config/brand';
 
 const STEPS = [
   {
@@ -49,7 +50,7 @@ export function PixelCaraKerjaScene() {
         {/* Header Section: Clean, Professional, No Badges */}
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
           <h2 className="font-pixel text-lg sm:text-2xl text-white tracking-wide">
-            Bagaimana Major Matcher Bekerja?
+            Bagaimana {APP_NAME} Bekerja?
           </h2>
 
           <p className="text-xs sm:text-sm text-amber-100/80 leading-relaxed font-normal">

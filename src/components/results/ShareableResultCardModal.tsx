@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Modal } from '@/components/ui/Modal';
 import { ProgramScore, FacultyScore, StudyProgram } from '@/data/types';
 import { faculties } from '@/data/faculties';
-import { APP_NAME, EVENT_NAME } from '@/config/brand';
+import { APP_NAME, APP_NAME_SHORT, EVENT_NAME } from '@/config/brand';
 import {
   CardFormat,
   CardData,
@@ -207,7 +207,7 @@ export function ShareableResultCardModal({
     retroAudio.playSelect();
     try {
       const blob = await getCanvasBlob(canvasRef.current);
-      const fileName = `hasil-undip-matcher-${format}.png`;
+      const fileName = `hasil-${APP_NAME_SHORT.toLowerCase().replace(/\s+/g, '-')}-${format}.png`;
       downloadBlob(blob, fileName);
       showToast('Gambar tersimpan');
     } catch (err) {

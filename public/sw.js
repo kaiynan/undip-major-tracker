@@ -1,4 +1,4 @@
-const CACHE_NAME = 'undip-major-matcher-v3';
+const CACHE_NAME = 'define-your-next-move-v4';
 
 const PRECACHE_URLS = [
   '/',

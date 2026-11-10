@@ -70,7 +70,7 @@ function assert(condition, testName, message) {
 
 async function runRound8Tests() {
   console.log('\n==================================================================');
-  console.log('🚀 UNDIP MAJOR MATCHER — ROUND 8 PRODUCTION E2E VERIFICATION');
+  console.log('🚀 DEFINE YOUR NEXT MOVE — ROUND 8 PRODUCTION E2E VERIFICATION');
   console.log('==================================================================');
   console.log(`Target URL: ${BASE_URL}`);
 

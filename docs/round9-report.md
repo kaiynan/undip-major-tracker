@@ -1,6 +1,6 @@
 # Laporan Verifikasi & Dokumentasi: Round 9 (Prompt G)
 
-**Aplikasi:** UNDIP Major Matcher (Tembalang Campus & HMIM Recommendation Engine)  
+**Aplikasi:** Define Your Next Move (Tembalang Campus & HMIM Recommendation Engine)  
 **Tanggal:** 10 November 2026  
 **Status Produksi:** ✅ Lolos Verifikasi Penuh (27/27 Assertion E2E Produksi, 14/14 Data Guard, 7/7 Unit Test Suite)  
 **Lingkungan Uji:** Node.js v26 / Chromium Headless (390×844 Touch Emulation & 1440×900 Desktop)

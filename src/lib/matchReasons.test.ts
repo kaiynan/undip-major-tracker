@@ -9,7 +9,7 @@ import { questions } from '@/data/questions';
 import { UserAnswers } from '@/data/types';
 
 console.log('===========================================================');
-console.log('UNDIP MAJOR MATCHER — MATCH REASONS & BREAKDOWN UNIT TESTS');
+console.log('DEFINE YOUR NEXT MOVE — MATCH REASONS & BREAKDOWN UNIT TESTS');
 console.log('===========================================================');
 
 // -----------------------------------------------------------------------------

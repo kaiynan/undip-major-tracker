@@ -54,7 +54,7 @@ const ARTIFACTS_DIR = path.resolve(__dirname, '..', 'test-artifacts', 'live');
 
 async function runLiveSmokeTests() {
   console.log('\n==================================================================');
-  console.log(`🌐 UNDIP MAJOR MATCHER — LIVE DEPLOY SMOKE TEST`);
+  console.log(`🌐 DEFINE YOUR NEXT MOVE — LIVE DEPLOY SMOKE TEST`);
   console.log(`Target URL: ${TARGET_URL}`);
   console.log('==================================================================\n');
 

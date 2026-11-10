@@ -8,7 +8,7 @@
  * - Interest Profile, Next Steps, and Official Disclaimers
  */
 
-import { APP_NAME, EVENT_NAME, TAGLINE, SITE_URL, SHORT_URL } from '@/config/brand';
+import { APP_NAME, APP_NAME_SHORT, EVENT_NAME, TAGLINE, SITE_URL, SHORT_URL } from '@/config/brand';
 import { ProgramScore, FacultyScore, StudyProgram, Faculty, DimensionScore } from '@/data/types';
 import { isPsdku } from '@/data/types';
 import { getMatchReasons } from '@/lib/matchReasons';
@@ -458,7 +458,7 @@ export async function generateResultsPdf(data: PdfExportData): Promise<Blob> {
  */
 export async function downloadOrSharePdf(
   blob: Blob,
-  fileName: string = `hasil-rekomendasi-undip-${getPdfDateString()}.pdf`
+  fileName: string = `hasil-${APP_NAME_SHORT.toLowerCase().replace(/\s+/g, '-')}-${getPdfDateString()}.pdf`
 ): Promise<'downloaded'> {
   // Direct client-side browser file download trigger via anchor element
   const url = URL.createObjectURL(blob);

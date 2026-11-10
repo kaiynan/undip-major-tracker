@@ -4,7 +4,7 @@ import { isPsdku } from '@/data/types';
 import { campusFacultyLocations } from '@/data/campusLocations';
 
 console.log('===========================================================');
-console.log('UNDIP MAJOR MATCHER — CAMPUS TOUR & MAP DATA UNIT TESTS');
+console.log('DEFINE YOUR NEXT MOVE — CAMPUS TOUR & MAP DATA UNIT TESTS');
 console.log('===========================================================');
 
 // -----------------------------------------------------------------------------

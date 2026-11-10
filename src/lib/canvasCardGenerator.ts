@@ -6,7 +6,7 @@
  * Golden-hour retro pixel identity, offline-ready, device-only generation.
  */
 
-import { APP_NAME, TAGLINE, EVENT_NAME, SHORT_URL } from '@/config/brand';
+import { APP_NAME, APP_NAME_SHORT, TAGLINE, EVENT_NAME, SHORT_URL } from '@/config/brand';
 
 export type CardFormat = 'story' | 'square';
 
@@ -455,7 +455,7 @@ export function getCanvasBlob(canvas: HTMLCanvasElement): Promise<Blob> {
  */
 export async function shareOrDownloadCard(
   blob: Blob,
-  fileName: string = 'hasil-rekomendasi-undip.png',
+  fileName: string = `hasil-rekomendasi-${APP_NAME_SHORT.toLowerCase().replace(/\s+/g, '-')}.png`,
   title: string = `${APP_NAME} - Rekomendasi Program Studi`
 ): Promise<'shared' | 'downloaded' | 'cancelled'> {
   const file = new File([blob], fileName, { type: 'image/png' });

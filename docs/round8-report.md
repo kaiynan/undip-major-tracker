@@ -1,6 +1,6 @@
 # Laporan Implementasi Prompt F (Round 8): Favorit & Bandingkan, Detail Prodi, Beasiswa Lengkap, Pratinjau Tautan
 
-**Aplikasi:** UNDIP Major Matcher (Roadshow Sedulur Serang Diponegoro 2027)  
+**Aplikasi:** Define Your Next Move (Roadshow Sedulur Serang Diponegoro 2027)  
 **Versi Target:** Next.js 16.4.5 (Turbopack, Static Export `output: "export"`), Tailwind CSS v4, React 19  
 **Tanggal Pengujian:** 10 November 2026  
 **Status Produksi:** ✅ Lolos Verifikasi Penuh (Zero Error, Zero Warning, 37/37 E2E Assertions Passed)

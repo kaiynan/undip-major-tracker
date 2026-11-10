@@ -106,11 +106,11 @@ async function runNavbarTests() {
           const brandText = document.querySelector('[data-testid="navbar-brand-text"]');
           if (!brandText) return { error: 'No brandText' };
 
-          // Injected ~22 char name in mobile stack: "UNDIP" + "MAJOR MATCHER 2027"
+          // Injected ~22 char name in mobile stack: "DEFINE YOUR" + "NEXT MOVE 2027"
           const mobileSpans = brandText.querySelectorAll('.navbar-brand-mobile span');
           if (mobileSpans.length >= 2) {
-            mobileSpans[0].textContent = 'UNDIP';
-            mobileSpans[1].textContent = 'MAJOR MATCHER 2027';
+            mobileSpans[0].textContent = 'DEFINE YOUR';
+            mobileSpans[1].textContent = 'NEXT MOVE 2027';
           }
 
           const hasOverflow = document.documentElement.scrollWidth > window.innerWidth;
