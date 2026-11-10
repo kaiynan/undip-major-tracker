@@ -634,47 +634,77 @@ for (const s of scholarshipsData) {
 // [GUARD 14] SERADIP Consultation Contact Integrity (src/config/contact.ts)
 // -----------------------------------------------------------------------------
 console.log('\n[GUARD 14] Validating SERADIP Consultation Contact Integrity...');
-import { CONTACT_CONFIG, isContactReady, buildWaLink } from '../src/config/contact';
+import { CONTACTS, INSTAGRAM, CONTACT_CONFIG, isContactReady, waLink, buildWaLink } from '../src/config/contact';
 
-// Test 1: Baseline readiness (default without env var must be false)
-const originalPhone = CONTACT_CONFIG.phone;
-CONTACT_CONFIG.phone = '';
+// Test 1: Active readiness of contacts
 assert(
-  !isContactReady(),
-  'Guard 14 - Graceful Degradation When Empty',
+  CONTACT_CONFIG.name === 'SERADIP',
+  'Guard 14 - Contact Organization Name',
   'contact.ts',
-  'isContactReady() must return false when phone is empty string'
-);
-assert(
-  buildWaLink('Test') === '#',
-  'Guard 14 - Safe Fallback wa.me URL',
-  'contact.ts',
-  'buildWaLink() must return "#" when isContactReady() is false'
+  `Expected CONTACT_CONFIG.name to be 'SERADIP'`
 );
 
-// Test 2: Active readiness when phone is provided
-CONTACT_CONFIG.phone = '+62 812-3456-7890';
+assert(
+  CONTACTS.length === 2,
+  'Guard 14 - Dual SERADIP Contacts Configured',
+  'contact.ts',
+  `Expected 2 contacts, got ${CONTACTS.length}`
+);
+
+const dianContact = CONTACTS.find((c) => c.id === 'dian');
+const cindyContact = CONTACTS.find((c) => c.id === 'cindy');
+
+assert(
+  !!dianContact && dianContact.wa === '6287741097976',
+  'Guard 14 - Dian Contact Number',
+  'contact.ts',
+  `Dian contact must be 6287741097976, got ${dianContact?.wa}`
+);
+
+assert(
+  !!cindyContact && cindyContact.wa === '6282210644934',
+  'Guard 14 - Cindy Contact Number',
+  'contact.ts',
+  `Cindy contact must be 6282210644934, got ${cindyContact?.wa}`
+);
+
+assert(
+  INSTAGRAM.handle === '@sedulurdiponegoro' && INSTAGRAM.url.includes('instagram.com/sedulurdiponegoro'),
+  'Guard 14 - Official Instagram Integration',
+  'contact.ts',
+  `Instagram handle & URL must point to @sedulurdiponegoro`
+);
+
 assert(
   isContactReady(),
   'Guard 14 - Active Readiness When Configured',
   'contact.ts',
-  'isContactReady() must return true when valid phone is set'
+  'isContactReady() must return true when valid contacts are set'
 );
+
+// Test 2: Deep Link Generation
 const testLink = buildWaLink('Halo Kakak SERADIP, saya mau tanya.');
 assert(
-  testLink.startsWith('https://wa.me/6281234567890?text='),
+  testLink.startsWith('https://wa.me/6287741097976?text='),
   'Guard 14 - Correct wa.me Deep Link Format',
   'contact.ts',
   `Expected wa.me URL with clean digits, got '${testLink}'`
 );
+
 assert(
   testLink.includes(encodeURIComponent('Halo Kakak SERADIP, saya mau tanya.')),
   'Guard 14 - Encoded Message Text',
   'contact.ts',
   'Message string must be URI encoded in WhatsApp deep link'
 );
-// Restore original config
-CONTACT_CONFIG.phone = originalPhone;
+
+const cindyLink = waLink('cindy', 'Halo Kak Cindy');
+assert(
+  cindyLink.startsWith('https://wa.me/6282210644934?text='),
+  'Guard 14 - Cindy wa.me Deep Link Format',
+  'contact.ts',
+  `Expected Cindy wa.me URL, got '${cindyLink}'`
+);
 
 // Test 3: No hardcoded phone numbers in src/ outside config/contact.ts
 function scanDirForFiles(dir: string): string[] {
