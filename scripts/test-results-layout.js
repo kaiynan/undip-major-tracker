@@ -55,7 +55,7 @@ const VIEWPORTS = [
 
 async function runResultsLayoutTests() {
   console.log('===============================================================');
-  console.log('RESULTS PAGE LAYOUT INVARIANT TESTS (PROMPT I ROUND 10)');
+  console.log('RESULTS PAGE LAYOUT & SCROLLING VERIFICATION (ROUND 10 AUDIT)');
   console.log('===============================================================\n');
 
   console.log(`Starting serve-out.js on port ${PORT}...`);
@@ -88,7 +88,7 @@ async function runResultsLayoutTests() {
     }
   }
 
-  // Sample answers for high affinity
+  // Sample answers for complete questionnaire
   const mockAnswers = {};
   for (let i = 1; i <= 36; i++) mockAnswers[i] = 4;
 
@@ -110,15 +110,34 @@ async function runResultsLayoutTests() {
 
       const page = await context.newPage();
       const consoleErrors = [];
+      const hydrationErrors = [];
+
       page.on('console', (msg) => {
-        if (msg.type() === 'error') consoleErrors.push(msg.text());
+        const text = msg.text();
+        if (msg.type() === 'error') {
+          consoleErrors.push(text);
+        }
+        if (
+          text.includes('Hydration failed') ||
+          text.includes("didn't match") ||
+          text.includes('did not match') ||
+          text.includes('server rendered text')
+        ) {
+          hydrationErrors.push(text);
+        }
       });
 
       await page.goto(`${BASE_URL}/results`, { waitUntil: 'domcontentloaded' });
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(600);
 
-      // INVARIANT 1: Zero horizontal document overflow
+      // INVARIANT 1: Zero hydration errors
+      assert(
+        hydrationErrors.length === 0,
+        `Viewport ${vp.width}px: Zero React hydration mismatch errors (found: ${hydrationErrors.length})`
+      );
+
+      // INVARIANT 2: Zero horizontal document overflow
       const overflowCheck = await page.evaluate(() => {
         return {
           scrollWidth: document.documentElement.scrollWidth,
@@ -131,14 +150,14 @@ async function runResultsLayoutTests() {
         `Viewport ${vp.width}px: Zero horizontal document overflow (scrollWidth=${overflowCheck.scrollWidth}, innerWidth=${overflowCheck.innerWidth})`
       );
 
-      // INVARIANT 2: Action Deduplication (Exactly ONE Share and ONE PDF button in header)
+      // INVARIANT 3: Action Deduplication (Exactly ONE Share and ONE PDF button in header)
       const shareButtons = await page.locator('[data-testid="btn-bagikan-hasil"]').all();
       assert(
         shareButtons.length === 1,
         `Viewport ${vp.width}px: Exactly ONE 'Bagikan Hasil' button in DOM (found: ${shareButtons.length})`
       );
 
-      // INVARIANT 3: Map controls placed strictly below top toolbar with clean margin
+      // INVARIANT 4: Map controls placed strictly below top toolbar with clean margin
       const toolbarBox = await page.locator('header[aria-label="Toolbar Hasil Rekomendasi"]').boundingBox();
       const mapControls = await page.locator('.pointer-events-auto').filter({ hasText: 'UNDIP MAP' }).first().boundingBox();
       if (toolbarBox && mapControls) {
@@ -149,18 +168,17 @@ async function runResultsLayoutTests() {
         );
       }
 
-      // INVARIANT 4: Title & Tier Badge collision check on Results Panel / Bottom Sheet
+      // INVARIANT 5: Title & Tier Badge collision check on Results Panel / Bottom Sheet
       const titleBox = await page.locator('h2:has-text("Hasil Rekomendasi")').first().boundingBox();
       const tierBadgeBox = await page.locator('aside span:has-text("Kecocokan")').first().boundingBox();
       if (titleBox && tierBadgeBox) {
-        // Assert tier badge sits below the title
         assert(
           tierBadgeBox.y >= titleBox.y + titleBox.height - 2,
           `Viewport ${vp.width}px: Tier badge sits strictly under title (title bottom: ${titleBox.y + titleBox.height}px, badge top: ${tierBadgeBox.y}px)`
         );
       }
 
-      // INVARIANT 5: No two disjoint interactive elements collide in the header/toolbar
+      // INVARIANT 6: Zero colliding interactive element bounding boxes in toolbar
       const collisionData = await page.evaluate(() => {
         const interactive = Array.from(document.querySelectorAll('header button, header a'));
         const boxes = interactive.map((el) => {
@@ -179,7 +197,6 @@ async function runResultsLayoutTests() {
             const b2 = boxes[j].rect;
             const xOverlap = Math.max(0, Math.min(b1.x + b1.width, b2.x + b2.width) - Math.max(b1.x, b2.x));
             const yOverlap = Math.max(0, Math.min(b1.y + b1.height, b2.y + b2.height) - Math.max(b1.y, b2.y));
-            // tolerance of 1px for subpixel border rendering
             if (xOverlap > 1 && yOverlap > 1) {
               overlaps.push({ el1: boxes[i].text, el2: boxes[j].text, xOverlap, yOverlap });
             }
@@ -192,22 +209,174 @@ async function runResultsLayoutTests() {
         `Viewport ${vp.width}px: Zero colliding interactive element bounding boxes in toolbar (found: ${collisionData.length})`
       );
 
-      // INVARIANT 6: Mobile snap points (for mobile viewports < 640)
+      // INVARIANT 7: Internal Scroll Container Metrics & Scrolling (Tab 1: 65 Jurusan)
+      const scrollMetricsTab1 = await page.evaluate(() => {
+        const el = document.getElementById('results-panel-scroll');
+        if (!el) return null;
+        const style = window.getComputedStyle(el);
+        return {
+          clientHeight: el.clientHeight,
+          scrollHeight: el.scrollHeight,
+          scrollTop: el.scrollTop,
+          minHeight: style.minHeight,
+          overflowY: style.overflowY,
+          overscrollBehavior: style.overscrollBehaviorY || style.overscrollBehavior,
+          touchAction: style.touchAction,
+        };
+      });
+
+      if (scrollMetricsTab1) {
+        assert(
+          scrollMetricsTab1.clientHeight > 0,
+          `Viewport ${vp.width}px [Tab 1]: Scroll container clientHeight is valid (> 0: got ${scrollMetricsTab1.clientHeight}px)`
+        );
+        assert(
+          scrollMetricsTab1.scrollHeight > scrollMetricsTab1.clientHeight,
+          `Viewport ${vp.width}px [Tab 1]: Content overflows scrollport (scrollHeight=${scrollMetricsTab1.scrollHeight}px > clientHeight=${scrollMetricsTab1.clientHeight}px)`
+        );
+        assert(
+          scrollMetricsTab1.minHeight === '0px',
+          `Viewport ${vp.width}px [Tab 1]: Content body has CSS min-h-0 (minHeight: ${scrollMetricsTab1.minHeight})`
+        );
+        assert(
+          scrollMetricsTab1.overflowY === 'auto',
+          `Viewport ${vp.width}px [Tab 1]: Content body preserves overflow-y: auto`
+        );
+
+        // Test wheel / programmatic scroll increments scrollTop
+        await page.evaluate(() => {
+          const el = document.getElementById('results-panel-scroll');
+          if (el) el.scrollTop = 250;
+        });
+        const scrolledTop = await page.evaluate(() => {
+          const el = document.getElementById('results-panel-scroll');
+          return el ? el.scrollTop : 0;
+        });
+        assert(
+          scrolledTop >= 200,
+          `Viewport ${vp.width}px [Tab 1]: Scrolling successfully updates scrollTop (got ${scrolledTop}px)`
+        );
+
+        // Test reachability of the very last content
+        await page.evaluate(() => {
+          const el = document.getElementById('results-panel-scroll');
+          if (el) el.scrollTop = el.scrollHeight;
+        });
+        const bottomMetrics = await page.evaluate(() => {
+          const el = document.getElementById('results-panel-scroll');
+          return el ? { scrollTop: el.scrollTop, clientHeight: el.clientHeight, scrollHeight: el.scrollHeight } : null;
+        });
+        if (bottomMetrics) {
+          assert(
+            bottomMetrics.scrollTop + bottomMetrics.clientHeight >= bottomMetrics.scrollHeight - 35,
+            `Viewport ${vp.width}px [Tab 1]: Bottom-most content is fully reachable (scrollTop+clientHeight=${bottomMetrics.scrollTop + bottomMetrics.clientHeight} vs scrollHeight=${bottomMetrics.scrollHeight})`
+          );
+        }
+
+        // Reset scroll position
+        await page.evaluate(() => {
+          const el = document.getElementById('results-panel-scroll');
+          if (el) el.scrollTop = 0;
+        });
+      }
+
+      // INVARIANT 8: Tab Switching to Tab 2 (12 Fakultas) & Scrolling Verification
+      const facultiesBtn = page.locator('button[aria-label*="Output 2: 12 Fakultas"]').first();
+      if (await facultiesBtn.count() > 0) {
+        await facultiesBtn.click();
+        await page.waitForTimeout(250);
+
+        const scrollMetricsTab2 = await page.evaluate(() => {
+          const el = document.getElementById('results-panel-scroll');
+          if (!el) return null;
+          return {
+            clientHeight: el.clientHeight,
+            scrollHeight: el.scrollHeight,
+          };
+        });
+
+        if (scrollMetricsTab2) {
+          assert(
+            scrollMetricsTab2.clientHeight > 0,
+            `Viewport ${vp.width}px [Tab 2]: 12 Fakultas scroll container clientHeight is valid (${scrollMetricsTab2.clientHeight}px)`
+          );
+          assert(
+            scrollMetricsTab2.scrollHeight > scrollMetricsTab2.clientHeight,
+            `Viewport ${vp.width}px [Tab 2]: 12 Fakultas overflows and scrolls smoothly (${scrollMetricsTab2.scrollHeight}px > ${scrollMetricsTab2.clientHeight}px)`
+          );
+        }
+
+        // Switch back to All Majors Tab
+        const allMajorsBtn = page.locator('button[aria-label*="Output 1: 65 Jurusan"]').first();
+        if (await allMajorsBtn.count() > 0) {
+          await allMajorsBtn.click();
+          await page.waitForTimeout(200);
+        }
+      }
+
+      // INVARIANT 9: Mobile Bottom Sheet Snap Points (on mobile viewports < 640px)
       if (vp.width < 640) {
-        // Half snap: check sheet height is ~50% and map area has >= 40% height
-        const sheetBox = await page.locator('aside').boundingBox();
-        if (sheetBox) {
-          const sheetRatio = sheetBox.height / vp.height;
-          const mapVisibleRatio = (vp.height - sheetBox.height) / vp.height;
-          console.log(`  ℹ️ Mobile sheet height ratio: ${(sheetRatio * 100).toFixed(1)}%, visible map ratio: ${(mapVisibleRatio * 100).toFixed(1)}%`);
+        // Initial state: half snap
+        const sheetBoxInitial = await page.locator('aside').boundingBox();
+        if (sheetBoxInitial) {
+          const mapVisibleRatio = (vp.height - sheetBoxInitial.height) / vp.height;
           assert(
             mapVisibleRatio >= 0.38,
             `Viewport ${vp.width}px: At half snap, map retains >= 40% visible viewport height (actual: ${(mapVisibleRatio * 100).toFixed(1)}%)`
           );
         }
+
+        // Test snap to expanded
+        const dragHandle = page.locator('[aria-label*="Ubah ukuran panel bawah"]').first();
+        if (await dragHandle.count() > 0) {
+          // Tap drag handle to cycle: half -> expanded
+          await dragHandle.click();
+          await page.waitForTimeout(350);
+
+          const sheetBoxExpanded = await page.locator('aside').boundingBox();
+          if (sheetBoxExpanded) {
+            const expandedRatio = sheetBoxExpanded.height / vp.height;
+            console.log(`  ℹ️ Mobile expanded height ratio: ${(expandedRatio * 100).toFixed(1)}%`);
+            assert(
+              expandedRatio > 0.70,
+              `Viewport ${vp.width}px: Expanded snap point expands to > 70% height (actual: ${(expandedRatio * 100).toFixed(1)}%)`
+            );
+          }
+
+          // Tap drag handle to cycle: expanded -> half
+          await dragHandle.click();
+          await page.waitForTimeout(350);
+
+          // Tap drag handle: half -> expanded, tap again or simulate drag down to collapsed
+          // Direct drag down simulation to test collapsed snap
+          const dragBox = await dragHandle.boundingBox();
+          if (dragBox) {
+            await page.mouse.move(dragBox.x + dragBox.width / 2, dragBox.y + dragBox.height / 2);
+            await page.mouse.down();
+            await page.mouse.move(dragBox.x + dragBox.width / 2, dragBox.y + dragBox.height / 2 + 60, { steps: 5 });
+            await page.mouse.up();
+            await page.waitForTimeout(350);
+
+            const sheetBoxCollapsed = await page.locator('aside').boundingBox();
+            if (sheetBoxCollapsed) {
+              console.log(`  ℹ️ Mobile collapsed height: ${sheetBoxCollapsed.height}px`);
+              assert(
+                sheetBoxCollapsed.height <= 110,
+                `Viewport ${vp.width}px: Collapsed peek snap point is ~96px (actual: ${sheetBoxCollapsed.height}px)`
+              );
+            }
+
+            // Drag back up to half snap
+            await page.mouse.move(dragBox.x + dragBox.width / 2, dragBox.y + 10);
+            await page.mouse.down();
+            await page.mouse.move(dragBox.x + dragBox.width / 2, dragBox.y - 60, { steps: 5 });
+            await page.mouse.up();
+            await page.waitForTimeout(350);
+          }
+        }
       }
 
-      // INVARIANT 7: Zero console errors
+      // INVARIANT 10: Zero console errors
       assert(
         consoleErrors.length === 0,
         `Viewport ${vp.width}px: Zero console errors (found: ${consoleErrors.length})`
@@ -234,10 +403,10 @@ async function runResultsLayoutTests() {
 
   console.log('\n===============================================================');
   if (failures > 0) {
-    console.error(`🚨 RESULTS LAYOUT INVARIANT TESTS FAILED WITH ${failures} ERRORS!`);
+    console.error(`🚨 RESULTS LAYOUT & SCROLLING TESTS FAILED WITH ${failures} ERRORS!`);
     process.exit(1);
   } else {
-    console.log('🎉 ALL RESULTS LAYOUT INVARIANT TESTS PASSED WITH 0 ERRORS!');
+    console.log('🎉 ALL RESULTS LAYOUT & SCROLLING TESTS PASSED WITH 0 ERRORS!');
   }
   console.log('===============================================================\n');
 }

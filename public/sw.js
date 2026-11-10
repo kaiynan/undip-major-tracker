@@ -1,4 +1,4 @@
-const CACHE_NAME = 'define-your-next-move-v4';
+const CACHE_NAME = 'define-your-next-move-v5';
 
 const PRECACHE_URLS = [
   '/',
@@ -69,6 +69,21 @@ self.addEventListener('fetch', (event) => {
   }
 
   const url = new URL(event.request.url);
+
+  // Skip non-http/https requests
+  if (!url.protocol.startsWith('http')) {
+    return;
+  }
+
+  // Bypass all Next.js development, HMR, and webpack hot reload assets
+  if (
+    url.pathname.includes('/_next/webpack-hmr') ||
+    url.pathname.includes('/_next/static/webpack/') ||
+    url.pathname.startsWith('/__nextjs') ||
+    url.pathname.includes('hot-update')
+  ) {
+    return;
+  }
 
   // Handle HTML navigation requests (pages)
   if (event.request.mode === 'navigate') {

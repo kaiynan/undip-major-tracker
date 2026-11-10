@@ -533,7 +533,11 @@ export default function ResultsPage() {
           </div>
 
           {/* Panel Scrollable Content Body (Hidden on mobile collapsed/peek ~96px to avoid clipping) */}
-          <div className={`flex-1 overflow-y-auto p-4 sm:p-6 space-y-5 scrollbar-thin scrollbar-thumb-[#78350F] scrollbar-track-[#190E08] pb-32 ${sheetPosition === 'collapsed' ? 'hidden sm:block' : 'block'}`}>
+          <div
+            id="results-panel-scroll"
+            data-testid="results-scroll-container"
+            className={`flex-1 min-h-0 overflow-y-auto overscroll-contain touch-pan-y scroll-touch p-4 sm:p-6 space-y-5 scrollbar-thin scrollbar-thumb-[#78350F] scrollbar-track-[#190E08] pb-32 ${sheetPosition === 'collapsed' ? 'hidden sm:block' : 'block'}`}
+          >
             {/* Banner Link to Langkah Selanjutnya */}
             <Link
               href="/langkah-selanjutnya"

@@ -8,6 +8,32 @@ export function PwaRegistrar() {
       return;
     }
 
+    // 1. In development mode, NEVER register Service Worker.
+    // Proactively UNREGISTER any existing Service Worker and clear stale caches to avoid hydration mismatch.
+    if (process.env.NODE_ENV !== 'production') {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        for (const registration of registrations) {
+          registration.unregister().then((success) => {
+            if (success) {
+              console.log('[PWA-Dev] Unregistered development service worker:', registration.scope);
+            }
+          });
+        }
+      });
+
+      if ('caches' in window) {
+        caches.keys().then((cacheNames) => {
+          for (const cacheName of cacheNames) {
+            caches.delete(cacheName).then(() => {
+              console.log('[PWA-Dev] Cleared stale cache:', cacheName);
+            });
+          }
+        });
+      }
+      return;
+    }
+
+    // 2. In production, register Service Worker for offline PWA capabilities.
     const registerSW = async () => {
       try {
         const registration = await navigator.serviceWorker.register('/sw.js', {
