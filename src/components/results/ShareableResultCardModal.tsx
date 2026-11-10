@@ -7,6 +7,7 @@ import { faculties } from '@/data/faculties';
 import { APP_NAME, APP_NAME_SHORT, EVENT_NAME } from '@/config/brand';
 import {
   CardFormat,
+  CardTheme,
   CardData,
   CardProgramItem,
   renderResultCard,
@@ -23,6 +24,10 @@ import {
   MessageCircle,
   Smartphone,
   Square,
+  Monitor,
+  Sun,
+  Moon,
+  Sunrise,
   Sparkles,
   FileText,
   Image as ImageIcon,
@@ -49,8 +54,11 @@ export function ShareableResultCardModal({
   programs,
   userSummary,
 }: ShareableResultCardModalProps) {
-  // Format selection: 'story' (1080x1920) or 'square' (1080x1080)
+  // Format selection: 'story' (1080x1920), 'square' (1080x1080), 'landscape' (1920x1080)
   const [format, setFormat] = useState<CardFormat>('story');
+
+  // Theme selection: 'golden-hour', 'malam', 'fajar'
+  const [theme, setTheme] = useState<CardTheme>('golden-hour');
 
   // Optional nickname field (held strictly in component state, max 20 chars)
   const [nickname, setNickname] = useState('');
@@ -113,7 +121,7 @@ export function ShareableResultCardModal({
     return `Hasil Eksplorasi Minat ${APP_NAME}\n${EVENT_NAME}\n${nickname ? `Pencari Minat: ${nickname}\n` : ''}\nTop 3 Rekomendasi Program Studi:\n${list}\n\nTipe Minat (RIASEC): ${riasecString}\nBidang Keilmuan: ${userSummary?.topDomain?.label || '-'}\n\nTemukan potensimu di Universitas Diponegoro bersama ${APP_NAME}!`;
   }, [top3Programs, nickname, riasecString, userSummary]);
 
-  // Redraw canvas whenever isOpen, format, nickname, or top3Programs change
+  // Redraw canvas whenever isOpen, format, theme, nickname, or top3Programs change
   const renderCanvas = useCallback(async () => {
     if (!isOpen) return;
 
@@ -127,15 +135,24 @@ export function ShareableResultCardModal({
         topPrograms: top3Programs,
         riasecCode: riasecString,
         topDomainLabel: userSummary?.topDomain?.label,
+        topRiasec: userSummary?.topRiasec,
       };
 
-      await renderResultCard(fullCanvas, cardData, format);
+      await renderResultCard(fullCanvas, cardData, format, theme);
 
       // 2. Render downscaled live preview into previewCanvasRef
       const previewCanvas = previewCanvasRef.current;
       if (previewCanvas) {
-        const previewWidth = 360;
-        const previewHeight = format === 'story' ? 640 : 360;
+        let previewWidth = 360;
+        let previewHeight = 640;
+        if (format === 'square') {
+          previewWidth = 360;
+          previewHeight = 360;
+        } else if (format === 'landscape') {
+          previewWidth = 480;
+          previewHeight = 270;
+        }
+
         previewCanvas.width = previewWidth;
         previewCanvas.height = previewHeight;
 
@@ -159,7 +176,7 @@ export function ShareableResultCardModal({
     } catch (err) {
       console.error('Failed to render result card on canvas:', err);
     }
-  }, [isOpen, format, nickname, top3Programs, riasecString, userSummary]);
+  }, [isOpen, format, theme, nickname, top3Programs, riasecString, userSummary]);
 
   useEffect(() => {
     let cancelled = false;
@@ -177,7 +194,7 @@ export function ShareableResultCardModal({
         cancelAnimationFrame(raf);
       };
     }
-  }, [isOpen, format, nickname, renderCanvas]);
+  }, [isOpen, format, theme, nickname, renderCanvas]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -298,21 +315,21 @@ export function ShareableResultCardModal({
 
       {mode === 'card' ? (
         <div className="space-y-4 mt-4">
-          {/* Controls: Format Picker & Nickname Input */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-[#190E08] p-3 rounded-xl border border-[#78350F]/70">
+          {/* Controls: Format, Theme, & Nickname */}
+          <div className="space-y-3 bg-[#190E08] p-3 rounded-xl border border-[#78350F]/70">
             {/* Format Picker */}
             <div>
               <label className="font-pixel text-[10px] text-[#FDE68A] uppercase block mb-1.5">
                 Format Ukuran:
               </label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-3 gap-2">
                 <button
                   type="button"
                   onClick={() => {
                     retroAudio.playSelect();
                     setFormat('story');
                   }}
-                  className={`flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
+                  className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
                     format === 'story'
                       ? 'bg-[#78350F] text-[#FDE68A] border-[#F59E0B]'
                       : 'bg-[#140B07] text-amber-200/70 border-[#78350F]/60 hover:text-white'
@@ -329,7 +346,7 @@ export function ShareableResultCardModal({
                     retroAudio.playSelect();
                     setFormat('square');
                   }}
-                  className={`flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
+                  className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
                     format === 'square'
                       ? 'bg-[#78350F] text-[#FDE68A] border-[#F59E0B]'
                       : 'bg-[#140B07] text-amber-200/70 border-[#78350F]/60 hover:text-white'
@@ -338,6 +355,82 @@ export function ShareableResultCardModal({
                 >
                   <Square className="w-3.5 h-3.5 shrink-0" />
                   <span className="font-mono text-[11px]">Square (1:1)</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    retroAudio.playSelect();
+                    setFormat('landscape');
+                  }}
+                  className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
+                    format === 'landscape'
+                      ? 'bg-[#78350F] text-[#FDE68A] border-[#F59E0B]'
+                      : 'bg-[#140B07] text-amber-200/70 border-[#78350F]/60 hover:text-white'
+                  }`}
+                  aria-label="Format Landscape 1920x1080 (16:9)"
+                >
+                  <Monitor className="w-3.5 h-3.5 shrink-0" />
+                  <span className="font-mono text-[11px]">Landscape</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Theme Picker */}
+            <div>
+              <label className="font-pixel text-[10px] text-[#FDE68A] uppercase block mb-1.5">
+                Tema Visual:
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    retroAudio.playSelect();
+                    setTheme('golden-hour');
+                  }}
+                  className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
+                    theme === 'golden-hour'
+                      ? 'bg-[#78350F] text-[#FDE68A] border-[#F59E0B]'
+                      : 'bg-[#140B07] text-amber-200/70 border-[#78350F]/60 hover:text-white'
+                  }`}
+                  aria-label="Tema Golden Hour (Amber Sunset)"
+                >
+                  <Sun className="w-3.5 h-3.5 shrink-0 text-amber-400" />
+                  <span className="font-mono text-[11px]">Golden Hour</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    retroAudio.playSelect();
+                    setTheme('malam');
+                  }}
+                  className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
+                    theme === 'malam'
+                      ? 'bg-[#1E3A8A] text-[#BAE6FD] border-[#38BDF8]'
+                      : 'bg-[#140B07] text-sky-200/70 border-[#78350F]/60 hover:text-white'
+                  }`}
+                  aria-label="Tema Malam (Midnight Blue)"
+                >
+                  <Moon className="w-3.5 h-3.5 shrink-0 text-sky-400" />
+                  <span className="font-mono text-[11px]">Malam</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    retroAudio.playSelect();
+                    setTheme('fajar');
+                  }}
+                  className={`flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-bold border transition-colors cursor-pointer min-h-[44px] ${
+                    theme === 'fajar'
+                      ? 'bg-[#831843] text-[#FCE7F3] border-[#F472B6]'
+                      : 'bg-[#140B07] text-pink-200/70 border-[#78350F]/60 hover:text-white'
+                  }`}
+                  aria-label="Tema Fajar (Dawn Magenta)"
+                >
+                  <Sunrise className="w-3.5 h-3.5 shrink-0 text-pink-400" />
+                  <span className="font-mono text-[11px]">Fajar</span>
                 </button>
               </div>
             </div>
@@ -370,7 +463,7 @@ export function ShareableResultCardModal({
           </div>
 
           {/* Card Preview Container */}
-          <div className="relative bg-[#0F0804] border-2 border-[#78350F] rounded-2xl p-3 flex flex-col items-center justify-center min-h-[280px] max-h-[360px] overflow-hidden shadow-inner">
+          <div className="relative bg-[#0F0804] border-2 border-[#78350F] rounded-2xl p-3 flex flex-col items-center justify-center min-h-[260px] max-h-[380px] overflow-hidden shadow-inner">
             {isGenerating && (
               <div className="absolute inset-0 bg-[#0F0804]/80 flex flex-col items-center justify-center z-10 gap-2">
                 <Sparkles className="w-6 h-6 text-[#F59E0B] animate-spin" />
@@ -380,7 +473,11 @@ export function ShareableResultCardModal({
 
             <div
               className={`transition-all duration-300 flex items-center justify-center ${
-                format === 'story' ? 'aspect-[9/16] h-[320px]' : 'aspect-square h-[280px]'
+                format === 'story'
+                  ? 'aspect-[9/16] h-[300px] sm:h-[340px]'
+                  : format === 'square'
+                  ? 'aspect-square h-[260px] sm:h-[300px]'
+                  : 'aspect-[16/9] w-full max-w-[420px] h-auto'
               }`}
             >
               <canvas
