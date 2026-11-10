@@ -3,8 +3,9 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import {
   campusFacultyLocations,
+  campusLandmarks,
 } from '@/data/campusLocations';
-import { FacultyBuildingIllustration } from './PixelFacultyBuildings';
+import { CampusBuildingsLayer } from './CampusBuildingsLayer';
 import { CampusRoadNetwork } from './CampusRoadNetwork';
 import { FacultyScore } from '@/data/types';
 import {
@@ -22,6 +23,26 @@ interface PixelCampusMapProps {
   className?: string;
   heightClass?: string;
 }
+
+const OVERVIEW_KEY_LANDMARKS = new Set([
+  'widya-puraya',
+  'gsg',
+  'student-centre',
+  'masjid-kampus',
+  'muladi-dome',
+  'stadion',
+  'waduk',
+  'rsnd',
+]);
+
+const VERIFIED_GREEN_TREES = [
+  [770, 270], [790, 280], [810, 260], [830, 275], // Taman Widya Puraya
+  [935, 760], [960, 775],                         // Taman Rusa
+  [1580, 790], [1610, 810],                       // Taman Stadion
+  [1150, 710], [1180, 720],                       // Taman Agro FPP
+  [570, 430], [590, 450],                         // Selasar Hijau FH/FISIP
+  [415, 390], [430, 375],                         // Selasar Hijau SV
+];
 
 export function PixelCampusMap({
   selectedFacultyId,
@@ -50,7 +71,7 @@ export function PixelCampusMap({
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       const delta = e.deltaY > 0 ? -0.15 : 0.15;
-      setUserZoom((prev) => Math.min(Math.max(0.7, prev + delta), 2.5));
+      setUserZoom((prev) => Math.min(Math.max(0.65, prev + delta), 2.8));
     };
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
@@ -75,19 +96,18 @@ export function PixelCampusMap({
   const MAP_WIDTH = 2000;
   const MAP_HEIGHT = 1400;
 
-  // Camera target calculation
+  // Camera target calculation: Centered on 12 units bounding box (950, 450)
   const cameraTransform = useMemo(() => {
     if (!selectedLocation) {
-      // Full overview: scale 1, centered at (1000, 700)
-      const scale = 1 * userZoom;
-      const tx = (1 - scale) * (MAP_WIDTH / 2) + manualPan.x;
-      const ty = (1 - scale) * (MAP_HEIGHT / 2) + manualPan.y;
+      // Full overview: centered on 12 units centroid
+      const scale = 1.05 * userZoom;
+      const tx = (MAP_WIDTH / 2 - 950 * scale) + manualPan.x;
+      const ty = (MAP_HEIGHT / 2 - 450 * scale) + manualPan.y;
       return `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`;
     } else {
       // Zoom into selected faculty
-      const baseZoom = 2.1;
+      const baseZoom = 2.2;
       const scale = baseZoom * userZoom;
-      // Target center
       const targetX = selectedLocation.mapPosition.x;
       const targetY = selectedLocation.mapPosition.y;
       const tx = (MAP_WIDTH / 2 - targetX * scale) + manualPan.x;
@@ -96,8 +116,8 @@ export function PixelCampusMap({
     }
   }, [selectedLocation, userZoom, manualPan]);
 
-  const handleZoomIn = () => setUserZoom((prev) => Math.min(prev + 0.3, 2.5));
-  const handleZoomOut = () => setUserZoom((prev) => Math.max(prev - 0.3, 0.7));
+  const handleZoomIn = () => setUserZoom((prev) => Math.min(prev + 0.3, 2.8));
+  const handleZoomOut = () => setUserZoom((prev) => Math.max(prev - 0.3, 0.65));
   const handleReset = () => {
     setUserZoom(1);
     setManualPan({ x: 0, y: 0 });
@@ -109,10 +129,10 @@ export function PixelCampusMap({
       ref={mapContainerRef}
       className={`relative w-full ${heightClass} bg-[#190E08] rounded-3xl border-2 border-[#78350F] overflow-hidden select-none shadow-[0_8px_30px_rgba(0,0,0,0.5)] ${className}`}
     >
-      {/* 1. Golden-Hour Compass & Title HUD Overlay */}
+      {/* 1. Compass & Title HUD Overlay */}
       <div className="absolute top-4 left-4 z-20 flex items-center gap-2.5 bg-[#190E08]/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-[#78350F] shadow-md pointer-events-auto">
         <div className="w-7 h-7 rounded-xl bg-[#78350F] text-[#FDE68A] flex items-center justify-center border border-[#F59E0B]">
-          <Compass className="w-4 h-4 text-[#FDE68A] animate-spin-slow" />
+          <Compass className="w-4 h-4 text-[#FDE68A] animate-spin-slow motion-reduce:animate-none" />
         </div>
         <div>
           <div className="flex items-center gap-2">
@@ -131,7 +151,7 @@ export function PixelCampusMap({
         </div>
       </div>
 
-      {/* 2. Map Camera Controls HUD (Zoom In/Out, Reset, Overview) */}
+      {/* 2. Map Camera Controls HUD */}
       <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 bg-[#190E08]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#78350F] shadow-md pointer-events-auto">
         <button
           onClick={handleZoomIn}
@@ -210,7 +230,7 @@ export function PixelCampusMap({
         </div>
       </div>
 
-      {/* 4. THE 16-BIT RETRO CAMPUS MAP CANVAS (Virtual 2000 x 1400 px) */}
+      {/* 4. THE 16-BIT RETRO CAMPUS MAP CANVAS */}
       <div
         className="w-full h-full cursor-grab active:cursor-grabbing"
         style={{
@@ -230,28 +250,26 @@ export function PixelCampusMap({
         >
           {/* DEFINITIONS & TEXTURES */}
           <defs>
-            {/* Paving Pattern */}
-            <pattern id="campusPaving" width="20" height="20" patternUnits="userSpaceOnUse">
-              <rect width="20" height="20" fill="#2E180E" />
-              <rect x="0" y="0" width="18" height="9" fill="#3D2114" />
-              <rect x="10" y="10" width="18" height="9" fill="#381D10" />
-            </pattern>
-            {/* Grass/Forest Texture */}
-            <pattern id="campusForest" width="24" height="24" patternUnits="userSpaceOnUse">
+            <g id="pixel-tree-small">
+              <rect x="6" y="14" width="4" height="8" fill="#451A03" />
+              <polygon points="8,0 0,14 16,14" fill="#15803D" />
+              <polygon points="8,4 2,12 14,12" fill="#22C55E" />
+            </g>
+            <pattern id="campusForestSmall" width="24" height="24" patternUnits="userSpaceOnUse">
               <rect width="24" height="24" fill="#15240E" />
               <rect x="2" y="2" width="8" height="8" fill="#1C3013" />
               <rect x="14" y="14" width="8" height="8" fill="#233A18" />
             </pattern>
           </defs>
 
-          {/* BASE TERRAIN: Tembalang Hills & Campus Lawn */}
+          {/* BASE TERRAIN */}
           <rect x="0" y="0" width={MAP_WIDTH} height={MAP_HEIGHT} fill="#141E0D" />
-          <rect x="0" y="0" width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#campusForest)" opacity="0.6" />
+          <rect x="0" y="0" width={MAP_WIDTH} height={MAP_HEIGHT} fill="url(#campusForestSmall)" opacity="0.6" />
 
           {/* REAL OSM CAMPUS ROAD NETWORK */}
           <CampusRoadNetwork />
 
-          {/* WATER FEATURE: Waduk Pendidikan Diponegoro (Danau Undip) */}
+          {/* REAL OSM WATER FEATURE: WADUK PENDIDIKAN DIPONEGORO */}
           <g id="waduk-undip">
             <polygon
               points="1632.8,625.6 1611.9,527.0 1574.5,540.5 1560.8,547.9 1545.6,550.3 1533.3,549.4 1519.0,552.0 1516.6,556.6 1516.4,562.1 1513.9,567.9 1509.9,571.8 1502.3,571.5 1496.2,570.6 1492.3,579.0 1486.0,592.8 1485.9,600.5 1490.1,629.3 1489.9,657.3 1484.1,675.8 1482.4,684.5 1473.0,687.4 1446.9,691.8 1455.0,697.1 1467.8,705.5 1488.0,715.2 1500.7,717.6 1534.8,715.0 1535.7,716.1 1554.4,702.8 1570.7,681.1 1565.8,659.4 1578.0,638.7 1632.8,625.6"
@@ -260,8 +278,8 @@ export function PixelCampusMap({
               strokeWidth="4"
               opacity="0.85"
             />
-            <rect x="1465" y="605" width="145" height="18" fill="#190E08" rx="4" stroke="#0284C7" strokeWidth="1" />
-            <text x="1537" y="618" fill="#38BDF8" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+            <rect x="1510" y="625" width="145" height="18" fill="#190E08" rx="4" stroke="#0284C7" strokeWidth="1" />
+            <text x="1582" y="638" fill="#38BDF8" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Waduk Pendidikan Undip
             </text>
           </g>
@@ -277,74 +295,29 @@ export function PixelCampusMap({
             />
           </g>
 
-          {/* CAMPUS PEDESTRIAN PATHWAYS & PLAZAS */}
-          <rect x="910" y="420" width="180" height="120" fill="url(#campusPaving)" stroke="#78350F" strokeWidth="2" rx="4" />
-          <circle cx="1000" cy="480" r="38" fill="#166534" stroke="#14532D" strokeWidth="3" />
+          {/* REAL BUILDINGS LAYER: DRAWN FROM REAL OSM POLYGONS */}
+          <CampusBuildingsLayer
+            selectedFacultyId={selectedFacultyId}
+            hoveredFacultyId={hoveredFacultyId}
+            onSelectFaculty={onSelectFaculty}
+            onHoverFaculty={setHoveredFacultyId}
+            zoom={userZoom}
+          />
 
-          {/* PANGERAN DIPONEGORO MONUMENT CIRCLE */}
-          <g id="monumen-bundaran-kuda" transform="translate(975, 455)">
-            <rect x="20" y="42" width="16" height="10" fill="#E2E8F0" />
-            <path d="M 26 28 L 34 22 L 32 32 L 36 38 L 24 40 L 21 34 Z" fill="#FFFFFF" />
-            <circle cx="29" cy="20" r="2.5" fill="#FFFFFF" />
-            <text x="28" y="60" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Patung Kuda Undip
-            </text>
-          </g>
-
-          {/* CENTRAL LANDMARK: GEDUNG REKTORAT & WIDYA PURAYA */}
-          <g
-            id="landmark-rektorat"
-            transform="translate(910, 410)"
-            className="cursor-pointer"
-            onClick={() => onSelectFaculty?.(null)}
-          >
-            <FacultyBuildingIllustration facultyId="rektorat" />
-            <rect x="20" y="105" width="160" height="20" fill="#190E08" rx="6" />
-            <text x="100" y="119" fill="#FDE68A" fontSize="12" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Gedung Rektorat (Widya Puraya)
-            </text>
-          </g>
-
-          {/* GSG (Gedung Serba Guna Prof. Sudarto) */}
-          <g id="landmark-gsg" transform="translate(800, 395)">
-            <polygon points="35,28 85,5 135,28" fill="#78350F" />
-            <polygon points="15,48 85,22 155,48" fill="#9A3412" />
-            <rect x="25" y="48" width="120" height="30" fill="#FEF3C7" />
-            <text x="85" y="93" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              GSG Prof. Sudarto
-            </text>
-          </g>
-
-          {/* MASJID KAMPUS DIPONEGORO */}
-          <g id="landmark-masjid" transform="translate(620, 890)">
-            <circle cx="50" cy="35" r="24" fill="#047857" />
-            <rect x="25" y="40" width="50" height="30" fill="#F8FAFC" />
-            <polygon points="85,60 90,15 95,60" fill="#065F46" />
-            <text x="50" y="85" fill="#A7F3D0" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Masjid Kampus
-            </text>
-          </g>
-
-          {/* CAMPUS ENTRANCE GATE (Gerbang Utama Tembalang) */}
-          <g id="gerbang-tembalang" transform="translate(885, 235)">
-            <rect x="20" y="30" width="18" height="40" fill="#78350F" />
-            <rect x="102" y="30" width="18" height="40" fill="#78350F" />
-            <polygon points="10,30 70,10 130,30" fill="#B45309" />
-            <rect x="38" y="24" width="64" height="6" fill="#F59E0B" />
-            <text x="70" y="84" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Gerbang Utama Tembalang
-            </text>
-          </g>
-
-          {/* 12 VERIFIED FACULTY SITES & ARCHITECTURAL BUILDINGS */}
+          {/* 12 FACULTY CLUSTER LABELS (ONE LABEL AT CLUSTER CENTROID) */}
           {campusFacultyLocations.map((loc) => {
             const isSelected = selectedFacultyId === loc.id;
-            const isHovered = hoveredFacultyId === loc.id;
             const score = scoreMap.get(loc.id);
+            const isApprox = loc.source === 'approx';
 
-            // Building position offset (center illustration on coordinate)
-            const posX = loc.mapPosition.x - 90;
-            const posY = loc.mapPosition.y - 60;
+            const shortTitle = loc.shortName;
+            const hasScore = !!score;
+            const textX = hasScore ? 28 : 10;
+            const pillWidth = hasScore ? (shortTitle.length > 3 ? 88 : 78) : (shortTitle.length > 3 ? 66 : 54);
+            const pillHeight = 24;
+
+            const posX = loc.mapPosition.x;
+            const posY = loc.mapPosition.y;
 
             return (
               <g
@@ -356,117 +329,125 @@ export function PixelCampusMap({
                 onMouseEnter={() => setHoveredFacultyId(loc.id)}
                 onMouseLeave={() => setHoveredFacultyId(null)}
               >
-                {/* Visual pulse aura when selected */}
-                {isSelected && (
-                  <circle
-                    cx="90"
-                    cy="60"
-                    r="95"
-                    fill="#F59E0B"
-                    opacity="0.2"
-                    className="animate-pulse"
+                {/* Pin dot */}
+                <circle cx="0" cy="0" r="4.5" fill={isSelected ? '#F59E0B' : '#FEF3C7'} stroke="#78350F" strokeWidth="2" />
+
+                {/* Ground Pin Label */}
+                <g transform={`translate(${-pillWidth / 2}, 14)`}>
+                  <rect
+                    x="0"
+                    y="0"
+                    width={pillWidth}
+                    height={pillHeight}
+                    rx="6"
+                    fill={isSelected ? '#78350F' : '#190E08'}
+                    stroke={isSelected ? '#F59E0B' : isApprox ? '#D97706' : '#78350F'}
+                    strokeWidth={isSelected ? '2' : '1'}
+                    strokeDasharray={isApprox ? '3 2' : undefined}
+                    opacity="0.95"
                   />
-                )}
 
-                {/* The 16-Bit Architectural Illustration */}
-                <FacultyBuildingIllustration
-                  facultyId={loc.id}
-                  isHighlighted={isSelected || isHovered}
-                />
-
-                {/* Ground Pin Label & Tier Marker (Badge first, compact width) */}
-                {(() => {
-                  const offsetX = loc.labelOffset?.x || 0;
-                  const offsetY = loc.labelOffset?.y || 0;
-                  const shortTitle = loc.shortName;
-                  const hasScore = !!score;
-                  const textX = hasScore ? 28 : 10;
-                  const pillWidth = hasScore ? (shortTitle.length > 3 ? 88 : 78) : (shortTitle.length > 3 ? 66 : 54);
-                  const pillHeight = 24;
-
-                  return (
-                    <g transform={`translate(${10 + offsetX}, ${105 + offsetY})`}>
+                  {score && (
+                    <g transform="translate(3, 2.5)">
                       <rect
                         x="0"
                         y="0"
-                        width={pillWidth}
-                        height={pillHeight}
-                        rx="6"
-                        fill={isSelected ? '#78350F' : '#190E08'}
-                        stroke={isSelected ? '#F59E0B' : '#78350F'}
-                        strokeWidth={isSelected ? '2' : '1'}
-                        opacity="0.95"
+                        width="19"
+                        height="19"
+                        rx="4"
+                        fill={
+                          score.tier === 'S'
+                            ? '#F59E0B'
+                            : score.tier === 'A'
+                            ? '#3B82F6'
+                            : score.tier === 'B'
+                            ? '#F97316'
+                            : '#78350F'
+                        }
                       />
-
-                      {score && (
-                        <g transform="translate(3, 2.5)">
-                          <rect
-                            x="0"
-                            y="0"
-                            width="19"
-                            height="19"
-                            rx="4"
-                            fill={
-                              score.tier === 'S'
-                                ? '#F59E0B'
-                                : score.tier === 'A'
-                                ? '#3B82F6'
-                                : score.tier === 'B'
-                                ? '#F97316'
-                                : '#78350F'
-                            }
-                          />
-                          <text
-                            x="9.5"
-                            y="13.5"
-                            fill="#FFFFFF"
-                            fontSize="11"
-                            fontWeight="black"
-                            textAnchor="middle"
-                            fontFamily="monospace"
-                          >
-                            {score.tier}
-                          </text>
-                        </g>
-                      )}
-
                       <text
-                        x={textX}
-                        y="16"
-                        fill={isSelected ? '#FFFBEB' : '#FDE68A'}
-                        fontSize="11.5"
-                        fontWeight="bold"
+                        x="9.5"
+                        y="13.5"
+                        fill="#FFFFFF"
+                        fontSize="11"
+                        fontWeight="black"
+                        textAnchor="middle"
                         fontFamily="monospace"
                       >
-                        {shortTitle}
+                        {score.tier}
                       </text>
                     </g>
-                  );
-                })()}
+                  )}
+
+                  <text
+                    x={textX}
+                    y="16"
+                    fill={isSelected ? '#FFFBEB' : '#FDE68A'}
+                    fontSize="11.5"
+                    fontWeight="bold"
+                    fontFamily="monospace"
+                  >
+                    {shortTitle}
+                  </text>
+                </g>
               </g>
             );
           })}
 
-          {/* TREES AND GREENERY SCATTERED ALONG PATHS */}
-          <g id="campus-trees" fill="#166534" stroke="#14532D" strokeWidth="2">
-            {[
-              [520, 240], [580, 260], [640, 220], [860, 240], [920, 200],
-              [340, 520], [320, 600], [330, 780], [380, 880], [420, 1000],
-              [780, 780], [840, 820], [740, 920], [780, 1020], [860, 1140],
-              [1100, 420], [1160, 360], [1480, 340], [1520, 460], [1620, 640],
-              [1480, 760], [1560, 860], [1400, 980], [1300, 1080], [1160, 1180],
-            ].map(([tx, ty], i) => (
-              <g key={i} transform={`translate(${tx}, ${ty})`}>
-                <rect x="6" y="14" width="4" height="8" fill="#451A03" />
-                <polygon points="8,0 0,14 16,14" fill="#15803D" />
-                <polygon points="8,4 2,12 14,12" fill="#22C55E" />
+          {/* ICONIC LANDMARKS LABELS (Key landmarks at overview, rest when zoomed) */}
+          {campusLandmarks.map((lm) => {
+            const isOverviewKey = OVERVIEW_KEY_LANDMARKS.has(lm.id);
+            if (userZoom < 1.6 && !isOverviewKey) return null;
+
+            const posX = lm.mapPosition.x;
+            const posY = lm.mapPosition.y;
+            const labelWidth = Math.min(130, lm.name.length * 6.5 + 16);
+
+            return (
+              <g
+                key={lm.id}
+                transform={`translate(${posX}, ${posY})`}
+                className="select-none pointer-events-none"
+              >
+                <circle cx="0" cy="0" r="3.5" fill="#38BDF8" stroke="#190E08" strokeWidth="1.5" />
+                <g transform={`translate(${-labelWidth / 2}, 10)`}>
+                  <rect
+                    x="0"
+                    y="0"
+                    width={labelWidth}
+                    height="18"
+                    rx="4"
+                    fill="#190E08"
+                    stroke="#0284C7"
+                    strokeWidth="1"
+                    opacity="0.9"
+                  />
+                  <text
+                    x={labelWidth / 2}
+                    y="12.5"
+                    fill="#BAE6FD"
+                    fontSize="8.5"
+                    fontWeight="bold"
+                    textAnchor="middle"
+                    fontFamily="monospace"
+                  >
+                    {lm.name.length > 20 ? lm.name.slice(0, 19) + '…' : lm.name}
+                  </text>
+                </g>
               </g>
+            );
+          })}
+
+          {/* TREES IN REAL GREEN POLYGONS */}
+          <g id="campus-trees-small">
+            {VERIFIED_GREEN_TREES.map(([tx, ty], i) => (
+              <use key={i} href="#pixel-tree-small" x={tx} y={ty} />
             ))}
           </g>
         </svg>
       </div>
 
-      {/* 5. Selected Faculty Architectural & Geographic Card (In Zoomed Mode) */}
+      {/* 5. Selected Faculty Detail Card */}
       {selectedLocation && (
         <div className="absolute bottom-16 left-4 right-4 sm:right-auto sm:max-w-md z-20 bg-[#24130C]/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-[#F59E0B] shadow-2xl text-white">
           <div className="flex items-start justify-between gap-3">
@@ -513,7 +494,10 @@ export function PixelCampusMap({
         </div>
       )}
 
-      {/* Map Attribution Badge */}
+      {/* Map Attribution and Caption */}
+      <div className="absolute bottom-2 left-2 z-10 text-[9px] font-mono text-amber-200/70 bg-black/60 px-2 py-0.5 rounded border border-[#78350F]/40 backdrop-blur-xs select-none">
+        Ilustrasi kampus — posisi bangunan disederhanakan
+      </div>
       <div className="absolute bottom-2 right-2 z-10 text-[9px] font-mono text-amber-200/70 bg-black/60 px-2 py-0.5 rounded border border-[#78350F]/40 backdrop-blur-xs select-none">
         © OpenStreetMap contributors
       </div>

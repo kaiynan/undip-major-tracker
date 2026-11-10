@@ -3,8 +3,9 @@
 import React, { useState, useMemo, useRef, useEffect, useCallback } from 'react';
 import {
   campusFacultyLocations,
+  campusLandmarks,
 } from '@/data/campusLocations';
-import { FacultyBuildingIllustration } from './PixelFacultyBuildings';
+import { CampusBuildingsLayer } from './CampusBuildingsLayer';
 import { CampusRoadNetwork } from './CampusRoadNetwork';
 import { FacultyMapTourSheet } from './FacultyMapTourSheet';
 import { FacultyScore } from '@/data/types';
@@ -25,6 +26,28 @@ interface FullScreenCampusMapProps {
   onToggleForeground?: () => void;
 }
 
+// 8 Verified iconic landmarks shown at overview zoom (< 1.6)
+const OVERVIEW_KEY_LANDMARKS = new Set([
+  'widya-puraya',
+  'gsg',
+  'student-centre',
+  'masjid-kampus',
+  'muladi-dome',
+  'stadion',
+  'waduk',
+  'rsnd',
+]);
+
+// Trees placed strictly within real OSM green polygons (Taman Widya Puraya, Taman Rusa, etc.)
+const VERIFIED_GREEN_TREES = [
+  [770, 270], [790, 280], [810, 260], [830, 275], // Taman Widya Puraya
+  [935, 760], [960, 775],                         // Taman Rusa
+  [1580, 790], [1610, 810],                       // Taman Stadion
+  [1150, 710], [1180, 720],                       // Taman Agro FPP
+  [570, 430], [590, 450],                         // Selasar Hijau FH/FISIP
+  [415, 390], [430, 375],                         // Selasar Hijau SV
+];
+
 export function FullScreenCampusMap({
   selectedFacultyId,
   onSelectFaculty,
@@ -35,7 +58,7 @@ export function FullScreenCampusMap({
 }: FullScreenCampusMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Synchronize panel open state (supports both isPanelOpen and isForegroundOpen)
+  // Synchronize panel open state
   const panelOpen = isPanelOpen !== undefined ? isPanelOpen : isForegroundOpen;
 
   // Map virtual dimensions
@@ -89,64 +112,90 @@ export function FullScreenCampusMap({
     return campusFacultyLocations.find((loc) => loc.id === selectedFacultyId) || null;
   }, [selectedFacultyId]);
 
-  // Dynamic Camera Math: Left-offset when panel is open, perfect center when collapsed
+  // Dynamic Camera Math: Fits 12 units on overview without clipping, zooms into selected unit
   const recalculateCamera = useCallback(() => {
-    if (!selectedLocation) {
-      // Campus full overview
-      setZoom(1);
-      setPan({ x: 0, y: 0 });
-      return;
-    }
-
     const vw = viewportSize.width;
     const vh = viewportSize.height;
+    const isDesktop = vw >= 640;
 
     // Base scale factor from virtual map (2000x1400) to viewport
     const baseScale = Math.max(vw / MAP_WIDTH, vh / MAP_HEIGHT);
+
+    if (!selectedLocation) {
+      // -----------------------------------------------------------------------
+      // OVERVIEW CAMERA: Bounding box fit calculation for 12 units (x: 445-1440, y: 210-685)
+      // -----------------------------------------------------------------------
+      const bboxMinX = 380;
+      const bboxMaxX = 1520;
+      const bboxMinY = 160;
+      const bboxMaxY = 740;
+      const bboxWidth = bboxMaxX - bboxMinX; // 1140
+      const bboxHeight = bboxMaxY - bboxMinY; // 580
+      const bboxCenterX = (bboxMinX + bboxMaxX) / 2; // 950
+      const bboxCenterY = (bboxMinY + bboxMaxY) / 2; // 450
+
+      let availW = vw * 0.92;
+      let availH = vh * 0.88;
+      let deltaScreenX = 0;
+      let deltaScreenY = 0;
+
+      if (panelOpen) {
+        if (isDesktop) {
+          let panelWidth = 580;
+          if (vw >= 1280) panelWidth = 720;
+          else if (vw >= 1024) panelWidth = 660;
+          panelWidth = Math.min(panelWidth, vw * 0.55);
+          availW = (vw - panelWidth) * 0.92;
+          deltaScreenX = -panelWidth / 2;
+        } else {
+          // Mobile sheet docked at bottom
+          const sheetHeight = Math.min(vh * 0.52, 420);
+          availH = (vh - sheetHeight) * 0.90;
+          deltaScreenY = -sheetHeight / 2;
+        }
+      }
+
+      const scaleX = availW / (bboxWidth * baseScale);
+      const scaleY = availH / (bboxHeight * baseScale);
+      const overviewZoom = Math.min(scaleX, scaleY, 1.05);
+
+      const totalScale = baseScale * overviewZoom;
+      const targetPanX = deltaScreenX - (bboxCenterX - MAP_WIDTH / 2) * totalScale;
+      const targetPanY = deltaScreenY - (bboxCenterY - MAP_HEIGHT / 2) * totalScale;
+
+      setZoom(overviewZoom);
+      setPan({ x: targetPanX, y: targetPanY });
+      return;
+    }
+
+    // -------------------------------------------------------------------------
+    // DETAIL CAMERA: Zoomed into selected faculty centroid
+    // -------------------------------------------------------------------------
     const targetZoom = 2.4;
     const totalScale = baseScale * targetZoom;
-
     const targetX = selectedLocation.mapPosition.x;
     const targetY = selectedLocation.mapPosition.y;
     const mapCenterX = MAP_WIDTH / 2; // 1000
     const mapCenterY = MAP_HEIGHT / 2; // 700
-
-    const isDesktop = vw >= 640;
 
     let deltaScreenX = 0;
     let deltaScreenY = 0;
 
     if (panelOpen) {
       if (isDesktop) {
-        // Desktop: Panel is docked on the right side
-        // Panel width scales with breakpoints: sm:580px, lg:660px, xl:720px
         let panelWidth = 580;
         if (vw >= 1280) panelWidth = 720;
         else if (vw >= 1024) panelWidth = 660;
-
         panelWidth = Math.min(panelWidth, vw * 0.55);
-
-        // Target center of unobstructed map area: (vw - panelWidth) / 2
-        // Offset from viewport center (vw / 2):
-        // (vw - panelWidth) / 2 - vw / 2 = -panelWidth / 2
         deltaScreenX = -panelWidth / 2;
-        deltaScreenY = 0;
       } else {
-        // Mobile (< 640px): Panel is docked at bottom as a bottom sheet
         const panelHeight = Math.min(vh * 0.52, 420);
         const headerHeight = 60;
         deltaScreenX = 0;
         deltaScreenY = -(panelHeight - headerHeight) / 2;
       }
-    } else {
-      // Panel is collapsed ("Peta Penuh" mode):
-      // Building smoothly glides to the EXACT CENTER of the entire screen!
-      deltaScreenX = 0;
-      deltaScreenY = 0;
     }
 
-    // Mathematical formula to place map coordinate (targetX, targetY)
-    // at screen offset (deltaScreenX, deltaScreenY) relative to viewport center:
     const targetPanX = deltaScreenX - (targetX - mapCenterX) * totalScale;
     const targetPanY = deltaScreenY - (targetY - mapCenterY) * totalScale;
 
@@ -161,7 +210,7 @@ export function FullScreenCampusMap({
     return () => cancelAnimationFrame(animId);
   }, [recalculateCamera]);
 
-  // Native wheel zoom listener with { passive: false } to properly allow e.preventDefault()
+  // Native wheel zoom listener
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -169,7 +218,7 @@ export function FullScreenCampusMap({
     const onNativeWheel = (e: WheelEvent) => {
       e.preventDefault();
       const zoomDelta = e.deltaY > 0 ? -0.15 : 0.15;
-      setZoom((prev) => Math.min(Math.max(0.65, prev + zoomDelta), 3.2));
+      setZoom((prev) => Math.min(Math.max(0.45, prev + zoomDelta), 3.4));
     };
 
     container.addEventListener('wheel', onNativeWheel, { passive: false });
@@ -178,7 +227,7 @@ export function FullScreenCampusMap({
     };
   }, []);
 
-  // Keyboard zoom shortcuts (+ / -)
+  // Keyboard zoom shortcuts (+ / - / arrow keys)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       const target = e.target as HTMLElement | null;
@@ -193,10 +242,10 @@ export function FullScreenCampusMap({
 
       if (e.key === '+' || e.key === '=' || e.key === 'Add') {
         e.preventDefault();
-        setZoom((prev) => Math.min(prev + 0.35, 3.2));
+        setZoom((prev) => Math.min(prev + 0.35, 3.4));
       } else if (e.key === '-' || e.key === '_' || e.key === 'Subtract') {
         e.preventDefault();
-        setZoom((prev) => Math.max(prev - 0.35, 0.65));
+        setZoom((prev) => Math.max(prev - 0.35, 0.45));
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         setPan((prev) => ({ ...prev, x: prev.x + 60 }));
@@ -251,7 +300,7 @@ export function FullScreenCampusMap({
       const coords = Array.from(pointersRef.current.values());
       const currentDist = Math.hypot(coords[1].x - coords[0].x, coords[1].y - coords[0].y);
       const ratio = currentDist / pinchStartDistRef.current;
-      const nextZoom = Math.min(3.2, Math.max(0.65, pinchStartZoomRef.current * ratio));
+      const nextZoom = Math.min(3.4, Math.max(0.45, pinchStartZoomRef.current * ratio));
       setZoom(nextZoom);
       hasMovedRef.current = true;
     } else if (pointersRef.current.size === 1 && isDragging) {
@@ -288,12 +337,11 @@ export function FullScreenCampusMap({
     }
   };
 
-  const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.35, 3.2));
-  const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.35, 0.65));
+  const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.35, 3.4));
+  const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.35, 0.45));
   const handleResetOverview = () => {
-    setZoom(1);
-    setPan({ x: 0, y: 0 });
     onSelectFaculty?.(null);
+    recalculateCamera();
   };
 
   const cameraTransform = useMemo(() => {
@@ -311,7 +359,7 @@ export function FullScreenCampusMap({
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
     >
-      {/* 1. TOP-LEFT HUD: VIRTUAL CAMPUS COMPASS & CONTROLS (Positioned cleanly below header toolbar) */}
+      {/* 1. TOP-LEFT HUD: VIRTUAL CAMPUS COMPASS & CONTROLS */}
       <div
         className="absolute left-3 sm:left-4 z-20 flex flex-wrap items-center gap-2 pointer-events-auto"
         style={{ top: 'calc(var(--navbar-h, 56px) + 72px)' }}
@@ -326,7 +374,7 @@ export function FullScreenCampusMap({
                 UNDIP MAP
               </span>
               <span className="text-[9px] text-amber-300 font-bold bg-[#78350F] px-1.5 py-0.2 rounded border border-[#F59E0B]/60">
-                16-BIT
+                16-BIT GIS
               </span>
             </div>
             <p className="text-[11px] text-amber-100 font-medium truncate max-w-[140px] sm:max-w-[200px]">
@@ -370,57 +418,55 @@ export function FullScreenCampusMap({
         </div>
       </div>
 
-      {/* 2. BOTTOM HUD: QUICK FACULTY EXPLORATION SELECTOR DOCK WITH EDGE FADES (Shown in Full-Screen Map Mode) */}
+      {/* 2. BOTTOM HUD: QUICK FACULTY EXPLORATION SELECTOR DOCK */}
       {!panelOpen && (
         <div className="absolute bottom-4 inset-x-3 sm:inset-x-4 z-20 pointer-events-auto max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom-2 duration-200">
           <div className="relative">
-            {/* Left Edge Fade */}
             <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#190E08] to-transparent pointer-events-none z-10 rounded-l-2xl" />
-            {/* Right Edge Fade */}
             <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#190E08] to-transparent pointer-events-none z-10 rounded-r-2xl" />
             <div className="flex items-center gap-1.5 overflow-x-auto p-1.5 px-4 bg-[#190E08]/90 backdrop-blur-md rounded-2xl border-2 border-[#78350F] shadow-[0_6px_20px_rgba(0,0,0,0.6)] scrollbar-none">
-            <button
-              onClick={() => handleResetOverview()}
-              aria-label={`Tampilkan tinjauan seluruh kampus (${campusFacultyLocations.length} lokasi)`}
-              className={`shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] flex items-center ${
-                !selectedFacultyId
-                  ? 'bg-[#F59E0B] text-stone-900 font-black shadow-xs'
-                  : 'text-amber-200/90 hover:bg-[#78350F]/70'
-              }`}
-            >
-              Overview ({campusFacultyLocations.length})
-            </button>
-            {campusFacultyLocations.map((loc) => {
-              const isSelected = selectedFacultyId === loc.id;
-              const score = scoreMap.get(loc.id);
-              return (
-                <button
-                  key={loc.id}
-                  onClick={() => onSelectFaculty?.(loc.id)}
-                  aria-label={`Pilih fakultas ${loc.name} di peta`}
-                  className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border min-h-[44px] ${
-                    isSelected
-                      ? 'bg-[#78350F] text-[#FDE68A] border-[#F59E0B] shadow-md'
-                      : 'text-amber-100 hover:bg-[#2A150D] border-transparent'
-                  }`}
-                >
-                  <span>{loc.shortName}</span>
-                  {score && (
-                    <span
-                      className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
-                        score.tier === 'S'
-                          ? 'bg-amber-400 text-stone-950'
-                          : score.tier === 'A'
-                          ? 'bg-blue-400 text-stone-950'
-                          : 'bg-stone-700 text-amber-200'
-                      }`}
-                    >
-                      {score.tier}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+              <button
+                onClick={() => handleResetOverview()}
+                aria-label={`Tampilkan tinjauan seluruh kampus (${campusFacultyLocations.length} lokasi)`}
+                className={`shrink-0 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer min-h-[44px] flex items-center ${
+                  !selectedFacultyId
+                    ? 'bg-[#F59E0B] text-stone-900 font-black shadow-xs'
+                    : 'text-amber-200/90 hover:bg-[#78350F]/70'
+                }`}
+              >
+                Overview ({campusFacultyLocations.length})
+              </button>
+              {campusFacultyLocations.map((loc) => {
+                const isSelected = selectedFacultyId === loc.id;
+                const score = scoreMap.get(loc.id);
+                return (
+                  <button
+                    key={loc.id}
+                    onClick={() => onSelectFaculty?.(loc.id)}
+                    aria-label={`Pilih fakultas ${loc.name} di peta`}
+                    className={`shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border min-h-[44px] ${
+                      isSelected
+                        ? 'bg-[#78350F] text-[#FDE68A] border-[#F59E0B] shadow-md'
+                        : 'text-amber-100 hover:bg-[#2A150D] border-transparent'
+                    }`}
+                  >
+                    <span>{loc.shortName}</span>
+                    {score && (
+                      <span
+                        className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
+                          score.tier === 'S'
+                            ? 'bg-amber-400 text-stone-950'
+                            : score.tier === 'A'
+                            ? 'bg-blue-400 text-stone-950'
+                            : 'bg-stone-700 text-amber-200'
+                        }`}
+                      >
+                        {score.tier}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -471,7 +517,7 @@ export function FullScreenCampusMap({
           {/* CONTINUOUS CAMPUS ROAD NETWORK (REAL OSM GEOMETRY) */}
           <CampusRoadNetwork />
 
-          {/* WADUK PENDIDIKAN DIPONEGORO (REAL OSM WATER RESERVOIR) */}
+          {/* REAL OSM WATER FEATURE: WADUK PENDIDIKAN DIPONEGORO */}
           <g id="waduk-pendidikan-undip">
             <polygon
               points="1632.8,625.6 1611.9,527.0 1574.5,540.5 1560.8,547.9 1545.6,550.3 1533.3,549.4 1519.0,552.0 1516.6,556.6 1516.4,562.1 1513.9,567.9 1509.9,571.8 1502.3,571.5 1496.2,570.6 1492.3,579.0 1486.0,592.8 1485.9,600.5 1490.1,629.3 1489.9,657.3 1484.1,675.8 1482.4,684.5 1473.0,687.4 1446.9,691.8 1455.0,697.1 1467.8,705.5 1488.0,715.2 1500.7,717.6 1534.8,715.0 1535.7,716.1 1554.4,702.8 1570.7,681.1 1565.8,659.4 1578.0,638.7 1632.8,625.6"
@@ -480,8 +526,8 @@ export function FullScreenCampusMap({
               strokeWidth="4"
               opacity="0.85"
             />
-            <rect x="1465" y="605" width="145" height="18" fill="#190E08" rx="4" stroke="#0284C7" strokeWidth="1" />
-            <text x="1537" y="618" fill="#BAE6FD" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
+            <rect x="1510" y="625" width="145" height="18" fill="#190E08" rx="4" stroke="#0284C7" strokeWidth="1" />
+            <text x="1582" y="638" fill="#BAE6FD" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
               Waduk Pendidikan Undip
             </text>
           </g>
@@ -496,14 +542,7 @@ export function FullScreenCampusMap({
               strokeWidth="2"
               opacity="0.85"
             />
-            {/* Lapangan Basket GKB FT */}
-            <polygon
-              points="933.6,428.2 950.3,436.6 937.4,463.1 920.3,454.3 933.6,428.2"
-              fill="#B45309"
-              stroke="#F59E0B"
-              strokeWidth="1.5"
-            />
-            {/* Lapangan Futsal & Stadion Area */}
+            {/* Taman Stadion Undip */}
             <polygon
               points="1599.8,821.9 1604.5,832.0 1597.7,835.2 1593.2,825.4 1562.5,839.5 1551.4,815.4 1540.6,792.0 1609.0,760.5 1630.7,807.6 1599.8,821.9"
               fill="#15803D"
@@ -513,203 +552,35 @@ export function FullScreenCampusMap({
             />
           </g>
 
-          {/* PEDESTRIAN PLAZAS & LAPANGAN WIDYA PURAYA */}
-          <rect x="910" y="420" width="180" height="120" fill="url(#fullCampusPaving)" stroke="#78350F" strokeWidth="2" rx="4" />
-          <circle cx="1000" cy="480" r="38" fill="#166534" stroke="#14532D" strokeWidth="3" />
+          {/* REAL BUILDINGS LAYER: DRAWN FROM REAL OSM POLYGONS */}
+          <CampusBuildingsLayer
+            selectedFacultyId={selectedFacultyId}
+            hoveredFacultyId={hoveredFacultyId}
+            onSelectFaculty={onSelectFaculty}
+            onHoverFaculty={setHoveredFacultyId}
+            zoom={zoom}
+          />
 
-          {/* 1. PINTU GERBANG UTAMA TEMBALANG */}
-          <g id="gerbang-tembalang" transform="translate(885, 235)">
-            <rect x="20" y="30" width="18" height="40" fill="#78350F" />
-            <rect x="102" y="30" width="18" height="40" fill="#78350F" />
-            <polygon points="10,30 70,10 130,30" fill="#B45309" />
-            <rect x="38" y="24" width="64" height="6" fill="#F59E0B" />
-            <text x="70" y="84" fill="#FDE68A" fontSize="11" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Gerbang Utama Tembalang
-            </text>
-          </g>
-
-          {/* 2. UPT LABORATORIUM TERPADU */}
-          <g id="landmark-upt-lab" transform="translate(820, 290)">
-            <rect x="10" y="15" width="105" height="32" fill="#1E293B" stroke="#0284C7" strokeWidth="2" rx="4" />
-            <rect x="15" y="19" width="24" height="10" fill="#38BDF8" opacity="0.8" />
-            <rect x="45" y="19" width="24" height="10" fill="#38BDF8" opacity="0.8" />
-            <rect x="10" y="50" width="105" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="62" y="62" fill="#93C5FD" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              UPT Lab Terpadu
-            </text>
-          </g>
-
-          {/* 3. GEDUNG PMB & TREK JOGGING LAMA */}
-          <g id="landmark-pmb" transform="translate(940, 290)">
-            <ellipse cx="55" cy="24" rx="45" ry="18" fill="none" stroke="#DC2626" strokeWidth="4" strokeDasharray="5 3" />
-            <rect x="20" y="12" width="70" height="24" fill="#FEF3C7" stroke="#B45309" strokeWidth="1.5" rx="3" />
-            <rect x="12" y="46" width="86" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="55" y="58" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              PMB & Jogging Track
-            </text>
-          </g>
-
-          {/* 4. GSG PROF. SOEDARTO */}
-          <g id="landmark-gsg" transform="translate(800, 395)">
-            <polygon points="35,28 85,5 135,28" fill="#78350F" />
-            <polygon points="15,48 85,22 155,48" fill="#9A3412" />
-            <rect x="25" y="48" width="120" height="30" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" rx="2" />
-            <rect x="15" y="82" width="140" height="18" fill="#190E08" rx="4" stroke="#F59E0B" strokeWidth="1" />
-            <text x="85" y="95" fill="#FDE68A" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              GSG Prof. Soedarto
-            </text>
-          </g>
-
-          {/* 5. BUNDARAN PERTAMA */}
-          <g id="bundaran-pertama" transform="translate(905, 513)">
-            <circle cx="40" cy="40" r="28" fill="#15803D" stroke="#166534" strokeWidth="3" />
-            <circle cx="40" cy="40" r="14" fill="#FDE68A" opacity="0.8" />
-            <text x="40" y="78" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Bundaran Pertama
-            </text>
-          </g>
-
-          {/* 6. ART CENTRE UNDIP */}
-          <g id="landmark-art-centre" transform="translate(820, 560)">
-            <polygon points="10,24 45,8 80,24" fill="#9A3412" />
-            <rect x="15" y="24" width="60" height="22" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" rx="2" />
-            <rect x="5" y="50" width="80" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="45" y="62" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Art Centre Undip
-            </text>
-          </g>
-
-          {/* 7. STUDENT CENTRE & MENARA UNDIP TOWER */}
-          <g id="landmark-sc-tower" transform="translate(730, 640)">
-            {/* UNDIP Tower high-rise */}
-            <rect x="65" y="5" width="38" height="65" fill="#0F172A" stroke="#38BDF8" strokeWidth="2" rx="2" />
-            <rect x="70" y="10" width="28" height="8" fill="#38BDF8" opacity="0.75" />
-            <rect x="70" y="22" width="28" height="8" fill="#38BDF8" opacity="0.75" />
-            <rect x="70" y="34" width="28" height="8" fill="#38BDF8" opacity="0.75" />
-            {/* Student Centre */}
-            <rect x="10" y="32" width="50" height="38" fill="#451A03" stroke="#F59E0B" strokeWidth="1.5" rx="3" />
-            <polygon points="10,32 35,18 60,32" fill="#D97706" />
-            <rect x="5" y="74" width="105" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="57" y="86" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              SC & Menara Undip
-            </text>
-          </g>
-
-          {/* 8. TAMAN INSPIRASI */}
-          <g id="landmark-taman-inspirasi" transform="translate(880, 630)">
-            <ellipse cx="45" cy="24" rx="35" ry="16" fill="#15803D" stroke="#166534" strokeWidth="2" />
-            <rect x="35" y="14" width="20" height="10" fill="#FEF3C7" stroke="#78350F" strokeWidth="1" />
-            <text x="45" y="48" fill="#86EFAC" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Taman Inspirasi
-            </text>
-          </g>
-
-          {/* 9. BUNDARAN PATUNG KUDA PANGERAN DIPONEGORO (WIDYA PURAYA) */}
-          <g id="bundaran-kuda" transform="translate(975, 455)">
-            <rect x="20" y="42" width="16" height="10" fill="#E2E8F0" />
-            <path d="M 26 28 L 34 22 L 32 32 L 36 38 L 24 40 L 21 34 Z" fill="#FFFFFF" />
-            <circle cx="29" cy="20" r="2.5" fill="#FFFFFF" />
-            <text x="28" y="60" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Patung Kuda Undip
-            </text>
-          </g>
-
-          {/* 10. GEDUNG REKTORAT (WIDYA PURAYA) */}
-          <g
-            id="landmark-rektorat"
-            transform="translate(910, 410)"
-            className="cursor-pointer"
-            onClick={() => onSelectFaculty?.(null)}
-          >
-            <FacultyBuildingIllustration facultyId="rektorat" />
-            <rect x="20" y="105" width="160" height="22" fill="#190E08" rx="6" stroke="#F59E0B" strokeWidth="1" />
-            <text x="100" y="120" fill="#FDE68A" fontSize="12" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Gedung Rektorat (Widya Puraya)
-            </text>
-          </g>
-
-          {/* 11. GEDUNG TEKNIK GEOLOGI */}
-          <g id="landmark-geologi" transform="translate(968, 619)">
-            <rect x="10" y="10" width="75" height="26" fill="#78350F" stroke="#F59E0B" strokeWidth="1" rx="4" />
-            <text x="47" y="26" fill="#FEF3C7" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Teknik Geologi
-            </text>
-          </g>
-
-          {/* 12. TEKNIK ELEKTRO */}
-          <g id="landmark-elektro" transform="translate(975, 700)">
-            <rect x="10" y="10" width="90" height="30" fill="#1E293B" stroke="#F59E0B" strokeWidth="1" rx="4" />
-            <polygon points="45,10 55,-3 65,10" fill="#3B82F6" />
-            <text x="55" y="26" fill="#FDE68A" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Teknik Elektro
-            </text>
-          </g>
-
-          {/* 13. KOMPLEKS ARSITEKTUR, TEKNIK SIPIL, & PWK */}
-          <g id="landmark-sipil-arsitektur-pwk" transform="translate(840, 790)">
-            <rect x="10" y="10" width="125" height="35" fill="#1E293B" stroke="#94A3B8" strokeWidth="1.5" rx="4" />
-            <polygon points="10,10 72,-3 135,10" fill="#475569" />
-            <rect x="10" y="48" width="125" height="16" fill="#190E08" rx="4" stroke="#78350F" strokeWidth="1" />
-            <text x="72" y="60" fill="#94A3B8" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Arsitektur • Sipil • PWK
-            </text>
-          </g>
-
-          {/* 14. TEKNIK KOMPUTER, GEODESI, & PERKAPALAN */}
-          <g id="landmark-komputer-geodesi" transform="translate(980, 750)">
-            <rect x="10" y="10" width="105" height="32" fill="#0F172A" stroke="#38BDF8" strokeWidth="1" rx="4" />
-            <text x="62" y="24" fill="#38BDF8" fontSize="8.5" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Teknik Komputer
-            </text>
-            <text x="62" y="36" fill="#94A3B8" fontSize="7.5" textAnchor="middle" fontFamily="monospace">
-              Geodesi • Perkapalan
-            </text>
-          </g>
-
-          {/* 15. PERTIGAAN TIGA ARAH TIMUR */}
-          <g id="pertigaan-timur" transform="translate(1068, 516)">
-            <circle cx="20" cy="20" r="13" fill="#78350F" stroke="#F59E0B" strokeWidth="2" />
-            <text x="20" y="42" fill="#FDE68A" fontSize="8.5" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Pertigaan Timur
-            </text>
-          </g>
-
-          {/* 16. KOMPLEKS MESIN, INDUSTRI, LINGKUNGAN, & KIMIA */}
-          <g id="landmark-mesin-industri-kimia" transform="translate(910, 910)">
-            <rect x="10" y="10" width="125" height="36" fill="#334155" stroke="#94A3B8" strokeWidth="1" rx="4" />
-            <text x="72" y="26" fill="#FEF3C7" fontSize="9" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Mesin • Industri
-            </text>
-            <text x="72" y="39" fill="#94A3B8" fontSize="8" textAnchor="middle" fontFamily="monospace">
-              Lingkungan • Kimia
-            </text>
-          </g>
-
-          {/* 17. RUMAH SAKIT NASIONAL DIPONEGORO (RSND) */}
-          <g id="landmark-rsnd" transform="translate(1600, 630)">
-            <rect x="10" y="15" width="115" height="46" fill="#F8FAFC" stroke="#047857" strokeWidth="2.5" rx="6" />
-            <rect x="55" y="22" width="22" height="22" fill="#047857" rx="3" />
-            <polygon points="64,25 68,25 68,41 64,41" fill="#FFFFFF" />
-            <polygon points="58,31 74,31 74,35 58,35" fill="#FFFFFF" />
-            <rect x="5" y="66" width="125" height="17" fill="#190E08" rx="5" stroke="#047857" strokeWidth="1" />
-            <text x="67" y="79" fill="#A7F3D0" fontSize="10" fontWeight="bold" textAnchor="middle" fontFamily="monospace">
-              Kompleks RSND Undip
-            </text>
-          </g>
-
-          {/* 12 VERIFIED FACULTY SITES (Normal Map Markers) */}
+          {/* 12 FACULTY CLUSTER LABELS (ONE LABEL AT CLUSTER CENTROID, ZERO OVERLAP) */}
           {campusFacultyLocations.map((loc) => {
             const isSelected = selectedFacultyId === loc.id;
             const isHovered = hoveredFacultyId === loc.id;
             const score = scoreMap.get(loc.id);
 
-            const posX = loc.mapPosition.x - 90;
-            const posY = loc.mapPosition.y - 60;
+            const offsetX = loc.labelOffset?.x || 0;
+            const offsetY = loc.labelOffset?.y || 0;
+            const shortTitle = loc.shortName;
+            const hasScore = !!score;
+            const isApprox = loc.source === 'approx';
 
-            // When this faculty is selected in zoom mode, we render the large hero illustration below instead
-            if (isSelected && zoom >= 2.0) {
-              return null;
-            }
+            const pillWidth = hasScore ? (shortTitle.length > 3 ? 88 : 78) : (shortTitle.length > 3 ? 66 : 54);
+            const pillHeight = 24;
+            const textX = hasScore ? 28 : 10;
+            const counterScale = Math.min(1.4, Math.max(0.9, 1.15 / zoom));
+
+            // Centroid ground position
+            const posX = loc.mapPosition.x;
+            const posY = loc.mapPosition.y;
 
             return (
               <g
@@ -718,13 +589,9 @@ export function FullScreenCampusMap({
                 tabIndex={0}
                 role="button"
                 data-no-drag="true"
-                aria-label={`Fakultas ${loc.name} (${loc.shortName}) - Tekan Enter untuk membuka daftar program studi`}
+                aria-label={`Fakultas ${loc.name} (${loc.shortName}) - Klik untuk melihat profil fakultas`}
                 transform={`translate(${posX}, ${posY})`}
-                className="cursor-pointer transition-transform duration-300 focus:outline-hidden"
-                onPointerDown={(e) => {
-                  e.stopPropagation();
-                  hasMovedRef.current = false;
-                }}
+                className="cursor-pointer focus:outline-hidden"
                 onClick={(e) => {
                   e.stopPropagation();
                   onSelectFaculty?.(loc.id);
@@ -739,129 +606,159 @@ export function FullScreenCampusMap({
                 onMouseEnter={() => setHoveredFacultyId(loc.id)}
                 onMouseLeave={() => setHoveredFacultyId(null)}
               >
-                {/* Transparent Hit Area for Touch & Mouse precision */}
-                <rect
-                  x="0"
-                  y="0"
-                  width="180"
-                  height="140"
-                  fill="transparent"
-                  pointerEvents="all"
-                  className="cursor-pointer"
-                />
+                {/* Hit area */}
+                <circle cx="0" cy="0" r="30" fill="transparent" pointerEvents="all" />
 
+                {/* Pulse ring when selected */}
                 {isSelected && (
-                  <circle cx="90" cy="60" r="95" fill="#F59E0B" opacity="0.25" className="animate-pulse motion-reduce:animate-none" />
+                  <circle cx="0" cy="0" r="45" fill="#F59E0B" opacity="0.3" className="animate-pulse motion-reduce:animate-none" />
                 )}
 
-                <FacultyBuildingIllustration facultyId={loc.id} isHighlighted={isSelected || isHovered} mode="overview" />
+                {/* Center ground pin marker */}
+                <circle
+                  cx="0"
+                  cy="0"
+                  r={isSelected ? 6 : 4.5}
+                  fill={isSelected ? '#F59E0B' : '#FEF3C7'}
+                  stroke="#78350F"
+                  strokeWidth="2"
+                />
 
-                {/* Ground Marker Label: badge first, compact width, counter-scaled on phones */}
-                {(() => {
-                  const offsetX = loc.labelOffset?.x || 0;
-                  const offsetY = loc.labelOffset?.y || 0;
-                  const shortTitle = loc.shortName;
-                  const hasScore = !!score;
-                  const textX = hasScore ? 28 : 10;
-                  const pillWidth = hasScore ? (shortTitle.length > 3 ? 88 : 78) : (shortTitle.length > 3 ? 66 : 54);
-                  const pillHeight = 24;
-                  const counterScale = Math.min(1.6, Math.max(1, 1.25 / zoom));
+                {/* Leader line if label has offset */}
+                {(offsetX !== 0 || offsetY !== 0) && (
+                  <line
+                    x1="0"
+                    y1="0"
+                    x2={offsetX}
+                    y2={18 + offsetY}
+                    stroke="#F59E0B"
+                    strokeWidth="1.5"
+                    strokeDasharray="2 2"
+                  />
+                )}
 
-                  return (
-                    <g
-                      transform={`translate(${10 + offsetX}, ${105 + offsetY}) scale(${counterScale})`}
-                      style={{ transformOrigin: '0 0' }}
-                    >
+                {/* Label Box */}
+                <g
+                  transform={`translate(${-pillWidth / 2 + offsetX}, ${18 + offsetY}) scale(${counterScale})`}
+                  style={{ transformOrigin: `${pillWidth / 2}px 0px` }}
+                >
+                  <rect
+                    x="0"
+                    y="0"
+                    width={pillWidth}
+                    height={pillHeight}
+                    rx="6"
+                    fill={isSelected ? '#78350F' : isHovered ? '#2A150D' : '#190E08'}
+                    stroke={isSelected ? '#F59E0B' : isHovered ? '#FDE68A' : isApprox ? '#D97706' : '#78350F'}
+                    strokeWidth={isSelected ? '2' : '1'}
+                    strokeDasharray={isApprox ? '3 2' : undefined}
+                    opacity="0.95"
+                  />
+
+                  {score && (
+                    <g transform="translate(3, 2.5)">
                       <rect
                         x="0"
                         y="0"
-                        width={pillWidth}
-                        height={pillHeight}
-                        rx="6"
-                        fill={isSelected ? '#78350F' : '#190E08'}
-                        stroke={isSelected ? '#F59E0B' : '#78350F'}
-                        strokeWidth={isSelected ? '2' : '1'}
-                        opacity="0.95"
+                        width="19"
+                        height="19"
+                        rx="4"
+                        fill={
+                          score.tier === 'S'
+                            ? '#F59E0B'
+                            : score.tier === 'A'
+                            ? '#3B82F6'
+                            : score.tier === 'B'
+                            ? '#F97316'
+                            : '#78350F'
+                        }
                       />
-
-                      {score && (
-                        <g transform="translate(3, 2.5)">
-                          <rect
-                            x="0"
-                            y="0"
-                            width="19"
-                            height="19"
-                            rx="4"
-                            fill={
-                              score.tier === 'S'
-                                ? '#F59E0B'
-                                : score.tier === 'A'
-                                ? '#3B82F6'
-                                : score.tier === 'B'
-                                ? '#F97316'
-                                : '#78350F'
-                            }
-                          />
-                          <text
-                            x="9.5"
-                            y="13.5"
-                            fill="#FFFFFF"
-                            fontSize="11"
-                            fontWeight="black"
-                            textAnchor="middle"
-                            fontFamily="monospace"
-                          >
-                            {score.tier}
-                          </text>
-                        </g>
-                      )}
-
                       <text
-                        x={textX}
-                        y="16"
-                        fill={isSelected ? '#FFFBEB' : '#FDE68A'}
-                        fontSize="11.5"
-                        fontWeight="bold"
+                        x="9.5"
+                        y="13.5"
+                        fill="#FFFFFF"
+                        fontSize="11"
+                        fontWeight="black"
+                        textAnchor="middle"
                         fontFamily="monospace"
                       >
-                        {shortTitle}
+                        {score.tier}
                       </text>
                     </g>
-                  );
-                })()}
+                  )}
+
+                  <text
+                    x={textX}
+                    y="16"
+                    fill={isSelected ? '#FFFBEB' : '#FDE68A'}
+                    fontSize="11.5"
+                    fontWeight="bold"
+                    fontFamily="monospace"
+                  >
+                    {shortTitle}
+                  </text>
+                </g>
               </g>
             );
           })}
 
-          {/* ============================================================== */}
-          {/* REQUIREMENT 5: ZOOMED-IN HERO BUILDING VISUALIZATION           */}
-          {/* Prominent, large, highly-detailed 16-bit building illustration */}
-          {/* ============================================================== */}
-          {selectedLocation && zoom >= 2.0 && (
-            <g
-              id={`hero-${selectedLocation.id}`}
-              transform={`translate(${selectedLocation.mapPosition.x - 230}, ${selectedLocation.mapPosition.y - 170})`}
-              className="transition-all duration-500 ease-out animate-fade-in"
-            >
-              {/* Highlight Aura */}
-              <circle cx="230" cy="150" r="190" fill="#F59E0B" opacity="0.12" className="animate-pulse motion-reduce:animate-none" />
+          {/* LANDMARKS LABELS (Decluttered: 8 key landmarks at overview, rest at zoom >= 1.6) */}
+          {campusLandmarks.map((lm) => {
+            const isOverviewKey = OVERVIEW_KEY_LANDMARKS.has(lm.id);
+            const isApprox = lm.source === 'approx';
 
-              {/* The Majestic 16-Bit Hero Building Recreation */}
-              <foreignObject x="0" y="0" width="460" height="300">
-                <FacultyBuildingIllustration facultyId={selectedLocation.id} mode="hero" isHighlighted />
-              </foreignObject>
-            </g>
-          )}
+            // Hide non-key landmarks at overview zoom
+            if (zoom < 1.6 && !isOverviewKey) {
+              return null;
+            }
 
-          {/* CAMPUS TREES & FORESTRY (Optimized via SVG <use>) */}
+            const posX = lm.mapPosition.x;
+            const posY = lm.mapPosition.y;
+            const labelWidth = Math.min(130, lm.name.length * 6.5 + 16);
+
+            return (
+              <g
+                key={lm.id}
+                id={`lm-marker-${lm.id}`}
+                transform={`translate(${posX}, ${posY})`}
+                className="select-none pointer-events-none"
+              >
+                {/* Landmark Pin */}
+                <circle cx="0" cy="0" r="3.5" fill={isApprox ? '#F59E0B' : '#38BDF8'} stroke="#190E08" strokeWidth="1.5" />
+
+                {/* Landmark Name Box */}
+                <g transform={`translate(${-labelWidth / 2}, 10)`}>
+                  <rect
+                    x="0"
+                    y="0"
+                    width={labelWidth}
+                    height="18"
+                    rx="4"
+                    fill="#190E08"
+                    stroke={isApprox ? '#B45309' : '#0284C7'}
+                    strokeWidth="1"
+                    strokeDasharray={isApprox ? '3 2' : undefined}
+                    opacity="0.9"
+                  />
+                  <text
+                    x={labelWidth / 2}
+                    y="12.5"
+                    fill={isApprox ? '#FDE68A' : '#BAE6FD'}
+                    fontSize="8.5"
+                    fontWeight="bold"
+                    textAnchor="middle"
+                    fontFamily="monospace"
+                  >
+                    {lm.name.length > 20 ? lm.name.slice(0, 19) + '…' : lm.name}
+                  </text>
+                </g>
+              </g>
+            );
+          })}
+
+          {/* TREES PLACED STRICTLY WITHIN VERIFIED GREEN POLYGONS */}
           <g id="campus-trees">
-            {[
-              [520, 240], [580, 260], [640, 220], [860, 240], [920, 200],
-              [340, 520], [320, 600], [330, 780], [380, 880], [420, 1000],
-              [780, 780], [840, 820], [740, 920], [780, 1020], [860, 1140],
-              [1100, 420], [1160, 360], [1480, 340], [1520, 460], [1620, 640],
-              [1480, 760], [1560, 860], [1400, 980], [1300, 1080], [1160, 1180],
-            ].map(([tx, ty], i) => (
+            {VERIFIED_GREEN_TREES.map(([tx, ty], i) => (
               <use key={i} href="#pixel-tree" x={tx} y={ty} />
             ))}
           </g>
@@ -871,13 +768,11 @@ export function FullScreenCampusMap({
       {/* 4. Mini Legend, North Arrow & Simplified Campus Disclaimer */}
       <div className="absolute bottom-4 left-3 z-10 hidden sm:flex flex-col gap-1.5 bg-[#190E08]/90 backdrop-blur-md p-2.5 rounded-2xl border border-[#78350F] shadow-lg text-[10px] pointer-events-none max-w-xs">
         <div className="flex items-center gap-3">
-          {/* North Arrow */}
           <div className="flex items-center gap-1 bg-[#24130C] px-2 py-0.5 rounded border border-[#78350F] text-[#FDE68A]">
             <span className="font-pixel text-[#F59E0B] text-[9px] font-bold">▲</span>
             <span className="font-pixel text-white text-[9px] font-bold">U</span>
             <span className="font-mono text-[9px] text-amber-200/80 ml-0.5">UTARA</span>
           </div>
-          {/* Tier Legend */}
           <div className="flex items-center gap-2 font-mono text-[10px] text-amber-100">
             <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#F59E0B]" /> S</span>
             <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-sm bg-[#3B82F6]" /> A</span>
@@ -890,7 +785,7 @@ export function FullScreenCampusMap({
         </p>
       </div>
 
-      {/* 4. FACULTY CAMPUS TOUR PANEL / BOTTOM SHEET (Prompt G Round 9) */}
+      {/* 5. FACULTY CAMPUS TOUR PANEL / BOTTOM SHEET */}
       {selectedFacultyId && (
         <FacultyMapTourSheet
           facultyId={selectedFacultyId}

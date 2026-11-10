@@ -1,12 +1,14 @@
 // =============================================================================
 // AUTOMATICALLY GENERATED FROM REAL GEOMETRY BY scripts/build-map-data.ts
 // DO NOT EDIT DIRECTLY. Source: OpenStreetMap (© OpenStreetMap contributors)
-// Generated: 2026-11-09T19:56:06.604Z
+// Generated: 2026-11-10T06:08:37.736Z
 // =============================================================================
 
 export interface CampusBuilding {
   id: string;
+  osmId: string | null;
   name: string;
+  matchedName: string;
   facultyId?: string;
   category: 'faculty' | 'public' | 'department' | 'administrative';
   polygon: { lat: number; lng: number }[];
@@ -16,6 +18,7 @@ export interface CampusBuilding {
   levels: number;
   tags: Record<string, string>;
   source: 'osm' | 'owner' | 'approx';
+  distanceFromOwnerPointM?: number;
   style?: {
     roofType?: string;
     mainColors?: string[];
@@ -51,12 +54,15 @@ export interface CampusGreen {
 
 export interface CampusLandmark {
   id: string;
+  osmId: string | null;
   name: string;
+  matchedName: string;
   coords: { lat: number; lng: number };
   projectedCoords: { x: number; y: number };
   category: string;
   description?: string;
   source: 'osm' | 'owner' | 'approx';
+  distanceFromOwnerPointM?: number;
 }
 
 export interface CampusMapData {
@@ -79,7 +85,7 @@ export interface CampusMapData {
 }
 
 export const campusMapData: CampusMapData = {
-  "generatedAt": "2026-11-09T19:56:06.604Z",
+  "generatedAt": "2026-11-10T06:08:37.736Z",
   "attribution": "© OpenStreetMap contributors",
   "origin": {
     "lat": -7.05132,
@@ -96,7 +102,9 @@ export const campusMapData: CampusMapData = {
   "buildings": [
     {
       "id": "osm-bld-167909067",
+      "osmId": "167909067",
       "name": "Masjid Darul Hikmah",
+      "matchedName": "Masjid Darul Hikmah",
       "category": "public",
       "polygon": [
         {
@@ -172,8 +180,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693582",
+      "osmId": "313693582",
       "name": "Gedung Prof Soedarto SH",
-      "category": "public",
+      "matchedName": "Gedung Prof Soedarto SH",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.052596,
@@ -376,8 +386,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693583",
+      "osmId": "313693583",
       "name": "1. Gedung ICT Centre",
-      "category": "public",
+      "matchedName": "1. Gedung ICT Centre",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054295,
@@ -584,8 +596,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693586",
+      "osmId": "313693586",
       "name": "Undip Career Center",
-      "category": "public",
+      "matchedName": "Undip Career Center",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054051,
@@ -693,7 +707,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693587",
+      "osmId": "313693587",
       "name": "Ruang Generator",
+      "matchedName": "Ruang Generator",
       "category": "public",
       "polygon": [
         {
@@ -756,7 +772,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693588",
+      "osmId": "313693588",
       "name": "Kampus UNDIP",
+      "matchedName": "Kampus UNDIP",
       "category": "public",
       "polygon": [
         {
@@ -935,7 +953,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693590",
+      "osmId": "313693590",
       "name": "WiFi Corner",
+      "matchedName": "WiFi Corner",
       "category": "public",
       "polygon": [
         {
@@ -998,8 +1018,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693591",
+      "osmId": "313693591",
       "name": "Gedung Widya Puraya",
-      "category": "public",
+      "matchedName": "Gedung Widya Puraya",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048599,
@@ -1235,7 +1257,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693592",
+      "osmId": "313693592",
       "name": "Perpustakaan Widya Puraya",
+      "matchedName": "Perpustakaan Widya Puraya",
       "category": "public",
       "polygon": [
         {
@@ -1310,7 +1334,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693593",
+      "osmId": "313693593",
       "name": "Gedung 313693593",
+      "matchedName": "Gedung 313693593",
       "category": "public",
       "polygon": [
         {
@@ -1388,7 +1414,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693594",
+      "osmId": "313693594",
       "name": "Kantin Elektro",
+      "matchedName": "Kantin Elektro",
       "category": "public",
       "polygon": [
         {
@@ -1489,8 +1517,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313693595",
+      "osmId": "313693595",
       "name": "Training Center",
-      "category": "public",
+      "matchedName": "Training Center",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054459,
@@ -1653,7 +1683,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697399",
+      "osmId": "313697399",
       "name": "Masjid Kampus Universitas Diponegoro",
+      "matchedName": "Masjid Kampus Universitas Diponegoro",
       "category": "public",
       "polygon": [
         {
@@ -1833,8 +1865,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697406",
+      "osmId": "313697406",
       "name": "Gedung Arsitektur Undip",
-      "category": "public",
+      "matchedName": "Gedung Arsitektur Undip",
+      "facultyId": "ft",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.051018,
@@ -1935,11 +1970,31 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 291.51,
+      "style": {
+        "roofType": "flat-cantilever",
+        "mainColors": [
+          "#1E3A8A",
+          "#991B1B",
+          "#334155",
+          "#E2E8F0"
+        ],
+        "facade": "Dinding bata merah terakota dipadu kisi-kisi baja abu-abu gelap dan jendela kaca biru navy khas teknik",
+        "signatureFeatures": [
+          "Engineering Hall lantai 5",
+          "Jembatan kaca / skybridge penghubung sayap",
+          "Plaza teknik luas bertingkat",
+          "Dekat akses Jembatan Sikatak"
+        ],
+        "entranceSide": "north"
+      }
     },
     {
       "id": "osm-bld-313697407",
+      "osmId": "313697407",
       "name": "Gedung Kuliah Bersama - Fakultas Teknik",
+      "matchedName": "Gedung Kuliah Bersama - Fakultas Teknik",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -2093,6 +2148,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 292.06,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -2113,8 +2169,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697408",
+      "osmId": "313697408",
       "name": "Gedung 313697408",
-      "category": "public",
+      "matchedName": "Gedung 313697408",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048336,
@@ -2271,7 +2329,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697412",
+      "osmId": "313697412",
       "name": "Dekanat Fakultas Teknik",
+      "matchedName": "Dekanat Fakultas Teknik",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -2569,6 +2629,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 196.11,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -2589,7 +2650,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697413",
+      "osmId": "313697413",
       "name": "Gedung A - Teknik Perencanaan Wilayah dan Kota",
+      "matchedName": "Gedung A - Teknik Perencanaan Wilayah dan Kota",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -2678,6 +2741,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 220.14,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -2698,7 +2762,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697414",
+      "osmId": "313697414",
       "name": "Gedung C - Teknik Arsitektur UNDIP",
+      "matchedName": "Gedung C - Teknik Arsitektur UNDIP",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -2786,6 +2852,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 267.69,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -2806,7 +2873,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697417",
+      "osmId": "313697417",
       "name": "Gedung Teknik Arsitektur Undip",
+      "matchedName": "Gedung Teknik Arsitektur Undip",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -2934,6 +3003,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 323.43,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -2954,8 +3024,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697418",
+      "osmId": "313697418",
       "name": "Gedung 313697418",
-      "category": "public",
+      "matchedName": "Gedung 313697418",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.051277,
@@ -3059,7 +3131,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313697419",
+      "osmId": "313697419",
       "name": "Gedung Teknik Geodesi dan Perkapalan",
+      "matchedName": "Gedung Teknik Geodesi dan Perkapalan",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -3164,6 +3238,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 270.1,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -3184,8 +3259,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701937",
+      "osmId": "313701937",
       "name": "BEM FT UNDIP",
-      "category": "public",
+      "matchedName": "BEM FT UNDIP",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.052044,
@@ -3249,7 +3326,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701939",
+      "osmId": "313701939",
       "name": "Gedung B - Teknik Sipil Undip",
+      "matchedName": "Gedung B - Teknik Sipil Undip",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -3369,6 +3448,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 119.49,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -3389,7 +3469,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701940",
+      "osmId": "313701940",
       "name": "Gedung E - Teknik Sipil Undip",
+      "matchedName": "Gedung E - Teknik Sipil Undip",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -3498,6 +3580,7 @@ export const campusMapData: CampusMapData = {
         "name": "Gedung E - Teknik Sipil Undip"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 149.08,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -3518,7 +3601,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701948",
+      "osmId": "313701948",
       "name": "Gedung 313701948",
+      "matchedName": "Gedung 313701948",
       "category": "public",
       "polygon": [
         {
@@ -3580,9 +3665,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701949",
-      "name": "Gedung Fakultas Ekonomika dan Bisnis",
-      "facultyId": "feb",
-      "category": "faculty",
+      "osmId": "313701949",
+      "name": "Gedung 313701949",
+      "matchedName": "Gedung 313701949",
+      "category": "public",
       "polygon": [
         {
           "lat": -7.052114,
@@ -3671,28 +3757,13 @@ export const campusMapData: CampusMapData = {
       "tags": {
         "building": "yes"
       },
-      "source": "osm",
-      "style": {
-        "roofType": "hipped-dome",
-        "mainColors": [
-          "#92400E",
-          "#B45309",
-          "#FEF3C7",
-          "#1E3A8A"
-        ],
-        "facade": "Dinding bata terakota hangat dipadu portico pilar putih gading simetris dan aula besar",
-        "signatureFeatures": [
-          "Pertamina Hall di lantai 3 gedung Dekanat",
-          "Dekat embung / kolam resapan FEB yang asri",
-          "Galeri Investasi Bursa Efek & Bloomberg Lab",
-          "Kompleks terpadu dengan selasar penghubung"
-        ],
-        "entranceSide": "north"
-      }
+      "source": "osm"
     },
     {
       "id": "osm-bld-313701950",
+      "osmId": "313701950",
       "name": "Gedung 313701950",
+      "matchedName": "Gedung 313701950",
       "category": "public",
       "polygon": [
         {
@@ -3754,7 +3825,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701951",
+      "osmId": "313701951",
       "name": "Masjid Baitul Ilmi",
+      "matchedName": "Masjid Baitul Ilmi",
       "category": "public",
       "polygon": [
         {
@@ -3831,7 +3904,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701952",
+      "osmId": "313701952",
       "name": "Gedung A - Teknik Sipil Undip",
+      "matchedName": "Gedung A - Teknik Sipil Undip",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -3903,6 +3978,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 109.19,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -3923,7 +3999,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701954",
+      "osmId": "313701954",
       "name": "Gedung Teknik Kimia",
+      "matchedName": "Gedung Teknik Kimia",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -4117,6 +4195,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 191.65,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -4137,7 +4216,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701955",
+      "osmId": "313701955",
       "name": "Gedung C - Teknik Sipil Undip",
+      "matchedName": "Gedung C - Teknik Sipil Undip",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -4225,6 +4306,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 118.47,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -4245,7 +4327,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701956",
+      "osmId": "313701956",
       "name": "Teknik Kimia B",
+      "matchedName": "Teknik Kimia B",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -4368,6 +4452,7 @@ export const campusMapData: CampusMapData = {
         "website": "https://undip.ac.id"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 157.15,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -4388,7 +4473,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701957",
+      "osmId": "313701957",
       "name": "Gedung 313701957",
+      "matchedName": "Gedung 313701957",
       "category": "public",
       "polygon": [
         {
@@ -4450,7 +4537,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313701958",
+      "osmId": "313701958",
       "name": "Gedung D - Teknik Sipil Undip",
+      "matchedName": "Gedung D - Teknik Sipil Undip",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -4634,6 +4723,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 164.03,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -4654,7 +4744,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703652",
+      "osmId": "313703652",
       "name": "Gedung Laboratorium Tribologi - Teknik Mesin",
+      "matchedName": "Gedung Laboratorium Tribologi - Teknik Mesin",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -4775,6 +4867,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 377.62,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -4795,7 +4888,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703653",
+      "osmId": "313703653",
       "name": "Gedung Fakultas Peternakan dan Pertanian",
+      "matchedName": "Gedung Fakultas Peternakan dan Pertanian",
       "facultyId": "fpp",
       "category": "faculty",
       "polygon": [
@@ -4933,6 +5028,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 75.12,
       "style": {
         "roofType": "modern-flat-gable",
         "mainColors": [
@@ -4953,8 +5049,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703656",
+      "osmId": "313703656",
       "name": "Gedung 313703656",
-      "category": "public",
+      "matchedName": "Gedung 313703656",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048103,
@@ -5028,7 +5126,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703658",
+      "osmId": "313703658",
       "name": "Gedung 313703658",
+      "matchedName": "Gedung 313703658",
       "category": "public",
       "polygon": [
         {
@@ -5090,7 +5190,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703661",
+      "osmId": "313703661",
       "name": "Gedung 313703661",
+      "matchedName": "Gedung 313703661",
       "category": "public",
       "polygon": [
         {
@@ -5152,8 +5254,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703664",
+      "osmId": "313703664",
       "name": "Gedung Jurusan Biologi",
-      "category": "public",
+      "matchedName": "Gedung Jurusan Biologi",
+      "facultyId": "fsm",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.04955,
@@ -5224,12 +5329,32 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 203.4,
+      "style": {
+        "roofType": "flat-stepped",
+        "mainColors": [
+          "#0284C7",
+          "#0369A1",
+          "#F1F5F9",
+          "#0F172A"
+        ],
+        "facade": "Gedung modern bertingkat 6 dengan dinding putih krem, aksen garis vertikal biru elektrik, dan jendela modular laboratorium",
+        "signatureFeatures": [
+          "Gedung Acintya Prasada megah 6 lantai",
+          "Aula pertemuan dan yudisium di lantai 6",
+          "Bersebelahan dengan Masjid Al-Kautsar dan Gedung D",
+          "Laboratorium sains komputasi, bioteknologi, dan fisika"
+        ],
+        "entranceSide": "east"
+      }
     },
     {
       "id": "osm-bld-313703665",
+      "osmId": "313703665",
       "name": "Gedung 313703665",
-      "category": "public",
+      "matchedName": "Gedung 313703665",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050034,
@@ -5303,8 +5428,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703667",
+      "osmId": "313703667",
       "name": "Gedung 313703667",
-      "category": "public",
+      "matchedName": "Gedung 313703667",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050285,
@@ -5365,7 +5492,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703668",
+      "osmId": "313703668",
       "name": "Gedung 313703668",
+      "matchedName": "Gedung 313703668",
       "category": "public",
       "polygon": [
         {
@@ -5427,7 +5556,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703669",
+      "osmId": "313703669",
       "name": "Gedung 313703669",
+      "matchedName": "Gedung 313703669",
       "category": "public",
       "polygon": [
         {
@@ -5489,8 +5620,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703671",
+      "osmId": "313703671",
       "name": "Gedung 313703671",
-      "category": "public",
+      "matchedName": "Gedung 313703671",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048463,
@@ -5564,7 +5697,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703672",
+      "osmId": "313703672",
       "name": "Gedung 313703672",
+      "matchedName": "Gedung 313703672",
       "category": "public",
       "polygon": [
         {
@@ -5626,7 +5761,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703673",
+      "osmId": "313703673",
       "name": "Gedung 313703673",
+      "matchedName": "Gedung 313703673",
       "category": "public",
       "polygon": [
         {
@@ -5688,7 +5825,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703674",
+      "osmId": "313703674",
       "name": "Gedung 313703674",
+      "matchedName": "Gedung 313703674",
       "category": "public",
       "polygon": [
         {
@@ -5782,8 +5921,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703676",
+      "osmId": "313703676",
       "name": "Gedung 313703676",
-      "category": "public",
+      "matchedName": "Gedung 313703676",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.04887,
@@ -5857,8 +5998,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703678",
+      "osmId": "313703678",
       "name": "Gedung Laboratorium Geofisika",
-      "category": "public",
+      "matchedName": "Gedung Laboratorium Geofisika",
+      "facultyId": "fsm",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.048623,
@@ -5929,11 +6073,31 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 301.57,
+      "style": {
+        "roofType": "flat-stepped",
+        "mainColors": [
+          "#0284C7",
+          "#0369A1",
+          "#F1F5F9",
+          "#0F172A"
+        ],
+        "facade": "Gedung modern bertingkat 6 dengan dinding putih krem, aksen garis vertikal biru elektrik, dan jendela modular laboratorium",
+        "signatureFeatures": [
+          "Gedung Acintya Prasada megah 6 lantai",
+          "Aula pertemuan dan yudisium di lantai 6",
+          "Bersebelahan dengan Masjid Al-Kautsar dan Gedung D",
+          "Laboratorium sains komputasi, bioteknologi, dan fisika"
+        ],
+        "entranceSide": "east"
+      }
     },
     {
       "id": "osm-bld-313703679",
+      "osmId": "313703679",
       "name": "Gedung Fakultas Peternakan dan Pertanian",
+      "matchedName": "Gedung Fakultas Peternakan dan Pertanian",
       "facultyId": "fpp",
       "category": "faculty",
       "polygon": [
@@ -6007,6 +6171,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 95.9,
       "style": {
         "roofType": "modern-flat-gable",
         "mainColors": [
@@ -6027,7 +6192,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703680",
+      "osmId": "313703680",
       "name": "Gedung 313703680",
+      "matchedName": "Gedung 313703680",
       "category": "public",
       "polygon": [
         {
@@ -6089,7 +6256,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703681",
+      "osmId": "313703681",
       "name": "Gedung F - FPIK",
+      "matchedName": "Gedung F - FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -6163,6 +6332,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 185.93,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -6183,7 +6353,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703682",
+      "osmId": "313703682",
       "name": "Masjid Al-Kautsar",
+      "matchedName": "Masjid Al-Kautsar",
       "category": "public",
       "polygon": [
         {
@@ -6268,7 +6440,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703685",
+      "osmId": "313703685",
       "name": "Gedung Teknik Informatika",
+      "matchedName": "Gedung Teknik Informatika",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -6358,6 +6532,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 570.83,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -6378,7 +6553,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703686",
+      "osmId": "313703686",
       "name": "Gedung A - Dekanat FPIK",
+      "matchedName": "Gedung A - Dekanat FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -6468,6 +6645,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 215.46,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -6488,8 +6666,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703688",
+      "osmId": "313703688",
       "name": "Gedung 313703688",
-      "category": "public",
+      "matchedName": "Gedung 313703688",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048168,
@@ -6579,8 +6759,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703689",
+      "osmId": "313703689",
       "name": "Gedung 313703689",
-      "category": "public",
+      "matchedName": "Gedung 313703689",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049326,
@@ -6670,7 +6852,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313703695",
+      "osmId": "313703695",
       "name": "Gedung Teknik Mesin",
+      "matchedName": "Gedung Teknik Mesin",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -6776,6 +6960,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 384.29,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -6796,7 +6981,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719452",
+      "osmId": "313719452",
       "name": "Gedung 313719452",
+      "matchedName": "Gedung 313719452",
       "category": "public",
       "polygon": [
         {
@@ -7743,7 +7930,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719455",
+      "osmId": "313719455",
       "name": "Gedung Fakultas Hukum",
+      "matchedName": "Gedung Fakultas Hukum",
       "facultyId": "fh",
       "category": "faculty",
       "polygon": [
@@ -7881,6 +8070,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 188.29,
       "style": {
         "roofType": "hipped-tajuk",
         "mainColors": [
@@ -7901,8 +8091,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719456",
+      "osmId": "313719456",
       "name": "Gedung Dekanat FMIPA",
-      "category": "public",
+      "matchedName": "Gedung Dekanat FMIPA",
+      "facultyId": "fsm",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.048398,
@@ -8093,11 +8286,31 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 332.5,
+      "style": {
+        "roofType": "flat-stepped",
+        "mainColors": [
+          "#0284C7",
+          "#0369A1",
+          "#F1F5F9",
+          "#0F172A"
+        ],
+        "facade": "Gedung modern bertingkat 6 dengan dinding putih krem, aksen garis vertikal biru elektrik, dan jendela modular laboratorium",
+        "signatureFeatures": [
+          "Gedung Acintya Prasada megah 6 lantai",
+          "Aula pertemuan dan yudisium di lantai 6",
+          "Bersebelahan dengan Masjid Al-Kautsar dan Gedung D",
+          "Laboratorium sains komputasi, bioteknologi, dan fisika"
+        ],
+        "entranceSide": "east"
+      }
     },
     {
       "id": "osm-bld-313719457",
+      "osmId": "313719457",
       "name": "Gedung Fakultas Peternakan dan Pertanian",
+      "matchedName": "Gedung Fakultas Peternakan dan Pertanian",
       "facultyId": "fpp",
       "category": "faculty",
       "polygon": [
@@ -8299,6 +8512,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 129.3,
       "style": {
         "roofType": "modern-flat-gable",
         "mainColors": [
@@ -8319,7 +8533,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719460",
+      "osmId": "313719460",
       "name": "Gedung Sekretariat Ilmu Budaya",
+      "matchedName": "Gedung Sekretariat Ilmu Budaya",
       "facultyId": "fib",
       "category": "faculty",
       "polygon": [
@@ -8393,6 +8609,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 476.52,
       "style": {
         "roofType": "joglo-tajug",
         "mainColors": [
@@ -8413,7 +8630,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719463",
+      "osmId": "313719463",
       "name": "Gedung 313719463",
+      "matchedName": "Gedung 313719463",
       "category": "public",
       "polygon": [
         {
@@ -8475,7 +8694,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719472",
+      "osmId": "313719472",
       "name": "Gedung 313719472",
+      "matchedName": "Gedung 313719472",
       "category": "public",
       "polygon": [
         {
@@ -8537,7 +8758,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719475",
+      "osmId": "313719475",
       "name": "Gedung 313719475",
+      "matchedName": "Gedung 313719475",
       "category": "public",
       "polygon": [
         {
@@ -8599,8 +8822,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719477",
+      "osmId": "313719477",
       "name": "Gedung 313719477",
-      "category": "public",
+      "matchedName": "Gedung 313719477",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050745,
@@ -8706,8 +8931,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719487",
+      "osmId": "313719487",
       "name": "Gedung 313719487",
-      "category": "public",
+      "matchedName": "Gedung 313719487",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050321,
@@ -8768,7 +8995,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719488",
+      "osmId": "313719488",
       "name": "Gedung Fakultas Ilmu Budaya",
+      "matchedName": "Gedung Fakultas Ilmu Budaya",
       "facultyId": "fib",
       "category": "faculty",
       "polygon": [
@@ -9114,6 +9343,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 427.52,
       "style": {
         "roofType": "joglo-tajug",
         "mainColors": [
@@ -9134,7 +9364,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719489",
+      "osmId": "313719489",
       "name": "Gedung Fakultas Ilmu Sosial dan Ilmu Politik",
+      "matchedName": "Gedung Fakultas Ilmu Sosial dan Ilmu Politik",
       "facultyId": "fisip",
       "category": "faculty",
       "polygon": [
@@ -9568,6 +9800,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 123.45,
       "style": {
         "roofType": "pitched-tropical",
         "mainColors": [
@@ -9588,8 +9821,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719493",
+      "osmId": "313719493",
       "name": "Gedung 313719493",
-      "category": "public",
+      "matchedName": "Gedung 313719493",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054291,
@@ -9687,8 +9922,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719494",
+      "osmId": "313719494",
       "name": "Gedung 313719494",
-      "category": "public",
+      "matchedName": "Gedung 313719494",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049062,
@@ -9778,8 +10015,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719495",
+      "osmId": "313719495",
       "name": "Gedung Fakultas Teknologi Pangan",
-      "category": "public",
+      "matchedName": "Gedung Fakultas Teknologi Pangan",
+      "facultyId": "fpp",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.054055,
@@ -9890,11 +10130,31 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 293.68,
+      "style": {
+        "roofType": "modern-flat-gable",
+        "mainColors": [
+          "#15803D",
+          "#166534",
+          "#FEF9C3",
+          "#78350F"
+        ],
+        "facade": "Gedung baru 5 lantai modern minimalis beraksen hijau daun dan elemen kayu, dipadu kompleks kandang dan greenhouse",
+        "signatureFeatures": [
+          "Gedung drh. Soejono Koesoemowardojo 5 lantai berfasilitas lift",
+          "Greenhouse riset agroteknologi kaca",
+          "Kandang ternak percontohan modern",
+          "Lahan percobaan agrosains terpadu"
+        ],
+        "entranceSide": "east"
+      }
     },
     {
       "id": "osm-bld-313719498",
+      "osmId": "313719498",
       "name": "Gedung D - FPIK",
+      "matchedName": "Gedung D - FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -9998,6 +10258,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 130.12,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -10018,7 +10279,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313719502",
+      "osmId": "313719502",
       "name": "Gedung Kuliah Teknik Mesin",
+      "matchedName": "Gedung Kuliah Teknik Mesin",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -10132,6 +10395,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 343.8,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -10152,7 +10416,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721936",
+      "osmId": "313721936",
       "name": "Gedung Fakultas Kesehatan Masyarakat",
+      "matchedName": "Gedung Fakultas Kesehatan Masyarakat",
       "facultyId": "fkm",
       "category": "faculty",
       "polygon": [
@@ -10274,6 +10540,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 272.49,
       "style": {
         "roofType": "hipped-gable",
         "mainColors": [
@@ -10294,7 +10561,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721937",
+      "osmId": "313721937",
       "name": "Gedung 313721937",
+      "matchedName": "Gedung 313721937",
       "category": "public",
       "polygon": [
         {
@@ -10421,7 +10690,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721938",
+      "osmId": "313721938",
       "name": "Gedung Fakultas Psikologi",
+      "matchedName": "Gedung Fakultas Psikologi",
       "facultyId": "fpsi",
       "category": "faculty",
       "polygon": [
@@ -10559,6 +10830,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 756.51,
       "style": {
         "roofType": "flat-tower",
         "mainColors": [
@@ -10579,7 +10851,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721939",
+      "osmId": "313721939",
       "name": "Masjid Baitul Muthmannah",
+      "matchedName": "Masjid Baitul Muthmannah",
       "category": "public",
       "polygon": [
         {
@@ -10721,8 +10995,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721940",
+      "osmId": "313721940",
       "name": "Gedung 313721940",
-      "category": "public",
+      "matchedName": "Gedung 313721940",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.052399,
@@ -10924,8 +11200,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721943",
+      "osmId": "313721943",
       "name": "Gedung 313721943",
-      "category": "public",
+      "matchedName": "Gedung 313721943",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.04916,
@@ -10999,8 +11277,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721945",
+      "osmId": "313721945",
       "name": "Gedung 313721945",
-      "category": "public",
+      "matchedName": "Gedung 313721945",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049918,
@@ -11061,7 +11341,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721946",
+      "osmId": "313721946",
       "name": "Gedung E - FPIK",
+      "matchedName": "Gedung E - FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -11135,6 +11417,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 220.94,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -11155,8 +11438,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721948",
+      "osmId": "313721948",
       "name": "Gedung Fakultas Dekanat Undip",
-      "category": "public",
+      "matchedName": "Gedung Fakultas Dekanat Undip",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050464,
@@ -11277,7 +11562,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721949",
+      "osmId": "313721949",
       "name": "Gedung 313721949",
+      "matchedName": "Gedung 313721949",
       "category": "public",
       "polygon": [
         {
@@ -11339,7 +11626,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721951",
+      "osmId": "313721951",
       "name": "Gedung 313721951",
+      "matchedName": "Gedung 313721951",
       "category": "public",
       "polygon": [
         {
@@ -11401,7 +11690,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721953",
+      "osmId": "313721953",
       "name": "Gedung 313721953",
+      "matchedName": "Gedung 313721953",
       "category": "public",
       "polygon": [
         {
@@ -11479,7 +11770,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721954",
+      "osmId": "313721954",
       "name": "Gedung 313721954",
+      "matchedName": "Gedung 313721954",
       "category": "public",
       "polygon": [
         {
@@ -11582,7 +11875,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721955",
+      "osmId": "313721955",
       "name": "Gedung 313721955",
+      "matchedName": "Gedung 313721955",
       "category": "public",
       "polygon": [
         {
@@ -11709,7 +12004,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721957",
+      "osmId": "313721957",
       "name": "Gedung 313721957",
+      "matchedName": "Gedung 313721957",
       "category": "public",
       "polygon": [
         {
@@ -11836,7 +12133,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-313721958",
+      "osmId": "313721958",
       "name": "Gedung Fakultas Kesehatan Masyarakat",
+      "matchedName": "Gedung Fakultas Kesehatan Masyarakat",
       "facultyId": "fkm",
       "category": "faculty",
       "polygon": [
@@ -11940,6 +12239,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 230.53,
       "style": {
         "roofType": "hipped-gable",
         "mainColors": [
@@ -11960,7 +12260,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-351931887",
+      "osmId": "351931887",
       "name": "Lapangan Futsal",
+      "matchedName": "Lapangan Futsal",
       "category": "public",
       "polygon": [
         {
@@ -12076,7 +12378,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-389147997",
+      "osmId": "389147997",
       "name": "Kantina Dharma Wanita Planologi",
+      "matchedName": "Kantina Dharma Wanita Planologi",
       "category": "public",
       "polygon": [
         {
@@ -12142,7 +12446,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-389488681",
+      "osmId": "389488681",
       "name": "Pesantren Mahasiswa Kyai Galang Sewu",
+      "matchedName": "Pesantren Mahasiswa Kyai Galang Sewu",
       "category": "public",
       "polygon": [
         {
@@ -12205,7 +12511,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918283",
+      "osmId": "463918283",
       "name": "Gedung 463918283",
+      "matchedName": "Gedung 463918283",
       "category": "public",
       "polygon": [
         {
@@ -12279,7 +12587,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918284",
+      "osmId": "463918284",
       "name": "Gedung 463918284",
+      "matchedName": "Gedung 463918284",
       "category": "public",
       "polygon": [
         {
@@ -12353,7 +12663,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918285",
+      "osmId": "463918285",
       "name": "Gedung 463918285",
+      "matchedName": "Gedung 463918285",
       "category": "public",
       "polygon": [
         {
@@ -12443,7 +12755,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918286",
+      "osmId": "463918286",
       "name": "Gedung 463918286",
+      "matchedName": "Gedung 463918286",
       "category": "public",
       "polygon": [
         {
@@ -12517,7 +12831,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918287",
+      "osmId": "463918287",
       "name": "Gedung 463918287",
+      "matchedName": "Gedung 463918287",
       "category": "public",
       "polygon": [
         {
@@ -12591,7 +12907,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918291",
+      "osmId": "463918291",
       "name": "Gedung 463918291",
+      "matchedName": "Gedung 463918291",
       "category": "public",
       "polygon": [
         {
@@ -12665,7 +12983,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918292",
+      "osmId": "463918292",
       "name": "Gedung 463918292",
+      "matchedName": "Gedung 463918292",
       "category": "public",
       "polygon": [
         {
@@ -12739,7 +13059,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-463918293",
+      "osmId": "463918293",
       "name": "Gedung 463918293",
+      "matchedName": "Gedung 463918293",
       "category": "public",
       "polygon": [
         {
@@ -12845,7 +13167,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-476102020",
+      "osmId": "476102020",
       "name": "Gedung A - Fakultas Kedokteran",
+      "matchedName": "Gedung A - Fakultas Kedokteran",
       "facultyId": "fk",
       "category": "faculty",
       "polygon": [
@@ -13135,6 +13459,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 332.77,
       "style": {
         "roofType": "hipped-metal",
         "mainColors": [
@@ -13155,7 +13480,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-476102022",
+      "osmId": "476102022",
       "name": "Gedung B - Fakultas Kedokteran",
+      "matchedName": "Gedung B - Fakultas Kedokteran",
       "facultyId": "fk",
       "category": "faculty",
       "polygon": [
@@ -13493,6 +13820,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 387.92,
       "style": {
         "roofType": "hipped-metal",
         "mainColors": [
@@ -13513,7 +13841,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-476109768",
+      "osmId": "476109768",
       "name": "Gedung 476109768",
+      "matchedName": "Gedung 476109768",
       "category": "public",
       "polygon": [
         {
@@ -13708,8 +14038,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-476436104",
+      "osmId": "476436104",
       "name": "Gedung 476436104",
-      "category": "public",
+      "matchedName": "Gedung 476436104",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049922,
@@ -13783,8 +14115,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-476436105",
+      "osmId": "476436105",
       "name": "Gedung Departemen Ilmu Keperawatan",
-      "category": "public",
+      "matchedName": "Gedung Departemen Ilmu Keperawatan",
+      "facultyId": "fk",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.050303,
@@ -13885,11 +14220,31 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 251.41,
+      "style": {
+        "roofType": "hipped-metal",
+        "mainColors": [
+          "#065F46",
+          "#047857",
+          "#F8FAFC",
+          "#10B981"
+        ],
+        "facade": "Dinding putih bersih dengan lis aksen hijau zamrud medis, lobi kaca lapang, dan selasar tertutup",
+        "signatureFeatures": [
+          "Gedung Mayjen dr. R. Soewondo Sastrodiprojo (Dekanat)",
+          "Sirkulasi terpadu menuju RSND (Rumah Sakit Nasional Diponegoro)",
+          "Laboratorium OSCE dan anatomi kedokteran",
+          "Taman asri di tengah sayap perkuliahan"
+        ],
+        "entranceSide": "north"
+      }
     },
     {
       "id": "osm-bld-477399127",
+      "osmId": "477399127",
       "name": "Gedung 477399127",
+      "matchedName": "Gedung 477399127",
       "category": "public",
       "polygon": [
         {
@@ -13951,7 +14306,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399128",
+      "osmId": "477399128",
       "name": "Gedung 477399128",
+      "matchedName": "Gedung 477399128",
       "category": "public",
       "polygon": [
         {
@@ -14045,7 +14402,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399129",
+      "osmId": "477399129",
       "name": "Gedung 477399129",
+      "matchedName": "Gedung 477399129",
       "category": "public",
       "polygon": [
         {
@@ -14107,7 +14466,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399130",
+      "osmId": "477399130",
       "name": "Gedung 477399130",
+      "matchedName": "Gedung 477399130",
       "category": "public",
       "polygon": [
         {
@@ -14169,7 +14530,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399131",
+      "osmId": "477399131",
       "name": "Gedung 477399131",
+      "matchedName": "Gedung 477399131",
       "category": "public",
       "polygon": [
         {
@@ -14231,7 +14594,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399132",
+      "osmId": "477399132",
       "name": "Gedung 477399132",
+      "matchedName": "Gedung 477399132",
       "category": "public",
       "polygon": [
         {
@@ -14293,7 +14658,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399133",
+      "osmId": "477399133",
       "name": "Gedung 477399133",
+      "matchedName": "Gedung 477399133",
       "category": "public",
       "polygon": [
         {
@@ -14355,7 +14722,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399134",
+      "osmId": "477399134",
       "name": "Gedung 477399134",
+      "matchedName": "Gedung 477399134",
       "category": "public",
       "polygon": [
         {
@@ -14417,7 +14786,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399135",
+      "osmId": "477399135",
       "name": "Gedung 477399135",
+      "matchedName": "Gedung 477399135",
       "category": "public",
       "polygon": [
         {
@@ -14479,7 +14850,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-477399136",
+      "osmId": "477399136",
       "name": "Gedung 477399136",
+      "matchedName": "Gedung 477399136",
       "category": "public",
       "polygon": [
         {
@@ -14541,7 +14914,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-495353789",
+      "osmId": "495353789",
       "name": "Indomaret Sirojudin",
+      "matchedName": "Indomaret Sirojudin",
       "category": "public",
       "polygon": [
         {
@@ -14607,7 +14982,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-495819388",
+      "osmId": "495819388",
       "name": "Gedung 495819388",
+      "matchedName": "Gedung 495819388",
       "category": "public",
       "polygon": [
         {
@@ -14669,7 +15046,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-495819625",
+      "osmId": "495819625",
       "name": "Gedung 495819625",
+      "matchedName": "Gedung 495819625",
       "category": "public",
       "polygon": [
         {
@@ -14731,9 +15110,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-495840171",
+      "osmId": "495840171",
       "name": "Gedung Pertamina Teknik Geologi",
-      "facultyId": "ft",
-      "category": "faculty",
+      "matchedName": "Gedung Pertamina Teknik Geologi",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.052171,
@@ -14810,28 +15190,13 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm",
-      "style": {
-        "roofType": "flat-cantilever",
-        "mainColors": [
-          "#1E3A8A",
-          "#991B1B",
-          "#334155",
-          "#E2E8F0"
-        ],
-        "facade": "Dinding bata merah terakota dipadu kisi-kisi baja abu-abu gelap dan jendela kaca biru navy khas teknik",
-        "signatureFeatures": [
-          "Engineering Hall lantai 5",
-          "Jembatan kaca / skybridge penghubung sayap",
-          "Plaza teknik luas bertingkat",
-          "Dekat akses Jembatan Sikatak"
-        ],
-        "entranceSide": "north"
-      }
+      "source": "osm"
     },
     {
       "id": "osm-bld-495852618",
+      "osmId": "495852618",
       "name": "Toko Tembalang",
+      "matchedName": "Toko Tembalang",
       "category": "public",
       "polygon": [
         {
@@ -14894,7 +15259,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-495852619",
+      "osmId": "495852619",
       "name": "Dokter Gigi",
+      "matchedName": "Dokter Gigi",
       "category": "public",
       "polygon": [
         {
@@ -14957,7 +15324,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-495852620",
+      "osmId": "495852620",
       "name": "Mie Nges Nges",
+      "matchedName": "Mie Nges Nges",
       "category": "public",
       "polygon": [
         {
@@ -15022,7 +15391,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-495852621",
+      "osmId": "495852621",
       "name": "BRI",
+      "matchedName": "BRI",
       "category": "public",
       "polygon": [
         {
@@ -15086,7 +15457,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406151",
+      "osmId": "506406151",
       "name": "Gedung 506406151",
+      "matchedName": "Gedung 506406151",
       "category": "public",
       "polygon": [
         {
@@ -15148,7 +15521,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406152",
+      "osmId": "506406152",
       "name": "Gedung 506406152",
+      "matchedName": "Gedung 506406152",
       "category": "public",
       "polygon": [
         {
@@ -15210,7 +15585,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406154",
+      "osmId": "506406154",
       "name": "Gedung 506406154",
+      "matchedName": "Gedung 506406154",
       "category": "public",
       "polygon": [
         {
@@ -15368,7 +15745,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406155",
+      "osmId": "506406155",
       "name": "Gedung 506406155",
+      "matchedName": "Gedung 506406155",
       "category": "public",
       "polygon": [
         {
@@ -15430,7 +15809,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406156",
+      "osmId": "506406156",
       "name": "Gedung 506406156",
+      "matchedName": "Gedung 506406156",
       "category": "public",
       "polygon": [
         {
@@ -15492,7 +15873,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406157",
+      "osmId": "506406157",
       "name": "Gedung 506406157",
+      "matchedName": "Gedung 506406157",
       "category": "public",
       "polygon": [
         {
@@ -15554,7 +15937,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406158",
+      "osmId": "506406158",
       "name": "Gedung 506406158",
+      "matchedName": "Gedung 506406158",
       "category": "public",
       "polygon": [
         {
@@ -15616,7 +16001,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406159",
+      "osmId": "506406159",
       "name": "Gedung 506406159",
+      "matchedName": "Gedung 506406159",
       "category": "public",
       "polygon": [
         {
@@ -15678,7 +16065,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406160",
+      "osmId": "506406160",
       "name": "Gedung 506406160",
+      "matchedName": "Gedung 506406160",
       "category": "public",
       "polygon": [
         {
@@ -15740,7 +16129,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406165",
+      "osmId": "506406165",
       "name": "Amelia Guest House",
+      "matchedName": "Amelia Guest House",
       "category": "public",
       "polygon": [
         {
@@ -15804,7 +16195,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406166",
+      "osmId": "506406166",
       "name": "Gedung 506406166",
+      "matchedName": "Gedung 506406166",
       "category": "public",
       "polygon": [
         {
@@ -15866,7 +16259,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406167",
+      "osmId": "506406167",
       "name": "Gedung 506406167",
+      "matchedName": "Gedung 506406167",
       "category": "public",
       "polygon": [
         {
@@ -15928,7 +16323,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406170",
+      "osmId": "506406170",
       "name": "Gedung 506406170",
+      "matchedName": "Gedung 506406170",
       "category": "public",
       "polygon": [
         {
@@ -16004,7 +16401,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406195",
+      "osmId": "506406195",
       "name": "Gedung 506406195",
+      "matchedName": "Gedung 506406195",
       "category": "public",
       "polygon": [
         {
@@ -16066,7 +16465,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406196",
+      "osmId": "506406196",
       "name": "Gedung 506406196",
+      "matchedName": "Gedung 506406196",
       "category": "public",
       "polygon": [
         {
@@ -16128,7 +16529,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406197",
+      "osmId": "506406197",
       "name": "Gedung 506406197",
+      "matchedName": "Gedung 506406197",
       "category": "public",
       "polygon": [
         {
@@ -16190,7 +16593,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406198",
+      "osmId": "506406198",
       "name": "Gedung 506406198",
+      "matchedName": "Gedung 506406198",
       "category": "public",
       "polygon": [
         {
@@ -16252,7 +16657,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-506406199",
+      "osmId": "506406199",
       "name": "Gedung 506406199",
+      "matchedName": "Gedung 506406199",
       "category": "public",
       "polygon": [
         {
@@ -16314,7 +16721,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049085",
+      "osmId": "508049085",
       "name": "Gedung 508049085",
+      "matchedName": "Gedung 508049085",
       "category": "public",
       "polygon": [
         {
@@ -16376,7 +16785,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049086",
+      "osmId": "508049086",
       "name": "Gedung 508049086",
+      "matchedName": "Gedung 508049086",
       "category": "public",
       "polygon": [
         {
@@ -16438,7 +16849,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049087",
+      "osmId": "508049087",
       "name": "Gedung 508049087",
+      "matchedName": "Gedung 508049087",
       "category": "public",
       "polygon": [
         {
@@ -16500,7 +16913,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049089",
+      "osmId": "508049089",
       "name": "Gedung 508049089",
+      "matchedName": "Gedung 508049089",
       "category": "public",
       "polygon": [
         {
@@ -16562,7 +16977,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049090",
+      "osmId": "508049090",
       "name": "Gedung 508049090",
+      "matchedName": "Gedung 508049090",
       "category": "public",
       "polygon": [
         {
@@ -16624,7 +17041,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049091",
+      "osmId": "508049091",
       "name": "Gedung 508049091",
+      "matchedName": "Gedung 508049091",
       "category": "public",
       "polygon": [
         {
@@ -16686,7 +17105,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049092",
+      "osmId": "508049092",
       "name": "Gedung 508049092",
+      "matchedName": "Gedung 508049092",
       "category": "public",
       "polygon": [
         {
@@ -16748,7 +17169,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049093",
+      "osmId": "508049093",
       "name": "Gedung 508049093",
+      "matchedName": "Gedung 508049093",
       "category": "public",
       "polygon": [
         {
@@ -16810,7 +17233,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049094",
+      "osmId": "508049094",
       "name": "Gedung 508049094",
+      "matchedName": "Gedung 508049094",
       "category": "public",
       "polygon": [
         {
@@ -16872,7 +17297,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049095",
+      "osmId": "508049095",
       "name": "Gedung 508049095",
+      "matchedName": "Gedung 508049095",
       "category": "public",
       "polygon": [
         {
@@ -16934,7 +17361,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049096",
+      "osmId": "508049096",
       "name": "Gedung 508049096",
+      "matchedName": "Gedung 508049096",
       "category": "public",
       "polygon": [
         {
@@ -16996,7 +17425,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049097",
+      "osmId": "508049097",
       "name": "Gedung 508049097",
+      "matchedName": "Gedung 508049097",
       "category": "public",
       "polygon": [
         {
@@ -17058,7 +17489,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049098",
+      "osmId": "508049098",
       "name": "Gedung 508049098",
+      "matchedName": "Gedung 508049098",
       "category": "public",
       "polygon": [
         {
@@ -17120,7 +17553,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049099",
+      "osmId": "508049099",
       "name": "Gedung 508049099",
+      "matchedName": "Gedung 508049099",
       "category": "public",
       "polygon": [
         {
@@ -17182,7 +17617,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049100",
+      "osmId": "508049100",
       "name": "Gedung 508049100",
+      "matchedName": "Gedung 508049100",
       "category": "public",
       "polygon": [
         {
@@ -17244,7 +17681,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049101",
+      "osmId": "508049101",
       "name": "Gedung 508049101",
+      "matchedName": "Gedung 508049101",
       "category": "public",
       "polygon": [
         {
@@ -17306,7 +17745,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049102",
+      "osmId": "508049102",
       "name": "Gedung 508049102",
+      "matchedName": "Gedung 508049102",
       "category": "public",
       "polygon": [
         {
@@ -17368,7 +17809,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049103",
+      "osmId": "508049103",
       "name": "Gedung 508049103",
+      "matchedName": "Gedung 508049103",
       "category": "public",
       "polygon": [
         {
@@ -17430,7 +17873,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049104",
+      "osmId": "508049104",
       "name": "Gedung 508049104",
+      "matchedName": "Gedung 508049104",
       "category": "public",
       "polygon": [
         {
@@ -17492,7 +17937,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049105",
+      "osmId": "508049105",
       "name": "Gedung 508049105",
+      "matchedName": "Gedung 508049105",
       "category": "public",
       "polygon": [
         {
@@ -17554,7 +18001,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049106",
+      "osmId": "508049106",
       "name": "Gedung 508049106",
+      "matchedName": "Gedung 508049106",
       "category": "public",
       "polygon": [
         {
@@ -17616,7 +18065,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049107",
+      "osmId": "508049107",
       "name": "Gedung 508049107",
+      "matchedName": "Gedung 508049107",
       "category": "public",
       "polygon": [
         {
@@ -17678,7 +18129,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049108",
+      "osmId": "508049108",
       "name": "Gedung 508049108",
+      "matchedName": "Gedung 508049108",
       "category": "public",
       "polygon": [
         {
@@ -17740,7 +18193,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049112",
+      "osmId": "508049112",
       "name": "Gedung 508049112",
+      "matchedName": "Gedung 508049112",
       "category": "public",
       "polygon": [
         {
@@ -17802,7 +18257,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049113",
+      "osmId": "508049113",
       "name": "Gedung 508049113",
+      "matchedName": "Gedung 508049113",
       "category": "public",
       "polygon": [
         {
@@ -17864,7 +18321,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049114",
+      "osmId": "508049114",
       "name": "Gedung 508049114",
+      "matchedName": "Gedung 508049114",
       "category": "public",
       "polygon": [
         {
@@ -17926,7 +18385,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049115",
+      "osmId": "508049115",
       "name": "Gedung 508049115",
+      "matchedName": "Gedung 508049115",
       "category": "public",
       "polygon": [
         {
@@ -17988,7 +18449,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049116",
+      "osmId": "508049116",
       "name": "Gedung 508049116",
+      "matchedName": "Gedung 508049116",
       "category": "public",
       "polygon": [
         {
@@ -18050,7 +18513,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049117",
+      "osmId": "508049117",
       "name": "Gedung 508049117",
+      "matchedName": "Gedung 508049117",
       "category": "public",
       "polygon": [
         {
@@ -18112,7 +18577,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049118",
+      "osmId": "508049118",
       "name": "Gedung 508049118",
+      "matchedName": "Gedung 508049118",
       "category": "public",
       "polygon": [
         {
@@ -18174,7 +18641,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049119",
+      "osmId": "508049119",
       "name": "Gedung 508049119",
+      "matchedName": "Gedung 508049119",
       "category": "public",
       "polygon": [
         {
@@ -18236,7 +18705,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049120",
+      "osmId": "508049120",
       "name": "Gedung 508049120",
+      "matchedName": "Gedung 508049120",
       "category": "public",
       "polygon": [
         {
@@ -18298,7 +18769,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049121",
+      "osmId": "508049121",
       "name": "Gedung 508049121",
+      "matchedName": "Gedung 508049121",
       "category": "public",
       "polygon": [
         {
@@ -18360,7 +18833,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049122",
+      "osmId": "508049122",
       "name": "Gedung 508049122",
+      "matchedName": "Gedung 508049122",
       "category": "public",
       "polygon": [
         {
@@ -18422,7 +18897,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049124",
+      "osmId": "508049124",
       "name": "Gedung 508049124",
+      "matchedName": "Gedung 508049124",
       "category": "public",
       "polygon": [
         {
@@ -18484,7 +18961,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049125",
+      "osmId": "508049125",
       "name": "Gedung 508049125",
+      "matchedName": "Gedung 508049125",
       "category": "public",
       "polygon": [
         {
@@ -18546,7 +19025,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049126",
+      "osmId": "508049126",
       "name": "Gedung 508049126",
+      "matchedName": "Gedung 508049126",
       "category": "public",
       "polygon": [
         {
@@ -18608,7 +19089,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049130",
+      "osmId": "508049130",
       "name": "Gedung 508049130",
+      "matchedName": "Gedung 508049130",
       "category": "public",
       "polygon": [
         {
@@ -18670,7 +19153,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049131",
+      "osmId": "508049131",
       "name": "Gedung 508049131",
+      "matchedName": "Gedung 508049131",
       "category": "public",
       "polygon": [
         {
@@ -18732,7 +19217,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049132",
+      "osmId": "508049132",
       "name": "Gedung 508049132",
+      "matchedName": "Gedung 508049132",
       "category": "public",
       "polygon": [
         {
@@ -18794,7 +19281,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049134",
+      "osmId": "508049134",
       "name": "Gedung 508049134",
+      "matchedName": "Gedung 508049134",
       "category": "public",
       "polygon": [
         {
@@ -18856,7 +19345,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049135",
+      "osmId": "508049135",
       "name": "Gedung 508049135",
+      "matchedName": "Gedung 508049135",
       "category": "public",
       "polygon": [
         {
@@ -18918,7 +19409,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049136",
+      "osmId": "508049136",
       "name": "Gedung 508049136",
+      "matchedName": "Gedung 508049136",
       "category": "public",
       "polygon": [
         {
@@ -18980,7 +19473,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049137",
+      "osmId": "508049137",
       "name": "Gedung 508049137",
+      "matchedName": "Gedung 508049137",
       "category": "public",
       "polygon": [
         {
@@ -19042,7 +19537,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049138",
+      "osmId": "508049138",
       "name": "Gedung 508049138",
+      "matchedName": "Gedung 508049138",
       "category": "public",
       "polygon": [
         {
@@ -19104,7 +19601,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049139",
+      "osmId": "508049139",
       "name": "Gedung 508049139",
+      "matchedName": "Gedung 508049139",
       "category": "public",
       "polygon": [
         {
@@ -19166,7 +19665,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049140",
+      "osmId": "508049140",
       "name": "Gedung 508049140",
+      "matchedName": "Gedung 508049140",
       "category": "public",
       "polygon": [
         {
@@ -19228,7 +19729,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049141",
+      "osmId": "508049141",
       "name": "Gedung 508049141",
+      "matchedName": "Gedung 508049141",
       "category": "public",
       "polygon": [
         {
@@ -19290,7 +19793,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049142",
+      "osmId": "508049142",
       "name": "Gedung 508049142",
+      "matchedName": "Gedung 508049142",
       "category": "public",
       "polygon": [
         {
@@ -19352,7 +19857,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049143",
+      "osmId": "508049143",
       "name": "Gedung 508049143",
+      "matchedName": "Gedung 508049143",
       "category": "public",
       "polygon": [
         {
@@ -19414,7 +19921,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049144",
+      "osmId": "508049144",
       "name": "Gedung 508049144",
+      "matchedName": "Gedung 508049144",
       "category": "public",
       "polygon": [
         {
@@ -19476,7 +19985,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049145",
+      "osmId": "508049145",
       "name": "Gedung 508049145",
+      "matchedName": "Gedung 508049145",
       "category": "public",
       "polygon": [
         {
@@ -19538,7 +20049,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049146",
+      "osmId": "508049146",
       "name": "Gedung 508049146",
+      "matchedName": "Gedung 508049146",
       "category": "public",
       "polygon": [
         {
@@ -19600,7 +20113,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049147",
+      "osmId": "508049147",
       "name": "Gedung 508049147",
+      "matchedName": "Gedung 508049147",
       "category": "public",
       "polygon": [
         {
@@ -19662,7 +20177,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049148",
+      "osmId": "508049148",
       "name": "Gedung 508049148",
+      "matchedName": "Gedung 508049148",
       "category": "public",
       "polygon": [
         {
@@ -19724,7 +20241,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049149",
+      "osmId": "508049149",
       "name": "Gedung 508049149",
+      "matchedName": "Gedung 508049149",
       "category": "public",
       "polygon": [
         {
@@ -19786,7 +20305,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049150",
+      "osmId": "508049150",
       "name": "Gedung 508049150",
+      "matchedName": "Gedung 508049150",
       "category": "public",
       "polygon": [
         {
@@ -19848,7 +20369,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049151",
+      "osmId": "508049151",
       "name": "Gedung 508049151",
+      "matchedName": "Gedung 508049151",
       "category": "public",
       "polygon": [
         {
@@ -19910,7 +20433,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049152",
+      "osmId": "508049152",
       "name": "Gedung 508049152",
+      "matchedName": "Gedung 508049152",
       "category": "public",
       "polygon": [
         {
@@ -19972,7 +20497,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049173",
+      "osmId": "508049173",
       "name": "PAUD Permata UNDIP",
+      "matchedName": "PAUD Permata UNDIP",
       "category": "public",
       "polygon": [
         {
@@ -20081,7 +20608,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049255",
+      "osmId": "508049255",
       "name": "PAUD Mekar Jaya",
+      "matchedName": "PAUD Mekar Jaya",
       "category": "public",
       "polygon": [
         {
@@ -20158,7 +20687,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049271",
+      "osmId": "508049271",
       "name": "Masjid Al - Ikhlas",
+      "matchedName": "Masjid Al - Ikhlas",
       "category": "public",
       "polygon": [
         {
@@ -20235,7 +20766,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049320",
+      "osmId": "508049320",
       "name": "Gedung 508049320",
+      "matchedName": "Gedung 508049320",
       "category": "public",
       "polygon": [
         {
@@ -20297,7 +20830,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049321",
+      "osmId": "508049321",
       "name": "Gedung 508049321",
+      "matchedName": "Gedung 508049321",
       "category": "public",
       "polygon": [
         {
@@ -20367,7 +20902,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049322",
+      "osmId": "508049322",
       "name": "Gedung 508049322",
+      "matchedName": "Gedung 508049322",
       "category": "public",
       "polygon": [
         {
@@ -20429,9 +20966,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049323",
+      "osmId": "508049323",
       "name": "Gedung Teknik Industri",
-      "facultyId": "ft",
-      "category": "faculty",
+      "matchedName": "Gedung Teknik Industri",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.051228,
@@ -20524,28 +21062,13 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm",
-      "style": {
-        "roofType": "flat-cantilever",
-        "mainColors": [
-          "#1E3A8A",
-          "#991B1B",
-          "#334155",
-          "#E2E8F0"
-        ],
-        "facade": "Dinding bata merah terakota dipadu kisi-kisi baja abu-abu gelap dan jendela kaca biru navy khas teknik",
-        "signatureFeatures": [
-          "Engineering Hall lantai 5",
-          "Jembatan kaca / skybridge penghubung sayap",
-          "Plaza teknik luas bertingkat",
-          "Dekat akses Jembatan Sikatak"
-        ],
-        "entranceSide": "north"
-      }
+      "source": "osm"
     },
     {
       "id": "osm-bld-508049324",
+      "osmId": "508049324",
       "name": "Gedung I - Auditorium FPIK",
+      "matchedName": "Gedung I - Auditorium FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -20683,6 +21206,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 176.96,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -20703,8 +21227,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049326",
+      "osmId": "508049326",
       "name": "Gedung 508049326",
-      "category": "public",
+      "matchedName": "Gedung 508049326",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.051397,
@@ -20776,7 +21302,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049327",
+      "osmId": "508049327",
       "name": "Gedung 508049327",
+      "matchedName": "Gedung 508049327",
       "category": "public",
       "polygon": [
         {
@@ -20838,7 +21366,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049328",
+      "osmId": "508049328",
       "name": "Gedung 508049328",
+      "matchedName": "Gedung 508049328",
       "category": "public",
       "polygon": [
         {
@@ -20900,7 +21430,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049329",
+      "osmId": "508049329",
       "name": "Gedung 508049329",
+      "matchedName": "Gedung 508049329",
       "category": "public",
       "polygon": [
         {
@@ -20962,7 +21494,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049330",
+      "osmId": "508049330",
       "name": "Gedung 508049330",
+      "matchedName": "Gedung 508049330",
       "category": "public",
       "polygon": [
         {
@@ -21024,7 +21558,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049331",
+      "osmId": "508049331",
       "name": "Gedung 508049331",
+      "matchedName": "Gedung 508049331",
       "category": "public",
       "polygon": [
         {
@@ -21086,7 +21622,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049333",
+      "osmId": "508049333",
       "name": "Gedung 508049333",
+      "matchedName": "Gedung 508049333",
       "category": "public",
       "polygon": [
         {
@@ -21148,7 +21686,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049334",
+      "osmId": "508049334",
       "name": "Gedung 508049334",
+      "matchedName": "Gedung 508049334",
       "category": "public",
       "polygon": [
         {
@@ -21210,7 +21750,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049335",
+      "osmId": "508049335",
       "name": "Gedung 508049335",
+      "matchedName": "Gedung 508049335",
       "category": "public",
       "polygon": [
         {
@@ -21272,7 +21814,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049336",
+      "osmId": "508049336",
       "name": "Gedung 508049336",
+      "matchedName": "Gedung 508049336",
       "category": "public",
       "polygon": [
         {
@@ -21334,7 +21878,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049337",
+      "osmId": "508049337",
       "name": "Gedung 508049337",
+      "matchedName": "Gedung 508049337",
       "category": "public",
       "polygon": [
         {
@@ -21396,7 +21942,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049338",
+      "osmId": "508049338",
       "name": "Gedung 508049338",
+      "matchedName": "Gedung 508049338",
       "category": "public",
       "polygon": [
         {
@@ -21458,7 +22006,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049339",
+      "osmId": "508049339",
       "name": "Gedung 508049339",
+      "matchedName": "Gedung 508049339",
       "category": "public",
       "polygon": [
         {
@@ -21520,7 +22070,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049340",
+      "osmId": "508049340",
       "name": "Gedung 508049340",
+      "matchedName": "Gedung 508049340",
       "category": "public",
       "polygon": [
         {
@@ -21582,7 +22134,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049341",
+      "osmId": "508049341",
       "name": "Gedung 508049341",
+      "matchedName": "Gedung 508049341",
       "category": "public",
       "polygon": [
         {
@@ -21644,7 +22198,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049342",
+      "osmId": "508049342",
       "name": "Gedung 508049342",
+      "matchedName": "Gedung 508049342",
       "category": "public",
       "polygon": [
         {
@@ -21706,7 +22262,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049343",
+      "osmId": "508049343",
       "name": "Gedung 508049343",
+      "matchedName": "Gedung 508049343",
       "category": "public",
       "polygon": [
         {
@@ -21768,7 +22326,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049344",
+      "osmId": "508049344",
       "name": "Gedung 508049344",
+      "matchedName": "Gedung 508049344",
       "category": "public",
       "polygon": [
         {
@@ -21830,7 +22390,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049345",
+      "osmId": "508049345",
       "name": "Gedung 508049345",
+      "matchedName": "Gedung 508049345",
       "category": "public",
       "polygon": [
         {
@@ -21892,7 +22454,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049346",
+      "osmId": "508049346",
       "name": "Gedung 508049346",
+      "matchedName": "Gedung 508049346",
       "category": "public",
       "polygon": [
         {
@@ -21954,7 +22518,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049347",
+      "osmId": "508049347",
       "name": "Gedung 508049347",
+      "matchedName": "Gedung 508049347",
       "category": "public",
       "polygon": [
         {
@@ -22016,7 +22582,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049348",
+      "osmId": "508049348",
       "name": "Gedung 508049348",
+      "matchedName": "Gedung 508049348",
       "category": "public",
       "polygon": [
         {
@@ -22078,7 +22646,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049349",
+      "osmId": "508049349",
       "name": "Gedung 508049349",
+      "matchedName": "Gedung 508049349",
       "category": "public",
       "polygon": [
         {
@@ -22140,7 +22710,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049350",
+      "osmId": "508049350",
       "name": "Gedung 508049350",
+      "matchedName": "Gedung 508049350",
       "category": "public",
       "polygon": [
         {
@@ -22202,7 +22774,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049351",
+      "osmId": "508049351",
       "name": "Gedung 508049351",
+      "matchedName": "Gedung 508049351",
       "category": "public",
       "polygon": [
         {
@@ -22264,7 +22838,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049352",
+      "osmId": "508049352",
       "name": "Gedung 508049352",
+      "matchedName": "Gedung 508049352",
       "category": "public",
       "polygon": [
         {
@@ -22326,7 +22902,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049353",
+      "osmId": "508049353",
       "name": "Gedung 508049353",
+      "matchedName": "Gedung 508049353",
       "category": "public",
       "polygon": [
         {
@@ -22388,7 +22966,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049354",
+      "osmId": "508049354",
       "name": "Gedung 508049354",
+      "matchedName": "Gedung 508049354",
       "category": "public",
       "polygon": [
         {
@@ -22450,7 +23030,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049355",
+      "osmId": "508049355",
       "name": "Gedung 508049355",
+      "matchedName": "Gedung 508049355",
       "category": "public",
       "polygon": [
         {
@@ -22512,7 +23094,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049356",
+      "osmId": "508049356",
       "name": "Gedung 508049356",
+      "matchedName": "Gedung 508049356",
       "category": "public",
       "polygon": [
         {
@@ -22574,7 +23158,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049357",
+      "osmId": "508049357",
       "name": "Gedung 508049357",
+      "matchedName": "Gedung 508049357",
       "category": "public",
       "polygon": [
         {
@@ -22636,7 +23222,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049358",
+      "osmId": "508049358",
       "name": "Gedung 508049358",
+      "matchedName": "Gedung 508049358",
       "category": "public",
       "polygon": [
         {
@@ -22698,7 +23286,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049359",
+      "osmId": "508049359",
       "name": "Gedung 508049359",
+      "matchedName": "Gedung 508049359",
       "category": "public",
       "polygon": [
         {
@@ -22760,7 +23350,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049360",
+      "osmId": "508049360",
       "name": "Gedung 508049360",
+      "matchedName": "Gedung 508049360",
       "category": "public",
       "polygon": [
         {
@@ -22822,7 +23414,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049361",
+      "osmId": "508049361",
       "name": "Gedung 508049361",
+      "matchedName": "Gedung 508049361",
       "category": "public",
       "polygon": [
         {
@@ -22884,7 +23478,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049362",
+      "osmId": "508049362",
       "name": "Gedung 508049362",
+      "matchedName": "Gedung 508049362",
       "category": "public",
       "polygon": [
         {
@@ -22946,7 +23542,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049363",
+      "osmId": "508049363",
       "name": "Gedung 508049363",
+      "matchedName": "Gedung 508049363",
       "category": "public",
       "polygon": [
         {
@@ -23008,7 +23606,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049364",
+      "osmId": "508049364",
       "name": "Gedung 508049364",
+      "matchedName": "Gedung 508049364",
       "category": "public",
       "polygon": [
         {
@@ -23070,7 +23670,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049365",
+      "osmId": "508049365",
       "name": "Gedung 508049365",
+      "matchedName": "Gedung 508049365",
       "category": "public",
       "polygon": [
         {
@@ -23132,7 +23734,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049366",
+      "osmId": "508049366",
       "name": "Gedung 508049366",
+      "matchedName": "Gedung 508049366",
       "category": "public",
       "polygon": [
         {
@@ -23194,7 +23798,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049367",
+      "osmId": "508049367",
       "name": "Gedung 508049367",
+      "matchedName": "Gedung 508049367",
       "category": "public",
       "polygon": [
         {
@@ -23256,7 +23862,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049368",
+      "osmId": "508049368",
       "name": "Gedung 508049368",
+      "matchedName": "Gedung 508049368",
       "category": "public",
       "polygon": [
         {
@@ -23318,7 +23926,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049369",
+      "osmId": "508049369",
       "name": "Gedung 508049369",
+      "matchedName": "Gedung 508049369",
       "category": "public",
       "polygon": [
         {
@@ -23380,7 +23990,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049370",
+      "osmId": "508049370",
       "name": "Gedung 508049370",
+      "matchedName": "Gedung 508049370",
       "category": "public",
       "polygon": [
         {
@@ -23442,7 +24054,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049371",
+      "osmId": "508049371",
       "name": "Gedung 508049371",
+      "matchedName": "Gedung 508049371",
       "category": "public",
       "polygon": [
         {
@@ -23504,7 +24118,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049372",
+      "osmId": "508049372",
       "name": "Gedung 508049372",
+      "matchedName": "Gedung 508049372",
       "category": "public",
       "polygon": [
         {
@@ -23566,7 +24182,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049373",
+      "osmId": "508049373",
       "name": "Gedung 508049373",
+      "matchedName": "Gedung 508049373",
       "category": "public",
       "polygon": [
         {
@@ -23628,7 +24246,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049374",
+      "osmId": "508049374",
       "name": "Gedung 508049374",
+      "matchedName": "Gedung 508049374",
       "category": "public",
       "polygon": [
         {
@@ -23690,7 +24310,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049375",
+      "osmId": "508049375",
       "name": "Gedung 508049375",
+      "matchedName": "Gedung 508049375",
       "category": "public",
       "polygon": [
         {
@@ -23752,7 +24374,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049376",
+      "osmId": "508049376",
       "name": "Gedung 508049376",
+      "matchedName": "Gedung 508049376",
       "category": "public",
       "polygon": [
         {
@@ -23814,7 +24438,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049377",
+      "osmId": "508049377",
       "name": "Gedung 508049377",
+      "matchedName": "Gedung 508049377",
       "category": "public",
       "polygon": [
         {
@@ -23876,7 +24502,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049378",
+      "osmId": "508049378",
       "name": "Gedung 508049378",
+      "matchedName": "Gedung 508049378",
       "category": "public",
       "polygon": [
         {
@@ -23938,7 +24566,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049379",
+      "osmId": "508049379",
       "name": "Gedung 508049379",
+      "matchedName": "Gedung 508049379",
       "category": "public",
       "polygon": [
         {
@@ -24000,7 +24630,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049380",
+      "osmId": "508049380",
       "name": "Gedung 508049380",
+      "matchedName": "Gedung 508049380",
       "category": "public",
       "polygon": [
         {
@@ -24062,7 +24694,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049381",
+      "osmId": "508049381",
       "name": "Gedung 508049381",
+      "matchedName": "Gedung 508049381",
       "category": "public",
       "polygon": [
         {
@@ -24124,7 +24758,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049382",
+      "osmId": "508049382",
       "name": "Gedung 508049382",
+      "matchedName": "Gedung 508049382",
       "category": "public",
       "polygon": [
         {
@@ -24186,7 +24822,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049383",
+      "osmId": "508049383",
       "name": "Gedung 508049383",
+      "matchedName": "Gedung 508049383",
       "category": "public",
       "polygon": [
         {
@@ -24248,7 +24886,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049384",
+      "osmId": "508049384",
       "name": "Gedung 508049384",
+      "matchedName": "Gedung 508049384",
       "category": "public",
       "polygon": [
         {
@@ -24310,7 +24950,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049385",
+      "osmId": "508049385",
       "name": "Gedung 508049385",
+      "matchedName": "Gedung 508049385",
       "category": "public",
       "polygon": [
         {
@@ -24372,7 +25014,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049386",
+      "osmId": "508049386",
       "name": "Gedung 508049386",
+      "matchedName": "Gedung 508049386",
       "category": "public",
       "polygon": [
         {
@@ -24434,7 +25078,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049387",
+      "osmId": "508049387",
       "name": "Gedung 508049387",
+      "matchedName": "Gedung 508049387",
       "category": "public",
       "polygon": [
         {
@@ -24496,7 +25142,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049388",
+      "osmId": "508049388",
       "name": "Gedung 508049388",
+      "matchedName": "Gedung 508049388",
       "category": "public",
       "polygon": [
         {
@@ -24558,7 +25206,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049389",
+      "osmId": "508049389",
       "name": "Gedung 508049389",
+      "matchedName": "Gedung 508049389",
       "category": "public",
       "polygon": [
         {
@@ -24620,7 +25270,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049390",
+      "osmId": "508049390",
       "name": "Gedung 508049390",
+      "matchedName": "Gedung 508049390",
       "category": "public",
       "polygon": [
         {
@@ -24682,7 +25334,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049391",
+      "osmId": "508049391",
       "name": "Gedung 508049391",
+      "matchedName": "Gedung 508049391",
       "category": "public",
       "polygon": [
         {
@@ -24744,7 +25398,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049392",
+      "osmId": "508049392",
       "name": "Gedung 508049392",
+      "matchedName": "Gedung 508049392",
       "category": "public",
       "polygon": [
         {
@@ -24806,7 +25462,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049393",
+      "osmId": "508049393",
       "name": "Gedung 508049393",
+      "matchedName": "Gedung 508049393",
       "category": "public",
       "polygon": [
         {
@@ -24868,7 +25526,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049394",
+      "osmId": "508049394",
       "name": "Gedung 508049394",
+      "matchedName": "Gedung 508049394",
       "category": "public",
       "polygon": [
         {
@@ -24930,7 +25590,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049395",
+      "osmId": "508049395",
       "name": "Gedung 508049395",
+      "matchedName": "Gedung 508049395",
       "category": "public",
       "polygon": [
         {
@@ -24992,7 +25654,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049396",
+      "osmId": "508049396",
       "name": "Gedung 508049396",
+      "matchedName": "Gedung 508049396",
       "category": "public",
       "polygon": [
         {
@@ -25054,7 +25718,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049397",
+      "osmId": "508049397",
       "name": "Gedung 508049397",
+      "matchedName": "Gedung 508049397",
       "category": "public",
       "polygon": [
         {
@@ -25116,7 +25782,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049398",
+      "osmId": "508049398",
       "name": "Gedung 508049398",
+      "matchedName": "Gedung 508049398",
       "category": "public",
       "polygon": [
         {
@@ -25178,7 +25846,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049399",
+      "osmId": "508049399",
       "name": "Gedung 508049399",
+      "matchedName": "Gedung 508049399",
       "category": "public",
       "polygon": [
         {
@@ -25240,7 +25910,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049400",
+      "osmId": "508049400",
       "name": "Gedung 508049400",
+      "matchedName": "Gedung 508049400",
       "category": "public",
       "polygon": [
         {
@@ -25302,7 +25974,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049401",
+      "osmId": "508049401",
       "name": "Gedung 508049401",
+      "matchedName": "Gedung 508049401",
       "category": "public",
       "polygon": [
         {
@@ -25364,7 +26038,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049402",
+      "osmId": "508049402",
       "name": "Gedung 508049402",
+      "matchedName": "Gedung 508049402",
       "category": "public",
       "polygon": [
         {
@@ -25426,7 +26102,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049403",
+      "osmId": "508049403",
       "name": "Gedung 508049403",
+      "matchedName": "Gedung 508049403",
       "category": "public",
       "polygon": [
         {
@@ -25488,7 +26166,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049404",
+      "osmId": "508049404",
       "name": "Gedung 508049404",
+      "matchedName": "Gedung 508049404",
       "category": "public",
       "polygon": [
         {
@@ -25550,7 +26230,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049405",
+      "osmId": "508049405",
       "name": "Gedung 508049405",
+      "matchedName": "Gedung 508049405",
       "category": "public",
       "polygon": [
         {
@@ -25612,7 +26294,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049406",
+      "osmId": "508049406",
       "name": "Gedung 508049406",
+      "matchedName": "Gedung 508049406",
       "category": "public",
       "polygon": [
         {
@@ -25674,7 +26358,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049407",
+      "osmId": "508049407",
       "name": "Gedung 508049407",
+      "matchedName": "Gedung 508049407",
       "category": "public",
       "polygon": [
         {
@@ -25736,7 +26422,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049408",
+      "osmId": "508049408",
       "name": "Gedung 508049408",
+      "matchedName": "Gedung 508049408",
       "category": "public",
       "polygon": [
         {
@@ -25798,7 +26486,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049409",
+      "osmId": "508049409",
       "name": "Gedung 508049409",
+      "matchedName": "Gedung 508049409",
       "category": "public",
       "polygon": [
         {
@@ -25860,7 +26550,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049410",
+      "osmId": "508049410",
       "name": "Gedung 508049410",
+      "matchedName": "Gedung 508049410",
       "category": "public",
       "polygon": [
         {
@@ -25922,7 +26614,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049411",
+      "osmId": "508049411",
       "name": "Gedung 508049411",
+      "matchedName": "Gedung 508049411",
       "category": "public",
       "polygon": [
         {
@@ -25984,7 +26678,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049412",
+      "osmId": "508049412",
       "name": "Gedung 508049412",
+      "matchedName": "Gedung 508049412",
       "category": "public",
       "polygon": [
         {
@@ -26046,7 +26742,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049413",
+      "osmId": "508049413",
       "name": "Gedung 508049413",
+      "matchedName": "Gedung 508049413",
       "category": "public",
       "polygon": [
         {
@@ -26108,7 +26806,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049414",
+      "osmId": "508049414",
       "name": "Gedung 508049414",
+      "matchedName": "Gedung 508049414",
       "category": "public",
       "polygon": [
         {
@@ -26170,7 +26870,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049415",
+      "osmId": "508049415",
       "name": "Gedung 508049415",
+      "matchedName": "Gedung 508049415",
       "category": "public",
       "polygon": [
         {
@@ -26232,7 +26934,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049416",
+      "osmId": "508049416",
       "name": "Gedung 508049416",
+      "matchedName": "Gedung 508049416",
       "category": "public",
       "polygon": [
         {
@@ -26294,7 +26998,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049417",
+      "osmId": "508049417",
       "name": "Gedung 508049417",
+      "matchedName": "Gedung 508049417",
       "category": "public",
       "polygon": [
         {
@@ -26356,7 +27062,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049418",
+      "osmId": "508049418",
       "name": "Gedung 508049418",
+      "matchedName": "Gedung 508049418",
       "category": "public",
       "polygon": [
         {
@@ -26418,7 +27126,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049419",
+      "osmId": "508049419",
       "name": "Gedung 508049419",
+      "matchedName": "Gedung 508049419",
       "category": "public",
       "polygon": [
         {
@@ -26480,7 +27190,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049420",
+      "osmId": "508049420",
       "name": "Gedung 508049420",
+      "matchedName": "Gedung 508049420",
       "category": "public",
       "polygon": [
         {
@@ -26542,7 +27254,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049421",
+      "osmId": "508049421",
       "name": "Gedung 508049421",
+      "matchedName": "Gedung 508049421",
       "category": "public",
       "polygon": [
         {
@@ -26604,7 +27318,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049422",
+      "osmId": "508049422",
       "name": "Gedung 508049422",
+      "matchedName": "Gedung 508049422",
       "category": "public",
       "polygon": [
         {
@@ -26666,7 +27382,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049423",
+      "osmId": "508049423",
       "name": "Gedung 508049423",
+      "matchedName": "Gedung 508049423",
       "category": "public",
       "polygon": [
         {
@@ -26728,7 +27446,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049424",
+      "osmId": "508049424",
       "name": "Gedung 508049424",
+      "matchedName": "Gedung 508049424",
       "category": "public",
       "polygon": [
         {
@@ -26790,7 +27510,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049425",
+      "osmId": "508049425",
       "name": "Gedung 508049425",
+      "matchedName": "Gedung 508049425",
       "category": "public",
       "polygon": [
         {
@@ -26852,7 +27574,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049426",
+      "osmId": "508049426",
       "name": "Gedung 508049426",
+      "matchedName": "Gedung 508049426",
       "category": "public",
       "polygon": [
         {
@@ -26914,7 +27638,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049427",
+      "osmId": "508049427",
       "name": "Gedung 508049427",
+      "matchedName": "Gedung 508049427",
       "category": "public",
       "polygon": [
         {
@@ -26976,7 +27702,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049428",
+      "osmId": "508049428",
       "name": "PAUD Pelita Hati",
+      "matchedName": "PAUD Pelita Hati",
       "category": "public",
       "polygon": [
         {
@@ -27053,7 +27781,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049429",
+      "osmId": "508049429",
       "name": "Gedung 508049429",
+      "matchedName": "Gedung 508049429",
       "category": "public",
       "polygon": [
         {
@@ -27115,7 +27845,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049430",
+      "osmId": "508049430",
       "name": "Gedung 508049430",
+      "matchedName": "Gedung 508049430",
       "category": "public",
       "polygon": [
         {
@@ -27177,7 +27909,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049431",
+      "osmId": "508049431",
       "name": "Gedung 508049431",
+      "matchedName": "Gedung 508049431",
       "category": "public",
       "polygon": [
         {
@@ -27239,7 +27973,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049432",
+      "osmId": "508049432",
       "name": "Gedung 508049432",
+      "matchedName": "Gedung 508049432",
       "category": "public",
       "polygon": [
         {
@@ -27301,7 +28037,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049433",
+      "osmId": "508049433",
       "name": "Gedung 508049433",
+      "matchedName": "Gedung 508049433",
       "category": "public",
       "polygon": [
         {
@@ -27363,7 +28101,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049434",
+      "osmId": "508049434",
       "name": "Gedung 508049434",
+      "matchedName": "Gedung 508049434",
       "category": "public",
       "polygon": [
         {
@@ -27425,7 +28165,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049435",
+      "osmId": "508049435",
       "name": "Gedung 508049435",
+      "matchedName": "Gedung 508049435",
       "category": "public",
       "polygon": [
         {
@@ -27487,7 +28229,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049436",
+      "osmId": "508049436",
       "name": "Gedung 508049436",
+      "matchedName": "Gedung 508049436",
       "category": "public",
       "polygon": [
         {
@@ -27549,7 +28293,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049437",
+      "osmId": "508049437",
       "name": "Gedung 508049437",
+      "matchedName": "Gedung 508049437",
       "category": "public",
       "polygon": [
         {
@@ -27611,7 +28357,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049438",
+      "osmId": "508049438",
       "name": "Gedung 508049438",
+      "matchedName": "Gedung 508049438",
       "category": "public",
       "polygon": [
         {
@@ -27673,7 +28421,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049439",
+      "osmId": "508049439",
       "name": "Gedung 508049439",
+      "matchedName": "Gedung 508049439",
       "category": "public",
       "polygon": [
         {
@@ -27735,7 +28485,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049440",
+      "osmId": "508049440",
       "name": "Gedung 508049440",
+      "matchedName": "Gedung 508049440",
       "category": "public",
       "polygon": [
         {
@@ -27797,7 +28549,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049441",
+      "osmId": "508049441",
       "name": "Gedung 508049441",
+      "matchedName": "Gedung 508049441",
       "category": "public",
       "polygon": [
         {
@@ -27859,7 +28613,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049442",
+      "osmId": "508049442",
       "name": "Gedung 508049442",
+      "matchedName": "Gedung 508049442",
       "category": "public",
       "polygon": [
         {
@@ -27921,7 +28677,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049443",
+      "osmId": "508049443",
       "name": "Gedung 508049443",
+      "matchedName": "Gedung 508049443",
       "category": "public",
       "polygon": [
         {
@@ -27983,7 +28741,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049444",
+      "osmId": "508049444",
       "name": "Gedung 508049444",
+      "matchedName": "Gedung 508049444",
       "category": "public",
       "polygon": [
         {
@@ -28045,7 +28805,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049445",
+      "osmId": "508049445",
       "name": "Gedung 508049445",
+      "matchedName": "Gedung 508049445",
       "category": "public",
       "polygon": [
         {
@@ -28107,7 +28869,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049446",
+      "osmId": "508049446",
       "name": "Gedung 508049446",
+      "matchedName": "Gedung 508049446",
       "category": "public",
       "polygon": [
         {
@@ -28169,7 +28933,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049447",
+      "osmId": "508049447",
       "name": "Gedung 508049447",
+      "matchedName": "Gedung 508049447",
       "category": "public",
       "polygon": [
         {
@@ -28231,7 +28997,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049448",
+      "osmId": "508049448",
       "name": "Masjid Nurul Hikmah",
+      "matchedName": "Masjid Nurul Hikmah",
       "category": "public",
       "polygon": [
         {
@@ -28308,7 +29076,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049449",
+      "osmId": "508049449",
       "name": "Gedung 508049449",
+      "matchedName": "Gedung 508049449",
       "category": "public",
       "polygon": [
         {
@@ -28370,7 +29140,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049450",
+      "osmId": "508049450",
       "name": "Gedung 508049450",
+      "matchedName": "Gedung 508049450",
       "category": "public",
       "polygon": [
         {
@@ -28432,7 +29204,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049451",
+      "osmId": "508049451",
       "name": "Gedung 508049451",
+      "matchedName": "Gedung 508049451",
       "category": "public",
       "polygon": [
         {
@@ -28494,7 +29268,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049452",
+      "osmId": "508049452",
       "name": "Gedung 508049452",
+      "matchedName": "Gedung 508049452",
       "category": "public",
       "polygon": [
         {
@@ -28556,7 +29332,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049453",
+      "osmId": "508049453",
       "name": "Gedung 508049453",
+      "matchedName": "Gedung 508049453",
       "category": "public",
       "polygon": [
         {
@@ -28618,7 +29396,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049454",
+      "osmId": "508049454",
       "name": "Gedung 508049454",
+      "matchedName": "Gedung 508049454",
       "category": "public",
       "polygon": [
         {
@@ -28680,7 +29460,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049455",
+      "osmId": "508049455",
       "name": "Gedung 508049455",
+      "matchedName": "Gedung 508049455",
       "category": "public",
       "polygon": [
         {
@@ -28742,7 +29524,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049456",
+      "osmId": "508049456",
       "name": "Gedung 508049456",
+      "matchedName": "Gedung 508049456",
       "category": "public",
       "polygon": [
         {
@@ -28804,7 +29588,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049457",
+      "osmId": "508049457",
       "name": "Gedung 508049457",
+      "matchedName": "Gedung 508049457",
       "category": "public",
       "polygon": [
         {
@@ -28866,7 +29652,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049458",
+      "osmId": "508049458",
       "name": "Gedung 508049458",
+      "matchedName": "Gedung 508049458",
       "category": "public",
       "polygon": [
         {
@@ -28928,7 +29716,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049459",
+      "osmId": "508049459",
       "name": "Gedung 508049459",
+      "matchedName": "Gedung 508049459",
       "category": "public",
       "polygon": [
         {
@@ -28990,7 +29780,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049460",
+      "osmId": "508049460",
       "name": "Gedung 508049460",
+      "matchedName": "Gedung 508049460",
       "category": "public",
       "polygon": [
         {
@@ -29052,7 +29844,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049461",
+      "osmId": "508049461",
       "name": "Gedung 508049461",
+      "matchedName": "Gedung 508049461",
       "category": "public",
       "polygon": [
         {
@@ -29114,7 +29908,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049462",
+      "osmId": "508049462",
       "name": "Gedung 508049462",
+      "matchedName": "Gedung 508049462",
       "category": "public",
       "polygon": [
         {
@@ -29176,7 +29972,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049463",
+      "osmId": "508049463",
       "name": "Gedung 508049463",
+      "matchedName": "Gedung 508049463",
       "category": "public",
       "polygon": [
         {
@@ -29238,7 +30036,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049464",
+      "osmId": "508049464",
       "name": "Gedung 508049464",
+      "matchedName": "Gedung 508049464",
       "category": "public",
       "polygon": [
         {
@@ -29300,7 +30100,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049465",
+      "osmId": "508049465",
       "name": "Gedung 508049465",
+      "matchedName": "Gedung 508049465",
       "category": "public",
       "polygon": [
         {
@@ -29362,7 +30164,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049466",
+      "osmId": "508049466",
       "name": "Gedung 508049466",
+      "matchedName": "Gedung 508049466",
       "category": "public",
       "polygon": [
         {
@@ -29424,7 +30228,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049467",
+      "osmId": "508049467",
       "name": "Gedung 508049467",
+      "matchedName": "Gedung 508049467",
       "category": "public",
       "polygon": [
         {
@@ -29486,7 +30292,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049468",
+      "osmId": "508049468",
       "name": "Gedung 508049468",
+      "matchedName": "Gedung 508049468",
       "category": "public",
       "polygon": [
         {
@@ -29548,7 +30356,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049469",
+      "osmId": "508049469",
       "name": "Gedung 508049469",
+      "matchedName": "Gedung 508049469",
       "category": "public",
       "polygon": [
         {
@@ -29610,7 +30420,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049470",
+      "osmId": "508049470",
       "name": "Gedung 508049470",
+      "matchedName": "Gedung 508049470",
       "category": "public",
       "polygon": [
         {
@@ -29672,7 +30484,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049471",
+      "osmId": "508049471",
       "name": "Gedung 508049471",
+      "matchedName": "Gedung 508049471",
       "category": "public",
       "polygon": [
         {
@@ -29734,7 +30548,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049472",
+      "osmId": "508049472",
       "name": "Gedung 508049472",
+      "matchedName": "Gedung 508049472",
       "category": "public",
       "polygon": [
         {
@@ -29796,7 +30612,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049473",
+      "osmId": "508049473",
       "name": "Gedung 508049473",
+      "matchedName": "Gedung 508049473",
       "category": "public",
       "polygon": [
         {
@@ -29858,7 +30676,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049474",
+      "osmId": "508049474",
       "name": "Gedung 508049474",
+      "matchedName": "Gedung 508049474",
       "category": "public",
       "polygon": [
         {
@@ -29920,7 +30740,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049475",
+      "osmId": "508049475",
       "name": "Gedung 508049475",
+      "matchedName": "Gedung 508049475",
       "category": "public",
       "polygon": [
         {
@@ -29982,7 +30804,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049476",
+      "osmId": "508049476",
       "name": "Gedung 508049476",
+      "matchedName": "Gedung 508049476",
       "category": "public",
       "polygon": [
         {
@@ -30044,7 +30868,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049477",
+      "osmId": "508049477",
       "name": "Gedung 508049477",
+      "matchedName": "Gedung 508049477",
       "category": "public",
       "polygon": [
         {
@@ -30106,7 +30932,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049478",
+      "osmId": "508049478",
       "name": "Gedung 508049478",
+      "matchedName": "Gedung 508049478",
       "category": "public",
       "polygon": [
         {
@@ -30168,7 +30996,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049479",
+      "osmId": "508049479",
       "name": "Gedung 508049479",
+      "matchedName": "Gedung 508049479",
       "category": "public",
       "polygon": [
         {
@@ -30230,7 +31060,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049480",
+      "osmId": "508049480",
       "name": "Gedung 508049480",
+      "matchedName": "Gedung 508049480",
       "category": "public",
       "polygon": [
         {
@@ -30292,7 +31124,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049481",
+      "osmId": "508049481",
       "name": "Gedung 508049481",
+      "matchedName": "Gedung 508049481",
       "category": "public",
       "polygon": [
         {
@@ -30354,7 +31188,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049482",
+      "osmId": "508049482",
       "name": "Gedung 508049482",
+      "matchedName": "Gedung 508049482",
       "category": "public",
       "polygon": [
         {
@@ -30416,7 +31252,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049483",
+      "osmId": "508049483",
       "name": "Gedung 508049483",
+      "matchedName": "Gedung 508049483",
       "category": "public",
       "polygon": [
         {
@@ -30478,7 +31316,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049484",
+      "osmId": "508049484",
       "name": "Gedung 508049484",
+      "matchedName": "Gedung 508049484",
       "category": "public",
       "polygon": [
         {
@@ -30540,7 +31380,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049485",
+      "osmId": "508049485",
       "name": "Gedung 508049485",
+      "matchedName": "Gedung 508049485",
       "category": "public",
       "polygon": [
         {
@@ -30602,7 +31444,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049486",
+      "osmId": "508049486",
       "name": "Gedung 508049486",
+      "matchedName": "Gedung 508049486",
       "category": "public",
       "polygon": [
         {
@@ -30664,7 +31508,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049487",
+      "osmId": "508049487",
       "name": "Gedung 508049487",
+      "matchedName": "Gedung 508049487",
       "category": "public",
       "polygon": [
         {
@@ -30726,7 +31572,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049488",
+      "osmId": "508049488",
       "name": "Gedung 508049488",
+      "matchedName": "Gedung 508049488",
       "category": "public",
       "polygon": [
         {
@@ -30788,7 +31636,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049489",
+      "osmId": "508049489",
       "name": "Gedung 508049489",
+      "matchedName": "Gedung 508049489",
       "category": "public",
       "polygon": [
         {
@@ -30850,7 +31700,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049490",
+      "osmId": "508049490",
       "name": "Gedung 508049490",
+      "matchedName": "Gedung 508049490",
       "category": "public",
       "polygon": [
         {
@@ -30912,7 +31764,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049491",
+      "osmId": "508049491",
       "name": "Gedung 508049491",
+      "matchedName": "Gedung 508049491",
       "category": "public",
       "polygon": [
         {
@@ -30974,7 +31828,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049492",
+      "osmId": "508049492",
       "name": "Gedung 508049492",
+      "matchedName": "Gedung 508049492",
       "category": "public",
       "polygon": [
         {
@@ -31036,7 +31892,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049493",
+      "osmId": "508049493",
       "name": "Gedung 508049493",
+      "matchedName": "Gedung 508049493",
       "category": "public",
       "polygon": [
         {
@@ -31098,7 +31956,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049494",
+      "osmId": "508049494",
       "name": "Gedung 508049494",
+      "matchedName": "Gedung 508049494",
       "category": "public",
       "polygon": [
         {
@@ -31160,7 +32020,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049495",
+      "osmId": "508049495",
       "name": "Gedung 508049495",
+      "matchedName": "Gedung 508049495",
       "category": "public",
       "polygon": [
         {
@@ -31222,7 +32084,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049496",
+      "osmId": "508049496",
       "name": "Gedung 508049496",
+      "matchedName": "Gedung 508049496",
       "category": "public",
       "polygon": [
         {
@@ -31284,7 +32148,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049497",
+      "osmId": "508049497",
       "name": "Gedung 508049497",
+      "matchedName": "Gedung 508049497",
       "category": "public",
       "polygon": [
         {
@@ -31346,7 +32212,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049498",
+      "osmId": "508049498",
       "name": "Gedung 508049498",
+      "matchedName": "Gedung 508049498",
       "category": "public",
       "polygon": [
         {
@@ -31408,7 +32276,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049499",
+      "osmId": "508049499",
       "name": "Gedung 508049499",
+      "matchedName": "Gedung 508049499",
       "category": "public",
       "polygon": [
         {
@@ -31470,7 +32340,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049500",
+      "osmId": "508049500",
       "name": "Gedung 508049500",
+      "matchedName": "Gedung 508049500",
       "category": "public",
       "polygon": [
         {
@@ -31532,7 +32404,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049501",
+      "osmId": "508049501",
       "name": "Gedung 508049501",
+      "matchedName": "Gedung 508049501",
       "category": "public",
       "polygon": [
         {
@@ -31607,7 +32481,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049502",
+      "osmId": "508049502",
       "name": "Gedung 508049502",
+      "matchedName": "Gedung 508049502",
       "category": "public",
       "polygon": [
         {
@@ -31669,7 +32545,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049503",
+      "osmId": "508049503",
       "name": "Gedung 508049503",
+      "matchedName": "Gedung 508049503",
       "category": "public",
       "polygon": [
         {
@@ -31731,8 +32609,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049504",
+      "osmId": "508049504",
       "name": "Gedung 508049504",
-      "category": "public",
+      "matchedName": "Gedung 508049504",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.052768,
@@ -31804,7 +32684,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049505",
+      "osmId": "508049505",
       "name": "Gedung 508049505",
+      "matchedName": "Gedung 508049505",
       "category": "public",
       "polygon": [
         {
@@ -31866,7 +32748,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049506",
+      "osmId": "508049506",
       "name": "Gedung 508049506",
+      "matchedName": "Gedung 508049506",
       "category": "public",
       "polygon": [
         {
@@ -31928,7 +32812,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049507",
+      "osmId": "508049507",
       "name": "Gedung 508049507",
+      "matchedName": "Gedung 508049507",
       "category": "public",
       "polygon": [
         {
@@ -31990,7 +32876,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049508",
+      "osmId": "508049508",
       "name": "Gedung 508049508",
+      "matchedName": "Gedung 508049508",
       "category": "public",
       "polygon": [
         {
@@ -32052,7 +32940,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049509",
+      "osmId": "508049509",
       "name": "Gedung 508049509",
+      "matchedName": "Gedung 508049509",
       "category": "public",
       "polygon": [
         {
@@ -32114,7 +33004,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049510",
+      "osmId": "508049510",
       "name": "Gedung 508049510",
+      "matchedName": "Gedung 508049510",
       "category": "public",
       "polygon": [
         {
@@ -32176,7 +33068,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049511",
+      "osmId": "508049511",
       "name": "Gedung 508049511",
+      "matchedName": "Gedung 508049511",
       "category": "public",
       "polygon": [
         {
@@ -32238,7 +33132,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049512",
+      "osmId": "508049512",
       "name": "Gedung 508049512",
+      "matchedName": "Gedung 508049512",
       "category": "public",
       "polygon": [
         {
@@ -32300,7 +33196,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049513",
+      "osmId": "508049513",
       "name": "Gedung 508049513",
+      "matchedName": "Gedung 508049513",
       "category": "public",
       "polygon": [
         {
@@ -32362,7 +33260,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049514",
+      "osmId": "508049514",
       "name": "Gedung 508049514",
+      "matchedName": "Gedung 508049514",
       "category": "public",
       "polygon": [
         {
@@ -32424,7 +33324,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049515",
+      "osmId": "508049515",
       "name": "Gedung 508049515",
+      "matchedName": "Gedung 508049515",
       "category": "public",
       "polygon": [
         {
@@ -32486,7 +33388,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049516",
+      "osmId": "508049516",
       "name": "Gedung 508049516",
+      "matchedName": "Gedung 508049516",
       "category": "public",
       "polygon": [
         {
@@ -32548,7 +33452,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049517",
+      "osmId": "508049517",
       "name": "Gedung 508049517",
+      "matchedName": "Gedung 508049517",
       "category": "public",
       "polygon": [
         {
@@ -32610,7 +33516,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049518",
+      "osmId": "508049518",
       "name": "Gedung 508049518",
+      "matchedName": "Gedung 508049518",
       "category": "public",
       "polygon": [
         {
@@ -32672,7 +33580,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049519",
+      "osmId": "508049519",
       "name": "Gedung 508049519",
+      "matchedName": "Gedung 508049519",
       "category": "public",
       "polygon": [
         {
@@ -32734,7 +33644,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049520",
+      "osmId": "508049520",
       "name": "Gedung 508049520",
+      "matchedName": "Gedung 508049520",
       "category": "public",
       "polygon": [
         {
@@ -32796,7 +33708,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049521",
+      "osmId": "508049521",
       "name": "Gedung 508049521",
+      "matchedName": "Gedung 508049521",
       "category": "public",
       "polygon": [
         {
@@ -32858,7 +33772,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049522",
+      "osmId": "508049522",
       "name": "Gedung 508049522",
+      "matchedName": "Gedung 508049522",
       "category": "public",
       "polygon": [
         {
@@ -32920,7 +33836,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049523",
+      "osmId": "508049523",
       "name": "Gedung 508049523",
+      "matchedName": "Gedung 508049523",
       "category": "public",
       "polygon": [
         {
@@ -32982,7 +33900,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049524",
+      "osmId": "508049524",
       "name": "Gedung 508049524",
+      "matchedName": "Gedung 508049524",
       "category": "public",
       "polygon": [
         {
@@ -33044,7 +33964,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049525",
+      "osmId": "508049525",
       "name": "Gedung 508049525",
+      "matchedName": "Gedung 508049525",
       "category": "public",
       "polygon": [
         {
@@ -33106,7 +34028,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049526",
+      "osmId": "508049526",
       "name": "Gedung 508049526",
+      "matchedName": "Gedung 508049526",
       "category": "public",
       "polygon": [
         {
@@ -33168,7 +34092,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049527",
+      "osmId": "508049527",
       "name": "Gedung 508049527",
+      "matchedName": "Gedung 508049527",
       "category": "public",
       "polygon": [
         {
@@ -33230,7 +34156,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049528",
+      "osmId": "508049528",
       "name": "Gedung 508049528",
+      "matchedName": "Gedung 508049528",
       "category": "public",
       "polygon": [
         {
@@ -33292,7 +34220,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049529",
+      "osmId": "508049529",
       "name": "Gedung 508049529",
+      "matchedName": "Gedung 508049529",
       "category": "public",
       "polygon": [
         {
@@ -33354,7 +34284,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049530",
+      "osmId": "508049530",
       "name": "Gedung 508049530",
+      "matchedName": "Gedung 508049530",
       "category": "public",
       "polygon": [
         {
@@ -33416,7 +34348,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049531",
+      "osmId": "508049531",
       "name": "Gedung 508049531",
+      "matchedName": "Gedung 508049531",
       "category": "public",
       "polygon": [
         {
@@ -33478,7 +34412,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049532",
+      "osmId": "508049532",
       "name": "Gedung 508049532",
+      "matchedName": "Gedung 508049532",
       "category": "public",
       "polygon": [
         {
@@ -33540,7 +34476,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049533",
+      "osmId": "508049533",
       "name": "Gedung 508049533",
+      "matchedName": "Gedung 508049533",
       "category": "public",
       "polygon": [
         {
@@ -33602,7 +34540,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049534",
+      "osmId": "508049534",
       "name": "Gedung 508049534",
+      "matchedName": "Gedung 508049534",
       "category": "public",
       "polygon": [
         {
@@ -33664,7 +34604,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049535",
+      "osmId": "508049535",
       "name": "Gedung 508049535",
+      "matchedName": "Gedung 508049535",
       "category": "public",
       "polygon": [
         {
@@ -33726,7 +34668,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049536",
+      "osmId": "508049536",
       "name": "Gedung 508049536",
+      "matchedName": "Gedung 508049536",
       "category": "public",
       "polygon": [
         {
@@ -33828,7 +34772,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049537",
+      "osmId": "508049537",
       "name": "Gedung 508049537",
+      "matchedName": "Gedung 508049537",
       "category": "public",
       "polygon": [
         {
@@ -33890,7 +34836,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049538",
+      "osmId": "508049538",
       "name": "Gedung 508049538",
+      "matchedName": "Gedung 508049538",
       "category": "public",
       "polygon": [
         {
@@ -33952,7 +34900,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049539",
+      "osmId": "508049539",
       "name": "Gedung 508049539",
+      "matchedName": "Gedung 508049539",
       "category": "public",
       "polygon": [
         {
@@ -34014,7 +34964,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049540",
+      "osmId": "508049540",
       "name": "Gedung 508049540",
+      "matchedName": "Gedung 508049540",
       "category": "public",
       "polygon": [
         {
@@ -34076,7 +35028,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049541",
+      "osmId": "508049541",
       "name": "Gedung 508049541",
+      "matchedName": "Gedung 508049541",
       "category": "public",
       "polygon": [
         {
@@ -34138,7 +35092,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049542",
+      "osmId": "508049542",
       "name": "Gedung 508049542",
+      "matchedName": "Gedung 508049542",
       "category": "public",
       "polygon": [
         {
@@ -34200,7 +35156,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049543",
+      "osmId": "508049543",
       "name": "Gedung 508049543",
+      "matchedName": "Gedung 508049543",
       "category": "public",
       "polygon": [
         {
@@ -34262,7 +35220,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049544",
+      "osmId": "508049544",
       "name": "Gedung 508049544",
+      "matchedName": "Gedung 508049544",
       "category": "public",
       "polygon": [
         {
@@ -34324,7 +35284,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049545",
+      "osmId": "508049545",
       "name": "Gedung 508049545",
+      "matchedName": "Gedung 508049545",
       "category": "public",
       "polygon": [
         {
@@ -34386,7 +35348,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049546",
+      "osmId": "508049546",
       "name": "Gedung 508049546",
+      "matchedName": "Gedung 508049546",
       "category": "public",
       "polygon": [
         {
@@ -34448,7 +35412,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049547",
+      "osmId": "508049547",
       "name": "Gedung 508049547",
+      "matchedName": "Gedung 508049547",
       "category": "public",
       "polygon": [
         {
@@ -34510,7 +35476,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049548",
+      "osmId": "508049548",
       "name": "Gedung 508049548",
+      "matchedName": "Gedung 508049548",
       "category": "public",
       "polygon": [
         {
@@ -34572,7 +35540,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049549",
+      "osmId": "508049549",
       "name": "Gedung 508049549",
+      "matchedName": "Gedung 508049549",
       "category": "public",
       "polygon": [
         {
@@ -34634,7 +35604,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049550",
+      "osmId": "508049550",
       "name": "Gedung 508049550",
+      "matchedName": "Gedung 508049550",
       "category": "public",
       "polygon": [
         {
@@ -34696,7 +35668,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049551",
+      "osmId": "508049551",
       "name": "Gedung 508049551",
+      "matchedName": "Gedung 508049551",
       "category": "public",
       "polygon": [
         {
@@ -34758,7 +35732,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049552",
+      "osmId": "508049552",
       "name": "Gedung 508049552",
+      "matchedName": "Gedung 508049552",
       "category": "public",
       "polygon": [
         {
@@ -34820,7 +35796,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049553",
+      "osmId": "508049553",
       "name": "Gedung 508049553",
+      "matchedName": "Gedung 508049553",
       "category": "public",
       "polygon": [
         {
@@ -34882,7 +35860,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049554",
+      "osmId": "508049554",
       "name": "Gedung 508049554",
+      "matchedName": "Gedung 508049554",
       "category": "public",
       "polygon": [
         {
@@ -34944,7 +35924,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049555",
+      "osmId": "508049555",
       "name": "Gedung 508049555",
+      "matchedName": "Gedung 508049555",
       "category": "public",
       "polygon": [
         {
@@ -35006,7 +35988,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049556",
+      "osmId": "508049556",
       "name": "Gedung 508049556",
+      "matchedName": "Gedung 508049556",
       "category": "public",
       "polygon": [
         {
@@ -35068,7 +36052,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049557",
+      "osmId": "508049557",
       "name": "Gedung 508049557",
+      "matchedName": "Gedung 508049557",
       "category": "public",
       "polygon": [
         {
@@ -35130,7 +36116,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049558",
+      "osmId": "508049558",
       "name": "Gedung 508049558",
+      "matchedName": "Gedung 508049558",
       "category": "public",
       "polygon": [
         {
@@ -35192,7 +36180,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049559",
+      "osmId": "508049559",
       "name": "Gedung 508049559",
+      "matchedName": "Gedung 508049559",
       "category": "public",
       "polygon": [
         {
@@ -35254,7 +36244,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049560",
+      "osmId": "508049560",
       "name": "Gedung 508049560",
+      "matchedName": "Gedung 508049560",
       "category": "public",
       "polygon": [
         {
@@ -35316,7 +36308,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049561",
+      "osmId": "508049561",
       "name": "Gedung 508049561",
+      "matchedName": "Gedung 508049561",
       "category": "public",
       "polygon": [
         {
@@ -35378,8 +36372,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049837",
+      "osmId": "508049837",
       "name": "Gedung 508049837",
-      "category": "public",
+      "matchedName": "Gedung 508049837",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048426,
@@ -35440,7 +36436,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049838",
+      "osmId": "508049838",
       "name": "Gedung 508049838",
+      "matchedName": "Gedung 508049838",
       "category": "public",
       "polygon": [
         {
@@ -35502,8 +36500,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049839",
+      "osmId": "508049839",
       "name": "Gedung 508049839",
-      "category": "public",
+      "matchedName": "Gedung 508049839",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049692,
@@ -35564,8 +36564,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049840",
+      "osmId": "508049840",
       "name": "Gedung 508049840",
-      "category": "public",
+      "matchedName": "Gedung 508049840",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049762,
@@ -35626,7 +36628,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049841",
+      "osmId": "508049841",
       "name": "Gedung 508049841",
+      "matchedName": "Gedung 508049841",
       "category": "public",
       "polygon": [
         {
@@ -35688,7 +36692,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049842",
+      "osmId": "508049842",
       "name": "Gedung 508049842",
+      "matchedName": "Gedung 508049842",
       "category": "public",
       "polygon": [
         {
@@ -35750,7 +36756,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049844",
+      "osmId": "508049844",
       "name": "Gedung 508049844",
+      "matchedName": "Gedung 508049844",
       "category": "public",
       "polygon": [
         {
@@ -35812,8 +36820,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049845",
+      "osmId": "508049845",
       "name": "Gedung 508049845",
-      "category": "public",
+      "matchedName": "Gedung 508049845",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050053,
@@ -35874,7 +36884,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049846",
+      "osmId": "508049846",
       "name": "Sekolah Vokasi Universitas Diponegoro",
+      "matchedName": "Sekolah Vokasi Universitas Diponegoro",
       "facultyId": "sv",
       "category": "faculty",
       "polygon": [
@@ -35939,6 +36951,7 @@ export const campusMapData: CampusMapData = {
         "website": "https://vokasi.undip.ac.id/en/baru-eng/"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 599.65,
       "style": {
         "roofType": "flat-deck",
         "mainColors": [
@@ -35959,8 +36972,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049847",
+      "osmId": "508049847",
       "name": "Gedung 508049847",
-      "category": "public",
+      "matchedName": "Gedung 508049847",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050343,
@@ -36021,7 +37036,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049849",
+      "osmId": "508049849",
       "name": "Gedung Sekolah Vokasi",
+      "matchedName": "Gedung Sekolah Vokasi",
       "facultyId": "sv",
       "category": "faculty",
       "polygon": [
@@ -36125,6 +37142,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 550.56,
       "style": {
         "roofType": "flat-deck",
         "mainColors": [
@@ -36145,7 +37163,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049850",
+      "osmId": "508049850",
       "name": "Gedung D3 Teknik Sipil",
+      "matchedName": "Gedung D3 Teknik Sipil",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -36217,6 +37237,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 556.07,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -36237,7 +37258,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049851",
+      "osmId": "508049851",
       "name": "Gedung D3 Teknik Sipil",
+      "matchedName": "Gedung D3 Teknik Sipil",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -36309,6 +37332,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 558.37,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -36329,7 +37353,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049852",
+      "osmId": "508049852",
       "name": "Gedung 508049852",
+      "matchedName": "Gedung 508049852",
       "category": "public",
       "polygon": [
         {
@@ -36404,7 +37430,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049853",
+      "osmId": "508049853",
       "name": "Gedung 508049853",
+      "matchedName": "Gedung 508049853",
       "category": "public",
       "polygon": [
         {
@@ -36479,7 +37507,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049854",
+      "osmId": "508049854",
       "name": "Gedung 508049854",
+      "matchedName": "Gedung 508049854",
       "category": "public",
       "polygon": [
         {
@@ -36554,7 +37584,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049855",
+      "osmId": "508049855",
       "name": "Gedung 508049855",
+      "matchedName": "Gedung 508049855",
       "category": "public",
       "polygon": [
         {
@@ -36629,7 +37661,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049856",
+      "osmId": "508049856",
       "name": "Gedung 508049856",
+      "matchedName": "Gedung 508049856",
       "category": "public",
       "polygon": [
         {
@@ -36691,7 +37725,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049857",
+      "osmId": "508049857",
       "name": "Gedung 508049857",
+      "matchedName": "Gedung 508049857",
       "category": "public",
       "polygon": [
         {
@@ -36766,7 +37802,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049858",
+      "osmId": "508049858",
       "name": "Gedung 508049858",
+      "matchedName": "Gedung 508049858",
       "category": "public",
       "polygon": [
         {
@@ -36841,7 +37879,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049859",
+      "osmId": "508049859",
       "name": "Gedung 508049859",
+      "matchedName": "Gedung 508049859",
       "category": "public",
       "polygon": [
         {
@@ -36903,7 +37943,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049864",
+      "osmId": "508049864",
       "name": "Gedung 508049864",
+      "matchedName": "Gedung 508049864",
       "category": "public",
       "polygon": [
         {
@@ -36965,7 +38007,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049865",
+      "osmId": "508049865",
       "name": "Gedung 508049865",
+      "matchedName": "Gedung 508049865",
       "category": "public",
       "polygon": [
         {
@@ -37027,7 +38071,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049866",
+      "osmId": "508049866",
       "name": "Gedung 508049866",
+      "matchedName": "Gedung 508049866",
       "category": "public",
       "polygon": [
         {
@@ -37089,7 +38135,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049867",
+      "osmId": "508049867",
       "name": "Gedung 508049867",
+      "matchedName": "Gedung 508049867",
       "category": "public",
       "polygon": [
         {
@@ -37151,7 +38199,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049868",
+      "osmId": "508049868",
       "name": "Gedung 508049868",
+      "matchedName": "Gedung 508049868",
       "category": "public",
       "polygon": [
         {
@@ -37213,8 +38263,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049877",
+      "osmId": "508049877",
       "name": "Student Center",
-      "category": "public",
+      "matchedName": "Student Center",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.053723,
@@ -37409,7 +38461,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049880",
+      "osmId": "508049880",
       "name": "Gedung 508049880",
+      "matchedName": "Gedung 508049880",
       "category": "public",
       "polygon": [
         {
@@ -37471,7 +38525,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049881",
+      "osmId": "508049881",
       "name": "Gedung 508049881",
+      "matchedName": "Gedung 508049881",
       "category": "public",
       "polygon": [
         {
@@ -37533,7 +38589,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049882",
+      "osmId": "508049882",
       "name": "Gedung 508049882",
+      "matchedName": "Gedung 508049882",
       "category": "public",
       "polygon": [
         {
@@ -37595,7 +38653,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049883",
+      "osmId": "508049883",
       "name": "Gedung 508049883",
+      "matchedName": "Gedung 508049883",
       "category": "public",
       "polygon": [
         {
@@ -37657,7 +38717,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049884",
+      "osmId": "508049884",
       "name": "Gedung 508049884",
+      "matchedName": "Gedung 508049884",
       "category": "public",
       "polygon": [
         {
@@ -37719,7 +38781,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049885",
+      "osmId": "508049885",
       "name": "Gedung 508049885",
+      "matchedName": "Gedung 508049885",
       "category": "public",
       "polygon": [
         {
@@ -37781,7 +38845,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049887",
+      "osmId": "508049887",
       "name": "Gedung 508049887",
+      "matchedName": "Gedung 508049887",
       "category": "public",
       "polygon": [
         {
@@ -37843,7 +38909,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049889",
+      "osmId": "508049889",
       "name": "Gedung 508049889",
+      "matchedName": "Gedung 508049889",
       "category": "public",
       "polygon": [
         {
@@ -37905,7 +38973,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049891",
+      "osmId": "508049891",
       "name": "Gedung 508049891",
+      "matchedName": "Gedung 508049891",
       "category": "public",
       "polygon": [
         {
@@ -37967,7 +39037,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049894",
+      "osmId": "508049894",
       "name": "Gedung 508049894",
+      "matchedName": "Gedung 508049894",
       "category": "public",
       "polygon": [
         {
@@ -38029,7 +39101,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049896",
+      "osmId": "508049896",
       "name": "Gedung 508049896",
+      "matchedName": "Gedung 508049896",
       "category": "public",
       "polygon": [
         {
@@ -38091,7 +39165,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049898",
+      "osmId": "508049898",
       "name": "Gedung 508049898",
+      "matchedName": "Gedung 508049898",
       "category": "public",
       "polygon": [
         {
@@ -38153,7 +39229,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049900",
+      "osmId": "508049900",
       "name": "Gedung 508049900",
+      "matchedName": "Gedung 508049900",
       "category": "public",
       "polygon": [
         {
@@ -38215,7 +39293,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049902",
+      "osmId": "508049902",
       "name": "Gedung 508049902",
+      "matchedName": "Gedung 508049902",
       "category": "public",
       "polygon": [
         {
@@ -38277,7 +39357,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049905",
+      "osmId": "508049905",
       "name": "Gedung 508049905",
+      "matchedName": "Gedung 508049905",
       "category": "public",
       "polygon": [
         {
@@ -38339,7 +39421,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049914",
+      "osmId": "508049914",
       "name": "Gedung 508049914",
+      "matchedName": "Gedung 508049914",
       "category": "public",
       "polygon": [
         {
@@ -38401,7 +39485,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049915",
+      "osmId": "508049915",
       "name": "Gedung 508049915",
+      "matchedName": "Gedung 508049915",
       "category": "public",
       "polygon": [
         {
@@ -38463,7 +39549,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049916",
+      "osmId": "508049916",
       "name": "Gedung 508049916",
+      "matchedName": "Gedung 508049916",
       "category": "public",
       "polygon": [
         {
@@ -38525,7 +39613,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049917",
+      "osmId": "508049917",
       "name": "Gedung 508049917",
+      "matchedName": "Gedung 508049917",
       "category": "public",
       "polygon": [
         {
@@ -38587,7 +39677,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049918",
+      "osmId": "508049918",
       "name": "Gedung 508049918",
+      "matchedName": "Gedung 508049918",
       "category": "public",
       "polygon": [
         {
@@ -38649,7 +39741,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049919",
+      "osmId": "508049919",
       "name": "Gedung 508049919",
+      "matchedName": "Gedung 508049919",
       "category": "public",
       "polygon": [
         {
@@ -38711,7 +39805,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049920",
+      "osmId": "508049920",
       "name": "Gedung 508049920",
+      "matchedName": "Gedung 508049920",
       "category": "public",
       "polygon": [
         {
@@ -38773,7 +39869,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049921",
+      "osmId": "508049921",
       "name": "Gedung 508049921",
+      "matchedName": "Gedung 508049921",
       "category": "public",
       "polygon": [
         {
@@ -38835,7 +39933,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049922",
+      "osmId": "508049922",
       "name": "Gedung 508049922",
+      "matchedName": "Gedung 508049922",
       "category": "public",
       "polygon": [
         {
@@ -38897,7 +39997,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049923",
+      "osmId": "508049923",
       "name": "Gedung 508049923",
+      "matchedName": "Gedung 508049923",
       "category": "public",
       "polygon": [
         {
@@ -38959,7 +40061,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049924",
+      "osmId": "508049924",
       "name": "Gedung 508049924",
+      "matchedName": "Gedung 508049924",
       "category": "public",
       "polygon": [
         {
@@ -39021,7 +40125,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049925",
+      "osmId": "508049925",
       "name": "Gedung 508049925",
+      "matchedName": "Gedung 508049925",
       "category": "public",
       "polygon": [
         {
@@ -39083,7 +40189,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049927",
+      "osmId": "508049927",
       "name": "Gedung 508049927",
+      "matchedName": "Gedung 508049927",
       "category": "public",
       "polygon": [
         {
@@ -39145,7 +40253,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049928",
+      "osmId": "508049928",
       "name": "Gedung 508049928",
+      "matchedName": "Gedung 508049928",
       "category": "public",
       "polygon": [
         {
@@ -39207,7 +40317,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049929",
+      "osmId": "508049929",
       "name": "Gedung 508049929",
+      "matchedName": "Gedung 508049929",
       "category": "public",
       "polygon": [
         {
@@ -39269,7 +40381,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049930",
+      "osmId": "508049930",
       "name": "Gedung 508049930",
+      "matchedName": "Gedung 508049930",
       "category": "public",
       "polygon": [
         {
@@ -39331,7 +40445,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049931",
+      "osmId": "508049931",
       "name": "Gedung 508049931",
+      "matchedName": "Gedung 508049931",
       "category": "public",
       "polygon": [
         {
@@ -39393,7 +40509,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049932",
+      "osmId": "508049932",
       "name": "Gedung 508049932",
+      "matchedName": "Gedung 508049932",
       "category": "public",
       "polygon": [
         {
@@ -39455,7 +40573,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049933",
+      "osmId": "508049933",
       "name": "Gedung 508049933",
+      "matchedName": "Gedung 508049933",
       "category": "public",
       "polygon": [
         {
@@ -39517,7 +40637,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049934",
+      "osmId": "508049934",
       "name": "Gedung 508049934",
+      "matchedName": "Gedung 508049934",
       "category": "public",
       "polygon": [
         {
@@ -39579,7 +40701,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049935",
+      "osmId": "508049935",
       "name": "Gedung 508049935",
+      "matchedName": "Gedung 508049935",
       "category": "public",
       "polygon": [
         {
@@ -39641,7 +40765,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049936",
+      "osmId": "508049936",
       "name": "Gedung 508049936",
+      "matchedName": "Gedung 508049936",
       "category": "public",
       "polygon": [
         {
@@ -39703,7 +40829,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049937",
+      "osmId": "508049937",
       "name": "Gedung 508049937",
+      "matchedName": "Gedung 508049937",
       "category": "public",
       "polygon": [
         {
@@ -39765,7 +40893,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049941",
+      "osmId": "508049941",
       "name": "Gedung 508049941",
+      "matchedName": "Gedung 508049941",
       "category": "public",
       "polygon": [
         {
@@ -39827,7 +40957,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049942",
+      "osmId": "508049942",
       "name": "Gedung 508049942",
+      "matchedName": "Gedung 508049942",
       "category": "public",
       "polygon": [
         {
@@ -39889,7 +41021,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049944",
+      "osmId": "508049944",
       "name": "Gedung 508049944",
+      "matchedName": "Gedung 508049944",
       "category": "public",
       "polygon": [
         {
@@ -39951,7 +41085,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049945",
+      "osmId": "508049945",
       "name": "Gedung 508049945",
+      "matchedName": "Gedung 508049945",
       "category": "public",
       "polygon": [
         {
@@ -40013,7 +41149,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049946",
+      "osmId": "508049946",
       "name": "Gedung 508049946",
+      "matchedName": "Gedung 508049946",
       "category": "public",
       "polygon": [
         {
@@ -40075,7 +41213,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049947",
+      "osmId": "508049947",
       "name": "Gedung 508049947",
+      "matchedName": "Gedung 508049947",
       "category": "public",
       "polygon": [
         {
@@ -40137,7 +41277,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049948",
+      "osmId": "508049948",
       "name": "Gedung 508049948",
+      "matchedName": "Gedung 508049948",
       "category": "public",
       "polygon": [
         {
@@ -40199,7 +41341,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049949",
+      "osmId": "508049949",
       "name": "Gedung 508049949",
+      "matchedName": "Gedung 508049949",
       "category": "public",
       "polygon": [
         {
@@ -40261,7 +41405,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049950",
+      "osmId": "508049950",
       "name": "Gedung 508049950",
+      "matchedName": "Gedung 508049950",
       "category": "public",
       "polygon": [
         {
@@ -40323,7 +41469,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049951",
+      "osmId": "508049951",
       "name": "Gedung 508049951",
+      "matchedName": "Gedung 508049951",
       "category": "public",
       "polygon": [
         {
@@ -40385,7 +41533,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049952",
+      "osmId": "508049952",
       "name": "Gedung 508049952",
+      "matchedName": "Gedung 508049952",
       "category": "public",
       "polygon": [
         {
@@ -40447,7 +41597,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049953",
+      "osmId": "508049953",
       "name": "Gedung 508049953",
+      "matchedName": "Gedung 508049953",
       "category": "public",
       "polygon": [
         {
@@ -40509,7 +41661,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049954",
+      "osmId": "508049954",
       "name": "Gedung 508049954",
+      "matchedName": "Gedung 508049954",
       "category": "public",
       "polygon": [
         {
@@ -40571,7 +41725,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049955",
+      "osmId": "508049955",
       "name": "Gedung 508049955",
+      "matchedName": "Gedung 508049955",
       "category": "public",
       "polygon": [
         {
@@ -40633,7 +41789,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049956",
+      "osmId": "508049956",
       "name": "Gedung 508049956",
+      "matchedName": "Gedung 508049956",
       "category": "public",
       "polygon": [
         {
@@ -40695,7 +41853,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049957",
+      "osmId": "508049957",
       "name": "Gedung 508049957",
+      "matchedName": "Gedung 508049957",
       "category": "public",
       "polygon": [
         {
@@ -40757,7 +41917,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049958",
+      "osmId": "508049958",
       "name": "Gedung 508049958",
+      "matchedName": "Gedung 508049958",
       "category": "public",
       "polygon": [
         {
@@ -40819,7 +41981,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049959",
+      "osmId": "508049959",
       "name": "Gedung 508049959",
+      "matchedName": "Gedung 508049959",
       "category": "public",
       "polygon": [
         {
@@ -40881,7 +42045,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049960",
+      "osmId": "508049960",
       "name": "Gedung 508049960",
+      "matchedName": "Gedung 508049960",
       "category": "public",
       "polygon": [
         {
@@ -40943,7 +42109,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049961",
+      "osmId": "508049961",
       "name": "Gedung 508049961",
+      "matchedName": "Gedung 508049961",
       "category": "public",
       "polygon": [
         {
@@ -41005,7 +42173,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049962",
+      "osmId": "508049962",
       "name": "Gedung 508049962",
+      "matchedName": "Gedung 508049962",
       "category": "public",
       "polygon": [
         {
@@ -41067,7 +42237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049963",
+      "osmId": "508049963",
       "name": "Gedung 508049963",
+      "matchedName": "Gedung 508049963",
       "category": "public",
       "polygon": [
         {
@@ -41129,7 +42301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049964",
+      "osmId": "508049964",
       "name": "Gedung 508049964",
+      "matchedName": "Gedung 508049964",
       "category": "public",
       "polygon": [
         {
@@ -41191,7 +42365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049965",
+      "osmId": "508049965",
       "name": "Gedung 508049965",
+      "matchedName": "Gedung 508049965",
       "category": "public",
       "polygon": [
         {
@@ -41253,7 +42429,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049966",
+      "osmId": "508049966",
       "name": "Gedung 508049966",
+      "matchedName": "Gedung 508049966",
       "category": "public",
       "polygon": [
         {
@@ -41315,7 +42493,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049967",
+      "osmId": "508049967",
       "name": "Gedung 508049967",
+      "matchedName": "Gedung 508049967",
       "category": "public",
       "polygon": [
         {
@@ -41377,7 +42557,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049968",
+      "osmId": "508049968",
       "name": "Gedung 508049968",
+      "matchedName": "Gedung 508049968",
       "category": "public",
       "polygon": [
         {
@@ -41439,7 +42621,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049969",
+      "osmId": "508049969",
       "name": "Gedung 508049969",
+      "matchedName": "Gedung 508049969",
       "category": "public",
       "polygon": [
         {
@@ -41501,7 +42685,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049970",
+      "osmId": "508049970",
       "name": "Gedung 508049970",
+      "matchedName": "Gedung 508049970",
       "category": "public",
       "polygon": [
         {
@@ -41563,7 +42749,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049971",
+      "osmId": "508049971",
       "name": "Gedung 508049971",
+      "matchedName": "Gedung 508049971",
       "category": "public",
       "polygon": [
         {
@@ -41625,7 +42813,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049972",
+      "osmId": "508049972",
       "name": "Gedung 508049972",
+      "matchedName": "Gedung 508049972",
       "category": "public",
       "polygon": [
         {
@@ -41687,7 +42877,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049982",
+      "osmId": "508049982",
       "name": "Gedung 508049982",
+      "matchedName": "Gedung 508049982",
       "category": "public",
       "polygon": [
         {
@@ -41749,7 +42941,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049985",
+      "osmId": "508049985",
       "name": "Gedung 508049985",
+      "matchedName": "Gedung 508049985",
       "category": "public",
       "polygon": [
         {
@@ -41811,7 +43005,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049986",
+      "osmId": "508049986",
       "name": "Gedung 508049986",
+      "matchedName": "Gedung 508049986",
       "category": "public",
       "polygon": [
         {
@@ -41873,7 +43069,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049987",
+      "osmId": "508049987",
       "name": "Gedung 508049987",
+      "matchedName": "Gedung 508049987",
       "category": "public",
       "polygon": [
         {
@@ -41935,7 +43133,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049988",
+      "osmId": "508049988",
       "name": "Gedung 508049988",
+      "matchedName": "Gedung 508049988",
       "category": "public",
       "polygon": [
         {
@@ -41997,7 +43197,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049989",
+      "osmId": "508049989",
       "name": "Gedung 508049989",
+      "matchedName": "Gedung 508049989",
       "category": "public",
       "polygon": [
         {
@@ -42059,7 +43261,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049990",
+      "osmId": "508049990",
       "name": "Gedung 508049990",
+      "matchedName": "Gedung 508049990",
       "category": "public",
       "polygon": [
         {
@@ -42121,7 +43325,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049991",
+      "osmId": "508049991",
       "name": "Gedung 508049991",
+      "matchedName": "Gedung 508049991",
       "category": "public",
       "polygon": [
         {
@@ -42183,7 +43389,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049992",
+      "osmId": "508049992",
       "name": "Gedung 508049992",
+      "matchedName": "Gedung 508049992",
       "category": "public",
       "polygon": [
         {
@@ -42245,7 +43453,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049993",
+      "osmId": "508049993",
       "name": "Gedung 508049993",
+      "matchedName": "Gedung 508049993",
       "category": "public",
       "polygon": [
         {
@@ -42307,7 +43517,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049994",
+      "osmId": "508049994",
       "name": "Gedung 508049994",
+      "matchedName": "Gedung 508049994",
       "category": "public",
       "polygon": [
         {
@@ -42369,7 +43581,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049995",
+      "osmId": "508049995",
       "name": "Gedung 508049995",
+      "matchedName": "Gedung 508049995",
       "category": "public",
       "polygon": [
         {
@@ -42431,7 +43645,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049996",
+      "osmId": "508049996",
       "name": "Gedung 508049996",
+      "matchedName": "Gedung 508049996",
       "category": "public",
       "polygon": [
         {
@@ -42493,7 +43709,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049997",
+      "osmId": "508049997",
       "name": "Gedung 508049997",
+      "matchedName": "Gedung 508049997",
       "category": "public",
       "polygon": [
         {
@@ -42555,7 +43773,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049998",
+      "osmId": "508049998",
       "name": "Gedung 508049998",
+      "matchedName": "Gedung 508049998",
       "category": "public",
       "polygon": [
         {
@@ -42617,7 +43837,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508049999",
+      "osmId": "508049999",
       "name": "Gedung 508049999",
+      "matchedName": "Gedung 508049999",
       "category": "public",
       "polygon": [
         {
@@ -42679,7 +43901,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050000",
+      "osmId": "508050000",
       "name": "Gedung 508050000",
+      "matchedName": "Gedung 508050000",
       "category": "public",
       "polygon": [
         {
@@ -42741,7 +43965,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050002",
+      "osmId": "508050002",
       "name": "Gedung 508050002",
+      "matchedName": "Gedung 508050002",
       "category": "public",
       "polygon": [
         {
@@ -42803,7 +44029,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050003",
+      "osmId": "508050003",
       "name": "Gedung 508050003",
+      "matchedName": "Gedung 508050003",
       "category": "public",
       "polygon": [
         {
@@ -42865,7 +44093,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050006",
+      "osmId": "508050006",
       "name": "Gedung 508050006",
+      "matchedName": "Gedung 508050006",
       "category": "public",
       "polygon": [
         {
@@ -42927,7 +44157,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050007",
+      "osmId": "508050007",
       "name": "Gedung 508050007",
+      "matchedName": "Gedung 508050007",
       "category": "public",
       "polygon": [
         {
@@ -42989,7 +44221,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050008",
+      "osmId": "508050008",
       "name": "Gedung 508050008",
+      "matchedName": "Gedung 508050008",
       "category": "public",
       "polygon": [
         {
@@ -43051,7 +44285,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050009",
+      "osmId": "508050009",
       "name": "Gedung 508050009",
+      "matchedName": "Gedung 508050009",
       "category": "public",
       "polygon": [
         {
@@ -43113,7 +44349,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050012",
+      "osmId": "508050012",
       "name": "Gedung 508050012",
+      "matchedName": "Gedung 508050012",
       "category": "public",
       "polygon": [
         {
@@ -43175,7 +44413,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050013",
+      "osmId": "508050013",
       "name": "Gedung 508050013",
+      "matchedName": "Gedung 508050013",
       "category": "public",
       "polygon": [
         {
@@ -43237,7 +44477,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050014",
+      "osmId": "508050014",
       "name": "Gedung 508050014",
+      "matchedName": "Gedung 508050014",
       "category": "public",
       "polygon": [
         {
@@ -43299,7 +44541,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050015",
+      "osmId": "508050015",
       "name": "Gedung 508050015",
+      "matchedName": "Gedung 508050015",
       "category": "public",
       "polygon": [
         {
@@ -43361,7 +44605,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050036",
+      "osmId": "508050036",
       "name": "Gedung 508050036",
+      "matchedName": "Gedung 508050036",
       "category": "public",
       "polygon": [
         {
@@ -43423,7 +44669,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050037",
+      "osmId": "508050037",
       "name": "Gedung 508050037",
+      "matchedName": "Gedung 508050037",
       "category": "public",
       "polygon": [
         {
@@ -43485,7 +44733,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050038",
+      "osmId": "508050038",
       "name": "Gedung 508050038",
+      "matchedName": "Gedung 508050038",
       "category": "public",
       "polygon": [
         {
@@ -43547,7 +44797,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050039",
+      "osmId": "508050039",
       "name": "Gedung 508050039",
+      "matchedName": "Gedung 508050039",
       "category": "public",
       "polygon": [
         {
@@ -43609,7 +44861,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050040",
+      "osmId": "508050040",
       "name": "Gedung 508050040",
+      "matchedName": "Gedung 508050040",
       "category": "public",
       "polygon": [
         {
@@ -43671,7 +44925,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050041",
+      "osmId": "508050041",
       "name": "Gedung 508050041",
+      "matchedName": "Gedung 508050041",
       "category": "public",
       "polygon": [
         {
@@ -43733,7 +44989,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050042",
+      "osmId": "508050042",
       "name": "Gedung 508050042",
+      "matchedName": "Gedung 508050042",
       "category": "public",
       "polygon": [
         {
@@ -43795,7 +45053,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050043",
+      "osmId": "508050043",
       "name": "Gedung 508050043",
+      "matchedName": "Gedung 508050043",
       "category": "public",
       "polygon": [
         {
@@ -43857,7 +45117,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050044",
+      "osmId": "508050044",
       "name": "Gedung 508050044",
+      "matchedName": "Gedung 508050044",
       "category": "public",
       "polygon": [
         {
@@ -43919,7 +45181,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050045",
+      "osmId": "508050045",
       "name": "Gedung 508050045",
+      "matchedName": "Gedung 508050045",
       "category": "public",
       "polygon": [
         {
@@ -43981,7 +45245,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050046",
+      "osmId": "508050046",
       "name": "Gedung 508050046",
+      "matchedName": "Gedung 508050046",
       "category": "public",
       "polygon": [
         {
@@ -44043,7 +45309,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050047",
+      "osmId": "508050047",
       "name": "Gedung 508050047",
+      "matchedName": "Gedung 508050047",
       "category": "public",
       "polygon": [
         {
@@ -44105,7 +45373,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050048",
+      "osmId": "508050048",
       "name": "Gedung 508050048",
+      "matchedName": "Gedung 508050048",
       "category": "public",
       "polygon": [
         {
@@ -44167,7 +45437,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050049",
+      "osmId": "508050049",
       "name": "Gedung 508050049",
+      "matchedName": "Gedung 508050049",
       "category": "public",
       "polygon": [
         {
@@ -44229,7 +45501,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050050",
+      "osmId": "508050050",
       "name": "Gedung 508050050",
+      "matchedName": "Gedung 508050050",
       "category": "public",
       "polygon": [
         {
@@ -44291,7 +45565,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050051",
+      "osmId": "508050051",
       "name": "Gedung 508050051",
+      "matchedName": "Gedung 508050051",
       "category": "public",
       "polygon": [
         {
@@ -44353,7 +45629,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050052",
+      "osmId": "508050052",
       "name": "Gedung 508050052",
+      "matchedName": "Gedung 508050052",
       "category": "public",
       "polygon": [
         {
@@ -44415,7 +45693,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050053",
+      "osmId": "508050053",
       "name": "Gedung 508050053",
+      "matchedName": "Gedung 508050053",
       "category": "public",
       "polygon": [
         {
@@ -44477,7 +45757,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050054",
+      "osmId": "508050054",
       "name": "Gedung 508050054",
+      "matchedName": "Gedung 508050054",
       "category": "public",
       "polygon": [
         {
@@ -44539,7 +45821,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050055",
+      "osmId": "508050055",
       "name": "Gedung 508050055",
+      "matchedName": "Gedung 508050055",
       "category": "public",
       "polygon": [
         {
@@ -44601,7 +45885,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050056",
+      "osmId": "508050056",
       "name": "Gedung 508050056",
+      "matchedName": "Gedung 508050056",
       "category": "public",
       "polygon": [
         {
@@ -44663,7 +45949,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050064",
+      "osmId": "508050064",
       "name": "Gedung 508050064",
+      "matchedName": "Gedung 508050064",
       "category": "public",
       "polygon": [
         {
@@ -44725,7 +46013,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050065",
+      "osmId": "508050065",
       "name": "Gedung 508050065",
+      "matchedName": "Gedung 508050065",
       "category": "public",
       "polygon": [
         {
@@ -44787,7 +46077,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050066",
+      "osmId": "508050066",
       "name": "Gedung 508050066",
+      "matchedName": "Gedung 508050066",
       "category": "public",
       "polygon": [
         {
@@ -44849,7 +46141,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050075",
+      "osmId": "508050075",
       "name": "Gedung 508050075",
+      "matchedName": "Gedung 508050075",
       "category": "public",
       "polygon": [
         {
@@ -44911,7 +46205,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050076",
+      "osmId": "508050076",
       "name": "Gedung 508050076",
+      "matchedName": "Gedung 508050076",
       "category": "public",
       "polygon": [
         {
@@ -44973,7 +46269,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050077",
+      "osmId": "508050077",
       "name": "Gedung 508050077",
+      "matchedName": "Gedung 508050077",
       "category": "public",
       "polygon": [
         {
@@ -45035,7 +46333,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050078",
+      "osmId": "508050078",
       "name": "Gedung 508050078",
+      "matchedName": "Gedung 508050078",
       "category": "public",
       "polygon": [
         {
@@ -45097,7 +46397,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050079",
+      "osmId": "508050079",
       "name": "Gedung 508050079",
+      "matchedName": "Gedung 508050079",
       "category": "public",
       "polygon": [
         {
@@ -45159,7 +46461,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050080",
+      "osmId": "508050080",
       "name": "Gedung 508050080",
+      "matchedName": "Gedung 508050080",
       "category": "public",
       "polygon": [
         {
@@ -45221,7 +46525,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050081",
+      "osmId": "508050081",
       "name": "Gedung 508050081",
+      "matchedName": "Gedung 508050081",
       "category": "public",
       "polygon": [
         {
@@ -45283,7 +46589,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050082",
+      "osmId": "508050082",
       "name": "Gedung 508050082",
+      "matchedName": "Gedung 508050082",
       "category": "public",
       "polygon": [
         {
@@ -45345,7 +46653,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050083",
+      "osmId": "508050083",
       "name": "Gedung 508050083",
+      "matchedName": "Gedung 508050083",
       "category": "public",
       "polygon": [
         {
@@ -45407,7 +46717,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050084",
+      "osmId": "508050084",
       "name": "Gedung 508050084",
+      "matchedName": "Gedung 508050084",
       "category": "public",
       "polygon": [
         {
@@ -45469,7 +46781,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050085",
+      "osmId": "508050085",
       "name": "Gedung 508050085",
+      "matchedName": "Gedung 508050085",
       "category": "public",
       "polygon": [
         {
@@ -45531,7 +46845,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050086",
+      "osmId": "508050086",
       "name": "Gedung 508050086",
+      "matchedName": "Gedung 508050086",
       "category": "public",
       "polygon": [
         {
@@ -45593,7 +46909,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050087",
+      "osmId": "508050087",
       "name": "Gedung 508050087",
+      "matchedName": "Gedung 508050087",
       "category": "public",
       "polygon": [
         {
@@ -45655,7 +46973,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050088",
+      "osmId": "508050088",
       "name": "Gedung 508050088",
+      "matchedName": "Gedung 508050088",
       "category": "public",
       "polygon": [
         {
@@ -45717,7 +47037,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050089",
+      "osmId": "508050089",
       "name": "Gedung 508050089",
+      "matchedName": "Gedung 508050089",
       "category": "public",
       "polygon": [
         {
@@ -45779,7 +47101,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050090",
+      "osmId": "508050090",
       "name": "Gedung 508050090",
+      "matchedName": "Gedung 508050090",
       "category": "public",
       "polygon": [
         {
@@ -45841,7 +47165,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050091",
+      "osmId": "508050091",
       "name": "Gedung 508050091",
+      "matchedName": "Gedung 508050091",
       "category": "public",
       "polygon": [
         {
@@ -45911,7 +47237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050092",
+      "osmId": "508050092",
       "name": "Gedung 508050092",
+      "matchedName": "Gedung 508050092",
       "category": "public",
       "polygon": [
         {
@@ -45973,7 +47301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050093",
+      "osmId": "508050093",
       "name": "Gedung 508050093",
+      "matchedName": "Gedung 508050093",
       "category": "public",
       "polygon": [
         {
@@ -46035,7 +47365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050094",
+      "osmId": "508050094",
       "name": "Gedung 508050094",
+      "matchedName": "Gedung 508050094",
       "category": "public",
       "polygon": [
         {
@@ -46097,7 +47429,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050100",
+      "osmId": "508050100",
       "name": "Gedung 508050100",
+      "matchedName": "Gedung 508050100",
       "category": "public",
       "polygon": [
         {
@@ -46159,7 +47493,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050101",
+      "osmId": "508050101",
       "name": "Gedung 508050101",
+      "matchedName": "Gedung 508050101",
       "category": "public",
       "polygon": [
         {
@@ -46221,7 +47557,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050102",
+      "osmId": "508050102",
       "name": "Gedung 508050102",
+      "matchedName": "Gedung 508050102",
       "category": "public",
       "polygon": [
         {
@@ -46283,7 +47621,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050103",
+      "osmId": "508050103",
       "name": "Gedung 508050103",
+      "matchedName": "Gedung 508050103",
       "category": "public",
       "polygon": [
         {
@@ -46345,7 +47685,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050104",
+      "osmId": "508050104",
       "name": "Gedung 508050104",
+      "matchedName": "Gedung 508050104",
       "category": "public",
       "polygon": [
         {
@@ -46407,7 +47749,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050105",
+      "osmId": "508050105",
       "name": "Gedung 508050105",
+      "matchedName": "Gedung 508050105",
       "category": "public",
       "polygon": [
         {
@@ -46469,7 +47813,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050109",
+      "osmId": "508050109",
       "name": "Gedung 508050109",
+      "matchedName": "Gedung 508050109",
       "category": "public",
       "polygon": [
         {
@@ -46531,7 +47877,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050110",
+      "osmId": "508050110",
       "name": "Gedung 508050110",
+      "matchedName": "Gedung 508050110",
       "category": "public",
       "polygon": [
         {
@@ -46593,7 +47941,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050111",
+      "osmId": "508050111",
       "name": "Gedung 508050111",
+      "matchedName": "Gedung 508050111",
       "category": "public",
       "polygon": [
         {
@@ -46655,7 +48005,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050112",
+      "osmId": "508050112",
       "name": "Gedung 508050112",
+      "matchedName": "Gedung 508050112",
       "category": "public",
       "polygon": [
         {
@@ -46717,7 +48069,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050113",
+      "osmId": "508050113",
       "name": "Gedung 508050113",
+      "matchedName": "Gedung 508050113",
       "category": "public",
       "polygon": [
         {
@@ -46779,7 +48133,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050114",
+      "osmId": "508050114",
       "name": "Gedung 508050114",
+      "matchedName": "Gedung 508050114",
       "category": "public",
       "polygon": [
         {
@@ -46841,7 +48197,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050115",
+      "osmId": "508050115",
       "name": "Gedung 508050115",
+      "matchedName": "Gedung 508050115",
       "category": "public",
       "polygon": [
         {
@@ -46903,7 +48261,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050116",
+      "osmId": "508050116",
       "name": "Gedung 508050116",
+      "matchedName": "Gedung 508050116",
       "category": "public",
       "polygon": [
         {
@@ -46965,7 +48325,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050117",
+      "osmId": "508050117",
       "name": "Gedung 508050117",
+      "matchedName": "Gedung 508050117",
       "category": "public",
       "polygon": [
         {
@@ -47027,7 +48389,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050118",
+      "osmId": "508050118",
       "name": "Gedung 508050118",
+      "matchedName": "Gedung 508050118",
       "category": "public",
       "polygon": [
         {
@@ -47089,7 +48453,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050119",
+      "osmId": "508050119",
       "name": "Gedung 508050119",
+      "matchedName": "Gedung 508050119",
       "category": "public",
       "polygon": [
         {
@@ -47151,7 +48517,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050120",
+      "osmId": "508050120",
       "name": "Gedung 508050120",
+      "matchedName": "Gedung 508050120",
       "category": "public",
       "polygon": [
         {
@@ -47213,7 +48581,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050121",
+      "osmId": "508050121",
       "name": "Gedung 508050121",
+      "matchedName": "Gedung 508050121",
       "category": "public",
       "polygon": [
         {
@@ -47275,7 +48645,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050123",
+      "osmId": "508050123",
       "name": "Gedung 508050123",
+      "matchedName": "Gedung 508050123",
       "category": "public",
       "polygon": [
         {
@@ -47337,7 +48709,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050124",
+      "osmId": "508050124",
       "name": "Gedung 508050124",
+      "matchedName": "Gedung 508050124",
       "category": "public",
       "polygon": [
         {
@@ -47399,7 +48773,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050125",
+      "osmId": "508050125",
       "name": "Gedung 508050125",
+      "matchedName": "Gedung 508050125",
       "category": "public",
       "polygon": [
         {
@@ -47461,7 +48837,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050126",
+      "osmId": "508050126",
       "name": "Gedung 508050126",
+      "matchedName": "Gedung 508050126",
       "category": "public",
       "polygon": [
         {
@@ -47523,7 +48901,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050127",
+      "osmId": "508050127",
       "name": "Gedung 508050127",
+      "matchedName": "Gedung 508050127",
       "category": "public",
       "polygon": [
         {
@@ -47585,7 +48965,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050128",
+      "osmId": "508050128",
       "name": "Gedung 508050128",
+      "matchedName": "Gedung 508050128",
       "category": "public",
       "polygon": [
         {
@@ -47647,7 +49029,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050129",
+      "osmId": "508050129",
       "name": "Gedung 508050129",
+      "matchedName": "Gedung 508050129",
       "category": "public",
       "polygon": [
         {
@@ -47709,7 +49093,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050130",
+      "osmId": "508050130",
       "name": "Gedung 508050130",
+      "matchedName": "Gedung 508050130",
       "category": "public",
       "polygon": [
         {
@@ -47771,7 +49157,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050131",
+      "osmId": "508050131",
       "name": "Gedung 508050131",
+      "matchedName": "Gedung 508050131",
       "category": "public",
       "polygon": [
         {
@@ -47833,7 +49221,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050132",
+      "osmId": "508050132",
       "name": "Gedung 508050132",
+      "matchedName": "Gedung 508050132",
       "category": "public",
       "polygon": [
         {
@@ -47895,7 +49285,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050133",
+      "osmId": "508050133",
       "name": "Gedung 508050133",
+      "matchedName": "Gedung 508050133",
       "category": "public",
       "polygon": [
         {
@@ -47957,7 +49349,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050134",
+      "osmId": "508050134",
       "name": "Gedung 508050134",
+      "matchedName": "Gedung 508050134",
       "category": "public",
       "polygon": [
         {
@@ -48019,7 +49413,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050136",
+      "osmId": "508050136",
       "name": "Gedung 508050136",
+      "matchedName": "Gedung 508050136",
       "category": "public",
       "polygon": [
         {
@@ -48081,7 +49477,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050137",
+      "osmId": "508050137",
       "name": "Gedung 508050137",
+      "matchedName": "Gedung 508050137",
       "category": "public",
       "polygon": [
         {
@@ -48143,7 +49541,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050138",
+      "osmId": "508050138",
       "name": "Gedung 508050138",
+      "matchedName": "Gedung 508050138",
       "category": "public",
       "polygon": [
         {
@@ -48205,7 +49605,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050139",
+      "osmId": "508050139",
       "name": "Gedung 508050139",
+      "matchedName": "Gedung 508050139",
       "category": "public",
       "polygon": [
         {
@@ -48267,7 +49669,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050141",
+      "osmId": "508050141",
       "name": "Gedung 508050141",
+      "matchedName": "Gedung 508050141",
       "category": "public",
       "polygon": [
         {
@@ -48329,7 +49733,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050143",
+      "osmId": "508050143",
       "name": "Gedung 508050143",
+      "matchedName": "Gedung 508050143",
       "category": "public",
       "polygon": [
         {
@@ -48391,7 +49797,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050147",
+      "osmId": "508050147",
       "name": "BRI",
+      "matchedName": "BRI",
       "category": "public",
       "polygon": [
         {
@@ -48467,7 +49875,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050153",
+      "osmId": "508050153",
       "name": "Gedung 508050153",
+      "matchedName": "Gedung 508050153",
       "category": "public",
       "polygon": [
         {
@@ -48529,7 +49939,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050154",
+      "osmId": "508050154",
       "name": "Gedung 508050154",
+      "matchedName": "Gedung 508050154",
       "category": "public",
       "polygon": [
         {
@@ -48591,7 +50003,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050155",
+      "osmId": "508050155",
       "name": "Gedung 508050155",
+      "matchedName": "Gedung 508050155",
       "category": "public",
       "polygon": [
         {
@@ -48653,7 +50067,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050156",
+      "osmId": "508050156",
       "name": "Gedung 508050156",
+      "matchedName": "Gedung 508050156",
       "category": "public",
       "polygon": [
         {
@@ -48715,7 +50131,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050157",
+      "osmId": "508050157",
       "name": "Gedung 508050157",
+      "matchedName": "Gedung 508050157",
       "category": "public",
       "polygon": [
         {
@@ -48777,7 +50195,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050158",
+      "osmId": "508050158",
       "name": "Gedung 508050158",
+      "matchedName": "Gedung 508050158",
       "category": "public",
       "polygon": [
         {
@@ -48839,7 +50259,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050159",
+      "osmId": "508050159",
       "name": "Gedung 508050159",
+      "matchedName": "Gedung 508050159",
       "category": "public",
       "polygon": [
         {
@@ -48901,7 +50323,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050160",
+      "osmId": "508050160",
       "name": "Gedung 508050160",
+      "matchedName": "Gedung 508050160",
       "category": "public",
       "polygon": [
         {
@@ -48963,7 +50387,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050161",
+      "osmId": "508050161",
       "name": "Gedung 508050161",
+      "matchedName": "Gedung 508050161",
       "category": "public",
       "polygon": [
         {
@@ -49025,7 +50451,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050162",
+      "osmId": "508050162",
       "name": "Gedung 508050162",
+      "matchedName": "Gedung 508050162",
       "category": "public",
       "polygon": [
         {
@@ -49087,7 +50515,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050163",
+      "osmId": "508050163",
       "name": "Gedung 508050163",
+      "matchedName": "Gedung 508050163",
       "category": "public",
       "polygon": [
         {
@@ -49149,7 +50579,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050164",
+      "osmId": "508050164",
       "name": "Gedung 508050164",
+      "matchedName": "Gedung 508050164",
       "category": "public",
       "polygon": [
         {
@@ -49211,7 +50643,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050165",
+      "osmId": "508050165",
       "name": "Gedung 508050165",
+      "matchedName": "Gedung 508050165",
       "category": "public",
       "polygon": [
         {
@@ -49273,7 +50707,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050166",
+      "osmId": "508050166",
       "name": "Gedung 508050166",
+      "matchedName": "Gedung 508050166",
       "category": "public",
       "polygon": [
         {
@@ -49335,7 +50771,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050167",
+      "osmId": "508050167",
       "name": "Gedung 508050167",
+      "matchedName": "Gedung 508050167",
       "category": "public",
       "polygon": [
         {
@@ -49397,7 +50835,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050168",
+      "osmId": "508050168",
       "name": "Gedung 508050168",
+      "matchedName": "Gedung 508050168",
       "category": "public",
       "polygon": [
         {
@@ -49459,7 +50899,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050169",
+      "osmId": "508050169",
       "name": "Gedung 508050169",
+      "matchedName": "Gedung 508050169",
       "category": "public",
       "polygon": [
         {
@@ -49521,7 +50963,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050170",
+      "osmId": "508050170",
       "name": "Gedung 508050170",
+      "matchedName": "Gedung 508050170",
       "category": "public",
       "polygon": [
         {
@@ -49583,7 +51027,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050171",
+      "osmId": "508050171",
       "name": "Gedung 508050171",
+      "matchedName": "Gedung 508050171",
       "category": "public",
       "polygon": [
         {
@@ -49645,7 +51091,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050172",
+      "osmId": "508050172",
       "name": "Gedung 508050172",
+      "matchedName": "Gedung 508050172",
       "category": "public",
       "polygon": [
         {
@@ -49707,7 +51155,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050173",
+      "osmId": "508050173",
       "name": "Gedung 508050173",
+      "matchedName": "Gedung 508050173",
       "category": "public",
       "polygon": [
         {
@@ -49769,7 +51219,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050174",
+      "osmId": "508050174",
       "name": "Gedung 508050174",
+      "matchedName": "Gedung 508050174",
       "category": "public",
       "polygon": [
         {
@@ -49831,7 +51283,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050175",
+      "osmId": "508050175",
       "name": "Gedung 508050175",
+      "matchedName": "Gedung 508050175",
       "category": "public",
       "polygon": [
         {
@@ -49893,7 +51347,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050176",
+      "osmId": "508050176",
       "name": "Gedung 508050176",
+      "matchedName": "Gedung 508050176",
       "category": "public",
       "polygon": [
         {
@@ -49955,7 +51411,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050177",
+      "osmId": "508050177",
       "name": "Gedung 508050177",
+      "matchedName": "Gedung 508050177",
       "category": "public",
       "polygon": [
         {
@@ -50017,7 +51475,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050182",
+      "osmId": "508050182",
       "name": "Gedung 508050182",
+      "matchedName": "Gedung 508050182",
       "category": "public",
       "polygon": [
         {
@@ -50079,7 +51539,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050183",
+      "osmId": "508050183",
       "name": "Gedung 508050183",
+      "matchedName": "Gedung 508050183",
       "category": "public",
       "polygon": [
         {
@@ -50141,7 +51603,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050184",
+      "osmId": "508050184",
       "name": "Gedung 508050184",
+      "matchedName": "Gedung 508050184",
       "category": "public",
       "polygon": [
         {
@@ -50203,7 +51667,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050185",
+      "osmId": "508050185",
       "name": "Gedung 508050185",
+      "matchedName": "Gedung 508050185",
       "category": "public",
       "polygon": [
         {
@@ -50265,7 +51731,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050186",
+      "osmId": "508050186",
       "name": "Gedung 508050186",
+      "matchedName": "Gedung 508050186",
       "category": "public",
       "polygon": [
         {
@@ -50327,7 +51795,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050187",
+      "osmId": "508050187",
       "name": "Gedung 508050187",
+      "matchedName": "Gedung 508050187",
       "category": "public",
       "polygon": [
         {
@@ -50389,7 +51859,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050188",
+      "osmId": "508050188",
       "name": "Gedung 508050188",
+      "matchedName": "Gedung 508050188",
       "category": "public",
       "polygon": [
         {
@@ -50451,7 +51923,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050189",
+      "osmId": "508050189",
       "name": "Gedung 508050189",
+      "matchedName": "Gedung 508050189",
       "category": "public",
       "polygon": [
         {
@@ -50513,7 +51987,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050190",
+      "osmId": "508050190",
       "name": "Gedung 508050190",
+      "matchedName": "Gedung 508050190",
       "category": "public",
       "polygon": [
         {
@@ -50575,7 +52051,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050191",
+      "osmId": "508050191",
       "name": "Gedung 508050191",
+      "matchedName": "Gedung 508050191",
       "category": "public",
       "polygon": [
         {
@@ -50637,7 +52115,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050192",
+      "osmId": "508050192",
       "name": "Gedung 508050192",
+      "matchedName": "Gedung 508050192",
       "category": "public",
       "polygon": [
         {
@@ -50699,7 +52179,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050193",
+      "osmId": "508050193",
       "name": "Gedung 508050193",
+      "matchedName": "Gedung 508050193",
       "category": "public",
       "polygon": [
         {
@@ -50761,7 +52243,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050194",
+      "osmId": "508050194",
       "name": "Gedung 508050194",
+      "matchedName": "Gedung 508050194",
       "category": "public",
       "polygon": [
         {
@@ -50823,7 +52307,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050195",
+      "osmId": "508050195",
       "name": "Gedung 508050195",
+      "matchedName": "Gedung 508050195",
       "category": "public",
       "polygon": [
         {
@@ -50885,7 +52371,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050196",
+      "osmId": "508050196",
       "name": "Gedung 508050196",
+      "matchedName": "Gedung 508050196",
       "category": "public",
       "polygon": [
         {
@@ -50947,7 +52435,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050197",
+      "osmId": "508050197",
       "name": "Gedung 508050197",
+      "matchedName": "Gedung 508050197",
       "category": "public",
       "polygon": [
         {
@@ -51009,7 +52499,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050198",
+      "osmId": "508050198",
       "name": "Gedung 508050198",
+      "matchedName": "Gedung 508050198",
       "category": "public",
       "polygon": [
         {
@@ -51071,7 +52563,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050199",
+      "osmId": "508050199",
       "name": "Gedung 508050199",
+      "matchedName": "Gedung 508050199",
       "category": "public",
       "polygon": [
         {
@@ -51133,7 +52627,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050200",
+      "osmId": "508050200",
       "name": "Gedung 508050200",
+      "matchedName": "Gedung 508050200",
       "category": "public",
       "polygon": [
         {
@@ -51195,7 +52691,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050201",
+      "osmId": "508050201",
       "name": "Gedung 508050201",
+      "matchedName": "Gedung 508050201",
       "category": "public",
       "polygon": [
         {
@@ -51257,7 +52755,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050202",
+      "osmId": "508050202",
       "name": "Gedung 508050202",
+      "matchedName": "Gedung 508050202",
       "category": "public",
       "polygon": [
         {
@@ -51319,7 +52819,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050203",
+      "osmId": "508050203",
       "name": "Gedung 508050203",
+      "matchedName": "Gedung 508050203",
       "category": "public",
       "polygon": [
         {
@@ -51381,7 +52883,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050204",
+      "osmId": "508050204",
       "name": "Gedung 508050204",
+      "matchedName": "Gedung 508050204",
       "category": "public",
       "polygon": [
         {
@@ -51443,7 +52947,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050205",
+      "osmId": "508050205",
       "name": "Gedung 508050205",
+      "matchedName": "Gedung 508050205",
       "category": "public",
       "polygon": [
         {
@@ -51505,7 +53011,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050206",
+      "osmId": "508050206",
       "name": "Gedung 508050206",
+      "matchedName": "Gedung 508050206",
       "category": "public",
       "polygon": [
         {
@@ -51567,7 +53075,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050207",
+      "osmId": "508050207",
       "name": "Gedung 508050207",
+      "matchedName": "Gedung 508050207",
       "category": "public",
       "polygon": [
         {
@@ -51629,7 +53139,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050208",
+      "osmId": "508050208",
       "name": "Gedung 508050208",
+      "matchedName": "Gedung 508050208",
       "category": "public",
       "polygon": [
         {
@@ -51691,7 +53203,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050209",
+      "osmId": "508050209",
       "name": "Gedung 508050209",
+      "matchedName": "Gedung 508050209",
       "category": "public",
       "polygon": [
         {
@@ -51753,7 +53267,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050210",
+      "osmId": "508050210",
       "name": "Gedung 508050210",
+      "matchedName": "Gedung 508050210",
       "category": "public",
       "polygon": [
         {
@@ -51815,7 +53331,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050211",
+      "osmId": "508050211",
       "name": "Gedung 508050211",
+      "matchedName": "Gedung 508050211",
       "category": "public",
       "polygon": [
         {
@@ -51877,7 +53395,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050212",
+      "osmId": "508050212",
       "name": "Gedung 508050212",
+      "matchedName": "Gedung 508050212",
       "category": "public",
       "polygon": [
         {
@@ -51939,7 +53459,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050213",
+      "osmId": "508050213",
       "name": "Gedung 508050213",
+      "matchedName": "Gedung 508050213",
       "category": "public",
       "polygon": [
         {
@@ -52001,7 +53523,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050214",
+      "osmId": "508050214",
       "name": "Gedung 508050214",
+      "matchedName": "Gedung 508050214",
       "category": "public",
       "polygon": [
         {
@@ -52063,7 +53587,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050215",
+      "osmId": "508050215",
       "name": "Gedung 508050215",
+      "matchedName": "Gedung 508050215",
       "category": "public",
       "polygon": [
         {
@@ -52125,7 +53651,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050216",
+      "osmId": "508050216",
       "name": "Gedung 508050216",
+      "matchedName": "Gedung 508050216",
       "category": "public",
       "polygon": [
         {
@@ -52187,7 +53715,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-508050217",
+      "osmId": "508050217",
       "name": "Gedung 508050217",
+      "matchedName": "Gedung 508050217",
       "category": "public",
       "polygon": [
         {
@@ -52249,7 +53779,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-530349523",
+      "osmId": "530349523",
       "name": "Gedung 530349523",
+      "matchedName": "Gedung 530349523",
       "category": "public",
       "polygon": [
         {
@@ -52343,7 +53875,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-530351348",
+      "osmId": "530351348",
       "name": "Gedung 530351348",
+      "matchedName": "Gedung 530351348",
       "category": "public",
       "polygon": [
         {
@@ -52405,7 +53939,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953612",
+      "osmId": "558953612",
       "name": "Gedung 558953612",
+      "matchedName": "Gedung 558953612",
       "category": "public",
       "polygon": [
         {
@@ -52481,7 +54017,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953613",
+      "osmId": "558953613",
       "name": "Gedung 558953613",
+      "matchedName": "Gedung 558953613",
       "category": "public",
       "polygon": [
         {
@@ -52557,7 +54095,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953614",
+      "osmId": "558953614",
       "name": "Gedung 558953614",
+      "matchedName": "Gedung 558953614",
       "category": "public",
       "polygon": [
         {
@@ -52633,7 +54173,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953618",
+      "osmId": "558953618",
       "name": "Gedung 558953618",
+      "matchedName": "Gedung 558953618",
       "category": "public",
       "polygon": [
         {
@@ -52695,7 +54237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953620",
+      "osmId": "558953620",
       "name": "Gedung 558953620",
+      "matchedName": "Gedung 558953620",
       "category": "public",
       "polygon": [
         {
@@ -52757,7 +54301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953621",
+      "osmId": "558953621",
       "name": "Gedung 558953621",
+      "matchedName": "Gedung 558953621",
       "category": "public",
       "polygon": [
         {
@@ -52819,7 +54365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953624",
+      "osmId": "558953624",
       "name": "Gedung 558953624",
+      "matchedName": "Gedung 558953624",
       "category": "public",
       "polygon": [
         {
@@ -52881,7 +54429,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953625",
+      "osmId": "558953625",
       "name": "Gedung 558953625",
+      "matchedName": "Gedung 558953625",
       "category": "public",
       "polygon": [
         {
@@ -52943,7 +54493,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953626",
+      "osmId": "558953626",
       "name": "Gedung 558953626",
+      "matchedName": "Gedung 558953626",
       "category": "public",
       "polygon": [
         {
@@ -53005,7 +54557,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953627",
+      "osmId": "558953627",
       "name": "Gedung 558953627",
+      "matchedName": "Gedung 558953627",
       "category": "public",
       "polygon": [
         {
@@ -53067,7 +54621,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953628",
+      "osmId": "558953628",
       "name": "Gedung 558953628",
+      "matchedName": "Gedung 558953628",
       "category": "public",
       "polygon": [
         {
@@ -53129,7 +54685,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953629",
+      "osmId": "558953629",
       "name": "Gedung 558953629",
+      "matchedName": "Gedung 558953629",
       "category": "public",
       "polygon": [
         {
@@ -53191,7 +54749,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953630",
+      "osmId": "558953630",
       "name": "Gedung 558953630",
+      "matchedName": "Gedung 558953630",
       "category": "public",
       "polygon": [
         {
@@ -53253,7 +54813,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953631",
+      "osmId": "558953631",
       "name": "Gedung 558953631",
+      "matchedName": "Gedung 558953631",
       "category": "public",
       "polygon": [
         {
@@ -53315,7 +54877,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953633",
+      "osmId": "558953633",
       "name": "Gedung 558953633",
+      "matchedName": "Gedung 558953633",
       "category": "public",
       "polygon": [
         {
@@ -53377,7 +54941,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953634",
+      "osmId": "558953634",
       "name": "Gedung 558953634",
+      "matchedName": "Gedung 558953634",
       "category": "public",
       "polygon": [
         {
@@ -53439,7 +55005,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953637",
+      "osmId": "558953637",
       "name": "Gedung 558953637",
+      "matchedName": "Gedung 558953637",
       "category": "public",
       "polygon": [
         {
@@ -53501,7 +55069,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953638",
+      "osmId": "558953638",
       "name": "Gedung 558953638",
+      "matchedName": "Gedung 558953638",
       "category": "public",
       "polygon": [
         {
@@ -53563,7 +55133,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953639",
+      "osmId": "558953639",
       "name": "Gedung 558953639",
+      "matchedName": "Gedung 558953639",
       "category": "public",
       "polygon": [
         {
@@ -53625,7 +55197,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953640",
+      "osmId": "558953640",
       "name": "Gedung 558953640",
+      "matchedName": "Gedung 558953640",
       "category": "public",
       "polygon": [
         {
@@ -53687,7 +55261,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953641",
+      "osmId": "558953641",
       "name": "Gedung 558953641",
+      "matchedName": "Gedung 558953641",
       "category": "public",
       "polygon": [
         {
@@ -53749,7 +55325,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953642",
+      "osmId": "558953642",
       "name": "Gedung 558953642",
+      "matchedName": "Gedung 558953642",
       "category": "public",
       "polygon": [
         {
@@ -53811,7 +55389,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953644",
+      "osmId": "558953644",
       "name": "Gedung 558953644",
+      "matchedName": "Gedung 558953644",
       "category": "public",
       "polygon": [
         {
@@ -53873,7 +55453,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953646",
+      "osmId": "558953646",
       "name": "Gedung 558953646",
+      "matchedName": "Gedung 558953646",
       "category": "public",
       "polygon": [
         {
@@ -53935,7 +55517,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953647",
+      "osmId": "558953647",
       "name": "Gedung 558953647",
+      "matchedName": "Gedung 558953647",
       "category": "public",
       "polygon": [
         {
@@ -53997,7 +55581,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953648",
+      "osmId": "558953648",
       "name": "Gedung 558953648",
+      "matchedName": "Gedung 558953648",
       "category": "public",
       "polygon": [
         {
@@ -54059,7 +55645,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953651",
+      "osmId": "558953651",
       "name": "Gedung 558953651",
+      "matchedName": "Gedung 558953651",
       "category": "public",
       "polygon": [
         {
@@ -54121,7 +55709,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953652",
+      "osmId": "558953652",
       "name": "Gedung 558953652",
+      "matchedName": "Gedung 558953652",
       "category": "public",
       "polygon": [
         {
@@ -54183,7 +55773,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953654",
+      "osmId": "558953654",
       "name": "Gedung 558953654",
+      "matchedName": "Gedung 558953654",
       "category": "public",
       "polygon": [
         {
@@ -54245,7 +55837,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953655",
+      "osmId": "558953655",
       "name": "Gedung 558953655",
+      "matchedName": "Gedung 558953655",
       "category": "public",
       "polygon": [
         {
@@ -54307,7 +55901,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953659",
+      "osmId": "558953659",
       "name": "Gedung 558953659",
+      "matchedName": "Gedung 558953659",
       "category": "public",
       "polygon": [
         {
@@ -54369,7 +55965,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953660",
+      "osmId": "558953660",
       "name": "Gedung 558953660",
+      "matchedName": "Gedung 558953660",
       "category": "public",
       "polygon": [
         {
@@ -54431,7 +56029,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953662",
+      "osmId": "558953662",
       "name": "Gedung 558953662",
+      "matchedName": "Gedung 558953662",
       "category": "public",
       "polygon": [
         {
@@ -54493,7 +56093,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953664",
+      "osmId": "558953664",
       "name": "Gedung 558953664",
+      "matchedName": "Gedung 558953664",
       "category": "public",
       "polygon": [
         {
@@ -54555,7 +56157,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953665",
+      "osmId": "558953665",
       "name": "Gedung 558953665",
+      "matchedName": "Gedung 558953665",
       "category": "public",
       "polygon": [
         {
@@ -54617,7 +56221,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953666",
+      "osmId": "558953666",
       "name": "Gedung 558953666",
+      "matchedName": "Gedung 558953666",
       "category": "public",
       "polygon": [
         {
@@ -54679,7 +56285,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953667",
+      "osmId": "558953667",
       "name": "Gedung 558953667",
+      "matchedName": "Gedung 558953667",
       "category": "public",
       "polygon": [
         {
@@ -54741,7 +56349,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953668",
+      "osmId": "558953668",
       "name": "Gedung 558953668",
+      "matchedName": "Gedung 558953668",
       "category": "public",
       "polygon": [
         {
@@ -54803,7 +56413,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953671",
+      "osmId": "558953671",
       "name": "Gedung 558953671",
+      "matchedName": "Gedung 558953671",
       "category": "public",
       "polygon": [
         {
@@ -54865,7 +56477,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953672",
+      "osmId": "558953672",
       "name": "Gedung 558953672",
+      "matchedName": "Gedung 558953672",
       "category": "public",
       "polygon": [
         {
@@ -54927,7 +56541,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953673",
+      "osmId": "558953673",
       "name": "Gedung 558953673",
+      "matchedName": "Gedung 558953673",
       "category": "public",
       "polygon": [
         {
@@ -54989,7 +56605,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953678",
+      "osmId": "558953678",
       "name": "Gedung 558953678",
+      "matchedName": "Gedung 558953678",
       "category": "public",
       "polygon": [
         {
@@ -55051,7 +56669,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953681",
+      "osmId": "558953681",
       "name": "Gedung 558953681",
+      "matchedName": "Gedung 558953681",
       "category": "public",
       "polygon": [
         {
@@ -55113,7 +56733,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953682",
+      "osmId": "558953682",
       "name": "Gedung 558953682",
+      "matchedName": "Gedung 558953682",
       "category": "public",
       "polygon": [
         {
@@ -55175,7 +56797,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953683",
+      "osmId": "558953683",
       "name": "Gedung 558953683",
+      "matchedName": "Gedung 558953683",
       "category": "public",
       "polygon": [
         {
@@ -55237,7 +56861,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953684",
+      "osmId": "558953684",
       "name": "Gedung 558953684",
+      "matchedName": "Gedung 558953684",
       "category": "public",
       "polygon": [
         {
@@ -55299,7 +56925,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953685",
+      "osmId": "558953685",
       "name": "Gedung 558953685",
+      "matchedName": "Gedung 558953685",
       "category": "public",
       "polygon": [
         {
@@ -55361,7 +56989,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953686",
+      "osmId": "558953686",
       "name": "Gedung 558953686",
+      "matchedName": "Gedung 558953686",
       "category": "public",
       "polygon": [
         {
@@ -55423,7 +57053,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953688",
+      "osmId": "558953688",
       "name": "Gedung 558953688",
+      "matchedName": "Gedung 558953688",
       "category": "public",
       "polygon": [
         {
@@ -55485,7 +57117,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953690",
+      "osmId": "558953690",
       "name": "Gedung 558953690",
+      "matchedName": "Gedung 558953690",
       "category": "public",
       "polygon": [
         {
@@ -55547,7 +57181,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953691",
+      "osmId": "558953691",
       "name": "Gedung 558953691",
+      "matchedName": "Gedung 558953691",
       "category": "public",
       "polygon": [
         {
@@ -55609,7 +57245,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953692",
+      "osmId": "558953692",
       "name": "Gedung 558953692",
+      "matchedName": "Gedung 558953692",
       "category": "public",
       "polygon": [
         {
@@ -55671,7 +57309,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953693",
+      "osmId": "558953693",
       "name": "Gedung 558953693",
+      "matchedName": "Gedung 558953693",
       "category": "public",
       "polygon": [
         {
@@ -55733,7 +57373,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953695",
+      "osmId": "558953695",
       "name": "Gedung 558953695",
+      "matchedName": "Gedung 558953695",
       "category": "public",
       "polygon": [
         {
@@ -55795,7 +57437,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953696",
+      "osmId": "558953696",
       "name": "Gedung 558953696",
+      "matchedName": "Gedung 558953696",
       "category": "public",
       "polygon": [
         {
@@ -55857,7 +57501,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953697",
+      "osmId": "558953697",
       "name": "Gedung 558953697",
+      "matchedName": "Gedung 558953697",
       "category": "public",
       "polygon": [
         {
@@ -55919,7 +57565,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953698",
+      "osmId": "558953698",
       "name": "Gedung 558953698",
+      "matchedName": "Gedung 558953698",
       "category": "public",
       "polygon": [
         {
@@ -55981,7 +57629,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953699",
+      "osmId": "558953699",
       "name": "Gedung 558953699",
+      "matchedName": "Gedung 558953699",
       "category": "public",
       "polygon": [
         {
@@ -56043,7 +57693,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953700",
+      "osmId": "558953700",
       "name": "Gedung 558953700",
+      "matchedName": "Gedung 558953700",
       "category": "public",
       "polygon": [
         {
@@ -56105,7 +57757,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953703",
+      "osmId": "558953703",
       "name": "Gedung 558953703",
+      "matchedName": "Gedung 558953703",
       "category": "public",
       "polygon": [
         {
@@ -56167,7 +57821,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953704",
+      "osmId": "558953704",
       "name": "Gedung 558953704",
+      "matchedName": "Gedung 558953704",
       "category": "public",
       "polygon": [
         {
@@ -56229,7 +57885,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953705",
+      "osmId": "558953705",
       "name": "Gedung 558953705",
+      "matchedName": "Gedung 558953705",
       "category": "public",
       "polygon": [
         {
@@ -56291,7 +57949,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953706",
+      "osmId": "558953706",
       "name": "Gedung 558953706",
+      "matchedName": "Gedung 558953706",
       "category": "public",
       "polygon": [
         {
@@ -56353,7 +58013,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953708",
+      "osmId": "558953708",
       "name": "Gedung 558953708",
+      "matchedName": "Gedung 558953708",
       "category": "public",
       "polygon": [
         {
@@ -56415,7 +58077,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953709",
+      "osmId": "558953709",
       "name": "Gedung 558953709",
+      "matchedName": "Gedung 558953709",
       "category": "public",
       "polygon": [
         {
@@ -56477,7 +58141,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953715",
+      "osmId": "558953715",
       "name": "Gedung 558953715",
+      "matchedName": "Gedung 558953715",
       "category": "public",
       "polygon": [
         {
@@ -56539,7 +58205,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953716",
+      "osmId": "558953716",
       "name": "Gedung 558953716",
+      "matchedName": "Gedung 558953716",
       "category": "public",
       "polygon": [
         {
@@ -56601,7 +58269,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953717",
+      "osmId": "558953717",
       "name": "Gedung 558953717",
+      "matchedName": "Gedung 558953717",
       "category": "public",
       "polygon": [
         {
@@ -56663,7 +58333,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953719",
+      "osmId": "558953719",
       "name": "Gedung 558953719",
+      "matchedName": "Gedung 558953719",
       "category": "public",
       "polygon": [
         {
@@ -56725,7 +58397,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953721",
+      "osmId": "558953721",
       "name": "Gedung 558953721",
+      "matchedName": "Gedung 558953721",
       "category": "public",
       "polygon": [
         {
@@ -56787,7 +58461,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953724",
+      "osmId": "558953724",
       "name": "Gedung 558953724",
+      "matchedName": "Gedung 558953724",
       "category": "public",
       "polygon": [
         {
@@ -56849,7 +58525,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953725",
+      "osmId": "558953725",
       "name": "Gedung 558953725",
+      "matchedName": "Gedung 558953725",
       "category": "public",
       "polygon": [
         {
@@ -56911,7 +58589,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953727",
+      "osmId": "558953727",
       "name": "Gedung 558953727",
+      "matchedName": "Gedung 558953727",
       "category": "public",
       "polygon": [
         {
@@ -56973,7 +58653,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953728",
+      "osmId": "558953728",
       "name": "Gedung 558953728",
+      "matchedName": "Gedung 558953728",
       "category": "public",
       "polygon": [
         {
@@ -57035,7 +58717,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953730",
+      "osmId": "558953730",
       "name": "Gedung 558953730",
+      "matchedName": "Gedung 558953730",
       "category": "public",
       "polygon": [
         {
@@ -57097,7 +58781,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953732",
+      "osmId": "558953732",
       "name": "Gedung 558953732",
+      "matchedName": "Gedung 558953732",
       "category": "public",
       "polygon": [
         {
@@ -57159,7 +58845,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953735",
+      "osmId": "558953735",
       "name": "Gedung 558953735",
+      "matchedName": "Gedung 558953735",
       "category": "public",
       "polygon": [
         {
@@ -57253,7 +58941,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953737",
+      "osmId": "558953737",
       "name": "Gedung 558953737",
+      "matchedName": "Gedung 558953737",
       "category": "public",
       "polygon": [
         {
@@ -57347,7 +59037,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953739",
+      "osmId": "558953739",
       "name": "Gedung 558953739",
+      "matchedName": "Gedung 558953739",
       "category": "public",
       "polygon": [
         {
@@ -57441,7 +59133,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558953741",
+      "osmId": "558953741",
       "name": "Gedung 558953741",
+      "matchedName": "Gedung 558953741",
       "category": "public",
       "polygon": [
         {
@@ -57543,7 +59237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954617",
+      "osmId": "558954617",
       "name": "Gedung 558954617",
+      "matchedName": "Gedung 558954617",
       "category": "public",
       "polygon": [
         {
@@ -57605,7 +59301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954623",
+      "osmId": "558954623",
       "name": "Gedung 558954623",
+      "matchedName": "Gedung 558954623",
       "category": "public",
       "polygon": [
         {
@@ -57667,7 +59365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954624",
+      "osmId": "558954624",
       "name": "Gedung 558954624",
+      "matchedName": "Gedung 558954624",
       "category": "public",
       "polygon": [
         {
@@ -57761,7 +59461,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954625",
+      "osmId": "558954625",
       "name": "Gedung 558954625",
+      "matchedName": "Gedung 558954625",
       "category": "public",
       "polygon": [
         {
@@ -57823,7 +59525,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954626",
+      "osmId": "558954626",
       "name": "Gedung 558954626",
+      "matchedName": "Gedung 558954626",
       "category": "public",
       "polygon": [
         {
@@ -57885,7 +59589,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954629",
+      "osmId": "558954629",
       "name": "Gedung 558954629",
+      "matchedName": "Gedung 558954629",
       "category": "public",
       "polygon": [
         {
@@ -57979,7 +59685,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954642",
+      "osmId": "558954642",
       "name": "Gedung 558954642",
+      "matchedName": "Gedung 558954642",
       "category": "public",
       "polygon": [
         {
@@ -58041,7 +59749,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954643",
+      "osmId": "558954643",
       "name": "Gedung 558954643",
+      "matchedName": "Gedung 558954643",
       "category": "public",
       "polygon": [
         {
@@ -58103,7 +59813,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954644",
+      "osmId": "558954644",
       "name": "Gedung 558954644",
+      "matchedName": "Gedung 558954644",
       "category": "public",
       "polygon": [
         {
@@ -58165,8 +59877,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954647",
+      "osmId": "558954647",
       "name": "Gedung 558954647",
-      "category": "public",
+      "matchedName": "Gedung 558954647",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049516,
@@ -58238,7 +59952,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954651",
+      "osmId": "558954651",
       "name": "Gedung 558954651",
+      "matchedName": "Gedung 558954651",
       "category": "public",
       "polygon": [
         {
@@ -58300,7 +60016,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954672",
+      "osmId": "558954672",
       "name": "Gedung 558954672",
+      "matchedName": "Gedung 558954672",
       "category": "public",
       "polygon": [
         {
@@ -58362,8 +60080,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558954673",
+      "osmId": "558954673",
       "name": "Gedung 558954673",
-      "category": "public",
+      "matchedName": "Gedung 558954673",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.053287,
@@ -58424,7 +60144,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962736",
+      "osmId": "558962736",
       "name": "Gedung 558962736",
+      "matchedName": "Gedung 558962736",
       "category": "public",
       "polygon": [
         {
@@ -58486,7 +60208,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962737",
+      "osmId": "558962737",
       "name": "Gedung 558962737",
+      "matchedName": "Gedung 558962737",
       "category": "public",
       "polygon": [
         {
@@ -58548,7 +60272,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962738",
+      "osmId": "558962738",
       "name": "Gedung 558962738",
+      "matchedName": "Gedung 558962738",
       "category": "public",
       "polygon": [
         {
@@ -58610,7 +60336,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962739",
+      "osmId": "558962739",
       "name": "Gedung 558962739",
+      "matchedName": "Gedung 558962739",
       "category": "public",
       "polygon": [
         {
@@ -58672,7 +60400,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962740",
+      "osmId": "558962740",
       "name": "Gedung 558962740",
+      "matchedName": "Gedung 558962740",
       "category": "public",
       "polygon": [
         {
@@ -58734,7 +60464,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962741",
+      "osmId": "558962741",
       "name": "Gedung 558962741",
+      "matchedName": "Gedung 558962741",
       "category": "public",
       "polygon": [
         {
@@ -58796,7 +60528,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962742",
+      "osmId": "558962742",
       "name": "Gedung 558962742",
+      "matchedName": "Gedung 558962742",
       "category": "public",
       "polygon": [
         {
@@ -58858,7 +60592,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962743",
+      "osmId": "558962743",
       "name": "Gedung 558962743",
+      "matchedName": "Gedung 558962743",
       "category": "public",
       "polygon": [
         {
@@ -58920,7 +60656,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962744",
+      "osmId": "558962744",
       "name": "Gedung 558962744",
+      "matchedName": "Gedung 558962744",
       "category": "public",
       "polygon": [
         {
@@ -58982,7 +60720,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962745",
+      "osmId": "558962745",
       "name": "Gedung 558962745",
+      "matchedName": "Gedung 558962745",
       "category": "public",
       "polygon": [
         {
@@ -59044,7 +60784,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962746",
+      "osmId": "558962746",
       "name": "Gedung 558962746",
+      "matchedName": "Gedung 558962746",
       "category": "public",
       "polygon": [
         {
@@ -59106,7 +60848,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962747",
+      "osmId": "558962747",
       "name": "Gedung 558962747",
+      "matchedName": "Gedung 558962747",
       "category": "public",
       "polygon": [
         {
@@ -59168,7 +60912,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962748",
+      "osmId": "558962748",
       "name": "Gedung 558962748",
+      "matchedName": "Gedung 558962748",
       "category": "public",
       "polygon": [
         {
@@ -59230,7 +60976,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962749",
+      "osmId": "558962749",
       "name": "Gedung 558962749",
+      "matchedName": "Gedung 558962749",
       "category": "public",
       "polygon": [
         {
@@ -59292,7 +61040,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962752",
+      "osmId": "558962752",
       "name": "Gedung 558962752",
+      "matchedName": "Gedung 558962752",
       "category": "public",
       "polygon": [
         {
@@ -59354,7 +61104,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962756",
+      "osmId": "558962756",
       "name": "Gedung 558962756",
+      "matchedName": "Gedung 558962756",
       "category": "public",
       "polygon": [
         {
@@ -59416,7 +61168,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962759",
+      "osmId": "558962759",
       "name": "Gedung 558962759",
+      "matchedName": "Gedung 558962759",
       "category": "public",
       "polygon": [
         {
@@ -59478,7 +61232,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962760",
+      "osmId": "558962760",
       "name": "Gedung 558962760",
+      "matchedName": "Gedung 558962760",
       "category": "public",
       "polygon": [
         {
@@ -59540,7 +61296,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962761",
+      "osmId": "558962761",
       "name": "Gedung 558962761",
+      "matchedName": "Gedung 558962761",
       "category": "public",
       "polygon": [
         {
@@ -59602,7 +61360,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962790",
+      "osmId": "558962790",
       "name": "Gedung 558962790",
+      "matchedName": "Gedung 558962790",
       "category": "public",
       "polygon": [
         {
@@ -59664,7 +61424,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962791",
+      "osmId": "558962791",
       "name": "Gedung 558962791",
+      "matchedName": "Gedung 558962791",
       "category": "public",
       "polygon": [
         {
@@ -59726,7 +61488,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962792",
+      "osmId": "558962792",
       "name": "Gedung 558962792",
+      "matchedName": "Gedung 558962792",
       "category": "public",
       "polygon": [
         {
@@ -59788,7 +61552,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962793",
+      "osmId": "558962793",
       "name": "Gedung 558962793",
+      "matchedName": "Gedung 558962793",
       "category": "public",
       "polygon": [
         {
@@ -59850,7 +61616,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962794",
+      "osmId": "558962794",
       "name": "Gedung 558962794",
+      "matchedName": "Gedung 558962794",
       "category": "public",
       "polygon": [
         {
@@ -59912,7 +61680,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962795",
+      "osmId": "558962795",
       "name": "Gedung 558962795",
+      "matchedName": "Gedung 558962795",
       "category": "public",
       "polygon": [
         {
@@ -59974,7 +61744,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962796",
+      "osmId": "558962796",
       "name": "Gedung 558962796",
+      "matchedName": "Gedung 558962796",
       "category": "public",
       "polygon": [
         {
@@ -60036,7 +61808,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962797",
+      "osmId": "558962797",
       "name": "Gedung 558962797",
+      "matchedName": "Gedung 558962797",
       "category": "public",
       "polygon": [
         {
@@ -60098,7 +61872,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962798",
+      "osmId": "558962798",
       "name": "Gedung 558962798",
+      "matchedName": "Gedung 558962798",
       "category": "public",
       "polygon": [
         {
@@ -60160,7 +61936,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962799",
+      "osmId": "558962799",
       "name": "Gedung 558962799",
+      "matchedName": "Gedung 558962799",
       "category": "public",
       "polygon": [
         {
@@ -60222,7 +62000,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962800",
+      "osmId": "558962800",
       "name": "Gedung 558962800",
+      "matchedName": "Gedung 558962800",
       "category": "public",
       "polygon": [
         {
@@ -60284,7 +62064,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962811",
+      "osmId": "558962811",
       "name": "Gedung 558962811",
+      "matchedName": "Gedung 558962811",
       "category": "public",
       "polygon": [
         {
@@ -60346,7 +62128,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962812",
+      "osmId": "558962812",
       "name": "Gedung 558962812",
+      "matchedName": "Gedung 558962812",
       "category": "public",
       "polygon": [
         {
@@ -60408,7 +62192,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962879",
+      "osmId": "558962879",
       "name": "Gedung 558962879",
+      "matchedName": "Gedung 558962879",
       "category": "public",
       "polygon": [
         {
@@ -60470,7 +62256,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962882",
+      "osmId": "558962882",
       "name": "Gedung 558962882",
+      "matchedName": "Gedung 558962882",
       "category": "public",
       "polygon": [
         {
@@ -60532,7 +62320,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962888",
+      "osmId": "558962888",
       "name": "Gedung 558962888",
+      "matchedName": "Gedung 558962888",
       "category": "public",
       "polygon": [
         {
@@ -60594,7 +62384,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962981",
+      "osmId": "558962981",
       "name": "Gedung 558962981",
+      "matchedName": "Gedung 558962981",
       "category": "public",
       "polygon": [
         {
@@ -60749,7 +62541,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962982",
+      "osmId": "558962982",
       "name": "Musholla Polines",
+      "matchedName": "Musholla Polines",
       "category": "public",
       "polygon": [
         {
@@ -60825,8 +62619,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558962983",
+      "osmId": "558962983",
       "name": "Gedung 558962983",
-      "category": "public",
+      "matchedName": "Gedung 558962983",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050375,
@@ -60887,7 +62683,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963055",
+      "osmId": "558963055",
       "name": "Gedung 558963055",
+      "matchedName": "Gedung 558963055",
       "category": "public",
       "polygon": [
         {
@@ -60965,7 +62763,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963061",
+      "osmId": "558963061",
       "name": "Gedung 558963061",
+      "matchedName": "Gedung 558963061",
       "category": "public",
       "polygon": [
         {
@@ -61027,7 +62827,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963063",
+      "osmId": "558963063",
       "name": "Gedung 558963063",
+      "matchedName": "Gedung 558963063",
       "category": "public",
       "polygon": [
         {
@@ -61089,7 +62891,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963073",
+      "osmId": "558963073",
       "name": "Gedung 558963073",
+      "matchedName": "Gedung 558963073",
       "category": "public",
       "polygon": [
         {
@@ -61151,7 +62955,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963074",
+      "osmId": "558963074",
       "name": "Gedung 558963074",
+      "matchedName": "Gedung 558963074",
       "category": "public",
       "polygon": [
         {
@@ -61213,7 +63019,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963075",
+      "osmId": "558963075",
       "name": "Gedung 558963075",
+      "matchedName": "Gedung 558963075",
       "category": "public",
       "polygon": [
         {
@@ -61275,7 +63083,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963076",
+      "osmId": "558963076",
       "name": "Gedung 558963076",
+      "matchedName": "Gedung 558963076",
       "category": "public",
       "polygon": [
         {
@@ -61337,7 +63147,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963077",
+      "osmId": "558963077",
       "name": "NJ Guest House Tembalang",
+      "matchedName": "NJ Guest House Tembalang",
       "category": "public",
       "polygon": [
         {
@@ -61401,7 +63213,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963078",
+      "osmId": "558963078",
       "name": "Gedung 558963078",
+      "matchedName": "Gedung 558963078",
       "category": "public",
       "polygon": [
         {
@@ -61463,7 +63277,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963079",
+      "osmId": "558963079",
       "name": "Gedung 558963079",
+      "matchedName": "Gedung 558963079",
       "category": "public",
       "polygon": [
         {
@@ -61525,7 +63341,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963081",
+      "osmId": "558963081",
       "name": "Gedung 558963081",
+      "matchedName": "Gedung 558963081",
       "category": "public",
       "polygon": [
         {
@@ -61587,7 +63405,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963082",
+      "osmId": "558963082",
       "name": "Gedung 558963082",
+      "matchedName": "Gedung 558963082",
       "category": "public",
       "polygon": [
         {
@@ -61649,7 +63469,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963083",
+      "osmId": "558963083",
       "name": "Gedung 558963083",
+      "matchedName": "Gedung 558963083",
       "category": "public",
       "polygon": [
         {
@@ -61711,7 +63533,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963084",
+      "osmId": "558963084",
       "name": "Gedung 558963084",
+      "matchedName": "Gedung 558963084",
       "category": "public",
       "polygon": [
         {
@@ -61773,7 +63597,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963085",
+      "osmId": "558963085",
       "name": "Gedung 558963085",
+      "matchedName": "Gedung 558963085",
       "category": "public",
       "polygon": [
         {
@@ -61835,7 +63661,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963086",
+      "osmId": "558963086",
       "name": "Gedung 558963086",
+      "matchedName": "Gedung 558963086",
       "category": "public",
       "polygon": [
         {
@@ -61897,7 +63725,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963087",
+      "osmId": "558963087",
       "name": "Gedung 558963087",
+      "matchedName": "Gedung 558963087",
       "category": "public",
       "polygon": [
         {
@@ -61959,7 +63789,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963088",
+      "osmId": "558963088",
       "name": "Gedung 558963088",
+      "matchedName": "Gedung 558963088",
       "category": "public",
       "polygon": [
         {
@@ -62021,7 +63853,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963089",
+      "osmId": "558963089",
       "name": "Gedung 558963089",
+      "matchedName": "Gedung 558963089",
       "category": "public",
       "polygon": [
         {
@@ -62083,7 +63917,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963090",
+      "osmId": "558963090",
       "name": "Gedung 558963090",
+      "matchedName": "Gedung 558963090",
       "category": "public",
       "polygon": [
         {
@@ -62145,7 +63981,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963091",
+      "osmId": "558963091",
       "name": "Gedung 558963091",
+      "matchedName": "Gedung 558963091",
       "category": "public",
       "polygon": [
         {
@@ -62207,7 +64045,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963092",
+      "osmId": "558963092",
       "name": "Gedung 558963092",
+      "matchedName": "Gedung 558963092",
       "category": "public",
       "polygon": [
         {
@@ -62269,7 +64109,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963093",
+      "osmId": "558963093",
       "name": "Gedung 558963093",
+      "matchedName": "Gedung 558963093",
       "category": "public",
       "polygon": [
         {
@@ -62331,7 +64173,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963094",
+      "osmId": "558963094",
       "name": "Gedung 558963094",
+      "matchedName": "Gedung 558963094",
       "category": "public",
       "polygon": [
         {
@@ -62393,7 +64237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963098",
+      "osmId": "558963098",
       "name": "Gedung 558963098",
+      "matchedName": "Gedung 558963098",
       "category": "public",
       "polygon": [
         {
@@ -62455,7 +64301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963099",
+      "osmId": "558963099",
       "name": "Gedung 558963099",
+      "matchedName": "Gedung 558963099",
       "category": "public",
       "polygon": [
         {
@@ -62517,7 +64365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963100",
+      "osmId": "558963100",
       "name": "Gedung 558963100",
+      "matchedName": "Gedung 558963100",
       "category": "public",
       "polygon": [
         {
@@ -62579,7 +64429,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963101",
+      "osmId": "558963101",
       "name": "Gedung 558963101",
+      "matchedName": "Gedung 558963101",
       "category": "public",
       "polygon": [
         {
@@ -62641,7 +64493,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963102",
+      "osmId": "558963102",
       "name": "Gedung 558963102",
+      "matchedName": "Gedung 558963102",
       "category": "public",
       "polygon": [
         {
@@ -62703,7 +64557,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963103",
+      "osmId": "558963103",
       "name": "Gedung 558963103",
+      "matchedName": "Gedung 558963103",
       "category": "public",
       "polygon": [
         {
@@ -62765,7 +64621,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963104",
+      "osmId": "558963104",
       "name": "Gedung 558963104",
+      "matchedName": "Gedung 558963104",
       "category": "public",
       "polygon": [
         {
@@ -62827,7 +64685,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963105",
+      "osmId": "558963105",
       "name": "Gedung 558963105",
+      "matchedName": "Gedung 558963105",
       "category": "public",
       "polygon": [
         {
@@ -62889,7 +64749,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963106",
+      "osmId": "558963106",
       "name": "Gedung 558963106",
+      "matchedName": "Gedung 558963106",
       "category": "public",
       "polygon": [
         {
@@ -62951,7 +64813,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963107",
+      "osmId": "558963107",
       "name": "Gedung 558963107",
+      "matchedName": "Gedung 558963107",
       "category": "public",
       "polygon": [
         {
@@ -63013,7 +64877,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963108",
+      "osmId": "558963108",
       "name": "Gedung 558963108",
+      "matchedName": "Gedung 558963108",
       "category": "public",
       "polygon": [
         {
@@ -63075,7 +64941,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963109",
+      "osmId": "558963109",
       "name": "Gedung 558963109",
+      "matchedName": "Gedung 558963109",
       "category": "public",
       "polygon": [
         {
@@ -63137,7 +65005,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963110",
+      "osmId": "558963110",
       "name": "Gedung 558963110",
+      "matchedName": "Gedung 558963110",
       "category": "public",
       "polygon": [
         {
@@ -63199,7 +65069,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963111",
+      "osmId": "558963111",
       "name": "Gedung 558963111",
+      "matchedName": "Gedung 558963111",
       "category": "public",
       "polygon": [
         {
@@ -63261,7 +65133,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963112",
+      "osmId": "558963112",
       "name": "Gedung 558963112",
+      "matchedName": "Gedung 558963112",
       "category": "public",
       "polygon": [
         {
@@ -63323,7 +65197,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963113",
+      "osmId": "558963113",
       "name": "Gedung 558963113",
+      "matchedName": "Gedung 558963113",
       "category": "public",
       "polygon": [
         {
@@ -63385,7 +65261,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963114",
+      "osmId": "558963114",
       "name": "Gedung 558963114",
+      "matchedName": "Gedung 558963114",
       "category": "public",
       "polygon": [
         {
@@ -63447,7 +65325,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963115",
+      "osmId": "558963115",
       "name": "Gedung 558963115",
+      "matchedName": "Gedung 558963115",
       "category": "public",
       "polygon": [
         {
@@ -63509,7 +65389,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963116",
+      "osmId": "558963116",
       "name": "Gedung 558963116",
+      "matchedName": "Gedung 558963116",
       "category": "public",
       "polygon": [
         {
@@ -63571,7 +65453,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963119",
+      "osmId": "558963119",
       "name": "Gedung 558963119",
+      "matchedName": "Gedung 558963119",
       "category": "public",
       "polygon": [
         {
@@ -63633,7 +65517,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963122",
+      "osmId": "558963122",
       "name": "Gedung 558963122",
+      "matchedName": "Gedung 558963122",
       "category": "public",
       "polygon": [
         {
@@ -63708,7 +65594,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963123",
+      "osmId": "558963123",
       "name": "Gedung 558963123",
+      "matchedName": "Gedung 558963123",
       "category": "public",
       "polygon": [
         {
@@ -63770,7 +65658,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963124",
+      "osmId": "558963124",
       "name": "Gedung 558963124",
+      "matchedName": "Gedung 558963124",
       "category": "public",
       "polygon": [
         {
@@ -63832,7 +65722,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963125",
+      "osmId": "558963125",
       "name": "Gedung 558963125",
+      "matchedName": "Gedung 558963125",
       "category": "public",
       "polygon": [
         {
@@ -63894,7 +65786,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963126",
+      "osmId": "558963126",
       "name": "Gedung 558963126",
+      "matchedName": "Gedung 558963126",
       "category": "public",
       "polygon": [
         {
@@ -63956,7 +65850,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963127",
+      "osmId": "558963127",
       "name": "Gedung 558963127",
+      "matchedName": "Gedung 558963127",
       "category": "public",
       "polygon": [
         {
@@ -64018,7 +65914,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963128",
+      "osmId": "558963128",
       "name": "Gedung 558963128",
+      "matchedName": "Gedung 558963128",
       "category": "public",
       "polygon": [
         {
@@ -64080,7 +65978,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963129",
+      "osmId": "558963129",
       "name": "Gedung 558963129",
+      "matchedName": "Gedung 558963129",
       "category": "public",
       "polygon": [
         {
@@ -64142,7 +66042,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963130",
+      "osmId": "558963130",
       "name": "Gedung 558963130",
+      "matchedName": "Gedung 558963130",
       "category": "public",
       "polygon": [
         {
@@ -64204,7 +66106,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963131",
+      "osmId": "558963131",
       "name": "Gedung 558963131",
+      "matchedName": "Gedung 558963131",
       "category": "public",
       "polygon": [
         {
@@ -64266,7 +66170,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963132",
+      "osmId": "558963132",
       "name": "Gedung 558963132",
+      "matchedName": "Gedung 558963132",
       "category": "public",
       "polygon": [
         {
@@ -64328,7 +66234,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963133",
+      "osmId": "558963133",
       "name": "Gedung 558963133",
+      "matchedName": "Gedung 558963133",
       "category": "public",
       "polygon": [
         {
@@ -64390,7 +66298,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963134",
+      "osmId": "558963134",
       "name": "Gedung 558963134",
+      "matchedName": "Gedung 558963134",
       "category": "public",
       "polygon": [
         {
@@ -64465,7 +66375,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963135",
+      "osmId": "558963135",
       "name": "Gedung 558963135",
+      "matchedName": "Gedung 558963135",
       "category": "public",
       "polygon": [
         {
@@ -64540,7 +66452,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963136",
+      "osmId": "558963136",
       "name": "Gedung 558963136",
+      "matchedName": "Gedung 558963136",
       "category": "public",
       "polygon": [
         {
@@ -64615,7 +66529,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963137",
+      "osmId": "558963137",
       "name": "Gedung 558963137",
+      "matchedName": "Gedung 558963137",
       "category": "public",
       "polygon": [
         {
@@ -64690,7 +66606,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963146",
+      "osmId": "558963146",
       "name": "Gedung 558963146",
+      "matchedName": "Gedung 558963146",
       "category": "public",
       "polygon": [
         {
@@ -64765,7 +66683,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963147",
+      "osmId": "558963147",
       "name": "Gedung Sekolah 1",
+      "matchedName": "Gedung Sekolah 1",
       "category": "public",
       "polygon": [
         {
@@ -64841,7 +66761,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963148",
+      "osmId": "558963148",
       "name": "Gedung 558963148",
+      "matchedName": "Gedung 558963148",
       "category": "public",
       "polygon": [
         {
@@ -64916,7 +66838,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963149",
+      "osmId": "558963149",
       "name": "Gedung Sekolah 2",
+      "matchedName": "Gedung Sekolah 2",
       "category": "public",
       "polygon": [
         {
@@ -64992,7 +66916,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963150",
+      "osmId": "558963150",
       "name": "Gedung 558963150",
+      "matchedName": "Gedung 558963150",
       "category": "public",
       "polygon": [
         {
@@ -65054,7 +66980,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963151",
+      "osmId": "558963151",
       "name": "Gedung 558963151",
+      "matchedName": "Gedung 558963151",
       "category": "public",
       "polygon": [
         {
@@ -65116,7 +67044,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963152",
+      "osmId": "558963152",
       "name": "Gedung 558963152",
+      "matchedName": "Gedung 558963152",
       "category": "public",
       "polygon": [
         {
@@ -65178,7 +67108,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963153",
+      "osmId": "558963153",
       "name": "Gedung 558963153",
+      "matchedName": "Gedung 558963153",
       "category": "public",
       "polygon": [
         {
@@ -65240,7 +67172,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963154",
+      "osmId": "558963154",
       "name": "Gedung 558963154",
+      "matchedName": "Gedung 558963154",
       "category": "public",
       "polygon": [
         {
@@ -65302,7 +67236,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963155",
+      "osmId": "558963155",
       "name": "Gedung 558963155",
+      "matchedName": "Gedung 558963155",
       "category": "public",
       "polygon": [
         {
@@ -65364,7 +67300,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963156",
+      "osmId": "558963156",
       "name": "Gedung 558963156",
+      "matchedName": "Gedung 558963156",
       "category": "public",
       "polygon": [
         {
@@ -65426,7 +67364,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963157",
+      "osmId": "558963157",
       "name": "Gedung 558963157",
+      "matchedName": "Gedung 558963157",
       "category": "public",
       "polygon": [
         {
@@ -65488,7 +67428,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963165",
+      "osmId": "558963165",
       "name": "Gedung 558963165",
+      "matchedName": "Gedung 558963165",
       "category": "public",
       "polygon": [
         {
@@ -65550,7 +67492,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963166",
+      "osmId": "558963166",
       "name": "Gedung 558963166",
+      "matchedName": "Gedung 558963166",
       "category": "public",
       "polygon": [
         {
@@ -65628,7 +67572,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963167",
+      "osmId": "558963167",
       "name": "Gedung 558963167",
+      "matchedName": "Gedung 558963167",
       "category": "public",
       "polygon": [
         {
@@ -65706,7 +67652,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963168",
+      "osmId": "558963168",
       "name": "Gedung 558963168",
+      "matchedName": "Gedung 558963168",
       "category": "public",
       "polygon": [
         {
@@ -65776,7 +67724,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963169",
+      "osmId": "558963169",
       "name": "Gedung 558963169",
+      "matchedName": "Gedung 558963169",
       "category": "public",
       "polygon": [
         {
@@ -65838,7 +67788,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963170",
+      "osmId": "558963170",
       "name": "Gedung 558963170",
+      "matchedName": "Gedung 558963170",
       "category": "public",
       "polygon": [
         {
@@ -65900,7 +67852,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963171",
+      "osmId": "558963171",
       "name": "Gedung 558963171",
+      "matchedName": "Gedung 558963171",
       "category": "public",
       "polygon": [
         {
@@ -65962,7 +67916,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963172",
+      "osmId": "558963172",
       "name": "Gedung 558963172",
+      "matchedName": "Gedung 558963172",
       "category": "public",
       "polygon": [
         {
@@ -66024,7 +67980,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963173",
+      "osmId": "558963173",
       "name": "Gedung 558963173",
+      "matchedName": "Gedung 558963173",
       "category": "public",
       "polygon": [
         {
@@ -66086,8 +68044,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963174",
+      "osmId": "558963174",
       "name": "Muladi Dome",
-      "category": "public",
+      "matchedName": "Muladi Dome",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.0529,
@@ -66213,7 +68173,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963176",
+      "osmId": "558963176",
       "name": "Gedung 558963176",
+      "matchedName": "Gedung 558963176",
       "category": "public",
       "polygon": [
         {
@@ -66275,7 +68237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-558963178",
+      "osmId": "558963178",
       "name": "Gedung 558963178",
+      "matchedName": "Gedung 558963178",
       "category": "public",
       "polygon": [
         {
@@ -66337,7 +68301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-559878221",
+      "osmId": "559878221",
       "name": "Gedung 559878221",
+      "matchedName": "Gedung 559878221",
       "category": "public",
       "polygon": [
         {
@@ -66399,7 +68365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-559878222",
+      "osmId": "559878222",
       "name": "Gedung 559878222",
+      "matchedName": "Gedung 559878222",
       "category": "public",
       "polygon": [
         {
@@ -66461,7 +68429,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-559878223",
+      "osmId": "559878223",
       "name": "Gedung 559878223",
+      "matchedName": "Gedung 559878223",
       "category": "public",
       "polygon": [
         {
@@ -66531,7 +68501,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565255494",
+      "osmId": "565255494",
       "name": "Gedung 565255494",
+      "matchedName": "Gedung 565255494",
       "category": "public",
       "polygon": [
         {
@@ -66593,7 +68565,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565255496",
+      "osmId": "565255496",
       "name": "Gedung 565255496",
+      "matchedName": "Gedung 565255496",
       "category": "public",
       "polygon": [
         {
@@ -66655,7 +68629,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565255497",
+      "osmId": "565255497",
       "name": "Gedung 565255497",
+      "matchedName": "Gedung 565255497",
       "category": "public",
       "polygon": [
         {
@@ -66717,7 +68693,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565255498",
+      "osmId": "565255498",
       "name": "Gedung 565255498",
+      "matchedName": "Gedung 565255498",
       "category": "public",
       "polygon": [
         {
@@ -66779,7 +68757,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565255499",
+      "osmId": "565255499",
       "name": "Gedung 565255499",
+      "matchedName": "Gedung 565255499",
       "category": "public",
       "polygon": [
         {
@@ -66841,7 +68821,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324279",
+      "osmId": "565324279",
       "name": "Gedung 565324279",
+      "matchedName": "Gedung 565324279",
       "category": "public",
       "polygon": [
         {
@@ -66903,7 +68885,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324284",
+      "osmId": "565324284",
       "name": "Gedung 565324284",
+      "matchedName": "Gedung 565324284",
       "category": "public",
       "polygon": [
         {
@@ -66965,7 +68949,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324285",
+      "osmId": "565324285",
       "name": "Gedung 565324285",
+      "matchedName": "Gedung 565324285",
       "category": "public",
       "polygon": [
         {
@@ -67027,7 +69013,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324286",
+      "osmId": "565324286",
       "name": "Gedung 565324286",
+      "matchedName": "Gedung 565324286",
       "category": "public",
       "polygon": [
         {
@@ -67089,7 +69077,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324304",
+      "osmId": "565324304",
       "name": "Gedung 565324304",
+      "matchedName": "Gedung 565324304",
       "category": "public",
       "polygon": [
         {
@@ -67151,7 +69141,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324305",
+      "osmId": "565324305",
       "name": "Gedung 565324305",
+      "matchedName": "Gedung 565324305",
       "category": "public",
       "polygon": [
         {
@@ -67245,7 +69237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324306",
+      "osmId": "565324306",
       "name": "Gedung 565324306",
+      "matchedName": "Gedung 565324306",
       "category": "public",
       "polygon": [
         {
@@ -67307,7 +69301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324307",
+      "osmId": "565324307",
       "name": "Gedung 565324307",
+      "matchedName": "Gedung 565324307",
       "category": "public",
       "polygon": [
         {
@@ -67369,7 +69365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324308",
+      "osmId": "565324308",
       "name": "Gedung 565324308",
+      "matchedName": "Gedung 565324308",
       "category": "public",
       "polygon": [
         {
@@ -67431,7 +69429,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324309",
+      "osmId": "565324309",
       "name": "Gedung 565324309",
+      "matchedName": "Gedung 565324309",
       "category": "public",
       "polygon": [
         {
@@ -67493,7 +69493,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324310",
+      "osmId": "565324310",
       "name": "Gedung 565324310",
+      "matchedName": "Gedung 565324310",
       "category": "public",
       "polygon": [
         {
@@ -67555,7 +69557,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324311",
+      "osmId": "565324311",
       "name": "Gedung 565324311",
+      "matchedName": "Gedung 565324311",
       "category": "public",
       "polygon": [
         {
@@ -67617,7 +69621,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324312",
+      "osmId": "565324312",
       "name": "Gedung 565324312",
+      "matchedName": "Gedung 565324312",
       "category": "public",
       "polygon": [
         {
@@ -67679,7 +69685,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324313",
+      "osmId": "565324313",
       "name": "Gedung 565324313",
+      "matchedName": "Gedung 565324313",
       "category": "public",
       "polygon": [
         {
@@ -67789,7 +69797,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324352",
+      "osmId": "565324352",
       "name": "Gedung 565324352",
+      "matchedName": "Gedung 565324352",
       "category": "public",
       "polygon": [
         {
@@ -67851,7 +69861,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324353",
+      "osmId": "565324353",
       "name": "Gedung 565324353",
+      "matchedName": "Gedung 565324353",
       "category": "public",
       "polygon": [
         {
@@ -67913,7 +69925,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324354",
+      "osmId": "565324354",
       "name": "Gedung 565324354",
+      "matchedName": "Gedung 565324354",
       "category": "public",
       "polygon": [
         {
@@ -67975,7 +69989,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324355",
+      "osmId": "565324355",
       "name": "Gedung 565324355",
+      "matchedName": "Gedung 565324355",
       "category": "public",
       "polygon": [
         {
@@ -68037,7 +70053,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324356",
+      "osmId": "565324356",
       "name": "Gedung 565324356",
+      "matchedName": "Gedung 565324356",
       "category": "public",
       "polygon": [
         {
@@ -68099,7 +70117,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324357",
+      "osmId": "565324357",
       "name": "Gedung 565324357",
+      "matchedName": "Gedung 565324357",
       "category": "public",
       "polygon": [
         {
@@ -68161,7 +70181,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324358",
+      "osmId": "565324358",
       "name": "Gedung 565324358",
+      "matchedName": "Gedung 565324358",
       "category": "public",
       "polygon": [
         {
@@ -68223,7 +70245,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324359",
+      "osmId": "565324359",
       "name": "Gedung 565324359",
+      "matchedName": "Gedung 565324359",
       "category": "public",
       "polygon": [
         {
@@ -68285,7 +70309,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324360",
+      "osmId": "565324360",
       "name": "Gedung 565324360",
+      "matchedName": "Gedung 565324360",
       "category": "public",
       "polygon": [
         {
@@ -68347,7 +70373,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324361",
+      "osmId": "565324361",
       "name": "Gedung 565324361",
+      "matchedName": "Gedung 565324361",
       "category": "public",
       "polygon": [
         {
@@ -68409,7 +70437,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324362",
+      "osmId": "565324362",
       "name": "Gedung 565324362",
+      "matchedName": "Gedung 565324362",
       "category": "public",
       "polygon": [
         {
@@ -68471,7 +70501,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324363",
+      "osmId": "565324363",
       "name": "Gedung 565324363",
+      "matchedName": "Gedung 565324363",
       "category": "public",
       "polygon": [
         {
@@ -68533,7 +70565,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324364",
+      "osmId": "565324364",
       "name": "Gedung 565324364",
+      "matchedName": "Gedung 565324364",
       "category": "public",
       "polygon": [
         {
@@ -68627,7 +70661,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324365",
+      "osmId": "565324365",
       "name": "Gedung 565324365",
+      "matchedName": "Gedung 565324365",
       "category": "public",
       "polygon": [
         {
@@ -68689,7 +70725,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324366",
+      "osmId": "565324366",
       "name": "Gedung 565324366",
+      "matchedName": "Gedung 565324366",
       "category": "public",
       "polygon": [
         {
@@ -68751,7 +70789,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324367",
+      "osmId": "565324367",
       "name": "Gedung 565324367",
+      "matchedName": "Gedung 565324367",
       "category": "public",
       "polygon": [
         {
@@ -68813,7 +70853,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324368",
+      "osmId": "565324368",
       "name": "Gedung 565324368",
+      "matchedName": "Gedung 565324368",
       "category": "public",
       "polygon": [
         {
@@ -68875,7 +70917,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324369",
+      "osmId": "565324369",
       "name": "Gedung 565324369",
+      "matchedName": "Gedung 565324369",
       "category": "public",
       "polygon": [
         {
@@ -68937,7 +70981,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324370",
+      "osmId": "565324370",
       "name": "Gedung 565324370",
+      "matchedName": "Gedung 565324370",
       "category": "public",
       "polygon": [
         {
@@ -68999,7 +71045,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324371",
+      "osmId": "565324371",
       "name": "Gedung 565324371",
+      "matchedName": "Gedung 565324371",
       "category": "public",
       "polygon": [
         {
@@ -69061,7 +71109,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324372",
+      "osmId": "565324372",
       "name": "Gedung 565324372",
+      "matchedName": "Gedung 565324372",
       "category": "public",
       "polygon": [
         {
@@ -69123,7 +71173,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324373",
+      "osmId": "565324373",
       "name": "Gedung 565324373",
+      "matchedName": "Gedung 565324373",
       "category": "public",
       "polygon": [
         {
@@ -69185,7 +71237,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324374",
+      "osmId": "565324374",
       "name": "Gedung 565324374",
+      "matchedName": "Gedung 565324374",
       "category": "public",
       "polygon": [
         {
@@ -69247,7 +71301,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324375",
+      "osmId": "565324375",
       "name": "Gedung 565324375",
+      "matchedName": "Gedung 565324375",
       "category": "public",
       "polygon": [
         {
@@ -69309,7 +71365,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324376",
+      "osmId": "565324376",
       "name": "Gedung 565324376",
+      "matchedName": "Gedung 565324376",
       "category": "public",
       "polygon": [
         {
@@ -69371,7 +71429,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324377",
+      "osmId": "565324377",
       "name": "Gedung 565324377",
+      "matchedName": "Gedung 565324377",
       "category": "public",
       "polygon": [
         {
@@ -69433,7 +71493,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324378",
+      "osmId": "565324378",
       "name": "Gedung 565324378",
+      "matchedName": "Gedung 565324378",
       "category": "public",
       "polygon": [
         {
@@ -69495,7 +71557,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324379",
+      "osmId": "565324379",
       "name": "Gedung 565324379",
+      "matchedName": "Gedung 565324379",
       "category": "public",
       "polygon": [
         {
@@ -69557,7 +71621,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565324380",
+      "osmId": "565324380",
       "name": "Gedung 565324380",
+      "matchedName": "Gedung 565324380",
       "category": "public",
       "polygon": [
         {
@@ -69619,7 +71685,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608097",
+      "osmId": "565608097",
       "name": "Gedung 565608097",
+      "matchedName": "Gedung 565608097",
       "category": "public",
       "polygon": [
         {
@@ -69681,7 +71749,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608101",
+      "osmId": "565608101",
       "name": "Gedung 565608101",
+      "matchedName": "Gedung 565608101",
       "category": "public",
       "polygon": [
         {
@@ -69743,7 +71813,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608104",
+      "osmId": "565608104",
       "name": "Gedung 565608104",
+      "matchedName": "Gedung 565608104",
       "category": "public",
       "polygon": [
         {
@@ -69805,7 +71877,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608106",
+      "osmId": "565608106",
       "name": "Gedung 565608106",
+      "matchedName": "Gedung 565608106",
       "category": "public",
       "polygon": [
         {
@@ -69867,7 +71941,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608107",
+      "osmId": "565608107",
       "name": "Gedung 565608107",
+      "matchedName": "Gedung 565608107",
       "category": "public",
       "polygon": [
         {
@@ -69929,7 +72005,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608109",
+      "osmId": "565608109",
       "name": "Gedung 565608109",
+      "matchedName": "Gedung 565608109",
       "category": "public",
       "polygon": [
         {
@@ -69991,7 +72069,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608111",
+      "osmId": "565608111",
       "name": "Gedung 565608111",
+      "matchedName": "Gedung 565608111",
       "category": "public",
       "polygon": [
         {
@@ -70053,7 +72133,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608113",
+      "osmId": "565608113",
       "name": "Gedung 565608113",
+      "matchedName": "Gedung 565608113",
       "category": "public",
       "polygon": [
         {
@@ -70115,7 +72197,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608116",
+      "osmId": "565608116",
       "name": "Gedung 565608116",
+      "matchedName": "Gedung 565608116",
       "category": "public",
       "polygon": [
         {
@@ -70177,7 +72261,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608118",
+      "osmId": "565608118",
       "name": "Gedung 565608118",
+      "matchedName": "Gedung 565608118",
       "category": "public",
       "polygon": [
         {
@@ -70239,7 +72325,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608120",
+      "osmId": "565608120",
       "name": "Gedung 565608120",
+      "matchedName": "Gedung 565608120",
       "category": "public",
       "polygon": [
         {
@@ -70301,7 +72389,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608122",
+      "osmId": "565608122",
       "name": "Gedung 565608122",
+      "matchedName": "Gedung 565608122",
       "category": "public",
       "polygon": [
         {
@@ -70363,7 +72453,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608124",
+      "osmId": "565608124",
       "name": "Gedung 565608124",
+      "matchedName": "Gedung 565608124",
       "category": "public",
       "polygon": [
         {
@@ -70425,7 +72517,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608127",
+      "osmId": "565608127",
       "name": "Gedung 565608127",
+      "matchedName": "Gedung 565608127",
       "category": "public",
       "polygon": [
         {
@@ -70487,7 +72581,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608129",
+      "osmId": "565608129",
       "name": "Gedung 565608129",
+      "matchedName": "Gedung 565608129",
       "category": "public",
       "polygon": [
         {
@@ -70549,7 +72645,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608136",
+      "osmId": "565608136",
       "name": "Gedung 565608136",
+      "matchedName": "Gedung 565608136",
       "category": "public",
       "polygon": [
         {
@@ -70611,7 +72709,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608138",
+      "osmId": "565608138",
       "name": "Gedung 565608138",
+      "matchedName": "Gedung 565608138",
       "category": "public",
       "polygon": [
         {
@@ -70673,7 +72773,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608140",
+      "osmId": "565608140",
       "name": "Gedung 565608140",
+      "matchedName": "Gedung 565608140",
       "category": "public",
       "polygon": [
         {
@@ -70735,7 +72837,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608142",
+      "osmId": "565608142",
       "name": "Gedung 565608142",
+      "matchedName": "Gedung 565608142",
       "category": "public",
       "polygon": [
         {
@@ -70797,7 +72901,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608144",
+      "osmId": "565608144",
       "name": "Gedung 565608144",
+      "matchedName": "Gedung 565608144",
       "category": "public",
       "polygon": [
         {
@@ -70867,7 +72973,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608146",
+      "osmId": "565608146",
       "name": "Gedung 565608146",
+      "matchedName": "Gedung 565608146",
       "category": "public",
       "polygon": [
         {
@@ -70929,7 +73037,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608148",
+      "osmId": "565608148",
       "name": "Gedung 565608148",
+      "matchedName": "Gedung 565608148",
       "category": "public",
       "polygon": [
         {
@@ -70991,7 +73101,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608150",
+      "osmId": "565608150",
       "name": "Gedung 565608150",
+      "matchedName": "Gedung 565608150",
       "category": "public",
       "polygon": [
         {
@@ -71053,7 +73165,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608152",
+      "osmId": "565608152",
       "name": "Gedung 565608152",
+      "matchedName": "Gedung 565608152",
       "category": "public",
       "polygon": [
         {
@@ -71155,7 +73269,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608154",
+      "osmId": "565608154",
       "name": "Gedung 565608154",
+      "matchedName": "Gedung 565608154",
       "category": "public",
       "polygon": [
         {
@@ -71217,7 +73333,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608156",
+      "osmId": "565608156",
       "name": "Gedung 565608156",
+      "matchedName": "Gedung 565608156",
       "category": "public",
       "polygon": [
         {
@@ -71287,7 +73405,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608158",
+      "osmId": "565608158",
       "name": "Gedung 565608158",
+      "matchedName": "Gedung 565608158",
       "category": "public",
       "polygon": [
         {
@@ -71349,7 +73469,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608159",
+      "osmId": "565608159",
       "name": "Gedung 565608159",
+      "matchedName": "Gedung 565608159",
       "category": "public",
       "polygon": [
         {
@@ -71467,7 +73589,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608162",
+      "osmId": "565608162",
       "name": "Gedung 565608162",
+      "matchedName": "Gedung 565608162",
       "category": "public",
       "polygon": [
         {
@@ -71529,7 +73653,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608163",
+      "osmId": "565608163",
       "name": "Gedung 565608163",
+      "matchedName": "Gedung 565608163",
       "category": "public",
       "polygon": [
         {
@@ -71591,7 +73717,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608165",
+      "osmId": "565608165",
       "name": "Gedung 565608165",
+      "matchedName": "Gedung 565608165",
       "category": "public",
       "polygon": [
         {
@@ -71653,7 +73781,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608168",
+      "osmId": "565608168",
       "name": "Gedung 565608168",
+      "matchedName": "Gedung 565608168",
       "category": "public",
       "polygon": [
         {
@@ -71715,7 +73845,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608170",
+      "osmId": "565608170",
       "name": "Gedung 565608170",
+      "matchedName": "Gedung 565608170",
       "category": "public",
       "polygon": [
         {
@@ -71777,7 +73909,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608172",
+      "osmId": "565608172",
       "name": "Gedung 565608172",
+      "matchedName": "Gedung 565608172",
       "category": "public",
       "polygon": [
         {
@@ -71839,7 +73973,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608174",
+      "osmId": "565608174",
       "name": "Gedung 565608174",
+      "matchedName": "Gedung 565608174",
       "category": "public",
       "polygon": [
         {
@@ -71901,7 +74037,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608176",
+      "osmId": "565608176",
       "name": "Gedung 565608176",
+      "matchedName": "Gedung 565608176",
       "category": "public",
       "polygon": [
         {
@@ -71963,7 +74101,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608178",
+      "osmId": "565608178",
       "name": "Gedung 565608178",
+      "matchedName": "Gedung 565608178",
       "category": "public",
       "polygon": [
         {
@@ -72025,7 +74165,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608179",
+      "osmId": "565608179",
       "name": "Gedung 565608179",
+      "matchedName": "Gedung 565608179",
       "category": "public",
       "polygon": [
         {
@@ -72087,7 +74229,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608181",
+      "osmId": "565608181",
       "name": "Gedung 565608181",
+      "matchedName": "Gedung 565608181",
       "category": "public",
       "polygon": [
         {
@@ -72149,7 +74293,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608183",
+      "osmId": "565608183",
       "name": "Gedung 565608183",
+      "matchedName": "Gedung 565608183",
       "category": "public",
       "polygon": [
         {
@@ -72211,7 +74357,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608186",
+      "osmId": "565608186",
       "name": "Gedung 565608186",
+      "matchedName": "Gedung 565608186",
       "category": "public",
       "polygon": [
         {
@@ -72273,7 +74421,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608188",
+      "osmId": "565608188",
       "name": "Gedung 565608188",
+      "matchedName": "Gedung 565608188",
       "category": "public",
       "polygon": [
         {
@@ -72335,7 +74485,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608190",
+      "osmId": "565608190",
       "name": "Gedung 565608190",
+      "matchedName": "Gedung 565608190",
       "category": "public",
       "polygon": [
         {
@@ -72397,7 +74549,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608192",
+      "osmId": "565608192",
       "name": "Gedung 565608192",
+      "matchedName": "Gedung 565608192",
       "category": "public",
       "polygon": [
         {
@@ -72459,7 +74613,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608194",
+      "osmId": "565608194",
       "name": "Gedung 565608194",
+      "matchedName": "Gedung 565608194",
       "category": "public",
       "polygon": [
         {
@@ -72521,7 +74677,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608196",
+      "osmId": "565608196",
       "name": "Gedung 565608196",
+      "matchedName": "Gedung 565608196",
       "category": "public",
       "polygon": [
         {
@@ -72583,7 +74741,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608198",
+      "osmId": "565608198",
       "name": "Gedung 565608198",
+      "matchedName": "Gedung 565608198",
       "category": "public",
       "polygon": [
         {
@@ -72645,7 +74805,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608200",
+      "osmId": "565608200",
       "name": "Gedung 565608200",
+      "matchedName": "Gedung 565608200",
       "category": "public",
       "polygon": [
         {
@@ -72707,7 +74869,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608204",
+      "osmId": "565608204",
       "name": "Gedung 565608204",
+      "matchedName": "Gedung 565608204",
       "category": "public",
       "polygon": [
         {
@@ -72769,7 +74933,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608206",
+      "osmId": "565608206",
       "name": "Gedung 565608206",
+      "matchedName": "Gedung 565608206",
       "category": "public",
       "polygon": [
         {
@@ -72831,7 +74997,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608208",
+      "osmId": "565608208",
       "name": "Gedung 565608208",
+      "matchedName": "Gedung 565608208",
       "category": "public",
       "polygon": [
         {
@@ -72893,7 +75061,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608210",
+      "osmId": "565608210",
       "name": "Gedung 565608210",
+      "matchedName": "Gedung 565608210",
       "category": "public",
       "polygon": [
         {
@@ -72955,7 +75125,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608212",
+      "osmId": "565608212",
       "name": "Gedung 565608212",
+      "matchedName": "Gedung 565608212",
       "category": "public",
       "polygon": [
         {
@@ -73025,7 +75197,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608213",
+      "osmId": "565608213",
       "name": "Gedung 565608213",
+      "matchedName": "Gedung 565608213",
       "category": "public",
       "polygon": [
         {
@@ -73087,7 +75261,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608215",
+      "osmId": "565608215",
       "name": "Gedung 565608215",
+      "matchedName": "Gedung 565608215",
       "category": "public",
       "polygon": [
         {
@@ -73181,7 +75357,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608217",
+      "osmId": "565608217",
       "name": "Gedung 565608217",
+      "matchedName": "Gedung 565608217",
       "category": "public",
       "polygon": [
         {
@@ -73243,7 +75421,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608220",
+      "osmId": "565608220",
       "name": "Gedung 565608220",
+      "matchedName": "Gedung 565608220",
       "category": "public",
       "polygon": [
         {
@@ -73305,7 +75485,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608223",
+      "osmId": "565608223",
       "name": "Gedung 565608223",
+      "matchedName": "Gedung 565608223",
       "category": "public",
       "polygon": [
         {
@@ -73367,7 +75549,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608225",
+      "osmId": "565608225",
       "name": "Gedung 565608225",
+      "matchedName": "Gedung 565608225",
       "category": "public",
       "polygon": [
         {
@@ -73429,7 +75613,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608227",
+      "osmId": "565608227",
       "name": "Gedung 565608227",
+      "matchedName": "Gedung 565608227",
       "category": "public",
       "polygon": [
         {
@@ -73491,7 +75677,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608230",
+      "osmId": "565608230",
       "name": "Gedung 565608230",
+      "matchedName": "Gedung 565608230",
       "category": "public",
       "polygon": [
         {
@@ -73553,7 +75741,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608232",
+      "osmId": "565608232",
       "name": "Gedung 565608232",
+      "matchedName": "Gedung 565608232",
       "category": "public",
       "polygon": [
         {
@@ -73615,7 +75805,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608233",
+      "osmId": "565608233",
       "name": "Gedung 565608233",
+      "matchedName": "Gedung 565608233",
       "category": "public",
       "polygon": [
         {
@@ -73693,7 +75885,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608236",
+      "osmId": "565608236",
       "name": "Gedung 565608236",
+      "matchedName": "Gedung 565608236",
       "category": "public",
       "polygon": [
         {
@@ -73755,7 +75949,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608238",
+      "osmId": "565608238",
       "name": "Gedung 565608238",
+      "matchedName": "Gedung 565608238",
       "category": "public",
       "polygon": [
         {
@@ -73817,7 +76013,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608240",
+      "osmId": "565608240",
       "name": "Gedung 565608240",
+      "matchedName": "Gedung 565608240",
       "category": "public",
       "polygon": [
         {
@@ -73879,7 +76077,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608243",
+      "osmId": "565608243",
       "name": "Gedung 565608243",
+      "matchedName": "Gedung 565608243",
       "category": "public",
       "polygon": [
         {
@@ -73941,7 +76141,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608245",
+      "osmId": "565608245",
       "name": "Gedung 565608245",
+      "matchedName": "Gedung 565608245",
       "category": "public",
       "polygon": [
         {
@@ -74003,7 +76205,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608247",
+      "osmId": "565608247",
       "name": "Gedung 565608247",
+      "matchedName": "Gedung 565608247",
       "category": "public",
       "polygon": [
         {
@@ -74065,7 +76269,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608249",
+      "osmId": "565608249",
       "name": "Gedung 565608249",
+      "matchedName": "Gedung 565608249",
       "category": "public",
       "polygon": [
         {
@@ -74127,7 +76333,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608271",
+      "osmId": "565608271",
       "name": "Gedung 565608271",
+      "matchedName": "Gedung 565608271",
       "category": "public",
       "polygon": [
         {
@@ -74197,7 +76405,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608273",
+      "osmId": "565608273",
       "name": "Gedung 565608273",
+      "matchedName": "Gedung 565608273",
       "category": "public",
       "polygon": [
         {
@@ -74291,7 +76501,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608276",
+      "osmId": "565608276",
       "name": "Gedung 565608276",
+      "matchedName": "Gedung 565608276",
       "category": "public",
       "polygon": [
         {
@@ -74353,7 +76565,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608278",
+      "osmId": "565608278",
       "name": "Gedung 565608278",
+      "matchedName": "Gedung 565608278",
       "category": "public",
       "polygon": [
         {
@@ -74415,7 +76629,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608566",
+      "osmId": "565608566",
       "name": "Gedung 565608566",
+      "matchedName": "Gedung 565608566",
       "category": "public",
       "polygon": [
         {
@@ -74525,7 +76741,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608574",
+      "osmId": "565608574",
       "name": "Klinik Pratama Diponegoro I",
+      "matchedName": "Klinik Pratama Diponegoro I",
       "category": "public",
       "polygon": [
         {
@@ -74590,7 +76808,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608575",
+      "osmId": "565608575",
       "name": "Gedung 565608575",
+      "matchedName": "Gedung 565608575",
       "category": "public",
       "polygon": [
         {
@@ -74677,7 +76897,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608578",
+      "osmId": "565608578",
       "name": "Gedung 565608578",
+      "matchedName": "Gedung 565608578",
       "category": "public",
       "polygon": [
         {
@@ -74816,7 +77038,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608597",
+      "osmId": "565608597",
       "name": "Gedung 565608597",
+      "matchedName": "Gedung 565608597",
       "category": "public",
       "polygon": [
         {
@@ -74878,7 +77102,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608598",
+      "osmId": "565608598",
       "name": "Gedung 565608598",
+      "matchedName": "Gedung 565608598",
       "category": "public",
       "polygon": [
         {
@@ -74940,7 +77166,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608599",
+      "osmId": "565608599",
       "name": "Gedung 565608599",
+      "matchedName": "Gedung 565608599",
       "category": "public",
       "polygon": [
         {
@@ -75002,7 +77230,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608600",
+      "osmId": "565608600",
       "name": "Gedung 565608600",
+      "matchedName": "Gedung 565608600",
       "category": "public",
       "polygon": [
         {
@@ -75064,7 +77294,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608601",
+      "osmId": "565608601",
       "name": "Gedung 565608601",
+      "matchedName": "Gedung 565608601",
       "category": "public",
       "polygon": [
         {
@@ -75126,7 +77358,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608602",
+      "osmId": "565608602",
       "name": "Gedung 565608602",
+      "matchedName": "Gedung 565608602",
       "category": "public",
       "polygon": [
         {
@@ -75188,7 +77422,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608604",
+      "osmId": "565608604",
       "name": "Gedung 565608604",
+      "matchedName": "Gedung 565608604",
       "category": "public",
       "polygon": [
         {
@@ -75250,7 +77486,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608605",
+      "osmId": "565608605",
       "name": "Gedung 565608605",
+      "matchedName": "Gedung 565608605",
       "category": "public",
       "polygon": [
         {
@@ -75312,7 +77550,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608606",
+      "osmId": "565608606",
       "name": "Gedung 565608606",
+      "matchedName": "Gedung 565608606",
       "category": "public",
       "polygon": [
         {
@@ -75374,7 +77614,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608608",
+      "osmId": "565608608",
       "name": "Gedung 565608608",
+      "matchedName": "Gedung 565608608",
       "category": "public",
       "polygon": [
         {
@@ -75436,7 +77678,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608611",
+      "osmId": "565608611",
       "name": "Gedung 565608611",
+      "matchedName": "Gedung 565608611",
       "category": "public",
       "polygon": [
         {
@@ -75498,7 +77742,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608612",
+      "osmId": "565608612",
       "name": "Gedung 565608612",
+      "matchedName": "Gedung 565608612",
       "category": "public",
       "polygon": [
         {
@@ -75560,7 +77806,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608613",
+      "osmId": "565608613",
       "name": "Gedung 565608613",
+      "matchedName": "Gedung 565608613",
       "category": "public",
       "polygon": [
         {
@@ -75622,7 +77870,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608614",
+      "osmId": "565608614",
       "name": "Gedung 565608614",
+      "matchedName": "Gedung 565608614",
       "category": "public",
       "polygon": [
         {
@@ -75684,7 +77934,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608615",
+      "osmId": "565608615",
       "name": "Gedung 565608615",
+      "matchedName": "Gedung 565608615",
       "category": "public",
       "polygon": [
         {
@@ -75746,7 +77998,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608617",
+      "osmId": "565608617",
       "name": "Gedung 565608617",
+      "matchedName": "Gedung 565608617",
       "category": "public",
       "polygon": [
         {
@@ -75808,7 +78062,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608618",
+      "osmId": "565608618",
       "name": "Gedung 565608618",
+      "matchedName": "Gedung 565608618",
       "category": "public",
       "polygon": [
         {
@@ -75870,7 +78126,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608619",
+      "osmId": "565608619",
       "name": "Gedung 565608619",
+      "matchedName": "Gedung 565608619",
       "category": "public",
       "polygon": [
         {
@@ -75932,7 +78190,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608620",
+      "osmId": "565608620",
       "name": "Gedung 565608620",
+      "matchedName": "Gedung 565608620",
       "category": "public",
       "polygon": [
         {
@@ -75994,7 +78254,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608621",
+      "osmId": "565608621",
       "name": "Gedung 565608621",
+      "matchedName": "Gedung 565608621",
       "category": "public",
       "polygon": [
         {
@@ -76056,7 +78318,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608622",
+      "osmId": "565608622",
       "name": "Gedung 565608622",
+      "matchedName": "Gedung 565608622",
       "category": "public",
       "polygon": [
         {
@@ -76118,7 +78382,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-565608623",
+      "osmId": "565608623",
       "name": "Gedung 565608623",
+      "matchedName": "Gedung 565608623",
       "category": "public",
       "polygon": [
         {
@@ -76180,7 +78446,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-569916368",
+      "osmId": "569916368",
       "name": "Gedung 569916368",
+      "matchedName": "Gedung 569916368",
       "category": "public",
       "polygon": [
         {
@@ -76242,7 +78510,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-569916377",
+      "osmId": "569916377",
       "name": "Gedung 569916377",
+      "matchedName": "Gedung 569916377",
       "category": "public",
       "polygon": [
         {
@@ -76304,7 +78574,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-569916391",
+      "osmId": "569916391",
       "name": "Gedung 569916391",
+      "matchedName": "Gedung 569916391",
       "category": "public",
       "polygon": [
         {
@@ -76366,7 +78638,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-569916409",
+      "osmId": "569916409",
       "name": "Gedung 569916409",
+      "matchedName": "Gedung 569916409",
       "category": "public",
       "polygon": [
         {
@@ -76428,7 +78702,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-569916452",
+      "osmId": "569916452",
       "name": "Gedung 569916452",
+      "matchedName": "Gedung 569916452",
       "category": "public",
       "polygon": [
         {
@@ -76490,7 +78766,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570878180",
+      "osmId": "570878180",
       "name": "Gedung 570878180",
+      "matchedName": "Gedung 570878180",
       "category": "public",
       "polygon": [
         {
@@ -76552,7 +78830,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570878202",
+      "osmId": "570878202",
       "name": "Gedung 570878202",
+      "matchedName": "Gedung 570878202",
       "category": "public",
       "polygon": [
         {
@@ -76630,7 +78910,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887634",
+      "osmId": "570887634",
       "name": "Gedung 570887634",
+      "matchedName": "Gedung 570887634",
       "category": "public",
       "polygon": [
         {
@@ -76692,7 +78974,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887637",
+      "osmId": "570887637",
       "name": "Gedung 570887637",
+      "matchedName": "Gedung 570887637",
       "category": "public",
       "polygon": [
         {
@@ -76754,7 +79038,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887643",
+      "osmId": "570887643",
       "name": "Gedung 570887643",
+      "matchedName": "Gedung 570887643",
       "category": "public",
       "polygon": [
         {
@@ -76816,7 +79102,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887645",
+      "osmId": "570887645",
       "name": "Gedung 570887645",
+      "matchedName": "Gedung 570887645",
       "category": "public",
       "polygon": [
         {
@@ -76878,7 +79166,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887647",
+      "osmId": "570887647",
       "name": "Gedung 570887647",
+      "matchedName": "Gedung 570887647",
       "category": "public",
       "polygon": [
         {
@@ -76940,7 +79230,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887649",
+      "osmId": "570887649",
       "name": "Gedung 570887649",
+      "matchedName": "Gedung 570887649",
       "category": "public",
       "polygon": [
         {
@@ -77002,7 +79294,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887651",
+      "osmId": "570887651",
       "name": "Gedung 570887651",
+      "matchedName": "Gedung 570887651",
       "category": "public",
       "polygon": [
         {
@@ -77064,7 +79358,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887653",
+      "osmId": "570887653",
       "name": "Gedung 570887653",
+      "matchedName": "Gedung 570887653",
       "category": "public",
       "polygon": [
         {
@@ -77126,7 +79422,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887655",
+      "osmId": "570887655",
       "name": "Gedung 570887655",
+      "matchedName": "Gedung 570887655",
       "category": "public",
       "polygon": [
         {
@@ -77188,7 +79486,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887657",
+      "osmId": "570887657",
       "name": "Gedung 570887657",
+      "matchedName": "Gedung 570887657",
       "category": "public",
       "polygon": [
         {
@@ -77250,7 +79550,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887659",
+      "osmId": "570887659",
       "name": "Gedung 570887659",
+      "matchedName": "Gedung 570887659",
       "category": "public",
       "polygon": [
         {
@@ -77312,7 +79614,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887662",
+      "osmId": "570887662",
       "name": "Gedung 570887662",
+      "matchedName": "Gedung 570887662",
       "category": "public",
       "polygon": [
         {
@@ -77374,7 +79678,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570887664",
+      "osmId": "570887664",
       "name": "Gedung 570887664",
+      "matchedName": "Gedung 570887664",
       "category": "public",
       "polygon": [
         {
@@ -77436,7 +79742,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-570892654",
+      "osmId": "570892654",
       "name": "Gedung 570892654",
+      "matchedName": "Gedung 570892654",
       "category": "public",
       "polygon": [
         {
@@ -77498,7 +79806,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422585",
+      "osmId": "573422585",
       "name": "Gedung 573422585",
+      "matchedName": "Gedung 573422585",
       "category": "public",
       "polygon": [
         {
@@ -77573,7 +79883,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422590",
+      "osmId": "573422590",
       "name": "Gedung 573422590",
+      "matchedName": "Gedung 573422590",
       "category": "public",
       "polygon": [
         {
@@ -77635,7 +79947,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422601",
+      "osmId": "573422601",
       "name": "Gedung 573422601",
+      "matchedName": "Gedung 573422601",
       "category": "public",
       "polygon": [
         {
@@ -77697,7 +80011,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422603",
+      "osmId": "573422603",
       "name": "Gedung 573422603",
+      "matchedName": "Gedung 573422603",
       "category": "public",
       "polygon": [
         {
@@ -77759,7 +80075,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422605",
+      "osmId": "573422605",
       "name": "Gedung 573422605",
+      "matchedName": "Gedung 573422605",
       "category": "public",
       "polygon": [
         {
@@ -77821,7 +80139,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422607",
+      "osmId": "573422607",
       "name": "Gedung 573422607",
+      "matchedName": "Gedung 573422607",
       "category": "public",
       "polygon": [
         {
@@ -77883,7 +80203,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422609",
+      "osmId": "573422609",
       "name": "Gedung 573422609",
+      "matchedName": "Gedung 573422609",
       "category": "public",
       "polygon": [
         {
@@ -77945,7 +80267,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422626",
+      "osmId": "573422626",
       "name": "Gedung 573422626",
+      "matchedName": "Gedung 573422626",
       "category": "public",
       "polygon": [
         {
@@ -78007,7 +80331,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422628",
+      "osmId": "573422628",
       "name": "Gedung 573422628",
+      "matchedName": "Gedung 573422628",
       "category": "public",
       "polygon": [
         {
@@ -78069,7 +80395,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422635",
+      "osmId": "573422635",
       "name": "Gedung Fakultas Hukum",
+      "matchedName": "Gedung Fakultas Hukum",
       "facultyId": "fh",
       "category": "faculty",
       "polygon": [
@@ -78231,6 +80559,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 180.44,
       "style": {
         "roofType": "hipped-tajuk",
         "mainColors": [
@@ -78251,8 +80580,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422668",
+      "osmId": "573422668",
       "name": "Training Center II",
-      "category": "public",
+      "matchedName": "Training Center II",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054727,
@@ -78327,8 +80658,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422674",
+      "osmId": "573422674",
       "name": "Pusat Penelitian Lingkungan Hidup",
-      "category": "public",
+      "matchedName": "Pusat Penelitian Lingkungan Hidup",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048399,
@@ -78433,7 +80766,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422677",
+      "osmId": "573422677",
       "name": "Gedung 573422677",
+      "matchedName": "Gedung 573422677",
       "category": "public",
       "polygon": [
         {
@@ -78501,8 +80836,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422694",
+      "osmId": "573422694",
       "name": "Gedung Geofisika",
-      "category": "public",
+      "matchedName": "Gedung Geofisika",
+      "facultyId": "fsm",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.048437,
@@ -78629,11 +80967,31 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 329.57,
+      "style": {
+        "roofType": "flat-stepped",
+        "mainColors": [
+          "#0284C7",
+          "#0369A1",
+          "#F1F5F9",
+          "#0F172A"
+        ],
+        "facade": "Gedung modern bertingkat 6 dengan dinding putih krem, aksen garis vertikal biru elektrik, dan jendela modular laboratorium",
+        "signatureFeatures": [
+          "Gedung Acintya Prasada megah 6 lantai",
+          "Aula pertemuan dan yudisium di lantai 6",
+          "Bersebelahan dengan Masjid Al-Kautsar dan Gedung D",
+          "Laboratorium sains komputasi, bioteknologi, dan fisika"
+        ],
+        "entranceSide": "east"
+      }
     },
     {
       "id": "osm-bld-573422697",
+      "osmId": "573422697",
       "name": "Gedung 573422697",
+      "matchedName": "Gedung 573422697",
       "category": "public",
       "polygon": [
         {
@@ -78702,7 +81060,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573422781",
+      "osmId": "573422781",
       "name": "Musholla Al - Firdaus",
+      "matchedName": "Musholla Al - Firdaus",
       "category": "public",
       "polygon": [
         {
@@ -78778,8 +81138,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503194",
+      "osmId": "573503194",
       "name": "Laboratorium Terpadu Undip",
-      "category": "public",
+      "matchedName": "Laboratorium Terpadu Undip",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054464,
@@ -78966,8 +81328,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503198",
+      "osmId": "573503198",
       "name": "Koperasi UNDIP",
-      "category": "public",
+      "matchedName": "Koperasi UNDIP",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.053907,
@@ -79106,7 +81470,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503207",
+      "osmId": "573503207",
       "name": "Mushola Planologi-Arsitek",
+      "matchedName": "Mushola Planologi-Arsitek",
       "category": "public",
       "polygon": [
         {
@@ -79173,7 +81539,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503220",
+      "osmId": "573503220",
       "name": "Gedung H - FPIK",
+      "matchedName": "Gedung H - FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -79247,6 +81615,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 161.62,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -79267,7 +81636,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503229",
+      "osmId": "573503229",
       "name": "Gedung G - FPIK",
+      "matchedName": "Gedung G - FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -79341,6 +81712,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 192.05,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -79361,8 +81733,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503249",
+      "osmId": "573503249",
       "name": "Gedung 573503249",
-      "category": "public",
+      "matchedName": "Gedung 573503249",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049848,
@@ -79423,8 +81797,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503252",
+      "osmId": "573503252",
       "name": "Gedung 573503252",
-      "category": "public",
+      "matchedName": "Gedung 573503252",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049869,
@@ -79485,8 +81861,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503254",
+      "osmId": "573503254",
       "name": "Gedung 573503254",
-      "category": "public",
+      "matchedName": "Gedung 573503254",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049805,
@@ -79547,7 +81925,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503265",
+      "osmId": "573503265",
       "name": "Gedung Fakultas Psikologi",
+      "matchedName": "Gedung Fakultas Psikologi",
       "facultyId": "fpsi",
       "category": "faculty",
       "polygon": [
@@ -79781,6 +82161,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 783.89,
       "style": {
         "roofType": "flat-tower",
         "mainColors": [
@@ -79801,8 +82182,11 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573503274",
+      "osmId": "573503274",
       "name": "Gedung Departemen Ilmu Gizi",
-      "category": "public",
+      "matchedName": "Gedung Departemen Ilmu Gizi",
+      "facultyId": "fk",
+      "category": "faculty",
       "polygon": [
         {
           "lat": -7.04996,
@@ -79905,11 +82289,31 @@ export const campusMapData: CampusMapData = {
         "operator:type": "government",
         "source": "HOT_InAWARESurvey_2018"
       },
-      "source": "osm"
+      "source": "osm",
+      "distanceFromOwnerPointM": 281.43,
+      "style": {
+        "roofType": "hipped-metal",
+        "mainColors": [
+          "#065F46",
+          "#047857",
+          "#F8FAFC",
+          "#10B981"
+        ],
+        "facade": "Dinding putih bersih dengan lis aksen hijau zamrud medis, lobi kaca lapang, dan selasar tertutup",
+        "signatureFeatures": [
+          "Gedung Mayjen dr. R. Soewondo Sastrodiprojo (Dekanat)",
+          "Sirkulasi terpadu menuju RSND (Rumah Sakit Nasional Diponegoro)",
+          "Laboratorium OSCE dan anatomi kedokteran",
+          "Taman asri di tengah sayap perkuliahan"
+        ],
+        "entranceSide": "north"
+      }
     },
     {
       "id": "osm-bld-573516726",
+      "osmId": "573516726",
       "name": "Gedung 573516726",
+      "matchedName": "Gedung 573516726",
       "category": "public",
       "polygon": [
         {
@@ -79971,7 +82375,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516763",
+      "osmId": "573516763",
       "name": "PAUD Mutiara Hati",
+      "matchedName": "PAUD Mutiara Hati",
       "category": "public",
       "polygon": [
         {
@@ -80047,7 +82453,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516777",
+      "osmId": "573516777",
       "name": "Gedung 573516777",
+      "matchedName": "Gedung 573516777",
       "category": "public",
       "polygon": [
         {
@@ -80154,7 +82562,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516783",
+      "osmId": "573516783",
       "name": "Masjid Miftahurrohman",
+      "matchedName": "Masjid Miftahurrohman",
       "category": "public",
       "polygon": [
         {
@@ -80230,7 +82640,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516798",
+      "osmId": "573516798",
       "name": "Masjid Al - Huda",
+      "matchedName": "Masjid Al - Huda",
       "category": "public",
       "polygon": [
         {
@@ -80307,7 +82719,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516799",
+      "osmId": "573516799",
       "name": "Gedung 573516799",
+      "matchedName": "Gedung 573516799",
       "category": "public",
       "polygon": [
         {
@@ -80369,7 +82783,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516800",
+      "osmId": "573516800",
       "name": "Gedung 573516800",
+      "matchedName": "Gedung 573516800",
       "category": "public",
       "polygon": [
         {
@@ -80431,7 +82847,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516835",
+      "osmId": "573516835",
       "name": "Gedung 573516835",
+      "matchedName": "Gedung 573516835",
       "category": "public",
       "polygon": [
         {
@@ -80493,7 +82911,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516836",
+      "osmId": "573516836",
       "name": "Gedung 573516836",
+      "matchedName": "Gedung 573516836",
       "category": "public",
       "polygon": [
         {
@@ -80555,7 +82975,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516837",
+      "osmId": "573516837",
       "name": "Gedung 573516837",
+      "matchedName": "Gedung 573516837",
       "category": "public",
       "polygon": [
         {
@@ -80617,7 +83039,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516838",
+      "osmId": "573516838",
       "name": "Gedung 573516838",
+      "matchedName": "Gedung 573516838",
       "category": "public",
       "polygon": [
         {
@@ -80711,7 +83135,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516839",
+      "osmId": "573516839",
       "name": "Gedung 573516839",
+      "matchedName": "Gedung 573516839",
       "category": "public",
       "polygon": [
         {
@@ -80773,7 +83199,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516840",
+      "osmId": "573516840",
       "name": "Gedung 573516840",
+      "matchedName": "Gedung 573516840",
       "category": "public",
       "polygon": [
         {
@@ -80851,7 +83279,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516841",
+      "osmId": "573516841",
       "name": "Gedung 573516841",
+      "matchedName": "Gedung 573516841",
       "category": "public",
       "polygon": [
         {
@@ -80913,7 +83343,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516842",
+      "osmId": "573516842",
       "name": "Gedung 573516842",
+      "matchedName": "Gedung 573516842",
       "category": "public",
       "polygon": [
         {
@@ -81007,7 +83439,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516843",
+      "osmId": "573516843",
       "name": "Gedung 573516843",
+      "matchedName": "Gedung 573516843",
       "category": "public",
       "polygon": [
         {
@@ -81069,7 +83503,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516844",
+      "osmId": "573516844",
       "name": "Gedung 573516844",
+      "matchedName": "Gedung 573516844",
       "category": "public",
       "polygon": [
         {
@@ -81131,7 +83567,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516845",
+      "osmId": "573516845",
       "name": "Masjid Hijau LPPU",
+      "matchedName": "Masjid Hijau LPPU",
       "category": "public",
       "polygon": [
         {
@@ -81207,7 +83645,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516851",
+      "osmId": "573516851",
       "name": "Gedung 573516851",
+      "matchedName": "Gedung 573516851",
       "category": "public",
       "polygon": [
         {
@@ -81269,7 +83709,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516853",
+      "osmId": "573516853",
       "name": "Gedung 573516853",
+      "matchedName": "Gedung 573516853",
       "category": "public",
       "polygon": [
         {
@@ -81331,7 +83773,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516855",
+      "osmId": "573516855",
       "name": "Gedung 573516855",
+      "matchedName": "Gedung 573516855",
       "category": "public",
       "polygon": [
         {
@@ -81417,7 +83861,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516858",
+      "osmId": "573516858",
       "name": "Gedung 573516858",
+      "matchedName": "Gedung 573516858",
       "category": "public",
       "polygon": [
         {
@@ -81479,7 +83925,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516860",
+      "osmId": "573516860",
       "name": "Gedung 573516860",
+      "matchedName": "Gedung 573516860",
       "category": "public",
       "polygon": [
         {
@@ -81541,7 +83989,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516862",
+      "osmId": "573516862",
       "name": "Gedung 573516862",
+      "matchedName": "Gedung 573516862",
       "category": "public",
       "polygon": [
         {
@@ -81603,7 +84053,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516864",
+      "osmId": "573516864",
       "name": "Gedung 573516864",
+      "matchedName": "Gedung 573516864",
       "category": "public",
       "polygon": [
         {
@@ -81665,7 +84117,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516867",
+      "osmId": "573516867",
       "name": "Gedung 573516867",
+      "matchedName": "Gedung 573516867",
       "category": "public",
       "polygon": [
         {
@@ -81727,7 +84181,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516871",
+      "osmId": "573516871",
       "name": "Gedung 573516871",
+      "matchedName": "Gedung 573516871",
       "category": "public",
       "polygon": [
         {
@@ -81789,7 +84245,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516874",
+      "osmId": "573516874",
       "name": "Gedung 573516874",
+      "matchedName": "Gedung 573516874",
       "category": "public",
       "polygon": [
         {
@@ -81883,7 +84341,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516877",
+      "osmId": "573516877",
       "name": "Gedung 573516877",
+      "matchedName": "Gedung 573516877",
       "category": "public",
       "polygon": [
         {
@@ -81977,7 +84437,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516879",
+      "osmId": "573516879",
       "name": "Gedung 573516879",
+      "matchedName": "Gedung 573516879",
       "category": "public",
       "polygon": [
         {
@@ -82039,7 +84501,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516881",
+      "osmId": "573516881",
       "name": "Gedung 573516881",
+      "matchedName": "Gedung 573516881",
       "category": "public",
       "polygon": [
         {
@@ -82117,7 +84581,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516883",
+      "osmId": "573516883",
       "name": "Gedung 573516883",
+      "matchedName": "Gedung 573516883",
       "category": "public",
       "polygon": [
         {
@@ -82179,7 +84645,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516884",
+      "osmId": "573516884",
       "name": "Gedung 573516884",
+      "matchedName": "Gedung 573516884",
       "category": "public",
       "polygon": [
         {
@@ -82273,7 +84741,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516886",
+      "osmId": "573516886",
       "name": "Gedung 573516886",
+      "matchedName": "Gedung 573516886",
       "category": "public",
       "polygon": [
         {
@@ -82367,7 +84837,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516889",
+      "osmId": "573516889",
       "name": "Gedung 573516889",
+      "matchedName": "Gedung 573516889",
       "category": "public",
       "polygon": [
         {
@@ -82549,7 +85021,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516891",
+      "osmId": "573516891",
       "name": "Gedung 573516891",
+      "matchedName": "Gedung 573516891",
       "category": "public",
       "polygon": [
         {
@@ -82643,7 +85117,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573516894",
+      "osmId": "573516894",
       "name": "Gedung 573516894",
+      "matchedName": "Gedung 573516894",
       "category": "public",
       "polygon": [
         {
@@ -82721,7 +85197,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573518803",
+      "osmId": "573518803",
       "name": "Gedung B - Teknik Elektro",
+      "matchedName": "Gedung B - Teknik Elektro",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -82827,6 +85305,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 332.58,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -82847,7 +85326,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573518804",
+      "osmId": "573518804",
       "name": "Gedung C FPIK",
+      "matchedName": "Gedung C FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -82982,6 +85463,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 143.06,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -83002,7 +85484,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573518805",
+      "osmId": "573518805",
       "name": "Gedung B FPIK",
+      "matchedName": "Gedung B FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -83074,6 +85558,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 192.11,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -83094,7 +85579,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573518806",
+      "osmId": "573518806",
       "name": "Gedung Teknik Perencanaan Wilayah dan Kota",
+      "matchedName": "Gedung Teknik Perencanaan Wilayah dan Kota",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -83182,6 +85669,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 270.7,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -83202,7 +85690,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874194",
+      "osmId": "573874194",
       "name": "Gedung 573874194",
+      "matchedName": "Gedung 573874194",
       "category": "public",
       "polygon": [
         {
@@ -83264,7 +85754,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874195",
+      "osmId": "573874195",
       "name": "Gedung 573874195",
+      "matchedName": "Gedung 573874195",
       "category": "public",
       "polygon": [
         {
@@ -83326,7 +85818,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874196",
+      "osmId": "573874196",
       "name": "Gedung 573874196",
+      "matchedName": "Gedung 573874196",
       "category": "public",
       "polygon": [
         {
@@ -83404,7 +85898,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874197",
+      "osmId": "573874197",
       "name": "Gedung 573874197",
+      "matchedName": "Gedung 573874197",
       "category": "public",
       "polygon": [
         {
@@ -83466,7 +85962,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874198",
+      "osmId": "573874198",
       "name": "Gedung 573874198",
+      "matchedName": "Gedung 573874198",
       "category": "public",
       "polygon": [
         {
@@ -83528,7 +86026,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874199",
+      "osmId": "573874199",
       "name": "Gedung 573874199",
+      "matchedName": "Gedung 573874199",
       "category": "public",
       "polygon": [
         {
@@ -83590,7 +86090,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874200",
+      "osmId": "573874200",
       "name": "Gedung 573874200",
+      "matchedName": "Gedung 573874200",
       "category": "public",
       "polygon": [
         {
@@ -83684,7 +86186,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874201",
+      "osmId": "573874201",
       "name": "Gedung 573874201",
+      "matchedName": "Gedung 573874201",
       "category": "public",
       "polygon": [
         {
@@ -83754,7 +86258,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874202",
+      "osmId": "573874202",
       "name": "Gedung 573874202",
+      "matchedName": "Gedung 573874202",
       "category": "public",
       "polygon": [
         {
@@ -83816,7 +86322,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874203",
+      "osmId": "573874203",
       "name": "Gedung 573874203",
+      "matchedName": "Gedung 573874203",
       "category": "public",
       "polygon": [
         {
@@ -83878,7 +86386,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874204",
+      "osmId": "573874204",
       "name": "Gedung 573874204",
+      "matchedName": "Gedung 573874204",
       "category": "public",
       "polygon": [
         {
@@ -83940,7 +86450,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874224",
+      "osmId": "573874224",
       "name": "Gedung 573874224",
+      "matchedName": "Gedung 573874224",
       "category": "public",
       "polygon": [
         {
@@ -84066,7 +86578,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874266",
+      "osmId": "573874266",
       "name": "Gedung 573874266",
+      "matchedName": "Gedung 573874266",
       "category": "public",
       "polygon": [
         {
@@ -84160,7 +86674,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874268",
+      "osmId": "573874268",
       "name": "Gedung 573874268",
+      "matchedName": "Gedung 573874268",
       "category": "public",
       "polygon": [
         {
@@ -84222,7 +86738,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874269",
+      "osmId": "573874269",
       "name": "Gedung 573874269",
+      "matchedName": "Gedung 573874269",
       "category": "public",
       "polygon": [
         {
@@ -84284,7 +86802,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874271",
+      "osmId": "573874271",
       "name": "Gedung 573874271",
+      "matchedName": "Gedung 573874271",
       "category": "public",
       "polygon": [
         {
@@ -84346,7 +86866,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874273",
+      "osmId": "573874273",
       "name": "Gedung 573874273",
+      "matchedName": "Gedung 573874273",
       "category": "public",
       "polygon": [
         {
@@ -84408,7 +86930,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874274",
+      "osmId": "573874274",
       "name": "Gedung 573874274",
+      "matchedName": "Gedung 573874274",
       "category": "public",
       "polygon": [
         {
@@ -84470,7 +86994,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874275",
+      "osmId": "573874275",
       "name": "Gedung 573874275",
+      "matchedName": "Gedung 573874275",
       "category": "public",
       "polygon": [
         {
@@ -84588,7 +87114,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874276",
+      "osmId": "573874276",
       "name": "Gedung 573874276",
+      "matchedName": "Gedung 573874276",
       "category": "public",
       "polygon": [
         {
@@ -84650,7 +87178,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874277",
+      "osmId": "573874277",
       "name": "Gedung 573874277",
+      "matchedName": "Gedung 573874277",
       "category": "public",
       "polygon": [
         {
@@ -84712,7 +87242,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874278",
+      "osmId": "573874278",
       "name": "Gedung 573874278",
+      "matchedName": "Gedung 573874278",
       "category": "public",
       "polygon": [
         {
@@ -84774,7 +87306,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874279",
+      "osmId": "573874279",
       "name": "Gedung 573874279",
+      "matchedName": "Gedung 573874279",
       "category": "public",
       "polygon": [
         {
@@ -84836,7 +87370,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874280",
+      "osmId": "573874280",
       "name": "Gedung 573874280",
+      "matchedName": "Gedung 573874280",
       "category": "public",
       "polygon": [
         {
@@ -84922,7 +87458,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874281",
+      "osmId": "573874281",
       "name": "Gedung 573874281",
+      "matchedName": "Gedung 573874281",
       "category": "public",
       "polygon": [
         {
@@ -84984,7 +87522,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874282",
+      "osmId": "573874282",
       "name": "Gedung 573874282",
+      "matchedName": "Gedung 573874282",
       "category": "public",
       "polygon": [
         {
@@ -85046,7 +87586,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874283",
+      "osmId": "573874283",
       "name": "Gedung 573874283",
+      "matchedName": "Gedung 573874283",
       "category": "public",
       "polygon": [
         {
@@ -85108,7 +87650,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573874284",
+      "osmId": "573874284",
       "name": "Gedung 573874284",
+      "matchedName": "Gedung 573874284",
       "category": "public",
       "polygon": [
         {
@@ -85170,7 +87714,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-573954851",
+      "osmId": "573954851",
       "name": "Gedung J - FPIK",
+      "matchedName": "Gedung J - FPIK",
       "facultyId": "fpik",
       "category": "faculty",
       "polygon": [
@@ -85274,6 +87820,7 @@ export const campusMapData: CampusMapData = {
         "source": "HOT_InAWARESurvey_2018"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 81.37,
       "style": {
         "roofType": "maritime-curved",
         "mainColors": [
@@ -85294,7 +87841,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282242",
+      "osmId": "574282242",
       "name": "Gedung 574282242",
+      "matchedName": "Gedung 574282242",
       "category": "public",
       "polygon": [
         {
@@ -85356,7 +87905,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282244",
+      "osmId": "574282244",
       "name": "Gedung 574282244",
+      "matchedName": "Gedung 574282244",
       "category": "public",
       "polygon": [
         {
@@ -85418,7 +87969,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282245",
+      "osmId": "574282245",
       "name": "Gedung 574282245",
+      "matchedName": "Gedung 574282245",
       "category": "public",
       "polygon": [
         {
@@ -85480,7 +88033,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282246",
+      "osmId": "574282246",
       "name": "Gedung 574282246",
+      "matchedName": "Gedung 574282246",
       "category": "public",
       "polygon": [
         {
@@ -85542,7 +88097,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282247",
+      "osmId": "574282247",
       "name": "Gedung 574282247",
+      "matchedName": "Gedung 574282247",
       "category": "public",
       "polygon": [
         {
@@ -85604,7 +88161,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282248",
+      "osmId": "574282248",
       "name": "Gedung 574282248",
+      "matchedName": "Gedung 574282248",
       "category": "public",
       "polygon": [
         {
@@ -85666,7 +88225,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282249",
+      "osmId": "574282249",
       "name": "Gedung 574282249",
+      "matchedName": "Gedung 574282249",
       "category": "public",
       "polygon": [
         {
@@ -85728,7 +88289,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282250",
+      "osmId": "574282250",
       "name": "Gedung 574282250",
+      "matchedName": "Gedung 574282250",
       "category": "public",
       "polygon": [
         {
@@ -85790,7 +88353,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282251",
+      "osmId": "574282251",
       "name": "Gedung 574282251",
+      "matchedName": "Gedung 574282251",
       "category": "public",
       "polygon": [
         {
@@ -85852,7 +88417,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282252",
+      "osmId": "574282252",
       "name": "Gedung 574282252",
+      "matchedName": "Gedung 574282252",
       "category": "public",
       "polygon": [
         {
@@ -85914,7 +88481,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282253",
+      "osmId": "574282253",
       "name": "Gedung 574282253",
+      "matchedName": "Gedung 574282253",
       "category": "public",
       "polygon": [
         {
@@ -85976,7 +88545,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282254",
+      "osmId": "574282254",
       "name": "Gedung 574282254",
+      "matchedName": "Gedung 574282254",
       "category": "public",
       "polygon": [
         {
@@ -86038,7 +88609,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282255",
+      "osmId": "574282255",
       "name": "Gedung 574282255",
+      "matchedName": "Gedung 574282255",
       "category": "public",
       "polygon": [
         {
@@ -86100,7 +88673,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282256",
+      "osmId": "574282256",
       "name": "Gedung 574282256",
+      "matchedName": "Gedung 574282256",
       "category": "public",
       "polygon": [
         {
@@ -86162,7 +88737,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282257",
+      "osmId": "574282257",
       "name": "Gedung 574282257",
+      "matchedName": "Gedung 574282257",
       "category": "public",
       "polygon": [
         {
@@ -86224,7 +88801,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282258",
+      "osmId": "574282258",
       "name": "Gedung 574282258",
+      "matchedName": "Gedung 574282258",
       "category": "public",
       "polygon": [
         {
@@ -86302,7 +88881,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282259",
+      "osmId": "574282259",
       "name": "Gedung 574282259",
+      "matchedName": "Gedung 574282259",
       "category": "public",
       "polygon": [
         {
@@ -86364,7 +88945,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282260",
+      "osmId": "574282260",
       "name": "Gedung 574282260",
+      "matchedName": "Gedung 574282260",
       "category": "public",
       "polygon": [
         {
@@ -86426,7 +89009,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282264",
+      "osmId": "574282264",
       "name": "Gedung 574282264",
+      "matchedName": "Gedung 574282264",
       "category": "public",
       "polygon": [
         {
@@ -86488,7 +89073,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282266",
+      "osmId": "574282266",
       "name": "Gedung 574282266",
+      "matchedName": "Gedung 574282266",
       "category": "public",
       "polygon": [
         {
@@ -86550,7 +89137,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282267",
+      "osmId": "574282267",
       "name": "Gedung 574282267",
+      "matchedName": "Gedung 574282267",
       "category": "public",
       "polygon": [
         {
@@ -86612,7 +89201,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282274",
+      "osmId": "574282274",
       "name": "Gedung 574282274",
+      "matchedName": "Gedung 574282274",
       "category": "public",
       "polygon": [
         {
@@ -86674,7 +89265,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282276",
+      "osmId": "574282276",
       "name": "Gedung 574282276",
+      "matchedName": "Gedung 574282276",
       "category": "public",
       "polygon": [
         {
@@ -86736,7 +89329,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282278",
+      "osmId": "574282278",
       "name": "Gedung 574282278",
+      "matchedName": "Gedung 574282278",
       "category": "public",
       "polygon": [
         {
@@ -86814,7 +89409,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282304",
+      "osmId": "574282304",
       "name": "Gedung 574282304",
+      "matchedName": "Gedung 574282304",
       "category": "public",
       "polygon": [
         {
@@ -86876,7 +89473,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282306",
+      "osmId": "574282306",
       "name": "Gedung 574282306",
+      "matchedName": "Gedung 574282306",
       "category": "public",
       "polygon": [
         {
@@ -86938,7 +89537,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282308",
+      "osmId": "574282308",
       "name": "Gedung 574282308",
+      "matchedName": "Gedung 574282308",
       "category": "public",
       "polygon": [
         {
@@ -87000,7 +89601,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282311",
+      "osmId": "574282311",
       "name": "Gedung 574282311",
+      "matchedName": "Gedung 574282311",
       "category": "public",
       "polygon": [
         {
@@ -87062,7 +89665,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282313",
+      "osmId": "574282313",
       "name": "Gedung 574282313",
+      "matchedName": "Gedung 574282313",
       "category": "public",
       "polygon": [
         {
@@ -87124,7 +89729,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282315",
+      "osmId": "574282315",
       "name": "Gedung 574282315",
+      "matchedName": "Gedung 574282315",
       "category": "public",
       "polygon": [
         {
@@ -87186,7 +89793,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282321",
+      "osmId": "574282321",
       "name": "Gedung 574282321",
+      "matchedName": "Gedung 574282321",
       "category": "public",
       "polygon": [
         {
@@ -87248,7 +89857,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282323",
+      "osmId": "574282323",
       "name": "Gedung 574282323",
+      "matchedName": "Gedung 574282323",
       "category": "public",
       "polygon": [
         {
@@ -87310,7 +89921,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282325",
+      "osmId": "574282325",
       "name": "Gedung 574282325",
+      "matchedName": "Gedung 574282325",
       "category": "public",
       "polygon": [
         {
@@ -87372,7 +89985,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282327",
+      "osmId": "574282327",
       "name": "Gedung 574282327",
+      "matchedName": "Gedung 574282327",
       "category": "public",
       "polygon": [
         {
@@ -87434,7 +90049,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282330",
+      "osmId": "574282330",
       "name": "Gedung 574282330",
+      "matchedName": "Gedung 574282330",
       "category": "public",
       "polygon": [
         {
@@ -87496,7 +90113,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282332",
+      "osmId": "574282332",
       "name": "Gedung 574282332",
+      "matchedName": "Gedung 574282332",
       "category": "public",
       "polygon": [
         {
@@ -87558,7 +90177,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282334",
+      "osmId": "574282334",
       "name": "Gedung 574282334",
+      "matchedName": "Gedung 574282334",
       "category": "public",
       "polygon": [
         {
@@ -87620,7 +90241,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282336",
+      "osmId": "574282336",
       "name": "Gedung 574282336",
+      "matchedName": "Gedung 574282336",
       "category": "public",
       "polygon": [
         {
@@ -87682,7 +90305,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282338",
+      "osmId": "574282338",
       "name": "Gedung 574282338",
+      "matchedName": "Gedung 574282338",
       "category": "public",
       "polygon": [
         {
@@ -87744,7 +90369,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282340",
+      "osmId": "574282340",
       "name": "Gedung 574282340",
+      "matchedName": "Gedung 574282340",
       "category": "public",
       "polygon": [
         {
@@ -87806,7 +90433,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282344",
+      "osmId": "574282344",
       "name": "Gedung 574282344",
+      "matchedName": "Gedung 574282344",
       "category": "public",
       "polygon": [
         {
@@ -87868,7 +90497,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282346",
+      "osmId": "574282346",
       "name": "Gedung 574282346",
+      "matchedName": "Gedung 574282346",
       "category": "public",
       "polygon": [
         {
@@ -87930,7 +90561,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282348",
+      "osmId": "574282348",
       "name": "Gedung 574282348",
+      "matchedName": "Gedung 574282348",
       "category": "public",
       "polygon": [
         {
@@ -87992,7 +90625,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282350",
+      "osmId": "574282350",
       "name": "Gedung 574282350",
+      "matchedName": "Gedung 574282350",
       "category": "public",
       "polygon": [
         {
@@ -88054,7 +90689,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282352",
+      "osmId": "574282352",
       "name": "Gedung 574282352",
+      "matchedName": "Gedung 574282352",
       "category": "public",
       "polygon": [
         {
@@ -88116,7 +90753,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282353",
+      "osmId": "574282353",
       "name": "Gedung 574282353",
+      "matchedName": "Gedung 574282353",
       "category": "public",
       "polygon": [
         {
@@ -88178,7 +90817,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282355",
+      "osmId": "574282355",
       "name": "Gedung 574282355",
+      "matchedName": "Gedung 574282355",
       "category": "public",
       "polygon": [
         {
@@ -88240,7 +90881,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282357",
+      "osmId": "574282357",
       "name": "Gedung 574282357",
+      "matchedName": "Gedung 574282357",
       "category": "public",
       "polygon": [
         {
@@ -88302,7 +90945,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574282359",
+      "osmId": "574282359",
       "name": "Gedung 574282359",
+      "matchedName": "Gedung 574282359",
       "category": "public",
       "polygon": [
         {
@@ -88364,7 +91009,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340617",
+      "osmId": "574340617",
       "name": "Gedung 574340617",
+      "matchedName": "Gedung 574340617",
       "category": "public",
       "polygon": [
         {
@@ -88426,7 +91073,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340618",
+      "osmId": "574340618",
       "name": "Gedung 574340618",
+      "matchedName": "Gedung 574340618",
       "category": "public",
       "polygon": [
         {
@@ -88488,7 +91137,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340619",
+      "osmId": "574340619",
       "name": "Gedung 574340619",
+      "matchedName": "Gedung 574340619",
       "category": "public",
       "polygon": [
         {
@@ -88550,7 +91201,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340624",
+      "osmId": "574340624",
       "name": "Gedung 574340624",
+      "matchedName": "Gedung 574340624",
       "category": "public",
       "polygon": [
         {
@@ -88612,7 +91265,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340625",
+      "osmId": "574340625",
       "name": "Gedung 574340625",
+      "matchedName": "Gedung 574340625",
       "category": "public",
       "polygon": [
         {
@@ -88674,7 +91329,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340629",
+      "osmId": "574340629",
       "name": "Gedung 574340629",
+      "matchedName": "Gedung 574340629",
       "category": "public",
       "polygon": [
         {
@@ -88736,7 +91393,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340636",
+      "osmId": "574340636",
       "name": "Gedung 574340636",
+      "matchedName": "Gedung 574340636",
       "category": "public",
       "polygon": [
         {
@@ -88798,7 +91457,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340637",
+      "osmId": "574340637",
       "name": "Gedung 574340637",
+      "matchedName": "Gedung 574340637",
       "category": "public",
       "polygon": [
         {
@@ -88860,7 +91521,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340638",
+      "osmId": "574340638",
       "name": "Gedung 574340638",
+      "matchedName": "Gedung 574340638",
       "category": "public",
       "polygon": [
         {
@@ -88922,7 +91585,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340639",
+      "osmId": "574340639",
       "name": "Gedung 574340639",
+      "matchedName": "Gedung 574340639",
       "category": "public",
       "polygon": [
         {
@@ -88984,7 +91649,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340640",
+      "osmId": "574340640",
       "name": "Gedung 574340640",
+      "matchedName": "Gedung 574340640",
       "category": "public",
       "polygon": [
         {
@@ -89046,7 +91713,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340641",
+      "osmId": "574340641",
       "name": "Gedung 574340641",
+      "matchedName": "Gedung 574340641",
       "category": "public",
       "polygon": [
         {
@@ -89108,7 +91777,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340643",
+      "osmId": "574340643",
       "name": "Gedung 574340643",
+      "matchedName": "Gedung 574340643",
       "category": "public",
       "polygon": [
         {
@@ -89170,7 +91841,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340644",
+      "osmId": "574340644",
       "name": "Gedung 574340644",
+      "matchedName": "Gedung 574340644",
       "category": "public",
       "polygon": [
         {
@@ -89232,7 +91905,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340646",
+      "osmId": "574340646",
       "name": "Gedung 574340646",
+      "matchedName": "Gedung 574340646",
       "category": "public",
       "polygon": [
         {
@@ -89294,7 +91969,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340647",
+      "osmId": "574340647",
       "name": "Gedung 574340647",
+      "matchedName": "Gedung 574340647",
       "category": "public",
       "polygon": [
         {
@@ -89356,7 +92033,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340649",
+      "osmId": "574340649",
       "name": "Gedung 574340649",
+      "matchedName": "Gedung 574340649",
       "category": "public",
       "polygon": [
         {
@@ -89418,7 +92097,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340651",
+      "osmId": "574340651",
       "name": "Gedung 574340651",
+      "matchedName": "Gedung 574340651",
       "category": "public",
       "polygon": [
         {
@@ -89480,7 +92161,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340653",
+      "osmId": "574340653",
       "name": "Gedung 574340653",
+      "matchedName": "Gedung 574340653",
       "category": "public",
       "polygon": [
         {
@@ -89542,7 +92225,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340655",
+      "osmId": "574340655",
       "name": "Gedung 574340655",
+      "matchedName": "Gedung 574340655",
       "category": "public",
       "polygon": [
         {
@@ -89604,7 +92289,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340657",
+      "osmId": "574340657",
       "name": "Gedung 574340657",
+      "matchedName": "Gedung 574340657",
       "category": "public",
       "polygon": [
         {
@@ -89666,7 +92353,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340659",
+      "osmId": "574340659",
       "name": "Gedung 574340659",
+      "matchedName": "Gedung 574340659",
       "category": "public",
       "polygon": [
         {
@@ -89728,7 +92417,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340661",
+      "osmId": "574340661",
       "name": "Gedung 574340661",
+      "matchedName": "Gedung 574340661",
       "category": "public",
       "polygon": [
         {
@@ -89790,7 +92481,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340663",
+      "osmId": "574340663",
       "name": "Gedung 574340663",
+      "matchedName": "Gedung 574340663",
       "category": "public",
       "polygon": [
         {
@@ -89884,7 +92577,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340665",
+      "osmId": "574340665",
       "name": "Gedung 574340665",
+      "matchedName": "Gedung 574340665",
       "category": "public",
       "polygon": [
         {
@@ -89946,7 +92641,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340667",
+      "osmId": "574340667",
       "name": "Gedung 574340667",
+      "matchedName": "Gedung 574340667",
       "category": "public",
       "polygon": [
         {
@@ -90008,7 +92705,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340669",
+      "osmId": "574340669",
       "name": "Gedung 574340669",
+      "matchedName": "Gedung 574340669",
       "category": "public",
       "polygon": [
         {
@@ -90070,7 +92769,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340671",
+      "osmId": "574340671",
       "name": "Gedung 574340671",
+      "matchedName": "Gedung 574340671",
       "category": "public",
       "polygon": [
         {
@@ -90132,7 +92833,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340673",
+      "osmId": "574340673",
       "name": "Gedung 574340673",
+      "matchedName": "Gedung 574340673",
       "category": "public",
       "polygon": [
         {
@@ -90194,7 +92897,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340675",
+      "osmId": "574340675",
       "name": "Gedung 574340675",
+      "matchedName": "Gedung 574340675",
       "category": "public",
       "polygon": [
         {
@@ -90256,7 +92961,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340677",
+      "osmId": "574340677",
       "name": "Gedung 574340677",
+      "matchedName": "Gedung 574340677",
       "category": "public",
       "polygon": [
         {
@@ -90318,7 +93025,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340685",
+      "osmId": "574340685",
       "name": "Gedung 574340685",
+      "matchedName": "Gedung 574340685",
       "category": "public",
       "polygon": [
         {
@@ -90380,7 +93089,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340687",
+      "osmId": "574340687",
       "name": "Gedung 574340687",
+      "matchedName": "Gedung 574340687",
       "category": "public",
       "polygon": [
         {
@@ -90442,7 +93153,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340688",
+      "osmId": "574340688",
       "name": "Gedung 574340688",
+      "matchedName": "Gedung 574340688",
       "category": "public",
       "polygon": [
         {
@@ -90504,7 +93217,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340689",
+      "osmId": "574340689",
       "name": "Gedung 574340689",
+      "matchedName": "Gedung 574340689",
       "category": "public",
       "polygon": [
         {
@@ -90566,7 +93281,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340691",
+      "osmId": "574340691",
       "name": "Gedung 574340691",
+      "matchedName": "Gedung 574340691",
       "category": "public",
       "polygon": [
         {
@@ -90628,7 +93345,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340692",
+      "osmId": "574340692",
       "name": "Gedung 574340692",
+      "matchedName": "Gedung 574340692",
       "category": "public",
       "polygon": [
         {
@@ -90690,7 +93409,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340693",
+      "osmId": "574340693",
       "name": "Gedung 574340693",
+      "matchedName": "Gedung 574340693",
       "category": "public",
       "polygon": [
         {
@@ -90752,7 +93473,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340694",
+      "osmId": "574340694",
       "name": "Gedung 574340694",
+      "matchedName": "Gedung 574340694",
       "category": "public",
       "polygon": [
         {
@@ -90814,7 +93537,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340695",
+      "osmId": "574340695",
       "name": "Gedung 574340695",
+      "matchedName": "Gedung 574340695",
       "category": "public",
       "polygon": [
         {
@@ -90876,7 +93601,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340696",
+      "osmId": "574340696",
       "name": "Gedung 574340696",
+      "matchedName": "Gedung 574340696",
       "category": "public",
       "polygon": [
         {
@@ -90938,7 +93665,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340697",
+      "osmId": "574340697",
       "name": "Gedung 574340697",
+      "matchedName": "Gedung 574340697",
       "category": "public",
       "polygon": [
         {
@@ -91000,7 +93729,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340698",
+      "osmId": "574340698",
       "name": "Gedung 574340698",
+      "matchedName": "Gedung 574340698",
       "category": "public",
       "polygon": [
         {
@@ -91062,7 +93793,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574340699",
+      "osmId": "574340699",
       "name": "Gedung 574340699",
+      "matchedName": "Gedung 574340699",
       "category": "public",
       "polygon": [
         {
@@ -91124,7 +93857,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-574378017",
+      "osmId": "574378017",
       "name": "Gedung 574378017",
+      "matchedName": "Gedung 574378017",
       "category": "public",
       "polygon": [
         {
@@ -91186,7 +93921,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926668",
+      "osmId": "577926668",
       "name": "Gedung 577926668",
+      "matchedName": "Gedung 577926668",
       "category": "public",
       "polygon": [
         {
@@ -91248,7 +93985,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926675",
+      "osmId": "577926675",
       "name": "Gedung 577926675",
+      "matchedName": "Gedung 577926675",
       "category": "public",
       "polygon": [
         {
@@ -91310,7 +94049,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926676",
+      "osmId": "577926676",
       "name": "Gedung 577926676",
+      "matchedName": "Gedung 577926676",
       "category": "public",
       "polygon": [
         {
@@ -91372,7 +94113,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926677",
+      "osmId": "577926677",
       "name": "Gedung 577926677",
+      "matchedName": "Gedung 577926677",
       "category": "public",
       "polygon": [
         {
@@ -91434,7 +94177,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926678",
+      "osmId": "577926678",
       "name": "Gedung 577926678",
+      "matchedName": "Gedung 577926678",
       "category": "public",
       "polygon": [
         {
@@ -91496,7 +94241,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926686",
+      "osmId": "577926686",
       "name": "Gedung 577926686",
+      "matchedName": "Gedung 577926686",
       "category": "public",
       "polygon": [
         {
@@ -91558,7 +94305,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926687",
+      "osmId": "577926687",
       "name": "Gedung 577926687",
+      "matchedName": "Gedung 577926687",
       "category": "public",
       "polygon": [
         {
@@ -91620,7 +94369,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926688",
+      "osmId": "577926688",
       "name": "Gedung 577926688",
+      "matchedName": "Gedung 577926688",
       "category": "public",
       "polygon": [
         {
@@ -91682,7 +94433,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926689",
+      "osmId": "577926689",
       "name": "Gedung 577926689",
+      "matchedName": "Gedung 577926689",
       "category": "public",
       "polygon": [
         {
@@ -91744,7 +94497,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926690",
+      "osmId": "577926690",
       "name": "Gedung 577926690",
+      "matchedName": "Gedung 577926690",
       "category": "public",
       "polygon": [
         {
@@ -91806,7 +94561,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926691",
+      "osmId": "577926691",
       "name": "Gedung 577926691",
+      "matchedName": "Gedung 577926691",
       "category": "public",
       "polygon": [
         {
@@ -91868,7 +94625,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926693",
+      "osmId": "577926693",
       "name": "Gedung 577926693",
+      "matchedName": "Gedung 577926693",
       "category": "public",
       "polygon": [
         {
@@ -91930,7 +94689,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926696",
+      "osmId": "577926696",
       "name": "Gedung 577926696",
+      "matchedName": "Gedung 577926696",
       "category": "public",
       "polygon": [
         {
@@ -91992,7 +94753,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926698",
+      "osmId": "577926698",
       "name": "Gedung 577926698",
+      "matchedName": "Gedung 577926698",
       "category": "public",
       "polygon": [
         {
@@ -92054,7 +94817,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926700",
+      "osmId": "577926700",
       "name": "Gedung 577926700",
+      "matchedName": "Gedung 577926700",
       "category": "public",
       "polygon": [
         {
@@ -92116,7 +94881,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926703",
+      "osmId": "577926703",
       "name": "Gedung 577926703",
+      "matchedName": "Gedung 577926703",
       "category": "public",
       "polygon": [
         {
@@ -92178,7 +94945,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926705",
+      "osmId": "577926705",
       "name": "Gedung 577926705",
+      "matchedName": "Gedung 577926705",
       "category": "public",
       "polygon": [
         {
@@ -92240,7 +95009,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926707",
+      "osmId": "577926707",
       "name": "Gedung 577926707",
+      "matchedName": "Gedung 577926707",
       "category": "public",
       "polygon": [
         {
@@ -92302,7 +95073,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926709",
+      "osmId": "577926709",
       "name": "Gedung 577926709",
+      "matchedName": "Gedung 577926709",
       "category": "public",
       "polygon": [
         {
@@ -92364,7 +95137,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926711",
+      "osmId": "577926711",
       "name": "Gedung 577926711",
+      "matchedName": "Gedung 577926711",
       "category": "public",
       "polygon": [
         {
@@ -92426,7 +95201,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926713",
+      "osmId": "577926713",
       "name": "Gedung 577926713",
+      "matchedName": "Gedung 577926713",
       "category": "public",
       "polygon": [
         {
@@ -92488,7 +95265,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926716",
+      "osmId": "577926716",
       "name": "Gedung 577926716",
+      "matchedName": "Gedung 577926716",
       "category": "public",
       "polygon": [
         {
@@ -92550,7 +95329,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926718",
+      "osmId": "577926718",
       "name": "Gedung 577926718",
+      "matchedName": "Gedung 577926718",
       "category": "public",
       "polygon": [
         {
@@ -92612,7 +95393,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926720",
+      "osmId": "577926720",
       "name": "Gedung 577926720",
+      "matchedName": "Gedung 577926720",
       "category": "public",
       "polygon": [
         {
@@ -92674,7 +95457,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926722",
+      "osmId": "577926722",
       "name": "Gedung 577926722",
+      "matchedName": "Gedung 577926722",
       "category": "public",
       "polygon": [
         {
@@ -92736,7 +95521,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926724",
+      "osmId": "577926724",
       "name": "Gedung 577926724",
+      "matchedName": "Gedung 577926724",
       "category": "public",
       "polygon": [
         {
@@ -92798,7 +95585,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926726",
+      "osmId": "577926726",
       "name": "Gedung 577926726",
+      "matchedName": "Gedung 577926726",
       "category": "public",
       "polygon": [
         {
@@ -92860,7 +95649,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926728",
+      "osmId": "577926728",
       "name": "Gedung 577926728",
+      "matchedName": "Gedung 577926728",
       "category": "public",
       "polygon": [
         {
@@ -92922,7 +95713,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926730",
+      "osmId": "577926730",
       "name": "Gedung 577926730",
+      "matchedName": "Gedung 577926730",
       "category": "public",
       "polygon": [
         {
@@ -92984,7 +95777,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926733",
+      "osmId": "577926733",
       "name": "Gedung 577926733",
+      "matchedName": "Gedung 577926733",
       "category": "public",
       "polygon": [
         {
@@ -93046,7 +95841,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926735",
+      "osmId": "577926735",
       "name": "Gedung 577926735",
+      "matchedName": "Gedung 577926735",
       "category": "public",
       "polygon": [
         {
@@ -93108,7 +95905,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926737",
+      "osmId": "577926737",
       "name": "Gedung 577926737",
+      "matchedName": "Gedung 577926737",
       "category": "public",
       "polygon": [
         {
@@ -93186,7 +95985,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926739",
+      "osmId": "577926739",
       "name": "Gedung 577926739",
+      "matchedName": "Gedung 577926739",
       "category": "public",
       "polygon": [
         {
@@ -93248,7 +96049,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926741",
+      "osmId": "577926741",
       "name": "Gedung 577926741",
+      "matchedName": "Gedung 577926741",
       "category": "public",
       "polygon": [
         {
@@ -93310,7 +96113,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926744",
+      "osmId": "577926744",
       "name": "Gedung 577926744",
+      "matchedName": "Gedung 577926744",
       "category": "public",
       "polygon": [
         {
@@ -93372,7 +96177,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926745",
+      "osmId": "577926745",
       "name": "Gedung 577926745",
+      "matchedName": "Gedung 577926745",
       "category": "public",
       "polygon": [
         {
@@ -93434,7 +96241,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926746",
+      "osmId": "577926746",
       "name": "Gedung 577926746",
+      "matchedName": "Gedung 577926746",
       "category": "public",
       "polygon": [
         {
@@ -93496,7 +96305,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926747",
+      "osmId": "577926747",
       "name": "Gedung 577926747",
+      "matchedName": "Gedung 577926747",
       "category": "public",
       "polygon": [
         {
@@ -93558,7 +96369,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926748",
+      "osmId": "577926748",
       "name": "Gedung 577926748",
+      "matchedName": "Gedung 577926748",
       "category": "public",
       "polygon": [
         {
@@ -93620,7 +96433,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926749",
+      "osmId": "577926749",
       "name": "Gedung 577926749",
+      "matchedName": "Gedung 577926749",
       "category": "public",
       "polygon": [
         {
@@ -93682,7 +96497,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926750",
+      "osmId": "577926750",
       "name": "Gedung 577926750",
+      "matchedName": "Gedung 577926750",
       "category": "public",
       "polygon": [
         {
@@ -93744,7 +96561,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926751",
+      "osmId": "577926751",
       "name": "Gedung 577926751",
+      "matchedName": "Gedung 577926751",
       "category": "public",
       "polygon": [
         {
@@ -93806,7 +96625,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926752",
+      "osmId": "577926752",
       "name": "Gedung 577926752",
+      "matchedName": "Gedung 577926752",
       "category": "public",
       "polygon": [
         {
@@ -93868,7 +96689,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926753",
+      "osmId": "577926753",
       "name": "Gedung 577926753",
+      "matchedName": "Gedung 577926753",
       "category": "public",
       "polygon": [
         {
@@ -93930,7 +96753,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926754",
+      "osmId": "577926754",
       "name": "Gedung 577926754",
+      "matchedName": "Gedung 577926754",
       "category": "public",
       "polygon": [
         {
@@ -93992,7 +96817,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926755",
+      "osmId": "577926755",
       "name": "Gedung 577926755",
+      "matchedName": "Gedung 577926755",
       "category": "public",
       "polygon": [
         {
@@ -94054,7 +96881,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926756",
+      "osmId": "577926756",
       "name": "Gedung 577926756",
+      "matchedName": "Gedung 577926756",
       "category": "public",
       "polygon": [
         {
@@ -94124,7 +96953,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926757",
+      "osmId": "577926757",
       "name": "Gedung 577926757",
+      "matchedName": "Gedung 577926757",
       "category": "public",
       "polygon": [
         {
@@ -94186,7 +97017,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926758",
+      "osmId": "577926758",
       "name": "Gedung 577926758",
+      "matchedName": "Gedung 577926758",
       "category": "public",
       "polygon": [
         {
@@ -94248,7 +97081,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926759",
+      "osmId": "577926759",
       "name": "Gedung 577926759",
+      "matchedName": "Gedung 577926759",
       "category": "public",
       "polygon": [
         {
@@ -94310,7 +97145,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926760",
+      "osmId": "577926760",
       "name": "Gedung 577926760",
+      "matchedName": "Gedung 577926760",
       "category": "public",
       "polygon": [
         {
@@ -94372,7 +97209,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926761",
+      "osmId": "577926761",
       "name": "Gedung 577926761",
+      "matchedName": "Gedung 577926761",
       "category": "public",
       "polygon": [
         {
@@ -94434,7 +97273,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926762",
+      "osmId": "577926762",
       "name": "Gedung 577926762",
+      "matchedName": "Gedung 577926762",
       "category": "public",
       "polygon": [
         {
@@ -94496,7 +97337,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926763",
+      "osmId": "577926763",
       "name": "Gedung 577926763",
+      "matchedName": "Gedung 577926763",
       "category": "public",
       "polygon": [
         {
@@ -94558,7 +97401,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926764",
+      "osmId": "577926764",
       "name": "Gedung 577926764",
+      "matchedName": "Gedung 577926764",
       "category": "public",
       "polygon": [
         {
@@ -94620,7 +97465,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926765",
+      "osmId": "577926765",
       "name": "Gedung 577926765",
+      "matchedName": "Gedung 577926765",
       "category": "public",
       "polygon": [
         {
@@ -94682,7 +97529,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926766",
+      "osmId": "577926766",
       "name": "Gedung 577926766",
+      "matchedName": "Gedung 577926766",
       "category": "public",
       "polygon": [
         {
@@ -94744,7 +97593,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926767",
+      "osmId": "577926767",
       "name": "Gedung 577926767",
+      "matchedName": "Gedung 577926767",
       "category": "public",
       "polygon": [
         {
@@ -94806,7 +97657,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926768",
+      "osmId": "577926768",
       "name": "Gedung 577926768",
+      "matchedName": "Gedung 577926768",
       "category": "public",
       "polygon": [
         {
@@ -94868,7 +97721,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926769",
+      "osmId": "577926769",
       "name": "Gedung 577926769",
+      "matchedName": "Gedung 577926769",
       "category": "public",
       "polygon": [
         {
@@ -94962,7 +97817,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926770",
+      "osmId": "577926770",
       "name": "Gedung 577926770",
+      "matchedName": "Gedung 577926770",
       "category": "public",
       "polygon": [
         {
@@ -95072,7 +97929,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926771",
+      "osmId": "577926771",
       "name": "Gedung 577926771",
+      "matchedName": "Gedung 577926771",
       "category": "public",
       "polygon": [
         {
@@ -95142,7 +98001,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926772",
+      "osmId": "577926772",
       "name": "Gedung 577926772",
+      "matchedName": "Gedung 577926772",
       "category": "public",
       "polygon": [
         {
@@ -95204,7 +98065,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926773",
+      "osmId": "577926773",
       "name": "Gedung 577926773",
+      "matchedName": "Gedung 577926773",
       "category": "public",
       "polygon": [
         {
@@ -95282,7 +98145,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926774",
+      "osmId": "577926774",
       "name": "Gedung 577926774",
+      "matchedName": "Gedung 577926774",
       "category": "public",
       "polygon": [
         {
@@ -95344,7 +98209,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926776",
+      "osmId": "577926776",
       "name": "Gedung 577926776",
+      "matchedName": "Gedung 577926776",
       "category": "public",
       "polygon": [
         {
@@ -95406,7 +98273,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926862",
+      "osmId": "577926862",
       "name": "Gedung 577926862",
+      "matchedName": "Gedung 577926862",
       "category": "public",
       "polygon": [
         {
@@ -95468,7 +98337,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926863",
+      "osmId": "577926863",
       "name": "Gedung 577926863",
+      "matchedName": "Gedung 577926863",
       "category": "public",
       "polygon": [
         {
@@ -95562,7 +98433,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926864",
+      "osmId": "577926864",
       "name": "Gedung 577926864",
+      "matchedName": "Gedung 577926864",
       "category": "public",
       "polygon": [
         {
@@ -95624,7 +98497,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926865",
+      "osmId": "577926865",
       "name": "Gedung 577926865",
+      "matchedName": "Gedung 577926865",
       "category": "public",
       "polygon": [
         {
@@ -95686,7 +98561,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926866",
+      "osmId": "577926866",
       "name": "Gedung 577926866",
+      "matchedName": "Gedung 577926866",
       "category": "public",
       "polygon": [
         {
@@ -95748,7 +98625,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926867",
+      "osmId": "577926867",
       "name": "Gedung 577926867",
+      "matchedName": "Gedung 577926867",
       "category": "public",
       "polygon": [
         {
@@ -95810,7 +98689,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926868",
+      "osmId": "577926868",
       "name": "Gedung 577926868",
+      "matchedName": "Gedung 577926868",
       "category": "public",
       "polygon": [
         {
@@ -95872,7 +98753,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926869",
+      "osmId": "577926869",
       "name": "Gedung 577926869",
+      "matchedName": "Gedung 577926869",
       "category": "public",
       "polygon": [
         {
@@ -95934,7 +98817,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926870",
+      "osmId": "577926870",
       "name": "Gedung 577926870",
+      "matchedName": "Gedung 577926870",
       "category": "public",
       "polygon": [
         {
@@ -95996,7 +98881,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926871",
+      "osmId": "577926871",
       "name": "Gedung 577926871",
+      "matchedName": "Gedung 577926871",
       "category": "public",
       "polygon": [
         {
@@ -96058,7 +98945,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926872",
+      "osmId": "577926872",
       "name": "Gedung 577926872",
+      "matchedName": "Gedung 577926872",
       "category": "public",
       "polygon": [
         {
@@ -96120,7 +99009,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926873",
+      "osmId": "577926873",
       "name": "Gedung 577926873",
+      "matchedName": "Gedung 577926873",
       "category": "public",
       "polygon": [
         {
@@ -96182,7 +99073,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926874",
+      "osmId": "577926874",
       "name": "Gedung 577926874",
+      "matchedName": "Gedung 577926874",
       "category": "public",
       "polygon": [
         {
@@ -96244,7 +99137,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926875",
+      "osmId": "577926875",
       "name": "Gedung 577926875",
+      "matchedName": "Gedung 577926875",
       "category": "public",
       "polygon": [
         {
@@ -96306,7 +99201,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926876",
+      "osmId": "577926876",
       "name": "Gedung 577926876",
+      "matchedName": "Gedung 577926876",
       "category": "public",
       "polygon": [
         {
@@ -96368,7 +99265,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926877",
+      "osmId": "577926877",
       "name": "Gedung 577926877",
+      "matchedName": "Gedung 577926877",
       "category": "public",
       "polygon": [
         {
@@ -96438,7 +99337,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926878",
+      "osmId": "577926878",
       "name": "Gedung 577926878",
+      "matchedName": "Gedung 577926878",
       "category": "public",
       "polygon": [
         {
@@ -96500,7 +99401,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926879",
+      "osmId": "577926879",
       "name": "Gedung 577926879",
+      "matchedName": "Gedung 577926879",
       "category": "public",
       "polygon": [
         {
@@ -96602,7 +99505,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926880",
+      "osmId": "577926880",
       "name": "Gedung 577926880",
+      "matchedName": "Gedung 577926880",
       "category": "public",
       "polygon": [
         {
@@ -96664,7 +99569,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926881",
+      "osmId": "577926881",
       "name": "Gedung 577926881",
+      "matchedName": "Gedung 577926881",
       "category": "public",
       "polygon": [
         {
@@ -96726,7 +99633,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926882",
+      "osmId": "577926882",
       "name": "Gedung 577926882",
+      "matchedName": "Gedung 577926882",
       "category": "public",
       "polygon": [
         {
@@ -96788,7 +99697,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926883",
+      "osmId": "577926883",
       "name": "Gedung 577926883",
+      "matchedName": "Gedung 577926883",
       "category": "public",
       "polygon": [
         {
@@ -96850,7 +99761,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926884",
+      "osmId": "577926884",
       "name": "Gedung 577926884",
+      "matchedName": "Gedung 577926884",
       "category": "public",
       "polygon": [
         {
@@ -96912,7 +99825,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926885",
+      "osmId": "577926885",
       "name": "Gedung 577926885",
+      "matchedName": "Gedung 577926885",
       "category": "public",
       "polygon": [
         {
@@ -96974,7 +99889,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926886",
+      "osmId": "577926886",
       "name": "Gedung 577926886",
+      "matchedName": "Gedung 577926886",
       "category": "public",
       "polygon": [
         {
@@ -97036,7 +99953,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926887",
+      "osmId": "577926887",
       "name": "Gedung 577926887",
+      "matchedName": "Gedung 577926887",
       "category": "public",
       "polygon": [
         {
@@ -97098,7 +100017,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926888",
+      "osmId": "577926888",
       "name": "Gedung 577926888",
+      "matchedName": "Gedung 577926888",
       "category": "public",
       "polygon": [
         {
@@ -97184,7 +100105,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926889",
+      "osmId": "577926889",
       "name": "Gedung 577926889",
+      "matchedName": "Gedung 577926889",
       "category": "public",
       "polygon": [
         {
@@ -97246,7 +100169,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577926890",
+      "osmId": "577926890",
       "name": "Gedung 577926890",
+      "matchedName": "Gedung 577926890",
       "category": "public",
       "polygon": [
         {
@@ -97308,7 +100233,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927338",
+      "osmId": "577927338",
       "name": "Gedung 577927338",
+      "matchedName": "Gedung 577927338",
       "category": "public",
       "polygon": [
         {
@@ -97370,7 +100297,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927339",
+      "osmId": "577927339",
       "name": "Gedung 577927339",
+      "matchedName": "Gedung 577927339",
       "category": "public",
       "polygon": [
         {
@@ -97432,7 +100361,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927340",
+      "osmId": "577927340",
       "name": "Gedung 577927340",
+      "matchedName": "Gedung 577927340",
       "category": "public",
       "polygon": [
         {
@@ -97494,7 +100425,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927341",
+      "osmId": "577927341",
       "name": "Gedung 577927341",
+      "matchedName": "Gedung 577927341",
       "category": "public",
       "polygon": [
         {
@@ -97556,7 +100489,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927342",
+      "osmId": "577927342",
       "name": "Gedung 577927342",
+      "matchedName": "Gedung 577927342",
       "category": "public",
       "polygon": [
         {
@@ -97618,7 +100553,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927343",
+      "osmId": "577927343",
       "name": "Gedung 577927343",
+      "matchedName": "Gedung 577927343",
       "category": "public",
       "polygon": [
         {
@@ -97680,7 +100617,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927344",
+      "osmId": "577927344",
       "name": "Gedung 577927344",
+      "matchedName": "Gedung 577927344",
       "category": "public",
       "polygon": [
         {
@@ -97758,7 +100697,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927345",
+      "osmId": "577927345",
       "name": "Gedung 577927345",
+      "matchedName": "Gedung 577927345",
       "category": "public",
       "polygon": [
         {
@@ -97820,7 +100761,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927346",
+      "osmId": "577927346",
       "name": "Gedung 577927346",
+      "matchedName": "Gedung 577927346",
       "category": "public",
       "polygon": [
         {
@@ -97898,7 +100841,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577927347",
+      "osmId": "577927347",
       "name": "Gedung 577927347",
+      "matchedName": "Gedung 577927347",
       "category": "public",
       "polygon": [
         {
@@ -97960,7 +100905,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577977135",
+      "osmId": "577977135",
       "name": "Masjid SMP Islam Nurus Sunnah",
+      "matchedName": "Masjid SMP Islam Nurus Sunnah",
       "category": "public",
       "polygon": [
         {
@@ -98060,7 +101007,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577977141",
+      "osmId": "577977141",
       "name": "SMP Islam Nurus Sunnah",
+      "matchedName": "SMP Islam Nurus Sunnah",
       "category": "public",
       "polygon": [
         {
@@ -98153,7 +101102,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990207",
+      "osmId": "577990207",
       "name": "Gedung 577990207",
+      "matchedName": "Gedung 577990207",
       "category": "public",
       "polygon": [
         {
@@ -98215,7 +101166,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990209",
+      "osmId": "577990209",
       "name": "Gedung 577990209",
+      "matchedName": "Gedung 577990209",
       "category": "public",
       "polygon": [
         {
@@ -98277,7 +101230,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990210",
+      "osmId": "577990210",
       "name": "Gedung 577990210",
+      "matchedName": "Gedung 577990210",
       "category": "public",
       "polygon": [
         {
@@ -98339,7 +101294,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990211",
+      "osmId": "577990211",
       "name": "Gedung 577990211",
+      "matchedName": "Gedung 577990211",
       "category": "public",
       "polygon": [
         {
@@ -98401,7 +101358,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990212",
+      "osmId": "577990212",
       "name": "Gedung 577990212",
+      "matchedName": "Gedung 577990212",
       "category": "public",
       "polygon": [
         {
@@ -98463,7 +101422,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990213",
+      "osmId": "577990213",
       "name": "Gedung 577990213",
+      "matchedName": "Gedung 577990213",
       "category": "public",
       "polygon": [
         {
@@ -98525,7 +101486,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990214",
+      "osmId": "577990214",
       "name": "Gedung 577990214",
+      "matchedName": "Gedung 577990214",
       "category": "public",
       "polygon": [
         {
@@ -98587,7 +101550,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990215",
+      "osmId": "577990215",
       "name": "Gedung 577990215",
+      "matchedName": "Gedung 577990215",
       "category": "public",
       "polygon": [
         {
@@ -98649,7 +101614,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990216",
+      "osmId": "577990216",
       "name": "Gedung 577990216",
+      "matchedName": "Gedung 577990216",
       "category": "public",
       "polygon": [
         {
@@ -98711,7 +101678,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990221",
+      "osmId": "577990221",
       "name": "Gedung 577990221",
+      "matchedName": "Gedung 577990221",
       "category": "public",
       "polygon": [
         {
@@ -98773,7 +101742,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990222",
+      "osmId": "577990222",
       "name": "Gedung 577990222",
+      "matchedName": "Gedung 577990222",
       "category": "public",
       "polygon": [
         {
@@ -98835,7 +101806,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990223",
+      "osmId": "577990223",
       "name": "Gedung 577990223",
+      "matchedName": "Gedung 577990223",
       "category": "public",
       "polygon": [
         {
@@ -98897,7 +101870,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990224",
+      "osmId": "577990224",
       "name": "Gedung 577990224",
+      "matchedName": "Gedung 577990224",
       "category": "public",
       "polygon": [
         {
@@ -98959,7 +101934,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990225",
+      "osmId": "577990225",
       "name": "Gedung 577990225",
+      "matchedName": "Gedung 577990225",
       "category": "public",
       "polygon": [
         {
@@ -99021,7 +101998,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990226",
+      "osmId": "577990226",
       "name": "Gedung 577990226",
+      "matchedName": "Gedung 577990226",
       "category": "public",
       "polygon": [
         {
@@ -99083,7 +102062,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990231",
+      "osmId": "577990231",
       "name": "Gedung 577990231",
+      "matchedName": "Gedung 577990231",
       "category": "public",
       "polygon": [
         {
@@ -99145,7 +102126,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990232",
+      "osmId": "577990232",
       "name": "Gedung 577990232",
+      "matchedName": "Gedung 577990232",
       "category": "public",
       "polygon": [
         {
@@ -99207,7 +102190,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990233",
+      "osmId": "577990233",
       "name": "Gedung 577990233",
+      "matchedName": "Gedung 577990233",
       "category": "public",
       "polygon": [
         {
@@ -99269,7 +102254,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990234",
+      "osmId": "577990234",
       "name": "Gedung 577990234",
+      "matchedName": "Gedung 577990234",
       "category": "public",
       "polygon": [
         {
@@ -99331,7 +102318,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990235",
+      "osmId": "577990235",
       "name": "Gedung 577990235",
+      "matchedName": "Gedung 577990235",
       "category": "public",
       "polygon": [
         {
@@ -99393,7 +102382,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990236",
+      "osmId": "577990236",
       "name": "Gedung 577990236",
+      "matchedName": "Gedung 577990236",
       "category": "public",
       "polygon": [
         {
@@ -99455,7 +102446,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990238",
+      "osmId": "577990238",
       "name": "Gedung 577990238",
+      "matchedName": "Gedung 577990238",
       "category": "public",
       "polygon": [
         {
@@ -99517,7 +102510,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-577990244",
+      "osmId": "577990244",
       "name": "Gedung 577990244",
+      "matchedName": "Gedung 577990244",
       "category": "public",
       "polygon": [
         {
@@ -99579,7 +102574,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-581072919",
+      "osmId": "581072919",
       "name": "Gedung 581072919",
+      "matchedName": "Gedung 581072919",
       "category": "public",
       "polygon": [
         {
@@ -99641,7 +102638,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-581072921",
+      "osmId": "581072921",
       "name": "Gedung 581072921",
+      "matchedName": "Gedung 581072921",
       "category": "public",
       "polygon": [
         {
@@ -99703,7 +102702,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-581072922",
+      "osmId": "581072922",
       "name": "Gedung 581072922",
+      "matchedName": "Gedung 581072922",
       "category": "public",
       "polygon": [
         {
@@ -99765,7 +102766,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-581072925",
+      "osmId": "581072925",
       "name": "Gedung 581072925",
+      "matchedName": "Gedung 581072925",
       "category": "public",
       "polygon": [
         {
@@ -99827,7 +102830,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-582763878",
+      "osmId": "582763878",
       "name": "Gedung 582763878",
+      "matchedName": "Gedung 582763878",
       "category": "public",
       "polygon": [
         {
@@ -99889,7 +102894,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-582763884",
+      "osmId": "582763884",
       "name": "Gedung 582763884",
+      "matchedName": "Gedung 582763884",
       "category": "public",
       "polygon": [
         {
@@ -99957,7 +102964,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-582763886",
+      "osmId": "582763886",
       "name": "Gedung Gardu pandang",
+      "matchedName": "Gedung Gardu pandang",
       "category": "public",
       "polygon": [
         {
@@ -100031,7 +103040,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654464",
+      "osmId": "583654464",
       "name": "Gedung 583654464",
+      "matchedName": "Gedung 583654464",
       "category": "public",
       "polygon": [
         {
@@ -100093,7 +103104,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654465",
+      "osmId": "583654465",
       "name": "Gedung 583654465",
+      "matchedName": "Gedung 583654465",
       "category": "public",
       "polygon": [
         {
@@ -100155,7 +103168,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654466",
+      "osmId": "583654466",
       "name": "Gedung 583654466",
+      "matchedName": "Gedung 583654466",
       "category": "public",
       "polygon": [
         {
@@ -100217,7 +103232,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654467",
+      "osmId": "583654467",
       "name": "Gedung 583654467",
+      "matchedName": "Gedung 583654467",
       "category": "public",
       "polygon": [
         {
@@ -100279,7 +103296,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654468",
+      "osmId": "583654468",
       "name": "Gedung 583654468",
+      "matchedName": "Gedung 583654468",
       "category": "public",
       "polygon": [
         {
@@ -100341,7 +103360,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654469",
+      "osmId": "583654469",
       "name": "Gedung 583654469",
+      "matchedName": "Gedung 583654469",
       "category": "public",
       "polygon": [
         {
@@ -100403,7 +103424,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654470",
+      "osmId": "583654470",
       "name": "Gedung 583654470",
+      "matchedName": "Gedung 583654470",
       "category": "public",
       "polygon": [
         {
@@ -100465,7 +103488,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654471",
+      "osmId": "583654471",
       "name": "Gedung 583654471",
+      "matchedName": "Gedung 583654471",
       "category": "public",
       "polygon": [
         {
@@ -100527,7 +103552,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654472",
+      "osmId": "583654472",
       "name": "Gedung 583654472",
+      "matchedName": "Gedung 583654472",
       "category": "public",
       "polygon": [
         {
@@ -100589,7 +103616,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654473",
+      "osmId": "583654473",
       "name": "Gedung 583654473",
+      "matchedName": "Gedung 583654473",
       "category": "public",
       "polygon": [
         {
@@ -100651,7 +103680,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583654474",
+      "osmId": "583654474",
       "name": "Gedung 583654474",
+      "matchedName": "Gedung 583654474",
       "category": "public",
       "polygon": [
         {
@@ -100713,7 +103744,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583655116",
+      "osmId": "583655116",
       "name": "Gedung 583655116",
+      "matchedName": "Gedung 583655116",
       "category": "public",
       "polygon": [
         {
@@ -100775,7 +103808,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583655118",
+      "osmId": "583655118",
       "name": "Gedung 583655118",
+      "matchedName": "Gedung 583655118",
       "category": "public",
       "polygon": [
         {
@@ -100837,7 +103872,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-583655119",
+      "osmId": "583655119",
       "name": "Gedung 583655119",
+      "matchedName": "Gedung 583655119",
       "category": "public",
       "polygon": [
         {
@@ -100899,7 +103936,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037150",
+      "osmId": "592037150",
       "name": "Gedung 592037150",
+      "matchedName": "Gedung 592037150",
       "category": "public",
       "polygon": [
         {
@@ -100961,7 +104000,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037151",
+      "osmId": "592037151",
       "name": "Gedung 592037151",
+      "matchedName": "Gedung 592037151",
       "category": "public",
       "polygon": [
         {
@@ -101023,7 +104064,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037152",
+      "osmId": "592037152",
       "name": "Gedung 592037152",
+      "matchedName": "Gedung 592037152",
       "category": "public",
       "polygon": [
         {
@@ -101085,7 +104128,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037153",
+      "osmId": "592037153",
       "name": "Gedung 592037153",
+      "matchedName": "Gedung 592037153",
       "category": "public",
       "polygon": [
         {
@@ -101147,7 +104192,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037154",
+      "osmId": "592037154",
       "name": "Gedung 592037154",
+      "matchedName": "Gedung 592037154",
       "category": "public",
       "polygon": [
         {
@@ -101209,7 +104256,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037155",
+      "osmId": "592037155",
       "name": "Gedung 592037155",
+      "matchedName": "Gedung 592037155",
       "category": "public",
       "polygon": [
         {
@@ -101271,7 +104320,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037156",
+      "osmId": "592037156",
       "name": "Gedung 592037156",
+      "matchedName": "Gedung 592037156",
       "category": "public",
       "polygon": [
         {
@@ -101333,7 +104384,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037157",
+      "osmId": "592037157",
       "name": "Gedung 592037157",
+      "matchedName": "Gedung 592037157",
       "category": "public",
       "polygon": [
         {
@@ -101395,7 +104448,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037158",
+      "osmId": "592037158",
       "name": "Gedung 592037158",
+      "matchedName": "Gedung 592037158",
       "category": "public",
       "polygon": [
         {
@@ -101457,7 +104512,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037159",
+      "osmId": "592037159",
       "name": "Gedung 592037159",
+      "matchedName": "Gedung 592037159",
       "category": "public",
       "polygon": [
         {
@@ -101519,7 +104576,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037160",
+      "osmId": "592037160",
       "name": "Gedung 592037160",
+      "matchedName": "Gedung 592037160",
       "category": "public",
       "polygon": [
         {
@@ -101581,7 +104640,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037161",
+      "osmId": "592037161",
       "name": "Gedung 592037161",
+      "matchedName": "Gedung 592037161",
       "category": "public",
       "polygon": [
         {
@@ -101643,7 +104704,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037162",
+      "osmId": "592037162",
       "name": "Gedung 592037162",
+      "matchedName": "Gedung 592037162",
       "category": "public",
       "polygon": [
         {
@@ -101705,7 +104768,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037163",
+      "osmId": "592037163",
       "name": "Gedung 592037163",
+      "matchedName": "Gedung 592037163",
       "category": "public",
       "polygon": [
         {
@@ -101767,7 +104832,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037164",
+      "osmId": "592037164",
       "name": "Gedung 592037164",
+      "matchedName": "Gedung 592037164",
       "category": "public",
       "polygon": [
         {
@@ -101829,7 +104896,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037165",
+      "osmId": "592037165",
       "name": "Gedung 592037165",
+      "matchedName": "Gedung 592037165",
       "category": "public",
       "polygon": [
         {
@@ -101891,7 +104960,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037166",
+      "osmId": "592037166",
       "name": "Gedung 592037166",
+      "matchedName": "Gedung 592037166",
       "category": "public",
       "polygon": [
         {
@@ -101953,7 +105024,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037167",
+      "osmId": "592037167",
       "name": "Gedung 592037167",
+      "matchedName": "Gedung 592037167",
       "category": "public",
       "polygon": [
         {
@@ -102015,7 +105088,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037168",
+      "osmId": "592037168",
       "name": "Gedung 592037168",
+      "matchedName": "Gedung 592037168",
       "category": "public",
       "polygon": [
         {
@@ -102077,7 +105152,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037169",
+      "osmId": "592037169",
       "name": "Gedung 592037169",
+      "matchedName": "Gedung 592037169",
       "category": "public",
       "polygon": [
         {
@@ -102139,7 +105216,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037170",
+      "osmId": "592037170",
       "name": "Gedung 592037170",
+      "matchedName": "Gedung 592037170",
       "category": "public",
       "polygon": [
         {
@@ -102201,7 +105280,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037171",
+      "osmId": "592037171",
       "name": "Gedung 592037171",
+      "matchedName": "Gedung 592037171",
       "category": "public",
       "polygon": [
         {
@@ -102263,7 +105344,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037172",
+      "osmId": "592037172",
       "name": "Gedung 592037172",
+      "matchedName": "Gedung 592037172",
       "category": "public",
       "polygon": [
         {
@@ -102325,7 +105408,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037173",
+      "osmId": "592037173",
       "name": "Gedung 592037173",
+      "matchedName": "Gedung 592037173",
       "category": "public",
       "polygon": [
         {
@@ -102387,7 +105472,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037174",
+      "osmId": "592037174",
       "name": "Gedung 592037174",
+      "matchedName": "Gedung 592037174",
       "category": "public",
       "polygon": [
         {
@@ -102449,7 +105536,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037175",
+      "osmId": "592037175",
       "name": "Gedung 592037175",
+      "matchedName": "Gedung 592037175",
       "category": "public",
       "polygon": [
         {
@@ -102511,7 +105600,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037176",
+      "osmId": "592037176",
       "name": "Gedung 592037176",
+      "matchedName": "Gedung 592037176",
       "category": "public",
       "polygon": [
         {
@@ -102573,7 +105664,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037177",
+      "osmId": "592037177",
       "name": "Gedung 592037177",
+      "matchedName": "Gedung 592037177",
       "category": "public",
       "polygon": [
         {
@@ -102635,7 +105728,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037178",
+      "osmId": "592037178",
       "name": "Gedung 592037178",
+      "matchedName": "Gedung 592037178",
       "category": "public",
       "polygon": [
         {
@@ -102697,7 +105792,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037179",
+      "osmId": "592037179",
       "name": "Gedung 592037179",
+      "matchedName": "Gedung 592037179",
       "category": "public",
       "polygon": [
         {
@@ -102759,7 +105856,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037180",
+      "osmId": "592037180",
       "name": "Gedung 592037180",
+      "matchedName": "Gedung 592037180",
       "category": "public",
       "polygon": [
         {
@@ -102821,7 +105920,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037181",
+      "osmId": "592037181",
       "name": "Gedung 592037181",
+      "matchedName": "Gedung 592037181",
       "category": "public",
       "polygon": [
         {
@@ -102883,7 +105984,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037182",
+      "osmId": "592037182",
       "name": "Gedung 592037182",
+      "matchedName": "Gedung 592037182",
       "category": "public",
       "polygon": [
         {
@@ -102945,7 +106048,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037183",
+      "osmId": "592037183",
       "name": "Gedung 592037183",
+      "matchedName": "Gedung 592037183",
       "category": "public",
       "polygon": [
         {
@@ -103007,7 +106112,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037184",
+      "osmId": "592037184",
       "name": "Gedung 592037184",
+      "matchedName": "Gedung 592037184",
       "category": "public",
       "polygon": [
         {
@@ -103069,7 +106176,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037185",
+      "osmId": "592037185",
       "name": "Gedung 592037185",
+      "matchedName": "Gedung 592037185",
       "category": "public",
       "polygon": [
         {
@@ -103131,7 +106240,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037186",
+      "osmId": "592037186",
       "name": "Gedung 592037186",
+      "matchedName": "Gedung 592037186",
       "category": "public",
       "polygon": [
         {
@@ -103193,7 +106304,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037187",
+      "osmId": "592037187",
       "name": "Gedung 592037187",
+      "matchedName": "Gedung 592037187",
       "category": "public",
       "polygon": [
         {
@@ -103255,7 +106368,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037188",
+      "osmId": "592037188",
       "name": "Gedung 592037188",
+      "matchedName": "Gedung 592037188",
       "category": "public",
       "polygon": [
         {
@@ -103317,7 +106432,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037189",
+      "osmId": "592037189",
       "name": "Gedung 592037189",
+      "matchedName": "Gedung 592037189",
       "category": "public",
       "polygon": [
         {
@@ -103379,7 +106496,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037190",
+      "osmId": "592037190",
       "name": "Gedung 592037190",
+      "matchedName": "Gedung 592037190",
       "category": "public",
       "polygon": [
         {
@@ -103441,7 +106560,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037191",
+      "osmId": "592037191",
       "name": "Gedung 592037191",
+      "matchedName": "Gedung 592037191",
       "category": "public",
       "polygon": [
         {
@@ -103503,7 +106624,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037192",
+      "osmId": "592037192",
       "name": "Gedung 592037192",
+      "matchedName": "Gedung 592037192",
       "category": "public",
       "polygon": [
         {
@@ -103565,7 +106688,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037193",
+      "osmId": "592037193",
       "name": "Gedung 592037193",
+      "matchedName": "Gedung 592037193",
       "category": "public",
       "polygon": [
         {
@@ -103627,7 +106752,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037194",
+      "osmId": "592037194",
       "name": "Gedung 592037194",
+      "matchedName": "Gedung 592037194",
       "category": "public",
       "polygon": [
         {
@@ -103689,7 +106816,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037195",
+      "osmId": "592037195",
       "name": "Gedung 592037195",
+      "matchedName": "Gedung 592037195",
       "category": "public",
       "polygon": [
         {
@@ -103751,7 +106880,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037196",
+      "osmId": "592037196",
       "name": "Gedung 592037196",
+      "matchedName": "Gedung 592037196",
       "category": "public",
       "polygon": [
         {
@@ -103813,7 +106944,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037197",
+      "osmId": "592037197",
       "name": "Gedung 592037197",
+      "matchedName": "Gedung 592037197",
       "category": "public",
       "polygon": [
         {
@@ -103875,7 +107008,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037198",
+      "osmId": "592037198",
       "name": "Gedung 592037198",
+      "matchedName": "Gedung 592037198",
       "category": "public",
       "polygon": [
         {
@@ -103937,7 +107072,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037199",
+      "osmId": "592037199",
       "name": "Gedung 592037199",
+      "matchedName": "Gedung 592037199",
       "category": "public",
       "polygon": [
         {
@@ -103999,7 +107136,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037200",
+      "osmId": "592037200",
       "name": "Gedung 592037200",
+      "matchedName": "Gedung 592037200",
       "category": "public",
       "polygon": [
         {
@@ -104061,7 +107200,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037201",
+      "osmId": "592037201",
       "name": "Gedung 592037201",
+      "matchedName": "Gedung 592037201",
       "category": "public",
       "polygon": [
         {
@@ -104123,7 +107264,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037202",
+      "osmId": "592037202",
       "name": "Gedung 592037202",
+      "matchedName": "Gedung 592037202",
       "category": "public",
       "polygon": [
         {
@@ -104185,7 +107328,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037203",
+      "osmId": "592037203",
       "name": "Gedung 592037203",
+      "matchedName": "Gedung 592037203",
       "category": "public",
       "polygon": [
         {
@@ -104247,7 +107392,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037204",
+      "osmId": "592037204",
       "name": "Gedung 592037204",
+      "matchedName": "Gedung 592037204",
       "category": "public",
       "polygon": [
         {
@@ -104309,7 +107456,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037205",
+      "osmId": "592037205",
       "name": "Gedung 592037205",
+      "matchedName": "Gedung 592037205",
       "category": "public",
       "polygon": [
         {
@@ -104371,7 +107520,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037206",
+      "osmId": "592037206",
       "name": "Gedung 592037206",
+      "matchedName": "Gedung 592037206",
       "category": "public",
       "polygon": [
         {
@@ -104433,7 +107584,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037207",
+      "osmId": "592037207",
       "name": "Gedung 592037207",
+      "matchedName": "Gedung 592037207",
       "category": "public",
       "polygon": [
         {
@@ -104495,7 +107648,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037208",
+      "osmId": "592037208",
       "name": "Gedung 592037208",
+      "matchedName": "Gedung 592037208",
       "category": "public",
       "polygon": [
         {
@@ -104557,7 +107712,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037209",
+      "osmId": "592037209",
       "name": "Gedung 592037209",
+      "matchedName": "Gedung 592037209",
       "category": "public",
       "polygon": [
         {
@@ -104619,7 +107776,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037210",
+      "osmId": "592037210",
       "name": "Gedung 592037210",
+      "matchedName": "Gedung 592037210",
       "category": "public",
       "polygon": [
         {
@@ -104681,7 +107840,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037211",
+      "osmId": "592037211",
       "name": "Gedung 592037211",
+      "matchedName": "Gedung 592037211",
       "category": "public",
       "polygon": [
         {
@@ -104743,7 +107904,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037212",
+      "osmId": "592037212",
       "name": "Gedung 592037212",
+      "matchedName": "Gedung 592037212",
       "category": "public",
       "polygon": [
         {
@@ -104805,7 +107968,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037213",
+      "osmId": "592037213",
       "name": "Gedung 592037213",
+      "matchedName": "Gedung 592037213",
       "category": "public",
       "polygon": [
         {
@@ -104867,7 +108032,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037214",
+      "osmId": "592037214",
       "name": "Gedung 592037214",
+      "matchedName": "Gedung 592037214",
       "category": "public",
       "polygon": [
         {
@@ -104929,7 +108096,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037215",
+      "osmId": "592037215",
       "name": "Gedung 592037215",
+      "matchedName": "Gedung 592037215",
       "category": "public",
       "polygon": [
         {
@@ -104991,7 +108160,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037216",
+      "osmId": "592037216",
       "name": "Gedung 592037216",
+      "matchedName": "Gedung 592037216",
       "category": "public",
       "polygon": [
         {
@@ -105053,7 +108224,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037217",
+      "osmId": "592037217",
       "name": "Gedung 592037217",
+      "matchedName": "Gedung 592037217",
       "category": "public",
       "polygon": [
         {
@@ -105115,7 +108288,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037218",
+      "osmId": "592037218",
       "name": "Gedung 592037218",
+      "matchedName": "Gedung 592037218",
       "category": "public",
       "polygon": [
         {
@@ -105177,7 +108352,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037219",
+      "osmId": "592037219",
       "name": "Gedung 592037219",
+      "matchedName": "Gedung 592037219",
       "category": "public",
       "polygon": [
         {
@@ -105239,7 +108416,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037220",
+      "osmId": "592037220",
       "name": "Gedung 592037220",
+      "matchedName": "Gedung 592037220",
       "category": "public",
       "polygon": [
         {
@@ -105301,7 +108480,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037221",
+      "osmId": "592037221",
       "name": "Gedung 592037221",
+      "matchedName": "Gedung 592037221",
       "category": "public",
       "polygon": [
         {
@@ -105363,7 +108544,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037222",
+      "osmId": "592037222",
       "name": "Gedung 592037222",
+      "matchedName": "Gedung 592037222",
       "category": "public",
       "polygon": [
         {
@@ -105425,7 +108608,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037223",
+      "osmId": "592037223",
       "name": "Gedung 592037223",
+      "matchedName": "Gedung 592037223",
       "category": "public",
       "polygon": [
         {
@@ -105487,7 +108672,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037224",
+      "osmId": "592037224",
       "name": "Gedung 592037224",
+      "matchedName": "Gedung 592037224",
       "category": "public",
       "polygon": [
         {
@@ -105549,7 +108736,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037225",
+      "osmId": "592037225",
       "name": "Gedung 592037225",
+      "matchedName": "Gedung 592037225",
       "category": "public",
       "polygon": [
         {
@@ -105611,7 +108800,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037226",
+      "osmId": "592037226",
       "name": "Gedung 592037226",
+      "matchedName": "Gedung 592037226",
       "category": "public",
       "polygon": [
         {
@@ -105673,7 +108864,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037227",
+      "osmId": "592037227",
       "name": "Gedung 592037227",
+      "matchedName": "Gedung 592037227",
       "category": "public",
       "polygon": [
         {
@@ -105735,7 +108928,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037228",
+      "osmId": "592037228",
       "name": "Gedung 592037228",
+      "matchedName": "Gedung 592037228",
       "category": "public",
       "polygon": [
         {
@@ -105797,7 +108992,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037229",
+      "osmId": "592037229",
       "name": "Gedung 592037229",
+      "matchedName": "Gedung 592037229",
       "category": "public",
       "polygon": [
         {
@@ -105859,7 +109056,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037230",
+      "osmId": "592037230",
       "name": "Gedung 592037230",
+      "matchedName": "Gedung 592037230",
       "category": "public",
       "polygon": [
         {
@@ -105921,7 +109120,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037231",
+      "osmId": "592037231",
       "name": "Gedung 592037231",
+      "matchedName": "Gedung 592037231",
       "category": "public",
       "polygon": [
         {
@@ -105983,7 +109184,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037232",
+      "osmId": "592037232",
       "name": "Gedung 592037232",
+      "matchedName": "Gedung 592037232",
       "category": "public",
       "polygon": [
         {
@@ -106045,7 +109248,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037233",
+      "osmId": "592037233",
       "name": "Gedung 592037233",
+      "matchedName": "Gedung 592037233",
       "category": "public",
       "polygon": [
         {
@@ -106107,7 +109312,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037234",
+      "osmId": "592037234",
       "name": "Gedung 592037234",
+      "matchedName": "Gedung 592037234",
       "category": "public",
       "polygon": [
         {
@@ -106169,7 +109376,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037235",
+      "osmId": "592037235",
       "name": "Gedung 592037235",
+      "matchedName": "Gedung 592037235",
       "category": "public",
       "polygon": [
         {
@@ -106231,7 +109440,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037236",
+      "osmId": "592037236",
       "name": "Gedung 592037236",
+      "matchedName": "Gedung 592037236",
       "category": "public",
       "polygon": [
         {
@@ -106293,7 +109504,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037237",
+      "osmId": "592037237",
       "name": "Gedung 592037237",
+      "matchedName": "Gedung 592037237",
       "category": "public",
       "polygon": [
         {
@@ -106355,7 +109568,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037238",
+      "osmId": "592037238",
       "name": "Gedung 592037238",
+      "matchedName": "Gedung 592037238",
       "category": "public",
       "polygon": [
         {
@@ -106417,7 +109632,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037239",
+      "osmId": "592037239",
       "name": "Gedung 592037239",
+      "matchedName": "Gedung 592037239",
       "category": "public",
       "polygon": [
         {
@@ -106479,7 +109696,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037240",
+      "osmId": "592037240",
       "name": "Gedung 592037240",
+      "matchedName": "Gedung 592037240",
       "category": "public",
       "polygon": [
         {
@@ -106565,7 +109784,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037241",
+      "osmId": "592037241",
       "name": "Gedung 592037241",
+      "matchedName": "Gedung 592037241",
       "category": "public",
       "polygon": [
         {
@@ -106627,7 +109848,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037242",
+      "osmId": "592037242",
       "name": "Gedung 592037242",
+      "matchedName": "Gedung 592037242",
       "category": "public",
       "polygon": [
         {
@@ -106689,7 +109912,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037243",
+      "osmId": "592037243",
       "name": "Gedung 592037243",
+      "matchedName": "Gedung 592037243",
       "category": "public",
       "polygon": [
         {
@@ -106751,7 +109976,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037244",
+      "osmId": "592037244",
       "name": "Gedung 592037244",
+      "matchedName": "Gedung 592037244",
       "category": "public",
       "polygon": [
         {
@@ -106813,7 +110040,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037245",
+      "osmId": "592037245",
       "name": "Gedung 592037245",
+      "matchedName": "Gedung 592037245",
       "category": "public",
       "polygon": [
         {
@@ -106875,7 +110104,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037246",
+      "osmId": "592037246",
       "name": "Gedung 592037246",
+      "matchedName": "Gedung 592037246",
       "category": "public",
       "polygon": [
         {
@@ -106937,7 +110168,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037247",
+      "osmId": "592037247",
       "name": "Gedung 592037247",
+      "matchedName": "Gedung 592037247",
       "category": "public",
       "polygon": [
         {
@@ -106999,7 +110232,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037248",
+      "osmId": "592037248",
       "name": "Gedung 592037248",
+      "matchedName": "Gedung 592037248",
       "category": "public",
       "polygon": [
         {
@@ -107061,7 +110296,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037249",
+      "osmId": "592037249",
       "name": "Gedung 592037249",
+      "matchedName": "Gedung 592037249",
       "category": "public",
       "polygon": [
         {
@@ -107123,7 +110360,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037250",
+      "osmId": "592037250",
       "name": "Gedung 592037250",
+      "matchedName": "Gedung 592037250",
       "category": "public",
       "polygon": [
         {
@@ -107185,7 +110424,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037251",
+      "osmId": "592037251",
       "name": "Gedung 592037251",
+      "matchedName": "Gedung 592037251",
       "category": "public",
       "polygon": [
         {
@@ -107247,7 +110488,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037252",
+      "osmId": "592037252",
       "name": "Gedung 592037252",
+      "matchedName": "Gedung 592037252",
       "category": "public",
       "polygon": [
         {
@@ -107309,7 +110552,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037253",
+      "osmId": "592037253",
       "name": "Gedung 592037253",
+      "matchedName": "Gedung 592037253",
       "category": "public",
       "polygon": [
         {
@@ -107371,7 +110616,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037254",
+      "osmId": "592037254",
       "name": "Gedung 592037254",
+      "matchedName": "Gedung 592037254",
       "category": "public",
       "polygon": [
         {
@@ -107433,7 +110680,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037255",
+      "osmId": "592037255",
       "name": "Gedung 592037255",
+      "matchedName": "Gedung 592037255",
       "category": "public",
       "polygon": [
         {
@@ -107495,7 +110744,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037256",
+      "osmId": "592037256",
       "name": "Gedung 592037256",
+      "matchedName": "Gedung 592037256",
       "category": "public",
       "polygon": [
         {
@@ -107557,7 +110808,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037257",
+      "osmId": "592037257",
       "name": "Gedung 592037257",
+      "matchedName": "Gedung 592037257",
       "category": "public",
       "polygon": [
         {
@@ -107619,7 +110872,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037258",
+      "osmId": "592037258",
       "name": "Gedung 592037258",
+      "matchedName": "Gedung 592037258",
       "category": "public",
       "polygon": [
         {
@@ -107681,7 +110936,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037259",
+      "osmId": "592037259",
       "name": "Gedung 592037259",
+      "matchedName": "Gedung 592037259",
       "category": "public",
       "polygon": [
         {
@@ -107743,7 +111000,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037260",
+      "osmId": "592037260",
       "name": "Gedung 592037260",
+      "matchedName": "Gedung 592037260",
       "category": "public",
       "polygon": [
         {
@@ -107805,7 +111064,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037261",
+      "osmId": "592037261",
       "name": "Gedung 592037261",
+      "matchedName": "Gedung 592037261",
       "category": "public",
       "polygon": [
         {
@@ -107867,7 +111128,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037262",
+      "osmId": "592037262",
       "name": "Gedung 592037262",
+      "matchedName": "Gedung 592037262",
       "category": "public",
       "polygon": [
         {
@@ -107929,7 +111192,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037263",
+      "osmId": "592037263",
       "name": "Gedung 592037263",
+      "matchedName": "Gedung 592037263",
       "category": "public",
       "polygon": [
         {
@@ -107991,7 +111256,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037264",
+      "osmId": "592037264",
       "name": "Gedung 592037264",
+      "matchedName": "Gedung 592037264",
       "category": "public",
       "polygon": [
         {
@@ -108085,7 +111352,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037265",
+      "osmId": "592037265",
       "name": "Gedung 592037265",
+      "matchedName": "Gedung 592037265",
       "category": "public",
       "polygon": [
         {
@@ -108147,7 +111416,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037266",
+      "osmId": "592037266",
       "name": "Gedung 592037266",
+      "matchedName": "Gedung 592037266",
       "category": "public",
       "polygon": [
         {
@@ -108209,7 +111480,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037267",
+      "osmId": "592037267",
       "name": "Gedung 592037267",
+      "matchedName": "Gedung 592037267",
       "category": "public",
       "polygon": [
         {
@@ -108271,7 +111544,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037268",
+      "osmId": "592037268",
       "name": "Gedung 592037268",
+      "matchedName": "Gedung 592037268",
       "category": "public",
       "polygon": [
         {
@@ -108333,7 +111608,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037269",
+      "osmId": "592037269",
       "name": "Gedung 592037269",
+      "matchedName": "Gedung 592037269",
       "category": "public",
       "polygon": [
         {
@@ -108395,7 +111672,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037270",
+      "osmId": "592037270",
       "name": "Gedung 592037270",
+      "matchedName": "Gedung 592037270",
       "category": "public",
       "polygon": [
         {
@@ -108457,7 +111736,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037271",
+      "osmId": "592037271",
       "name": "Gedung 592037271",
+      "matchedName": "Gedung 592037271",
       "category": "public",
       "polygon": [
         {
@@ -108519,7 +111800,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037272",
+      "osmId": "592037272",
       "name": "Gedung 592037272",
+      "matchedName": "Gedung 592037272",
       "category": "public",
       "polygon": [
         {
@@ -108581,7 +111864,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037273",
+      "osmId": "592037273",
       "name": "Gedung 592037273",
+      "matchedName": "Gedung 592037273",
       "category": "public",
       "polygon": [
         {
@@ -108643,7 +111928,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037274",
+      "osmId": "592037274",
       "name": "Gedung 592037274",
+      "matchedName": "Gedung 592037274",
       "category": "public",
       "polygon": [
         {
@@ -108705,7 +111992,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037275",
+      "osmId": "592037275",
       "name": "Gedung 592037275",
+      "matchedName": "Gedung 592037275",
       "category": "public",
       "polygon": [
         {
@@ -108767,7 +112056,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037276",
+      "osmId": "592037276",
       "name": "Gedung 592037276",
+      "matchedName": "Gedung 592037276",
       "category": "public",
       "polygon": [
         {
@@ -108829,7 +112120,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037277",
+      "osmId": "592037277",
       "name": "Gedung 592037277",
+      "matchedName": "Gedung 592037277",
       "category": "public",
       "polygon": [
         {
@@ -108891,7 +112184,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037278",
+      "osmId": "592037278",
       "name": "Gedung 592037278",
+      "matchedName": "Gedung 592037278",
       "category": "public",
       "polygon": [
         {
@@ -108953,7 +112248,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037279",
+      "osmId": "592037279",
       "name": "Gedung 592037279",
+      "matchedName": "Gedung 592037279",
       "category": "public",
       "polygon": [
         {
@@ -109015,7 +112312,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037280",
+      "osmId": "592037280",
       "name": "Gedung 592037280",
+      "matchedName": "Gedung 592037280",
       "category": "public",
       "polygon": [
         {
@@ -109077,7 +112376,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037281",
+      "osmId": "592037281",
       "name": "Gedung 592037281",
+      "matchedName": "Gedung 592037281",
       "category": "public",
       "polygon": [
         {
@@ -109139,7 +112440,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037282",
+      "osmId": "592037282",
       "name": "Gedung 592037282",
+      "matchedName": "Gedung 592037282",
       "category": "public",
       "polygon": [
         {
@@ -109201,7 +112504,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037283",
+      "osmId": "592037283",
       "name": "Gedung 592037283",
+      "matchedName": "Gedung 592037283",
       "category": "public",
       "polygon": [
         {
@@ -109263,7 +112568,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037284",
+      "osmId": "592037284",
       "name": "Gedung 592037284",
+      "matchedName": "Gedung 592037284",
       "category": "public",
       "polygon": [
         {
@@ -109325,7 +112632,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-592037285",
+      "osmId": "592037285",
       "name": "Gedung 592037285",
+      "matchedName": "Gedung 592037285",
       "category": "public",
       "polygon": [
         {
@@ -109387,7 +112696,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559860",
+      "osmId": "593559860",
       "name": "Gedung 593559860",
+      "matchedName": "Gedung 593559860",
       "category": "public",
       "polygon": [
         {
@@ -109449,9 +112760,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559861",
+      "osmId": "593559861",
       "name": "Kantin FPIK",
-      "facultyId": "fpik",
-      "category": "faculty",
+      "matchedName": "Kantin FPIK",
+      "category": "public",
       "polygon": [
         {
           "lat": -7.050061,
@@ -109510,29 +112822,14 @@ export const campusMapData: CampusMapData = {
         "building:levels": "2",
         "name": "Kantin FPIK"
       },
-      "source": "osm",
-      "style": {
-        "roofType": "maritime-curved",
-        "mainColors": [
-          "#0284C7",
-          "#0369A1",
-          "#E0F2FE",
-          "#0C4A6E"
-        ],
-        "facade": "Gaya arsitektur bernuansa maritim dengan ornamen garis gelombang biru dan dinding bersih",
-        "signatureFeatures": [
-          "Gedung A pusat Dekanat FPIK lantai 2",
-          "Kolam basah percobaan dan hatchery budidaya ikan",
-          "Laboratorium oseanografi dan navigasi laut",
-          "Monumen jangkar/haluan bahari"
-        ],
-        "entranceSide": "north"
-      }
+      "source": "osm"
     },
     {
       "id": "osm-bld-593559862",
+      "osmId": "593559862",
       "name": "Gedung 593559862",
-      "category": "public",
+      "matchedName": "Gedung 593559862",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048906,
@@ -109593,7 +112890,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559886",
+      "osmId": "593559886",
       "name": "Gedung 593559886",
+      "matchedName": "Gedung 593559886",
       "category": "public",
       "polygon": [
         {
@@ -109679,7 +112978,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559890",
+      "osmId": "593559890",
       "name": "Gedung 593559890",
+      "matchedName": "Gedung 593559890",
       "category": "public",
       "polygon": [
         {
@@ -109741,7 +113042,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559891",
+      "osmId": "593559891",
       "name": "Gedung 593559891",
+      "matchedName": "Gedung 593559891",
       "category": "public",
       "polygon": [
         {
@@ -109803,7 +113106,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559892",
+      "osmId": "593559892",
       "name": "Gedung 593559892",
+      "matchedName": "Gedung 593559892",
       "category": "public",
       "polygon": [
         {
@@ -109865,7 +113170,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559894",
+      "osmId": "593559894",
       "name": "Gedung 593559894",
+      "matchedName": "Gedung 593559894",
       "category": "public",
       "polygon": [
         {
@@ -109927,7 +113234,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559895",
+      "osmId": "593559895",
       "name": "Gedung 593559895",
+      "matchedName": "Gedung 593559895",
       "category": "public",
       "polygon": [
         {
@@ -109989,7 +113298,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559897",
+      "osmId": "593559897",
       "name": "Gedung 593559897",
+      "matchedName": "Gedung 593559897",
       "category": "public",
       "polygon": [
         {
@@ -110051,7 +113362,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593559899",
+      "osmId": "593559899",
       "name": "Gedung 593559899",
+      "matchedName": "Gedung 593559899",
       "category": "public",
       "polygon": [
         {
@@ -110113,7 +113426,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561454",
+      "osmId": "593561454",
       "name": "Gedung 593561454",
+      "matchedName": "Gedung 593561454",
       "category": "public",
       "polygon": [
         {
@@ -110175,7 +113490,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561455",
+      "osmId": "593561455",
       "name": "Gedung 593561455",
+      "matchedName": "Gedung 593561455",
       "category": "public",
       "polygon": [
         {
@@ -110237,7 +113554,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561457",
+      "osmId": "593561457",
       "name": "Gedung 593561457",
+      "matchedName": "Gedung 593561457",
       "category": "public",
       "polygon": [
         {
@@ -110299,7 +113618,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561459",
+      "osmId": "593561459",
       "name": "Gedung 593561459",
+      "matchedName": "Gedung 593561459",
       "category": "public",
       "polygon": [
         {
@@ -110361,7 +113682,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561461",
+      "osmId": "593561461",
       "name": "Gedung 593561461",
+      "matchedName": "Gedung 593561461",
       "category": "public",
       "polygon": [
         {
@@ -110423,7 +113746,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561462",
+      "osmId": "593561462",
       "name": "Gedung 593561462",
+      "matchedName": "Gedung 593561462",
       "category": "public",
       "polygon": [
         {
@@ -110485,7 +113810,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561464",
+      "osmId": "593561464",
       "name": "Gedung 593561464",
+      "matchedName": "Gedung 593561464",
       "category": "public",
       "polygon": [
         {
@@ -110547,7 +113874,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561466",
+      "osmId": "593561466",
       "name": "Gedung 593561466",
+      "matchedName": "Gedung 593561466",
       "category": "public",
       "polygon": [
         {
@@ -110609,7 +113938,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561467",
+      "osmId": "593561467",
       "name": "Gedung 593561467",
+      "matchedName": "Gedung 593561467",
       "category": "public",
       "polygon": [
         {
@@ -110671,7 +114002,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561469",
+      "osmId": "593561469",
       "name": "Gedung 593561469",
+      "matchedName": "Gedung 593561469",
       "category": "public",
       "polygon": [
         {
@@ -110733,7 +114066,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561471",
+      "osmId": "593561471",
       "name": "Gedung 593561471",
+      "matchedName": "Gedung 593561471",
       "category": "public",
       "polygon": [
         {
@@ -110795,7 +114130,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561472",
+      "osmId": "593561472",
       "name": "Gedung 593561472",
+      "matchedName": "Gedung 593561472",
       "category": "public",
       "polygon": [
         {
@@ -110857,7 +114194,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561474",
+      "osmId": "593561474",
       "name": "Gedung 593561474",
+      "matchedName": "Gedung 593561474",
       "category": "public",
       "polygon": [
         {
@@ -110919,7 +114258,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561475",
+      "osmId": "593561475",
       "name": "Gedung 593561475",
+      "matchedName": "Gedung 593561475",
       "category": "public",
       "polygon": [
         {
@@ -110981,7 +114322,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561477",
+      "osmId": "593561477",
       "name": "Gedung 593561477",
+      "matchedName": "Gedung 593561477",
       "category": "public",
       "polygon": [
         {
@@ -111043,7 +114386,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561478",
+      "osmId": "593561478",
       "name": "Gedung 593561478",
+      "matchedName": "Gedung 593561478",
       "category": "public",
       "polygon": [
         {
@@ -111105,7 +114450,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561481",
+      "osmId": "593561481",
       "name": "Gedung 593561481",
+      "matchedName": "Gedung 593561481",
       "category": "public",
       "polygon": [
         {
@@ -111167,7 +114514,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561483",
+      "osmId": "593561483",
       "name": "Gedung 593561483",
+      "matchedName": "Gedung 593561483",
       "category": "public",
       "polygon": [
         {
@@ -111229,7 +114578,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561484",
+      "osmId": "593561484",
       "name": "Gedung 593561484",
+      "matchedName": "Gedung 593561484",
       "category": "public",
       "polygon": [
         {
@@ -111291,7 +114642,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561486",
+      "osmId": "593561486",
       "name": "Gedung 593561486",
+      "matchedName": "Gedung 593561486",
       "category": "public",
       "polygon": [
         {
@@ -111353,7 +114706,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561488",
+      "osmId": "593561488",
       "name": "Gedung 593561488",
+      "matchedName": "Gedung 593561488",
       "category": "public",
       "polygon": [
         {
@@ -111415,7 +114770,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561489",
+      "osmId": "593561489",
       "name": "Gedung 593561489",
+      "matchedName": "Gedung 593561489",
       "category": "public",
       "polygon": [
         {
@@ -111477,7 +114834,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561491",
+      "osmId": "593561491",
       "name": "Gedung 593561491",
+      "matchedName": "Gedung 593561491",
       "category": "public",
       "polygon": [
         {
@@ -111539,7 +114898,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561493",
+      "osmId": "593561493",
       "name": "Gedung 593561493",
+      "matchedName": "Gedung 593561493",
       "category": "public",
       "polygon": [
         {
@@ -111601,7 +114962,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561494",
+      "osmId": "593561494",
       "name": "Gedung 593561494",
+      "matchedName": "Gedung 593561494",
       "category": "public",
       "polygon": [
         {
@@ -111663,7 +115026,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561496",
+      "osmId": "593561496",
       "name": "Gedung 593561496",
+      "matchedName": "Gedung 593561496",
       "category": "public",
       "polygon": [
         {
@@ -111725,7 +115090,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561498",
+      "osmId": "593561498",
       "name": "Gedung 593561498",
+      "matchedName": "Gedung 593561498",
       "category": "public",
       "polygon": [
         {
@@ -111787,7 +115154,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561499",
+      "osmId": "593561499",
       "name": "Gedung 593561499",
+      "matchedName": "Gedung 593561499",
       "category": "public",
       "polygon": [
         {
@@ -111849,7 +115218,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561501",
+      "osmId": "593561501",
       "name": "Gedung 593561501",
+      "matchedName": "Gedung 593561501",
       "category": "public",
       "polygon": [
         {
@@ -111911,7 +115282,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561503",
+      "osmId": "593561503",
       "name": "Gedung 593561503",
+      "matchedName": "Gedung 593561503",
       "category": "public",
       "polygon": [
         {
@@ -111973,7 +115346,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561504",
+      "osmId": "593561504",
       "name": "Gedung 593561504",
+      "matchedName": "Gedung 593561504",
       "category": "public",
       "polygon": [
         {
@@ -112035,7 +115410,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561506",
+      "osmId": "593561506",
       "name": "Gedung 593561506",
+      "matchedName": "Gedung 593561506",
       "category": "public",
       "polygon": [
         {
@@ -112097,7 +115474,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561508",
+      "osmId": "593561508",
       "name": "Gedung 593561508",
+      "matchedName": "Gedung 593561508",
       "category": "public",
       "polygon": [
         {
@@ -112159,7 +115538,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561509",
+      "osmId": "593561509",
       "name": "Gedung 593561509",
+      "matchedName": "Gedung 593561509",
       "category": "public",
       "polygon": [
         {
@@ -112221,7 +115602,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561511",
+      "osmId": "593561511",
       "name": "Gedung 593561511",
+      "matchedName": "Gedung 593561511",
       "category": "public",
       "polygon": [
         {
@@ -112283,7 +115666,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561513",
+      "osmId": "593561513",
       "name": "Gedung 593561513",
+      "matchedName": "Gedung 593561513",
       "category": "public",
       "polygon": [
         {
@@ -112345,7 +115730,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561515",
+      "osmId": "593561515",
       "name": "Gedung 593561515",
+      "matchedName": "Gedung 593561515",
       "category": "public",
       "polygon": [
         {
@@ -112407,7 +115794,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561516",
+      "osmId": "593561516",
       "name": "Gedung 593561516",
+      "matchedName": "Gedung 593561516",
       "category": "public",
       "polygon": [
         {
@@ -112469,7 +115858,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561518",
+      "osmId": "593561518",
       "name": "Gedung 593561518",
+      "matchedName": "Gedung 593561518",
       "category": "public",
       "polygon": [
         {
@@ -112531,7 +115922,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561520",
+      "osmId": "593561520",
       "name": "Gedung 593561520",
+      "matchedName": "Gedung 593561520",
       "category": "public",
       "polygon": [
         {
@@ -112593,7 +115986,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561521",
+      "osmId": "593561521",
       "name": "Gedung 593561521",
+      "matchedName": "Gedung 593561521",
       "category": "public",
       "polygon": [
         {
@@ -112655,7 +116050,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561522",
+      "osmId": "593561522",
       "name": "Gedung 593561522",
+      "matchedName": "Gedung 593561522",
       "category": "public",
       "polygon": [
         {
@@ -112717,7 +116114,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561523",
+      "osmId": "593561523",
       "name": "Gedung 593561523",
+      "matchedName": "Gedung 593561523",
       "category": "public",
       "polygon": [
         {
@@ -112779,7 +116178,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561524",
+      "osmId": "593561524",
       "name": "Gedung 593561524",
+      "matchedName": "Gedung 593561524",
       "category": "public",
       "polygon": [
         {
@@ -112841,7 +116242,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561525",
+      "osmId": "593561525",
       "name": "Gedung 593561525",
+      "matchedName": "Gedung 593561525",
       "category": "public",
       "polygon": [
         {
@@ -112903,7 +116306,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561526",
+      "osmId": "593561526",
       "name": "Gedung 593561526",
+      "matchedName": "Gedung 593561526",
       "category": "public",
       "polygon": [
         {
@@ -112965,7 +116370,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561527",
+      "osmId": "593561527",
       "name": "Gedung 593561527",
+      "matchedName": "Gedung 593561527",
       "category": "public",
       "polygon": [
         {
@@ -113027,7 +116434,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561536",
+      "osmId": "593561536",
       "name": "Gedung 593561536",
+      "matchedName": "Gedung 593561536",
       "category": "public",
       "polygon": [
         {
@@ -113089,7 +116498,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561537",
+      "osmId": "593561537",
       "name": "Gedung 593561537",
+      "matchedName": "Gedung 593561537",
       "category": "public",
       "polygon": [
         {
@@ -113151,7 +116562,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561538",
+      "osmId": "593561538",
       "name": "Gedung 593561538",
+      "matchedName": "Gedung 593561538",
       "category": "public",
       "polygon": [
         {
@@ -113213,7 +116626,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561539",
+      "osmId": "593561539",
       "name": "Gedung 593561539",
+      "matchedName": "Gedung 593561539",
       "category": "public",
       "polygon": [
         {
@@ -113275,7 +116690,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561540",
+      "osmId": "593561540",
       "name": "Gedung 593561540",
+      "matchedName": "Gedung 593561540",
       "category": "public",
       "polygon": [
         {
@@ -113337,7 +116754,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561541",
+      "osmId": "593561541",
       "name": "Gedung 593561541",
+      "matchedName": "Gedung 593561541",
       "category": "public",
       "polygon": [
         {
@@ -113399,7 +116818,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561542",
+      "osmId": "593561542",
       "name": "Gedung 593561542",
+      "matchedName": "Gedung 593561542",
       "category": "public",
       "polygon": [
         {
@@ -113461,7 +116882,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561543",
+      "osmId": "593561543",
       "name": "Gedung 593561543",
+      "matchedName": "Gedung 593561543",
       "category": "public",
       "polygon": [
         {
@@ -113523,7 +116946,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-593561544",
+      "osmId": "593561544",
       "name": "Gedung 593561544",
+      "matchedName": "Gedung 593561544",
       "category": "public",
       "polygon": [
         {
@@ -113697,7 +117122,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-594878717",
+      "osmId": "594878717",
       "name": "Gedung 594878717",
+      "matchedName": "Gedung 594878717",
       "category": "public",
       "polygon": [
         {
@@ -113764,7 +117191,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-600552615",
+      "osmId": "600552615",
       "name": "Gedung 600552615",
+      "matchedName": "Gedung 600552615",
       "category": "public",
       "polygon": [
         {
@@ -113826,7 +117255,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-601816494",
+      "osmId": "601816494",
       "name": "Gedung 601816494",
+      "matchedName": "Gedung 601816494",
       "category": "public",
       "polygon": [
         {
@@ -113888,7 +117319,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-601816495",
+      "osmId": "601816495",
       "name": "Gedung 601816495",
+      "matchedName": "Gedung 601816495",
       "category": "public",
       "polygon": [
         {
@@ -113950,7 +117383,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-601816496",
+      "osmId": "601816496",
       "name": "Gedung 601816496",
+      "matchedName": "Gedung 601816496",
       "category": "public",
       "polygon": [
         {
@@ -114012,7 +117447,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602794230",
+      "osmId": "602794230",
       "name": "Gedung 602794230",
+      "matchedName": "Gedung 602794230",
       "category": "public",
       "polygon": [
         {
@@ -114074,7 +117511,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602794231",
+      "osmId": "602794231",
       "name": "Gedung 602794231",
+      "matchedName": "Gedung 602794231",
       "category": "public",
       "polygon": [
         {
@@ -114136,7 +117575,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602916200",
+      "osmId": "602916200",
       "name": "Gedung 602916200",
+      "matchedName": "Gedung 602916200",
       "category": "public",
       "polygon": [
         {
@@ -114198,7 +117639,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602916201",
+      "osmId": "602916201",
       "name": "Gedung 602916201",
+      "matchedName": "Gedung 602916201",
       "category": "public",
       "polygon": [
         {
@@ -114260,7 +117703,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921655",
+      "osmId": "602921655",
       "name": "Gedung 602921655",
+      "matchedName": "Gedung 602921655",
       "category": "public",
       "polygon": [
         {
@@ -114322,7 +117767,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921656",
+      "osmId": "602921656",
       "name": "Gedung 602921656",
+      "matchedName": "Gedung 602921656",
       "category": "public",
       "polygon": [
         {
@@ -114384,7 +117831,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921657",
+      "osmId": "602921657",
       "name": "Gedung 602921657",
+      "matchedName": "Gedung 602921657",
       "category": "public",
       "polygon": [
         {
@@ -114446,7 +117895,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921658",
+      "osmId": "602921658",
       "name": "Gedung 602921658",
+      "matchedName": "Gedung 602921658",
       "category": "public",
       "polygon": [
         {
@@ -114508,7 +117959,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921659",
+      "osmId": "602921659",
       "name": "Gedung 602921659",
+      "matchedName": "Gedung 602921659",
       "category": "public",
       "polygon": [
         {
@@ -114570,7 +118023,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921660",
+      "osmId": "602921660",
       "name": "Gedung 602921660",
+      "matchedName": "Gedung 602921660",
       "category": "public",
       "polygon": [
         {
@@ -114632,7 +118087,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921661",
+      "osmId": "602921661",
       "name": "Gedung 602921661",
+      "matchedName": "Gedung 602921661",
       "category": "public",
       "polygon": [
         {
@@ -114694,7 +118151,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921662",
+      "osmId": "602921662",
       "name": "Gedung 602921662",
+      "matchedName": "Gedung 602921662",
       "category": "public",
       "polygon": [
         {
@@ -114756,7 +118215,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921663",
+      "osmId": "602921663",
       "name": "Gedung 602921663",
+      "matchedName": "Gedung 602921663",
       "category": "public",
       "polygon": [
         {
@@ -114818,7 +118279,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921664",
+      "osmId": "602921664",
       "name": "Gedung 602921664",
+      "matchedName": "Gedung 602921664",
       "category": "public",
       "polygon": [
         {
@@ -114880,7 +118343,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921665",
+      "osmId": "602921665",
       "name": "Gedung 602921665",
+      "matchedName": "Gedung 602921665",
       "category": "public",
       "polygon": [
         {
@@ -114942,7 +118407,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921666",
+      "osmId": "602921666",
       "name": "Gedung 602921666",
+      "matchedName": "Gedung 602921666",
       "category": "public",
       "polygon": [
         {
@@ -115004,7 +118471,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921667",
+      "osmId": "602921667",
       "name": "Gedung 602921667",
+      "matchedName": "Gedung 602921667",
       "category": "public",
       "polygon": [
         {
@@ -115066,7 +118535,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921668",
+      "osmId": "602921668",
       "name": "Gedung 602921668",
+      "matchedName": "Gedung 602921668",
       "category": "public",
       "polygon": [
         {
@@ -115128,7 +118599,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-602921669",
+      "osmId": "602921669",
       "name": "Gedung 602921669",
+      "matchedName": "Gedung 602921669",
       "category": "public",
       "polygon": [
         {
@@ -115190,7 +118663,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533983",
+      "osmId": "605533983",
       "name": "Gedung 605533983",
+      "matchedName": "Gedung 605533983",
       "category": "public",
       "polygon": [
         {
@@ -115252,7 +118727,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533984",
+      "osmId": "605533984",
       "name": "Gedung 605533984",
+      "matchedName": "Gedung 605533984",
       "category": "public",
       "polygon": [
         {
@@ -115314,7 +118791,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533985",
+      "osmId": "605533985",
       "name": "Gedung 605533985",
+      "matchedName": "Gedung 605533985",
       "category": "public",
       "polygon": [
         {
@@ -115376,7 +118855,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533986",
+      "osmId": "605533986",
       "name": "Gedung 605533986",
+      "matchedName": "Gedung 605533986",
       "category": "public",
       "polygon": [
         {
@@ -115438,7 +118919,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533987",
+      "osmId": "605533987",
       "name": "Gedung 605533987",
+      "matchedName": "Gedung 605533987",
       "category": "public",
       "polygon": [
         {
@@ -115500,7 +118983,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533988",
+      "osmId": "605533988",
       "name": "Gedung 605533988",
+      "matchedName": "Gedung 605533988",
       "category": "public",
       "polygon": [
         {
@@ -115562,7 +119047,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533989",
+      "osmId": "605533989",
       "name": "Gedung 605533989",
+      "matchedName": "Gedung 605533989",
       "category": "public",
       "polygon": [
         {
@@ -115624,7 +119111,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533990",
+      "osmId": "605533990",
       "name": "Gedung 605533990",
+      "matchedName": "Gedung 605533990",
       "category": "public",
       "polygon": [
         {
@@ -115686,7 +119175,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533991",
+      "osmId": "605533991",
       "name": "Gedung 605533991",
+      "matchedName": "Gedung 605533991",
       "category": "public",
       "polygon": [
         {
@@ -115748,7 +119239,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533992",
+      "osmId": "605533992",
       "name": "Gedung 605533992",
+      "matchedName": "Gedung 605533992",
       "category": "public",
       "polygon": [
         {
@@ -115810,7 +119303,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533993",
+      "osmId": "605533993",
       "name": "Gedung 605533993",
+      "matchedName": "Gedung 605533993",
       "category": "public",
       "polygon": [
         {
@@ -115872,7 +119367,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533994",
+      "osmId": "605533994",
       "name": "Gedung 605533994",
+      "matchedName": "Gedung 605533994",
       "category": "public",
       "polygon": [
         {
@@ -115934,7 +119431,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533995",
+      "osmId": "605533995",
       "name": "Gedung 605533995",
+      "matchedName": "Gedung 605533995",
       "category": "public",
       "polygon": [
         {
@@ -115996,7 +119495,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533996",
+      "osmId": "605533996",
       "name": "Gedung 605533996",
+      "matchedName": "Gedung 605533996",
       "category": "public",
       "polygon": [
         {
@@ -116058,7 +119559,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533997",
+      "osmId": "605533997",
       "name": "Gedung 605533997",
+      "matchedName": "Gedung 605533997",
       "category": "public",
       "polygon": [
         {
@@ -116120,7 +119623,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533998",
+      "osmId": "605533998",
       "name": "Gedung 605533998",
+      "matchedName": "Gedung 605533998",
       "category": "public",
       "polygon": [
         {
@@ -116182,7 +119687,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605533999",
+      "osmId": "605533999",
       "name": "Gedung 605533999",
+      "matchedName": "Gedung 605533999",
       "category": "public",
       "polygon": [
         {
@@ -116244,7 +119751,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605534000",
+      "osmId": "605534000",
       "name": "Gedung 605534000",
+      "matchedName": "Gedung 605534000",
       "category": "public",
       "polygon": [
         {
@@ -116306,7 +119815,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605534001",
+      "osmId": "605534001",
       "name": "Gedung 605534001",
+      "matchedName": "Gedung 605534001",
       "category": "public",
       "polygon": [
         {
@@ -116368,7 +119879,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-605534002",
+      "osmId": "605534002",
       "name": "Gedung 605534002",
+      "matchedName": "Gedung 605534002",
       "category": "public",
       "polygon": [
         {
@@ -116430,7 +119943,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-606391276",
+      "osmId": "606391276",
       "name": "Gedung 606391276",
+      "matchedName": "Gedung 606391276",
       "category": "public",
       "polygon": [
         {
@@ -116492,7 +120007,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-606391958",
+      "osmId": "606391958",
       "name": "Gedung 606391958",
+      "matchedName": "Gedung 606391958",
       "category": "public",
       "polygon": [
         {
@@ -116554,7 +120071,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-606391960",
+      "osmId": "606391960",
       "name": "Gedung 606391960",
+      "matchedName": "Gedung 606391960",
       "category": "public",
       "polygon": [
         {
@@ -116616,7 +120135,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-606391962",
+      "osmId": "606391962",
       "name": "Gedung 606391962",
+      "matchedName": "Gedung 606391962",
       "category": "public",
       "polygon": [
         {
@@ -116678,7 +120199,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607218234",
+      "osmId": "607218234",
       "name": "Gedung 607218234",
+      "matchedName": "Gedung 607218234",
       "category": "public",
       "polygon": [
         {
@@ -116740,7 +120263,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607218235",
+      "osmId": "607218235",
       "name": "Gedung 607218235",
+      "matchedName": "Gedung 607218235",
       "category": "public",
       "polygon": [
         {
@@ -116802,7 +120327,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607218236",
+      "osmId": "607218236",
       "name": "Gedung 607218236",
+      "matchedName": "Gedung 607218236",
       "category": "public",
       "polygon": [
         {
@@ -116864,7 +120391,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607218241",
+      "osmId": "607218241",
       "name": "Gedung 607218241",
+      "matchedName": "Gedung 607218241",
       "category": "public",
       "polygon": [
         {
@@ -116926,7 +120455,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607218242",
+      "osmId": "607218242",
       "name": "Gedung 607218242",
+      "matchedName": "Gedung 607218242",
       "category": "public",
       "polygon": [
         {
@@ -116988,7 +120519,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607218243",
+      "osmId": "607218243",
       "name": "Gedung 607218243",
+      "matchedName": "Gedung 607218243",
       "category": "public",
       "polygon": [
         {
@@ -117050,7 +120583,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607218244",
+      "osmId": "607218244",
       "name": "Gedung 607218244",
+      "matchedName": "Gedung 607218244",
       "category": "public",
       "polygon": [
         {
@@ -117112,7 +120647,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607219898",
+      "osmId": "607219898",
       "name": "Gedung 607219898",
+      "matchedName": "Gedung 607219898",
       "category": "public",
       "polygon": [
         {
@@ -117174,7 +120711,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607219899",
+      "osmId": "607219899",
       "name": "Gedung 607219899",
+      "matchedName": "Gedung 607219899",
       "category": "public",
       "polygon": [
         {
@@ -117236,7 +120775,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607221771",
+      "osmId": "607221771",
       "name": "Gedung 607221771",
+      "matchedName": "Gedung 607221771",
       "category": "public",
       "polygon": [
         {
@@ -117298,7 +120839,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607221772",
+      "osmId": "607221772",
       "name": "Gedung 607221772",
+      "matchedName": "Gedung 607221772",
       "category": "public",
       "polygon": [
         {
@@ -117360,7 +120903,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-607221773",
+      "osmId": "607221773",
       "name": "Gedung 607221773",
+      "matchedName": "Gedung 607221773",
       "category": "public",
       "polygon": [
         {
@@ -117422,7 +120967,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-794745331",
+      "osmId": "794745331",
       "name": "Gedung 794745331",
+      "matchedName": "Gedung 794745331",
       "category": "public",
       "polygon": [
         {
@@ -117484,7 +121031,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1079743928",
+      "osmId": "1079743928",
       "name": "Gedung 1079743928",
+      "matchedName": "Gedung 1079743928",
       "category": "public",
       "polygon": [
         {
@@ -117546,7 +121095,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1079743929",
+      "osmId": "1079743929",
       "name": "Gedung 1079743929",
+      "matchedName": "Gedung 1079743929",
       "category": "public",
       "polygon": [
         {
@@ -117608,7 +121159,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1080510178",
+      "osmId": "1080510178",
       "name": "Gedung 1080510178",
+      "matchedName": "Gedung 1080510178",
       "category": "public",
       "polygon": [
         {
@@ -117670,7 +121223,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1083446252",
+      "osmId": "1083446252",
       "name": "Gedung 1083446252",
+      "matchedName": "Gedung 1083446252",
       "category": "public",
       "polygon": [
         {
@@ -117828,7 +121383,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1083446253",
+      "osmId": "1083446253",
       "name": "Gedung 1083446253",
+      "matchedName": "Gedung 1083446253",
       "category": "public",
       "polygon": [
         {
@@ -117890,7 +121447,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1083725636",
+      "osmId": "1083725636",
       "name": "Gedung 1083725636",
+      "matchedName": "Gedung 1083725636",
       "category": "public",
       "polygon": [
         {
@@ -117952,7 +121511,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1083725637",
+      "osmId": "1083725637",
       "name": "Gedung 1083725637",
+      "matchedName": "Gedung 1083725637",
       "category": "public",
       "polygon": [
         {
@@ -118014,7 +121575,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1084673972",
+      "osmId": "1084673972",
       "name": "Gedung 1084673972",
+      "matchedName": "Gedung 1084673972",
       "category": "public",
       "polygon": [
         {
@@ -118076,7 +121639,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1084673973",
+      "osmId": "1084673973",
       "name": "Gedung 1084673973",
+      "matchedName": "Gedung 1084673973",
       "category": "public",
       "polygon": [
         {
@@ -118138,7 +121703,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1084673974",
+      "osmId": "1084673974",
       "name": "Gedung 1084673974",
+      "matchedName": "Gedung 1084673974",
       "category": "public",
       "polygon": [
         {
@@ -118200,7 +121767,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1084673976",
+      "osmId": "1084673976",
       "name": "Gedung 1084673976",
+      "matchedName": "Gedung 1084673976",
       "category": "public",
       "polygon": [
         {
@@ -118262,7 +121831,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1084673977",
+      "osmId": "1084673977",
       "name": "Gedung 1084673977",
+      "matchedName": "Gedung 1084673977",
       "category": "public",
       "polygon": [
         {
@@ -118324,7 +121895,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1105111726",
+      "osmId": "1105111726",
       "name": "Gedung Direktorat",
+      "matchedName": "Gedung Direktorat",
       "category": "public",
       "polygon": [
         {
@@ -118422,7 +121995,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699078",
+      "osmId": "1270699078",
       "name": "Gedung 1270699078",
+      "matchedName": "Gedung 1270699078",
       "category": "public",
       "polygon": [
         {
@@ -118484,7 +122059,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699079",
+      "osmId": "1270699079",
       "name": "Gedung 1270699079",
+      "matchedName": "Gedung 1270699079",
       "category": "public",
       "polygon": [
         {
@@ -118546,7 +122123,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699080",
+      "osmId": "1270699080",
       "name": "Gedung 1270699080",
+      "matchedName": "Gedung 1270699080",
       "category": "public",
       "polygon": [
         {
@@ -118616,7 +122195,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699081",
+      "osmId": "1270699081",
       "name": "Gedung 1270699081",
+      "matchedName": "Gedung 1270699081",
       "category": "public",
       "polygon": [
         {
@@ -118678,7 +122259,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699082",
+      "osmId": "1270699082",
       "name": "Gedung 1270699082",
+      "matchedName": "Gedung 1270699082",
       "category": "public",
       "polygon": [
         {
@@ -118756,7 +122339,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699083",
+      "osmId": "1270699083",
       "name": "Gedung 1270699083",
+      "matchedName": "Gedung 1270699083",
       "category": "public",
       "polygon": [
         {
@@ -118842,7 +122427,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699084",
+      "osmId": "1270699084",
       "name": "Gedung 1270699084",
+      "matchedName": "Gedung 1270699084",
       "category": "public",
       "polygon": [
         {
@@ -118936,7 +122523,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699085",
+      "osmId": "1270699085",
       "name": "Gedung 1270699085",
+      "matchedName": "Gedung 1270699085",
       "category": "public",
       "polygon": [
         {
@@ -119006,7 +122595,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699086",
+      "osmId": "1270699086",
       "name": "Gedung 1270699086",
+      "matchedName": "Gedung 1270699086",
       "category": "public",
       "polygon": [
         {
@@ -119068,7 +122659,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699087",
+      "osmId": "1270699087",
       "name": "Gedung 1270699087",
+      "matchedName": "Gedung 1270699087",
       "category": "public",
       "polygon": [
         {
@@ -119170,7 +122763,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699088",
+      "osmId": "1270699088",
       "name": "Gedung 1270699088",
+      "matchedName": "Gedung 1270699088",
       "category": "public",
       "polygon": [
         {
@@ -119280,7 +122875,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699089",
+      "osmId": "1270699089",
       "name": "Gedung 1270699089",
+      "matchedName": "Gedung 1270699089",
       "category": "public",
       "polygon": [
         {
@@ -119342,7 +122939,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699090",
+      "osmId": "1270699090",
       "name": "Gedung 1270699090",
+      "matchedName": "Gedung 1270699090",
       "category": "public",
       "polygon": [
         {
@@ -119404,7 +123003,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699091",
+      "osmId": "1270699091",
       "name": "Gedung 1270699091",
+      "matchedName": "Gedung 1270699091",
       "category": "public",
       "polygon": [
         {
@@ -119490,7 +123091,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699092",
+      "osmId": "1270699092",
       "name": "Gedung 1270699092",
+      "matchedName": "Gedung 1270699092",
       "category": "public",
       "polygon": [
         {
@@ -119552,7 +123155,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699093",
+      "osmId": "1270699093",
       "name": "Gedung 1270699093",
+      "matchedName": "Gedung 1270699093",
       "category": "public",
       "polygon": [
         {
@@ -119614,7 +123219,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699094",
+      "osmId": "1270699094",
       "name": "Gedung 1270699094",
+      "matchedName": "Gedung 1270699094",
       "category": "public",
       "polygon": [
         {
@@ -119676,7 +123283,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699095",
+      "osmId": "1270699095",
       "name": "Gedung 1270699095",
+      "matchedName": "Gedung 1270699095",
       "category": "public",
       "polygon": [
         {
@@ -119738,7 +123347,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699096",
+      "osmId": "1270699096",
       "name": "Gedung 1270699096",
+      "matchedName": "Gedung 1270699096",
       "category": "public",
       "polygon": [
         {
@@ -119800,7 +123411,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699097",
+      "osmId": "1270699097",
       "name": "Gedung 1270699097",
+      "matchedName": "Gedung 1270699097",
       "category": "public",
       "polygon": [
         {
@@ -119862,7 +123475,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699098",
+      "osmId": "1270699098",
       "name": "Gedung 1270699098",
+      "matchedName": "Gedung 1270699098",
       "category": "public",
       "polygon": [
         {
@@ -119956,7 +123571,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699099",
+      "osmId": "1270699099",
       "name": "Gedung 1270699099",
+      "matchedName": "Gedung 1270699099",
       "category": "public",
       "polygon": [
         {
@@ -120042,7 +123659,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699100",
+      "osmId": "1270699100",
       "name": "Gedung 1270699100",
+      "matchedName": "Gedung 1270699100",
       "category": "public",
       "polygon": [
         {
@@ -120104,7 +123723,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699101",
+      "osmId": "1270699101",
       "name": "Gedung 1270699101",
+      "matchedName": "Gedung 1270699101",
       "category": "public",
       "polygon": [
         {
@@ -120166,7 +123787,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699102",
+      "osmId": "1270699102",
       "name": "Gedung 1270699102",
+      "matchedName": "Gedung 1270699102",
       "category": "public",
       "polygon": [
         {
@@ -120228,7 +123851,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699103",
+      "osmId": "1270699103",
       "name": "Gedung 1270699103",
+      "matchedName": "Gedung 1270699103",
       "category": "public",
       "polygon": [
         {
@@ -120290,7 +123915,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699104",
+      "osmId": "1270699104",
       "name": "Gedung 1270699104",
+      "matchedName": "Gedung 1270699104",
       "category": "public",
       "polygon": [
         {
@@ -120352,7 +123979,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699105",
+      "osmId": "1270699105",
       "name": "Gedung 1270699105",
+      "matchedName": "Gedung 1270699105",
       "category": "public",
       "polygon": [
         {
@@ -120414,7 +124043,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699106",
+      "osmId": "1270699106",
       "name": "Gedung 1270699106",
+      "matchedName": "Gedung 1270699106",
       "category": "public",
       "polygon": [
         {
@@ -120476,7 +124107,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699107",
+      "osmId": "1270699107",
       "name": "Gedung 1270699107",
+      "matchedName": "Gedung 1270699107",
       "category": "public",
       "polygon": [
         {
@@ -120570,7 +124203,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699108",
+      "osmId": "1270699108",
       "name": "Gedung 1270699108",
+      "matchedName": "Gedung 1270699108",
       "category": "public",
       "polygon": [
         {
@@ -120648,7 +124283,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699109",
+      "osmId": "1270699109",
       "name": "Gedung 1270699109",
+      "matchedName": "Gedung 1270699109",
       "category": "public",
       "polygon": [
         {
@@ -120710,7 +124347,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699110",
+      "osmId": "1270699110",
       "name": "Gedung 1270699110",
+      "matchedName": "Gedung 1270699110",
       "category": "public",
       "polygon": [
         {
@@ -120788,7 +124427,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699111",
+      "osmId": "1270699111",
       "name": "Gedung 1270699111",
+      "matchedName": "Gedung 1270699111",
       "category": "public",
       "polygon": [
         {
@@ -120874,7 +124515,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699112",
+      "osmId": "1270699112",
       "name": "Gedung 1270699112",
+      "matchedName": "Gedung 1270699112",
       "category": "public",
       "polygon": [
         {
@@ -120936,7 +124579,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699113",
+      "osmId": "1270699113",
       "name": "Gedung 1270699113",
+      "matchedName": "Gedung 1270699113",
       "category": "public",
       "polygon": [
         {
@@ -120998,7 +124643,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699114",
+      "osmId": "1270699114",
       "name": "Gedung 1270699114",
+      "matchedName": "Gedung 1270699114",
       "category": "public",
       "polygon": [
         {
@@ -121092,7 +124739,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699115",
+      "osmId": "1270699115",
       "name": "Gedung 1270699115",
+      "matchedName": "Gedung 1270699115",
       "category": "public",
       "polygon": [
         {
@@ -121162,7 +124811,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699116",
+      "osmId": "1270699116",
       "name": "Gedung 1270699116",
+      "matchedName": "Gedung 1270699116",
       "category": "public",
       "polygon": [
         {
@@ -121232,7 +124883,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699117",
+      "osmId": "1270699117",
       "name": "Gedung 1270699117",
+      "matchedName": "Gedung 1270699117",
       "category": "public",
       "polygon": [
         {
@@ -121294,7 +124947,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699118",
+      "osmId": "1270699118",
       "name": "Gedung 1270699118",
+      "matchedName": "Gedung 1270699118",
       "category": "public",
       "polygon": [
         {
@@ -121356,7 +125011,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699119",
+      "osmId": "1270699119",
       "name": "Gedung 1270699119",
+      "matchedName": "Gedung 1270699119",
       "category": "public",
       "polygon": [
         {
@@ -121418,7 +125075,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699120",
+      "osmId": "1270699120",
       "name": "Gedung 1270699120",
+      "matchedName": "Gedung 1270699120",
       "category": "public",
       "polygon": [
         {
@@ -121480,7 +125139,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699121",
+      "osmId": "1270699121",
       "name": "Gedung 1270699121",
+      "matchedName": "Gedung 1270699121",
       "category": "public",
       "polygon": [
         {
@@ -121542,7 +125203,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699122",
+      "osmId": "1270699122",
       "name": "Gedung 1270699122",
+      "matchedName": "Gedung 1270699122",
       "category": "public",
       "polygon": [
         {
@@ -121604,7 +125267,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699123",
+      "osmId": "1270699123",
       "name": "Gedung 1270699123",
+      "matchedName": "Gedung 1270699123",
       "category": "public",
       "polygon": [
         {
@@ -121682,7 +125347,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699124",
+      "osmId": "1270699124",
       "name": "Gedung 1270699124",
+      "matchedName": "Gedung 1270699124",
       "category": "public",
       "polygon": [
         {
@@ -121760,7 +125427,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699125",
+      "osmId": "1270699125",
       "name": "Gedung 1270699125",
+      "matchedName": "Gedung 1270699125",
       "category": "public",
       "polygon": [
         {
@@ -121862,7 +125531,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699126",
+      "osmId": "1270699126",
       "name": "Gedung 1270699126",
+      "matchedName": "Gedung 1270699126",
       "category": "public",
       "polygon": [
         {
@@ -121940,7 +125611,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699127",
+      "osmId": "1270699127",
       "name": "Gedung 1270699127",
+      "matchedName": "Gedung 1270699127",
       "category": "public",
       "polygon": [
         {
@@ -122002,7 +125675,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699128",
+      "osmId": "1270699128",
       "name": "Gedung 1270699128",
+      "matchedName": "Gedung 1270699128",
       "category": "public",
       "polygon": [
         {
@@ -122072,7 +125747,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699129",
+      "osmId": "1270699129",
       "name": "Gedung 1270699129",
+      "matchedName": "Gedung 1270699129",
       "category": "public",
       "polygon": [
         {
@@ -122150,7 +125827,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699130",
+      "osmId": "1270699130",
       "name": "Gedung 1270699130",
+      "matchedName": "Gedung 1270699130",
       "category": "public",
       "polygon": [
         {
@@ -122220,7 +125899,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699131",
+      "osmId": "1270699131",
       "name": "Gedung 1270699131",
+      "matchedName": "Gedung 1270699131",
       "category": "public",
       "polygon": [
         {
@@ -122298,7 +125979,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699132",
+      "osmId": "1270699132",
       "name": "Gedung 1270699132",
+      "matchedName": "Gedung 1270699132",
       "category": "public",
       "polygon": [
         {
@@ -122368,7 +126051,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699133",
+      "osmId": "1270699133",
       "name": "Gedung 1270699133",
+      "matchedName": "Gedung 1270699133",
       "category": "public",
       "polygon": [
         {
@@ -122438,7 +126123,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699134",
+      "osmId": "1270699134",
       "name": "Gedung 1270699134",
+      "matchedName": "Gedung 1270699134",
       "category": "public",
       "polygon": [
         {
@@ -122508,7 +126195,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699135",
+      "osmId": "1270699135",
       "name": "Gedung 1270699135",
+      "matchedName": "Gedung 1270699135",
       "category": "public",
       "polygon": [
         {
@@ -122586,7 +126275,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699136",
+      "osmId": "1270699136",
       "name": "Gedung 1270699136",
+      "matchedName": "Gedung 1270699136",
       "category": "public",
       "polygon": [
         {
@@ -122664,7 +126355,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699137",
+      "osmId": "1270699137",
       "name": "Gedung 1270699137",
+      "matchedName": "Gedung 1270699137",
       "category": "public",
       "polygon": [
         {
@@ -122734,7 +126427,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699138",
+      "osmId": "1270699138",
       "name": "Gedung 1270699138",
+      "matchedName": "Gedung 1270699138",
       "category": "public",
       "polygon": [
         {
@@ -122804,7 +126499,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699139",
+      "osmId": "1270699139",
       "name": "Gedung 1270699139",
+      "matchedName": "Gedung 1270699139",
       "category": "public",
       "polygon": [
         {
@@ -122866,7 +126563,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699140",
+      "osmId": "1270699140",
       "name": "Gedung 1270699140",
+      "matchedName": "Gedung 1270699140",
       "category": "public",
       "polygon": [
         {
@@ -122944,7 +126643,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699141",
+      "osmId": "1270699141",
       "name": "Gedung 1270699141",
+      "matchedName": "Gedung 1270699141",
       "category": "public",
       "polygon": [
         {
@@ -123030,7 +126731,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699142",
+      "osmId": "1270699142",
       "name": "Gedung 1270699142",
+      "matchedName": "Gedung 1270699142",
       "category": "public",
       "polygon": [
         {
@@ -123124,7 +126827,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699143",
+      "osmId": "1270699143",
       "name": "Gedung 1270699143",
+      "matchedName": "Gedung 1270699143",
       "category": "public",
       "polygon": [
         {
@@ -123194,7 +126899,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699144",
+      "osmId": "1270699144",
       "name": "Gedung 1270699144",
+      "matchedName": "Gedung 1270699144",
       "category": "public",
       "polygon": [
         {
@@ -123296,7 +127003,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699145",
+      "osmId": "1270699145",
       "name": "Gedung 1270699145",
+      "matchedName": "Gedung 1270699145",
       "category": "public",
       "polygon": [
         {
@@ -123358,7 +127067,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699146",
+      "osmId": "1270699146",
       "name": "Gedung 1270699146",
+      "matchedName": "Gedung 1270699146",
       "category": "public",
       "polygon": [
         {
@@ -123444,7 +127155,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699147",
+      "osmId": "1270699147",
       "name": "Gedung 1270699147",
+      "matchedName": "Gedung 1270699147",
       "category": "public",
       "polygon": [
         {
@@ -123514,7 +127227,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699148",
+      "osmId": "1270699148",
       "name": "Gedung 1270699148",
+      "matchedName": "Gedung 1270699148",
       "category": "public",
       "polygon": [
         {
@@ -123576,7 +127291,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699149",
+      "osmId": "1270699149",
       "name": "Gedung 1270699149",
+      "matchedName": "Gedung 1270699149",
       "category": "public",
       "polygon": [
         {
@@ -123638,7 +127355,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699150",
+      "osmId": "1270699150",
       "name": "Gedung 1270699150",
+      "matchedName": "Gedung 1270699150",
       "category": "public",
       "polygon": [
         {
@@ -123700,7 +127419,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699151",
+      "osmId": "1270699151",
       "name": "Gedung 1270699151",
+      "matchedName": "Gedung 1270699151",
       "category": "public",
       "polygon": [
         {
@@ -123762,7 +127483,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699152",
+      "osmId": "1270699152",
       "name": "Gedung 1270699152",
+      "matchedName": "Gedung 1270699152",
       "category": "public",
       "polygon": [
         {
@@ -123824,7 +127547,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699153",
+      "osmId": "1270699153",
       "name": "Gedung 1270699153",
+      "matchedName": "Gedung 1270699153",
       "category": "public",
       "polygon": [
         {
@@ -123926,7 +127651,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699154",
+      "osmId": "1270699154",
       "name": "Gedung 1270699154",
+      "matchedName": "Gedung 1270699154",
       "category": "public",
       "polygon": [
         {
@@ -124020,7 +127747,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699155",
+      "osmId": "1270699155",
       "name": "Gedung 1270699155",
+      "matchedName": "Gedung 1270699155",
       "category": "public",
       "polygon": [
         {
@@ -124098,7 +127827,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699156",
+      "osmId": "1270699156",
       "name": "Gedung 1270699156",
+      "matchedName": "Gedung 1270699156",
       "category": "public",
       "polygon": [
         {
@@ -124160,7 +127891,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699157",
+      "osmId": "1270699157",
       "name": "Gedung 1270699157",
+      "matchedName": "Gedung 1270699157",
       "category": "public",
       "polygon": [
         {
@@ -124254,7 +127987,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699158",
+      "osmId": "1270699158",
       "name": "Gedung 1270699158",
+      "matchedName": "Gedung 1270699158",
       "category": "public",
       "polygon": [
         {
@@ -124316,7 +128051,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699159",
+      "osmId": "1270699159",
       "name": "Gedung 1270699159",
+      "matchedName": "Gedung 1270699159",
       "category": "public",
       "polygon": [
         {
@@ -124378,7 +128115,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699160",
+      "osmId": "1270699160",
       "name": "Gedung 1270699160",
+      "matchedName": "Gedung 1270699160",
       "category": "public",
       "polygon": [
         {
@@ -124440,7 +128179,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699161",
+      "osmId": "1270699161",
       "name": "Gedung 1270699161",
+      "matchedName": "Gedung 1270699161",
       "category": "public",
       "polygon": [
         {
@@ -124550,7 +128291,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699162",
+      "osmId": "1270699162",
       "name": "Gedung 1270699162",
+      "matchedName": "Gedung 1270699162",
       "category": "public",
       "polygon": [
         {
@@ -124660,7 +128403,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699163",
+      "osmId": "1270699163",
       "name": "Gedung 1270699163",
+      "matchedName": "Gedung 1270699163",
       "category": "public",
       "polygon": [
         {
@@ -124730,7 +128475,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699164",
+      "osmId": "1270699164",
       "name": "Gedung 1270699164",
+      "matchedName": "Gedung 1270699164",
       "category": "public",
       "polygon": [
         {
@@ -124800,7 +128547,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699165",
+      "osmId": "1270699165",
       "name": "Gedung 1270699165",
+      "matchedName": "Gedung 1270699165",
       "category": "public",
       "polygon": [
         {
@@ -124910,7 +128659,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699166",
+      "osmId": "1270699166",
       "name": "Gedung 1270699166",
+      "matchedName": "Gedung 1270699166",
       "category": "public",
       "polygon": [
         {
@@ -125012,7 +128763,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699167",
+      "osmId": "1270699167",
       "name": "Gedung 1270699167",
+      "matchedName": "Gedung 1270699167",
       "category": "public",
       "polygon": [
         {
@@ -125074,7 +128827,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699168",
+      "osmId": "1270699168",
       "name": "Gedung 1270699168",
+      "matchedName": "Gedung 1270699168",
       "category": "public",
       "polygon": [
         {
@@ -125136,7 +128891,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699169",
+      "osmId": "1270699169",
       "name": "Gedung 1270699169",
+      "matchedName": "Gedung 1270699169",
       "category": "public",
       "polygon": [
         {
@@ -125198,7 +128955,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699170",
+      "osmId": "1270699170",
       "name": "Gedung 1270699170",
+      "matchedName": "Gedung 1270699170",
       "category": "public",
       "polygon": [
         {
@@ -125268,7 +129027,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699171",
+      "osmId": "1270699171",
       "name": "Gedung 1270699171",
+      "matchedName": "Gedung 1270699171",
       "category": "public",
       "polygon": [
         {
@@ -125330,7 +129091,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699172",
+      "osmId": "1270699172",
       "name": "Gedung 1270699172",
+      "matchedName": "Gedung 1270699172",
       "category": "public",
       "polygon": [
         {
@@ -125400,7 +129163,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699173",
+      "osmId": "1270699173",
       "name": "Gedung 1270699173",
+      "matchedName": "Gedung 1270699173",
       "category": "public",
       "polygon": [
         {
@@ -125470,7 +129235,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699174",
+      "osmId": "1270699174",
       "name": "Gedung 1270699174",
+      "matchedName": "Gedung 1270699174",
       "category": "public",
       "polygon": [
         {
@@ -125532,7 +129299,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699175",
+      "osmId": "1270699175",
       "name": "Gedung 1270699175",
+      "matchedName": "Gedung 1270699175",
       "category": "public",
       "polygon": [
         {
@@ -125594,7 +129363,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699176",
+      "osmId": "1270699176",
       "name": "Gedung 1270699176",
+      "matchedName": "Gedung 1270699176",
       "category": "public",
       "polygon": [
         {
@@ -125664,7 +129435,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699177",
+      "osmId": "1270699177",
       "name": "Gedung 1270699177",
+      "matchedName": "Gedung 1270699177",
       "category": "public",
       "polygon": [
         {
@@ -125742,7 +129515,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699178",
+      "osmId": "1270699178",
       "name": "Gedung 1270699178",
+      "matchedName": "Gedung 1270699178",
       "category": "public",
       "polygon": [
         {
@@ -125836,7 +129611,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699179",
+      "osmId": "1270699179",
       "name": "Gedung 1270699179",
+      "matchedName": "Gedung 1270699179",
       "category": "public",
       "polygon": [
         {
@@ -125898,7 +129675,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699180",
+      "osmId": "1270699180",
       "name": "Gedung 1270699180",
+      "matchedName": "Gedung 1270699180",
       "category": "public",
       "polygon": [
         {
@@ -125968,7 +129747,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699181",
+      "osmId": "1270699181",
       "name": "Gedung 1270699181",
+      "matchedName": "Gedung 1270699181",
       "category": "public",
       "polygon": [
         {
@@ -126030,7 +129811,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699182",
+      "osmId": "1270699182",
       "name": "Gedung 1270699182",
+      "matchedName": "Gedung 1270699182",
       "category": "public",
       "polygon": [
         {
@@ -126092,7 +129875,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699183",
+      "osmId": "1270699183",
       "name": "Gedung 1270699183",
+      "matchedName": "Gedung 1270699183",
       "category": "public",
       "polygon": [
         {
@@ -126154,7 +129939,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699184",
+      "osmId": "1270699184",
       "name": "Gedung 1270699184",
+      "matchedName": "Gedung 1270699184",
       "category": "public",
       "polygon": [
         {
@@ -126224,7 +130011,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699185",
+      "osmId": "1270699185",
       "name": "Gedung 1270699185",
+      "matchedName": "Gedung 1270699185",
       "category": "public",
       "polygon": [
         {
@@ -126286,7 +130075,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699186",
+      "osmId": "1270699186",
       "name": "Gedung 1270699186",
+      "matchedName": "Gedung 1270699186",
       "category": "public",
       "polygon": [
         {
@@ -126348,7 +130139,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699187",
+      "osmId": "1270699187",
       "name": "Gedung 1270699187",
+      "matchedName": "Gedung 1270699187",
       "category": "public",
       "polygon": [
         {
@@ -126410,7 +130203,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699188",
+      "osmId": "1270699188",
       "name": "Gedung 1270699188",
+      "matchedName": "Gedung 1270699188",
       "category": "public",
       "polygon": [
         {
@@ -126512,7 +130307,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699189",
+      "osmId": "1270699189",
       "name": "Gedung 1270699189",
+      "matchedName": "Gedung 1270699189",
       "category": "public",
       "polygon": [
         {
@@ -126598,7 +130395,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699190",
+      "osmId": "1270699190",
       "name": "Gedung 1270699190",
+      "matchedName": "Gedung 1270699190",
       "category": "public",
       "polygon": [
         {
@@ -126668,7 +130467,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699191",
+      "osmId": "1270699191",
       "name": "Gedung 1270699191",
+      "matchedName": "Gedung 1270699191",
       "category": "public",
       "polygon": [
         {
@@ -126730,7 +130531,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699192",
+      "osmId": "1270699192",
       "name": "Gedung 1270699192",
+      "matchedName": "Gedung 1270699192",
       "category": "public",
       "polygon": [
         {
@@ -126792,7 +130595,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699193",
+      "osmId": "1270699193",
       "name": "Gedung 1270699193",
+      "matchedName": "Gedung 1270699193",
       "category": "public",
       "polygon": [
         {
@@ -126854,7 +130659,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699194",
+      "osmId": "1270699194",
       "name": "Gedung 1270699194",
+      "matchedName": "Gedung 1270699194",
       "category": "public",
       "polygon": [
         {
@@ -126916,7 +130723,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699195",
+      "osmId": "1270699195",
       "name": "Gedung 1270699195",
+      "matchedName": "Gedung 1270699195",
       "category": "public",
       "polygon": [
         {
@@ -126986,7 +130795,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699196",
+      "osmId": "1270699196",
       "name": "Gedung 1270699196",
+      "matchedName": "Gedung 1270699196",
       "category": "public",
       "polygon": [
         {
@@ -127056,7 +130867,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699197",
+      "osmId": "1270699197",
       "name": "Gedung 1270699197",
+      "matchedName": "Gedung 1270699197",
       "category": "public",
       "polygon": [
         {
@@ -127118,7 +130931,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699198",
+      "osmId": "1270699198",
       "name": "Gedung 1270699198",
+      "matchedName": "Gedung 1270699198",
       "category": "public",
       "polygon": [
         {
@@ -127180,7 +130995,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699199",
+      "osmId": "1270699199",
       "name": "Gedung 1270699199",
+      "matchedName": "Gedung 1270699199",
       "category": "public",
       "polygon": [
         {
@@ -127242,7 +131059,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699200",
+      "osmId": "1270699200",
       "name": "Gedung 1270699200",
+      "matchedName": "Gedung 1270699200",
       "category": "public",
       "polygon": [
         {
@@ -127304,7 +131123,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699201",
+      "osmId": "1270699201",
       "name": "Gedung 1270699201",
+      "matchedName": "Gedung 1270699201",
       "category": "public",
       "polygon": [
         {
@@ -127366,7 +131187,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699202",
+      "osmId": "1270699202",
       "name": "Gedung 1270699202",
+      "matchedName": "Gedung 1270699202",
       "category": "public",
       "polygon": [
         {
@@ -127428,7 +131251,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699203",
+      "osmId": "1270699203",
       "name": "Gedung 1270699203",
+      "matchedName": "Gedung 1270699203",
       "category": "public",
       "polygon": [
         {
@@ -127522,7 +131347,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699204",
+      "osmId": "1270699204",
       "name": "Gedung 1270699204",
+      "matchedName": "Gedung 1270699204",
       "category": "public",
       "polygon": [
         {
@@ -127600,7 +131427,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699205",
+      "osmId": "1270699205",
       "name": "Gedung 1270699205",
+      "matchedName": "Gedung 1270699205",
       "category": "public",
       "polygon": [
         {
@@ -127678,7 +131507,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699206",
+      "osmId": "1270699206",
       "name": "Gedung 1270699206",
+      "matchedName": "Gedung 1270699206",
       "category": "public",
       "polygon": [
         {
@@ -127756,7 +131587,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699207",
+      "osmId": "1270699207",
       "name": "Gedung 1270699207",
+      "matchedName": "Gedung 1270699207",
       "category": "public",
       "polygon": [
         {
@@ -127826,7 +131659,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699208",
+      "osmId": "1270699208",
       "name": "Gedung 1270699208",
+      "matchedName": "Gedung 1270699208",
       "category": "public",
       "polygon": [
         {
@@ -127888,7 +131723,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699209",
+      "osmId": "1270699209",
       "name": "Gedung 1270699209",
+      "matchedName": "Gedung 1270699209",
       "category": "public",
       "polygon": [
         {
@@ -127966,7 +131803,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699210",
+      "osmId": "1270699210",
       "name": "Gedung 1270699210",
+      "matchedName": "Gedung 1270699210",
       "category": "public",
       "polygon": [
         {
@@ -128028,7 +131867,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699211",
+      "osmId": "1270699211",
       "name": "Gedung 1270699211",
+      "matchedName": "Gedung 1270699211",
       "category": "public",
       "polygon": [
         {
@@ -128122,7 +131963,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699212",
+      "osmId": "1270699212",
       "name": "Gedung 1270699212",
+      "matchedName": "Gedung 1270699212",
       "category": "public",
       "polygon": [
         {
@@ -128216,7 +132059,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699213",
+      "osmId": "1270699213",
       "name": "Gedung 1270699213",
+      "matchedName": "Gedung 1270699213",
       "category": "public",
       "polygon": [
         {
@@ -128326,7 +132171,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699214",
+      "osmId": "1270699214",
       "name": "Gedung 1270699214",
+      "matchedName": "Gedung 1270699214",
       "category": "public",
       "polygon": [
         {
@@ -128388,7 +132235,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699215",
+      "osmId": "1270699215",
       "name": "Gedung 1270699215",
+      "matchedName": "Gedung 1270699215",
       "category": "public",
       "polygon": [
         {
@@ -128450,7 +132299,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699216",
+      "osmId": "1270699216",
       "name": "Gedung 1270699216",
+      "matchedName": "Gedung 1270699216",
       "category": "public",
       "polygon": [
         {
@@ -128520,7 +132371,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699217",
+      "osmId": "1270699217",
       "name": "Gedung 1270699217",
+      "matchedName": "Gedung 1270699217",
       "category": "public",
       "polygon": [
         {
@@ -128598,7 +132451,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699218",
+      "osmId": "1270699218",
       "name": "Gedung 1270699218",
+      "matchedName": "Gedung 1270699218",
       "category": "public",
       "polygon": [
         {
@@ -128692,7 +132547,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699219",
+      "osmId": "1270699219",
       "name": "Gedung 1270699219",
+      "matchedName": "Gedung 1270699219",
       "category": "public",
       "polygon": [
         {
@@ -128762,7 +132619,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699220",
+      "osmId": "1270699220",
       "name": "Gedung 1270699220",
+      "matchedName": "Gedung 1270699220",
       "category": "public",
       "polygon": [
         {
@@ -128888,7 +132747,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699221",
+      "osmId": "1270699221",
       "name": "Gedung 1270699221",
+      "matchedName": "Gedung 1270699221",
       "category": "public",
       "polygon": [
         {
@@ -128974,7 +132835,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699222",
+      "osmId": "1270699222",
       "name": "Gedung 1270699222",
+      "matchedName": "Gedung 1270699222",
       "category": "public",
       "polygon": [
         {
@@ -129116,7 +132979,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699223",
+      "osmId": "1270699223",
       "name": "Gedung 1270699223",
+      "matchedName": "Gedung 1270699223",
       "category": "public",
       "polygon": [
         {
@@ -129178,7 +133043,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699224",
+      "osmId": "1270699224",
       "name": "Gedung 1270699224",
+      "matchedName": "Gedung 1270699224",
       "category": "public",
       "polygon": [
         {
@@ -129240,7 +133107,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699225",
+      "osmId": "1270699225",
       "name": "Gedung 1270699225",
+      "matchedName": "Gedung 1270699225",
       "category": "public",
       "polygon": [
         {
@@ -129302,7 +133171,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699226",
+      "osmId": "1270699226",
       "name": "Gedung 1270699226",
+      "matchedName": "Gedung 1270699226",
       "category": "public",
       "polygon": [
         {
@@ -129364,7 +133235,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699227",
+      "osmId": "1270699227",
       "name": "Gedung 1270699227",
+      "matchedName": "Gedung 1270699227",
       "category": "public",
       "polygon": [
         {
@@ -129426,7 +133299,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699228",
+      "osmId": "1270699228",
       "name": "Gedung 1270699228",
+      "matchedName": "Gedung 1270699228",
       "category": "public",
       "polygon": [
         {
@@ -129488,7 +133363,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699229",
+      "osmId": "1270699229",
       "name": "Gedung 1270699229",
+      "matchedName": "Gedung 1270699229",
       "category": "public",
       "polygon": [
         {
@@ -129550,7 +133427,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699230",
+      "osmId": "1270699230",
       "name": "Gedung 1270699230",
+      "matchedName": "Gedung 1270699230",
       "category": "public",
       "polygon": [
         {
@@ -129628,7 +133507,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699231",
+      "osmId": "1270699231",
       "name": "Gedung 1270699231",
+      "matchedName": "Gedung 1270699231",
       "category": "public",
       "polygon": [
         {
@@ -129706,7 +133587,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699232",
+      "osmId": "1270699232",
       "name": "Gedung 1270699232",
+      "matchedName": "Gedung 1270699232",
       "category": "public",
       "polygon": [
         {
@@ -129768,7 +133651,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699233",
+      "osmId": "1270699233",
       "name": "Gedung 1270699233",
+      "matchedName": "Gedung 1270699233",
       "category": "public",
       "polygon": [
         {
@@ -129830,7 +133715,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699234",
+      "osmId": "1270699234",
       "name": "Gedung 1270699234",
+      "matchedName": "Gedung 1270699234",
       "category": "public",
       "polygon": [
         {
@@ -129892,7 +133779,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699235",
+      "osmId": "1270699235",
       "name": "Gedung 1270699235",
+      "matchedName": "Gedung 1270699235",
       "category": "public",
       "polygon": [
         {
@@ -129954,7 +133843,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699236",
+      "osmId": "1270699236",
       "name": "Gedung 1270699236",
+      "matchedName": "Gedung 1270699236",
       "category": "public",
       "polygon": [
         {
@@ -130016,7 +133907,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699237",
+      "osmId": "1270699237",
       "name": "Gedung 1270699237",
+      "matchedName": "Gedung 1270699237",
       "category": "public",
       "polygon": [
         {
@@ -130078,7 +133971,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699238",
+      "osmId": "1270699238",
       "name": "Gedung 1270699238",
+      "matchedName": "Gedung 1270699238",
       "category": "public",
       "polygon": [
         {
@@ -130140,7 +134035,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699239",
+      "osmId": "1270699239",
       "name": "Gedung 1270699239",
+      "matchedName": "Gedung 1270699239",
       "category": "public",
       "polygon": [
         {
@@ -130218,7 +134115,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699240",
+      "osmId": "1270699240",
       "name": "Gedung 1270699240",
+      "matchedName": "Gedung 1270699240",
       "category": "public",
       "polygon": [
         {
@@ -130288,7 +134187,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699241",
+      "osmId": "1270699241",
       "name": "Gedung 1270699241",
+      "matchedName": "Gedung 1270699241",
       "category": "public",
       "polygon": [
         {
@@ -130350,7 +134251,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699242",
+      "osmId": "1270699242",
       "name": "Gedung 1270699242",
+      "matchedName": "Gedung 1270699242",
       "category": "public",
       "polygon": [
         {
@@ -130412,7 +134315,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699243",
+      "osmId": "1270699243",
       "name": "Gedung 1270699243",
+      "matchedName": "Gedung 1270699243",
       "category": "public",
       "polygon": [
         {
@@ -130490,7 +134395,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699244",
+      "osmId": "1270699244",
       "name": "Gedung 1270699244",
+      "matchedName": "Gedung 1270699244",
       "category": "public",
       "polygon": [
         {
@@ -130552,7 +134459,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699245",
+      "osmId": "1270699245",
       "name": "Gedung 1270699245",
+      "matchedName": "Gedung 1270699245",
       "category": "public",
       "polygon": [
         {
@@ -130614,7 +134523,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699246",
+      "osmId": "1270699246",
       "name": "Gedung 1270699246",
+      "matchedName": "Gedung 1270699246",
       "category": "public",
       "polygon": [
         {
@@ -130676,7 +134587,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699247",
+      "osmId": "1270699247",
       "name": "Gedung 1270699247",
+      "matchedName": "Gedung 1270699247",
       "category": "public",
       "polygon": [
         {
@@ -130738,7 +134651,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699248",
+      "osmId": "1270699248",
       "name": "Gedung 1270699248",
+      "matchedName": "Gedung 1270699248",
       "category": "public",
       "polygon": [
         {
@@ -130816,7 +134731,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699249",
+      "osmId": "1270699249",
       "name": "Gedung 1270699249",
+      "matchedName": "Gedung 1270699249",
       "category": "public",
       "polygon": [
         {
@@ -130886,7 +134803,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699250",
+      "osmId": "1270699250",
       "name": "Gedung 1270699250",
+      "matchedName": "Gedung 1270699250",
       "category": "public",
       "polygon": [
         {
@@ -130964,7 +134883,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699251",
+      "osmId": "1270699251",
       "name": "Gedung 1270699251",
+      "matchedName": "Gedung 1270699251",
       "category": "public",
       "polygon": [
         {
@@ -131026,7 +134947,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699252",
+      "osmId": "1270699252",
       "name": "Gedung 1270699252",
+      "matchedName": "Gedung 1270699252",
       "category": "public",
       "polygon": [
         {
@@ -131096,7 +135019,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699253",
+      "osmId": "1270699253",
       "name": "Gedung 1270699253",
+      "matchedName": "Gedung 1270699253",
       "category": "public",
       "polygon": [
         {
@@ -131158,7 +135083,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699254",
+      "osmId": "1270699254",
       "name": "Gedung 1270699254",
+      "matchedName": "Gedung 1270699254",
       "category": "public",
       "polygon": [
         {
@@ -131220,7 +135147,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699255",
+      "osmId": "1270699255",
       "name": "Gedung 1270699255",
+      "matchedName": "Gedung 1270699255",
       "category": "public",
       "polygon": [
         {
@@ -131282,7 +135211,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699256",
+      "osmId": "1270699256",
       "name": "Gedung 1270699256",
+      "matchedName": "Gedung 1270699256",
       "category": "public",
       "polygon": [
         {
@@ -131352,7 +135283,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699257",
+      "osmId": "1270699257",
       "name": "Gedung 1270699257",
+      "matchedName": "Gedung 1270699257",
       "category": "public",
       "polygon": [
         {
@@ -131414,7 +135347,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699258",
+      "osmId": "1270699258",
       "name": "Gedung 1270699258",
+      "matchedName": "Gedung 1270699258",
       "category": "public",
       "polygon": [
         {
@@ -131484,7 +135419,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699259",
+      "osmId": "1270699259",
       "name": "Gedung 1270699259",
+      "matchedName": "Gedung 1270699259",
       "category": "public",
       "polygon": [
         {
@@ -131554,7 +135491,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699260",
+      "osmId": "1270699260",
       "name": "Gedung 1270699260",
+      "matchedName": "Gedung 1270699260",
       "category": "public",
       "polygon": [
         {
@@ -131640,7 +135579,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699261",
+      "osmId": "1270699261",
       "name": "Gedung 1270699261",
+      "matchedName": "Gedung 1270699261",
       "category": "public",
       "polygon": [
         {
@@ -131742,7 +135683,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699262",
+      "osmId": "1270699262",
       "name": "Gedung 1270699262",
+      "matchedName": "Gedung 1270699262",
       "category": "public",
       "polygon": [
         {
@@ -131828,9 +135771,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699263",
-      "name": "Gedung Fakultas Sains dan Matematika",
-      "facultyId": "fsm",
-      "category": "faculty",
+      "osmId": "1270699263",
+      "name": "Gedung 1270699263",
+      "matchedName": "Gedung 1270699263",
+      "category": "public",
       "polygon": [
         {
           "lat": -7.051916,
@@ -131887,28 +135831,13 @@ export const campusMapData: CampusMapData = {
       "tags": {
         "building": "yes"
       },
-      "source": "osm",
-      "style": {
-        "roofType": "flat-stepped",
-        "mainColors": [
-          "#0284C7",
-          "#0369A1",
-          "#F1F5F9",
-          "#0F172A"
-        ],
-        "facade": "Gedung modern bertingkat 6 dengan dinding putih krem, aksen garis vertikal biru elektrik, dan jendela modular laboratorium",
-        "signatureFeatures": [
-          "Gedung Acintya Prasada megah 6 lantai",
-          "Aula pertemuan dan yudisium di lantai 6",
-          "Bersebelahan dengan Masjid Al-Kautsar dan Gedung D",
-          "Laboratorium sains komputasi, bioteknologi, dan fisika"
-        ],
-        "entranceSide": "east"
-      }
+      "source": "osm"
     },
     {
       "id": "osm-bld-1270699264",
+      "osmId": "1270699264",
       "name": "Gedung 1270699264",
+      "matchedName": "Gedung 1270699264",
       "category": "public",
       "polygon": [
         {
@@ -131970,7 +135899,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699265",
+      "osmId": "1270699265",
       "name": "Gedung 1270699265",
+      "matchedName": "Gedung 1270699265",
       "category": "public",
       "polygon": [
         {
@@ -132032,7 +135963,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699266",
+      "osmId": "1270699266",
       "name": "Gedung 1270699266",
+      "matchedName": "Gedung 1270699266",
       "category": "public",
       "polygon": [
         {
@@ -132094,7 +136027,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699267",
+      "osmId": "1270699267",
       "name": "Gedung 1270699267",
+      "matchedName": "Gedung 1270699267",
       "category": "public",
       "polygon": [
         {
@@ -132156,7 +136091,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699268",
+      "osmId": "1270699268",
       "name": "Gedung 1270699268",
+      "matchedName": "Gedung 1270699268",
       "category": "public",
       "polygon": [
         {
@@ -132218,7 +136155,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699269",
+      "osmId": "1270699269",
       "name": "Gedung 1270699269",
+      "matchedName": "Gedung 1270699269",
       "category": "public",
       "polygon": [
         {
@@ -132280,7 +136219,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699270",
+      "osmId": "1270699270",
       "name": "Gedung 1270699270",
+      "matchedName": "Gedung 1270699270",
       "category": "public",
       "polygon": [
         {
@@ -132342,7 +136283,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699271",
+      "osmId": "1270699271",
       "name": "Gedung 1270699271",
+      "matchedName": "Gedung 1270699271",
       "category": "public",
       "polygon": [
         {
@@ -132404,7 +136347,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699272",
+      "osmId": "1270699272",
       "name": "Gedung 1270699272",
+      "matchedName": "Gedung 1270699272",
       "category": "public",
       "polygon": [
         {
@@ -132466,7 +136411,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699273",
+      "osmId": "1270699273",
       "name": "Gedung 1270699273",
+      "matchedName": "Gedung 1270699273",
       "category": "public",
       "polygon": [
         {
@@ -132528,7 +136475,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699274",
+      "osmId": "1270699274",
       "name": "Gedung 1270699274",
+      "matchedName": "Gedung 1270699274",
       "category": "public",
       "polygon": [
         {
@@ -132590,7 +136539,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699275",
+      "osmId": "1270699275",
       "name": "Gedung 1270699275",
+      "matchedName": "Gedung 1270699275",
       "category": "public",
       "polygon": [
         {
@@ -132652,7 +136603,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699276",
+      "osmId": "1270699276",
       "name": "Gedung 1270699276",
+      "matchedName": "Gedung 1270699276",
       "category": "public",
       "polygon": [
         {
@@ -132722,7 +136675,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699277",
+      "osmId": "1270699277",
       "name": "Gedung 1270699277",
+      "matchedName": "Gedung 1270699277",
       "category": "public",
       "polygon": [
         {
@@ -132784,7 +136739,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699278",
+      "osmId": "1270699278",
       "name": "Gedung 1270699278",
+      "matchedName": "Gedung 1270699278",
       "category": "public",
       "polygon": [
         {
@@ -132870,7 +136827,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699279",
+      "osmId": "1270699279",
       "name": "Gedung 1270699279",
+      "matchedName": "Gedung 1270699279",
       "category": "public",
       "polygon": [
         {
@@ -132964,7 +136923,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699280",
+      "osmId": "1270699280",
       "name": "Gedung 1270699280",
+      "matchedName": "Gedung 1270699280",
       "category": "public",
       "polygon": [
         {
@@ -133026,7 +136987,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699281",
+      "osmId": "1270699281",
       "name": "Gedung 1270699281",
+      "matchedName": "Gedung 1270699281",
       "category": "public",
       "polygon": [
         {
@@ -133088,7 +137051,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699282",
+      "osmId": "1270699282",
       "name": "Gedung 1270699282",
+      "matchedName": "Gedung 1270699282",
       "category": "public",
       "polygon": [
         {
@@ -133150,7 +137115,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699283",
+      "osmId": "1270699283",
       "name": "Gedung 1270699283",
+      "matchedName": "Gedung 1270699283",
       "category": "public",
       "polygon": [
         {
@@ -133212,7 +137179,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699284",
+      "osmId": "1270699284",
       "name": "Gedung 1270699284",
+      "matchedName": "Gedung 1270699284",
       "category": "public",
       "polygon": [
         {
@@ -133274,7 +137243,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1270699285",
+      "osmId": "1270699285",
       "name": "Gedung 1270699285",
+      "matchedName": "Gedung 1270699285",
       "category": "public",
       "polygon": [
         {
@@ -133336,8 +137307,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1282372358",
+      "osmId": "1282372358",
       "name": "Gedung 1282372358",
-      "category": "public",
+      "matchedName": "Gedung 1282372358",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049525,
@@ -133398,8 +137371,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1282372359",
+      "osmId": "1282372359",
       "name": "Gedung 1282372359",
-      "category": "public",
+      "matchedName": "Gedung 1282372359",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049447,
@@ -133652,7 +137627,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1282372360",
+      "osmId": "1282372360",
       "name": "Gedung 1282372360",
+      "matchedName": "Gedung 1282372360",
       "category": "public",
       "polygon": [
         {
@@ -133746,8 +137723,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1282372361",
+      "osmId": "1282372361",
       "name": "Gedung 1282372361",
-      "category": "public",
+      "matchedName": "Gedung 1282372361",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048793,
@@ -133808,7 +137787,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1290168933",
+      "osmId": "1290168933",
       "name": "Teknik Komputer",
+      "matchedName": "Teknik Komputer",
       "facultyId": "ft",
       "category": "faculty",
       "polygon": [
@@ -133902,6 +137883,7 @@ export const campusMapData: CampusMapData = {
         "name": "Teknik Komputer"
       },
       "source": "osm",
+      "distanceFromOwnerPointM": 184.04,
       "style": {
         "roofType": "flat-cantilever",
         "mainColors": [
@@ -133922,7 +137904,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1356851474",
+      "osmId": "1356851474",
       "name": "Gedung 1356851474",
+      "matchedName": "Gedung 1356851474",
       "category": "public",
       "polygon": [
         {
@@ -133984,7 +137968,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1448123972",
+      "osmId": "1448123972",
       "name": "Gedung 1448123972",
+      "matchedName": "Gedung 1448123972",
       "category": "public",
       "polygon": [
         {
@@ -134046,7 +138032,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1448123973",
+      "osmId": "1448123973",
       "name": "Gedung 1448123973",
+      "matchedName": "Gedung 1448123973",
       "category": "public",
       "polygon": [
         {
@@ -134108,7 +138096,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1448123974",
+      "osmId": "1448123974",
       "name": "Gedung 1448123974",
+      "matchedName": "Gedung 1448123974",
       "category": "public",
       "polygon": [
         {
@@ -134170,7 +138160,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1448123975",
+      "osmId": "1448123975",
       "name": "Gedung 1448123975",
+      "matchedName": "Gedung 1448123975",
       "category": "public",
       "polygon": [
         {
@@ -134232,8 +138224,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1472850881",
+      "osmId": "1472850881",
       "name": "Gedung 1472850881",
-      "category": "public",
+      "matchedName": "Gedung 1472850881",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054021,
@@ -134294,8 +138288,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1472850882",
+      "osmId": "1472850882",
       "name": "Gedung 1472850882",
-      "category": "public",
+      "matchedName": "Gedung 1472850882",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054148,
@@ -134356,8 +138352,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1472854473",
+      "osmId": "1472854473",
       "name": "Gedung 1472854473",
-      "category": "public",
+      "matchedName": "Gedung 1472854473",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.051429,
@@ -134418,8 +138416,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1472861555",
+      "osmId": "1472861555",
       "name": "Gedung 1472861555",
-      "category": "public",
+      "matchedName": "Gedung 1472861555",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.051236,
@@ -134496,8 +138496,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1473731596",
+      "osmId": "1473731596",
       "name": "Gedung 1473731596",
-      "category": "public",
+      "matchedName": "Gedung 1473731596",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049806,
@@ -134558,8 +138560,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1473950625",
+      "osmId": "1473950625",
       "name": "Gedung 1473950625",
-      "category": "public",
+      "matchedName": "Gedung 1473950625",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.051584,
@@ -134620,8 +138624,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1473950626",
+      "osmId": "1473950626",
       "name": "Gedung 1473950626",
-      "category": "public",
+      "matchedName": "Gedung 1473950626",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.051558,
@@ -134698,8 +138704,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1473991642",
+      "osmId": "1473991642",
       "name": "Gedung 1473991642",
-      "category": "public",
+      "matchedName": "Gedung 1473991642",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.055669,
@@ -134760,8 +138768,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474015532",
+      "osmId": "1474015532",
       "name": "Gedung 1474015532",
-      "category": "public",
+      "matchedName": "Gedung 1474015532",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.053762,
@@ -134838,8 +138848,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474026192",
+      "osmId": "1474026192",
       "name": "Gedung 1474026192",
-      "category": "public",
+      "matchedName": "Gedung 1474026192",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.052045,
@@ -134932,7 +138944,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474239396",
+      "osmId": "1474239396",
       "name": "Gedung 1474239396",
+      "matchedName": "Gedung 1474239396",
       "category": "public",
       "polygon": [
         {
@@ -135010,8 +139024,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474239397",
+      "osmId": "1474239397",
       "name": "Gedung 1474239397",
-      "category": "public",
+      "matchedName": "Gedung 1474239397",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.05005,
@@ -135088,8 +139104,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474239398",
+      "osmId": "1474239398",
       "name": "Gedung 1474239398",
-      "category": "public",
+      "matchedName": "Gedung 1474239398",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054487,
@@ -135150,8 +139168,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474239399",
+      "osmId": "1474239399",
       "name": "Gedung 1474239399",
-      "category": "public",
+      "matchedName": "Gedung 1474239399",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054482,
@@ -135212,8 +139232,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474239402",
+      "osmId": "1474239402",
       "name": "Gedung 1474239402",
-      "category": "public",
+      "matchedName": "Gedung 1474239402",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.049455,
@@ -135274,8 +139296,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474255949",
+      "osmId": "1474255949",
       "name": "Gedung 1474255949",
-      "category": "public",
+      "matchedName": "Gedung 1474255949",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.050675,
@@ -135336,8 +139360,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474263934",
+      "osmId": "1474263934",
       "name": "Gedung 1474263934",
-      "category": "public",
+      "matchedName": "Gedung 1474263934",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.052621,
@@ -135398,8 +139424,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474263935",
+      "osmId": "1474263935",
       "name": "Gedung 1474263935",
-      "category": "public",
+      "matchedName": "Gedung 1474263935",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.053175,
@@ -135460,8 +139488,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474263936",
+      "osmId": "1474263936",
       "name": "Gedung 1474263936",
-      "category": "public",
+      "matchedName": "Gedung 1474263936",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.053301,
@@ -135522,8 +139552,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474263937",
+      "osmId": "1474263937",
       "name": "Gedung 1474263937",
-      "category": "public",
+      "matchedName": "Gedung 1474263937",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.05342,
@@ -135584,8 +139616,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1474263938",
+      "osmId": "1474263938",
       "name": "Gedung 1474263938",
-      "category": "public",
+      "matchedName": "Gedung 1474263938",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.053531,
@@ -135646,8 +139680,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1483057394",
+      "osmId": "1483057394",
       "name": "Gedung 1483057394",
-      "category": "public",
+      "matchedName": "Gedung 1483057394",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.054976,
@@ -135708,8 +139744,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1483057395",
+      "osmId": "1483057395",
       "name": "Gedung 1483057395",
-      "category": "public",
+      "matchedName": "Gedung 1483057395",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.055083,
@@ -135770,7 +139808,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1535149731",
+      "osmId": "1535149731",
       "name": "Gedung 1535149731",
+      "matchedName": "Gedung 1535149731",
       "category": "public",
       "polygon": [
         {
@@ -135832,7 +139872,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1535149732",
+      "osmId": "1535149732",
       "name": "Gedung 1535149732",
+      "matchedName": "Gedung 1535149732",
       "category": "public",
       "polygon": [
         {
@@ -135902,7 +139944,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1576317064",
+      "osmId": "1576317064",
       "name": "Gedung 1576317064",
+      "matchedName": "Gedung 1576317064",
       "category": "public",
       "polygon": [
         {
@@ -135964,7 +140008,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1576319405",
+      "osmId": "1576319405",
       "name": "Gedung 1576319405",
+      "matchedName": "Gedung 1576319405",
       "category": "public",
       "polygon": [
         {
@@ -136050,7 +140096,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1576319406",
+      "osmId": "1576319406",
       "name": "Gedung 1576319406",
+      "matchedName": "Gedung 1576319406",
       "category": "public",
       "polygon": [
         {
@@ -136120,7 +140168,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-1576319410",
+      "osmId": "1576319410",
       "name": "Gedung 1576319410",
+      "matchedName": "Gedung 1576319410",
       "category": "public",
       "polygon": [
         {
@@ -136198,7 +140248,9 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-8151278",
+      "osmId": "8151278",
       "name": "Gedung 8151278",
+      "matchedName": "Gedung 8151278",
       "category": "public",
       "polygon": [
         {
@@ -136335,8 +140387,10 @@ export const campusMapData: CampusMapData = {
     },
     {
       "id": "osm-bld-8178684",
+      "osmId": "8178684",
       "name": "Gedung Majelis Wali Amanat",
-      "category": "public",
+      "matchedName": "Gedung Majelis Wali Amanat",
+      "category": "administrative",
       "polygon": [
         {
           "lat": -7.048418,
@@ -136552,6 +140606,72 @@ export const campusMapData: CampusMapData = {
         "type": "multipolygon"
       },
       "source": "osm"
+    },
+    {
+      "id": "approx-bld-feb",
+      "osmId": null,
+      "name": "Fakultas Ekonomika dan Bisnis (Perkiraan)",
+      "matchedName": "Fakultas Ekonomika dan Bisnis (Perkiraan)",
+      "facultyId": "feb",
+      "category": "faculty",
+      "polygon": [
+        {
+          "lat": -7.05195,
+          "lng": 110.43792
+        },
+        {
+          "lat": -7.05195,
+          "lng": 110.43832
+        },
+        {
+          "lat": -7.05235,
+          "lng": 110.43832
+        },
+        {
+          "lat": -7.05235,
+          "lng": 110.43792
+        }
+      ],
+      "projectedPolygon": [
+        {
+          "x": -271.09,
+          "y": 67.29
+        },
+        {
+          "x": -221.09,
+          "y": 67.29
+        },
+        {
+          "x": -221.09,
+          "y": 117.29
+        },
+        {
+          "x": -271.09,
+          "y": 117.29
+        }
+      ],
+      "centroid": {
+        "lat": -7.05215,
+        "lng": 110.43812
+      },
+      "projectedCentroid": {
+        "x": -246.09,
+        "y": 92.29
+      },
+      "levels": 3,
+      "tags": {
+        "source": "approx",
+        "note": "Unverified in OSM - awaiting owner ground coordinates"
+      },
+      "source": "approx",
+      "distanceFromOwnerPointM": 0,
+      "style": {
+        "roofType": "limasan-approx",
+        "mainColors": [
+          "#B45309",
+          "#FEF3C7"
+        ]
+      }
     }
   ],
   "roads": [
@@ -176182,162 +180302,90 @@ export const campusMapData: CampusMapData = {
   ],
   "landmarks": [
     {
-      "id": "osm-lm-3940723109",
-      "name": "Perpustakaan Fakultas Teknik",
+      "id": "osm-lm-waduk",
+      "osmId": "5539504862",
+      "name": "Waduk Pendidikan Diponegoro",
+      "matchedName": "Pintu Air Waduk Pendidikan Diponegoro",
       "coords": {
-        "lat": -7.051735,
-        "lng": 110.440444
+        "lat": -7.052528,
+        "lng": 110.445621
       },
       "projectedCoords": {
-        "x": 10.38,
-        "y": 46.15
+        "x": 581.68,
+        "y": 134.35
       },
-      "category": "library",
+      "category": "water",
       "source": "osm"
     },
     {
-      "id": "osm-lm-4550514362",
-      "name": "Sambal Van Java",
+      "id": "osm-lm-gsg",
+      "osmId": "313693582",
+      "name": "Gedung Prof Soedarto SH",
+      "matchedName": "Gedung Prof Soedarto SH",
       "coords": {
-        "lat": -7.055053,
-        "lng": 110.434649
+        "lat": -7.052796,
+        "lng": 110.440353
       },
       "projectedCoords": {
-        "x": -629.16,
-        "y": 415.15
+        "x": 0.32,
+        "y": 164.11
       },
-      "category": "restaurant",
+      "category": "auditorium",
       "source": "osm"
     },
     {
-      "id": "osm-lm-4715252490",
-      "name": "Waroeng Gokil",
+      "id": "osm-lm-ict-centre",
+      "osmId": "313693583",
+      "name": "Gedung ICT Centre",
+      "matchedName": "1. Gedung ICT Centre",
       "coords": {
-        "lat": -7.056837,
-        "lng": 110.433638
+        "lat": -7.054399,
+        "lng": 110.439079
       },
       "projectedCoords": {
-        "x": -740.75,
-        "y": 613.43
+        "x": -140.29,
+        "y": 342.37
       },
-      "category": "restaurant",
+      "category": "it_center",
       "source": "osm"
     },
     {
-      "id": "osm-lm-5507379251",
-      "name": "Bank Jateng",
+      "id": "osm-lm-career-center",
+      "osmId": "313693586",
+      "name": "Undip Career Center",
+      "matchedName": "Undip Career Center",
       "coords": {
-        "lat": -7.054289,
-        "lng": 110.435143
+        "lat": -7.054149,
+        "lng": 110.439227
       },
       "projectedCoords": {
-        "x": -574.61,
-        "y": 330.15
+        "x": -123.9,
+        "y": 314.62
       },
-      "category": "bank",
+      "category": "career",
       "source": "osm"
     },
     {
-      "id": "osm-lm-5507902613",
-      "name": "Bank Central Asia",
+      "id": "osm-lm-widya-puraya",
+      "osmId": "313693591",
+      "name": "Gedung Widya Puraya",
+      "matchedName": "Gedung Widya Puraya",
       "coords": {
-        "lat": -7.054582,
-        "lng": 110.432869
+        "lat": -7.048836,
+        "lng": 110.438023
       },
       "projectedCoords": {
-        "x": -825.61,
-        "y": 362.71
+        "x": -256.84,
+        "y": -276.24
       },
-      "category": "bank",
+      "category": "administrative",
       "source": "osm"
     },
     {
-      "id": "osm-lm-5510778065",
-      "name": "BTN",
-      "coords": {
-        "lat": -7.054906,
-        "lng": 110.435538
-      },
-      "projectedCoords": {
-        "x": -531.03,
-        "y": 398.73
-      },
-      "category": "bank",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-5527526834",
-      "name": "SPBU 44.502.23",
-      "coords": {
-        "lat": -7.054602,
-        "lng": 110.432603
-      },
-      "projectedCoords": {
-        "x": -854.92,
-        "y": 364.92
-      },
-      "category": "fuel",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-7254770585",
-      "name": "Wismagamsari",
-      "coords": {
-        "lat": -7.058234,
-        "lng": 110.43728
-      },
-      "projectedCoords": {
-        "x": -338.83,
-        "y": 768.8
-      },
-      "category": "landmark",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-167909067",
-      "name": "Masjid Darul Hikmah",
-      "coords": {
-        "lat": -7.052856,
-        "lng": 110.435654
-      },
-      "projectedCoords": {
-        "x": -518.24,
-        "y": 170.85
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-313693580",
-      "name": "Parkir Barat Elektro",
-      "coords": {
-        "lat": -7.050062,
-        "lng": 110.439652
-      },
-      "projectedCoords": {
-        "x": -76.99,
-        "y": -139.92
-      },
-      "category": "parking",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-313693581",
-      "name": "Parkir Dosen",
-      "coords": {
-        "lat": -7.049712,
-        "lng": 110.440178
-      },
-      "projectedCoords": {
-        "x": -18.97,
-        "y": -178.75
-      },
-      "category": "parking",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-313693592",
+      "id": "osm-lm-library-widya-puraya",
+      "osmId": "313693592",
       "name": "Perpustakaan Widya Puraya",
+      "matchedName": "Perpustakaan Widya Puraya",
       "coords": {
         "lat": -7.048272,
         "lng": 110.437718
@@ -176350,22 +180398,10 @@ export const campusMapData: CampusMapData = {
       "source": "osm"
     },
     {
-      "id": "osm-lm-313693594",
-      "name": "Kantin Elektro",
-      "coords": {
-        "lat": -7.050369,
-        "lng": 110.439799
-      },
-      "projectedCoords": {
-        "x": -60.81,
-        "y": -105.71
-      },
-      "category": "cafe",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-313697399",
+      "id": "osm-lm-masjid-kampus",
+      "osmId": "313697399",
       "name": "Masjid Kampus Universitas Diponegoro",
+      "matchedName": "Masjid Kampus Universitas Diponegoro",
       "coords": {
         "lat": -7.055093,
         "lng": 110.436926
@@ -176378,246 +180414,74 @@ export const campusMapData: CampusMapData = {
       "source": "osm"
     },
     {
-      "id": "osm-lm-313701951",
-      "name": "Masjid Baitul Ilmi",
+      "id": "osm-lm-stadion",
+      "osmId": "313721963",
+      "name": "Stadion UNDIP",
+      "matchedName": "Stadion UNDIP",
       "coords": {
-        "lat": -7.051864,
-        "lng": 110.440717
+        "lat": -7.054647,
+        "lng": 110.446517
       },
       "projectedCoords": {
-        "x": 40.5,
-        "y": 60.49
+        "x": 680.53,
+        "y": 369.95
       },
-      "category": "place_of_worship",
+      "category": "sports",
       "source": "osm"
     },
     {
-      "id": "osm-lm-313703682",
-      "name": "Masjid Al-Kautsar",
+      "id": "osm-lm-taman-rusa",
+      "osmId": "313721966",
+      "name": "Taman Rusa UNDIP",
+      "matchedName": "Taman Rusa UNDIP",
       "coords": {
-        "lat": -7.048898,
-        "lng": 110.441418
+        "lat": -7.053942,
+        "lng": 110.439907
       },
       "projectedCoords": {
-        "x": 117.85,
-        "y": -269.27
+        "x": -48.85,
+        "y": 291.5
       },
-      "category": "place_of_worship",
+      "category": "park",
       "source": "osm"
     },
     {
-      "id": "osm-lm-313721939",
-      "name": "Masjid Baitul Muthmannah",
+      "id": "osm-lm-student-center",
+      "osmId": "508049877",
+      "name": "Student Center",
+      "matchedName": "Student Center",
       "coords": {
-        "lat": -7.048851,
-        "lng": 110.443462
+        "lat": -7.053846,
+        "lng": 110.438662
       },
       "projectedCoords": {
-        "x": 343.47,
-        "y": -274.59
+        "x": -186.32,
+        "y": 280.88
       },
-      "category": "place_of_worship",
+      "category": "student_center",
       "source": "osm"
     },
     {
-      "id": "osm-lm-313926585",
-      "name": "Parkir Timur Elektro",
+      "id": "osm-lm-muladi-dome",
+      "osmId": "558963174",
+      "name": "Muladi Dome",
+      "matchedName": "Muladi Dome",
       "coords": {
-        "lat": -7.050129,
-        "lng": 110.439941
+        "lat": -7.053422,
+        "lng": 110.432951
       },
       "projectedCoords": {
-        "x": -45.14,
-        "y": -132.48
+        "x": -816.53,
+        "y": 233.73
       },
-      "category": "parking",
+      "category": "auditorium",
       "source": "osm"
     },
     {
-      "id": "osm-lm-389147997",
-      "name": "Kantina Dharma Wanita Planologi",
-      "coords": {
-        "lat": -7.051273,
-        "lng": 110.438783
-      },
-      "projectedCoords": {
-        "x": -172.9,
-        "y": -5.23
-      },
-      "category": "cafe",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-495852620",
-      "name": "Mie Nges Nges",
-      "coords": {
-        "lat": -7.056059,
-        "lng": 110.435894
-      },
-      "projectedCoords": {
-        "x": -491.79,
-        "y": 527
-      },
-      "category": "restaurant",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-495852621",
-      "name": "BRI",
-      "coords": {
-        "lat": -7.056098,
-        "lng": 110.435965
-      },
-      "projectedCoords": {
-        "x": -483.85,
-        "y": 531.26
-      },
-      "category": "atm",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-506406165",
-      "name": "Amelia Guest House",
-      "coords": {
-        "lat": -7.057482,
-        "lng": 110.434343
-      },
-      "projectedCoords": {
-        "x": -662.86,
-        "y": 685.18
-      },
-      "category": "landmark",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-508049173",
-      "name": "PAUD Permata UNDIP",
-      "coords": {
-        "lat": -7.049243,
-        "lng": 110.446029
-      },
-      "projectedCoords": {
-        "x": 626.72,
-        "y": -230.94
-      },
-      "category": "kindergarten",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-508049255",
-      "name": "PAUD Mekar Jaya",
-      "coords": {
-        "lat": -7.051636,
-        "lng": 110.444571
-      },
-      "projectedCoords": {
-        "x": 465.79,
-        "y": 35.08
-      },
-      "category": "kindergarten",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-508049271",
-      "name": "Masjid Al - Ikhlas",
-      "coords": {
-        "lat": -7.051142,
-        "lng": 110.444138
-      },
-      "projectedCoords": {
-        "x": 418.03,
-        "y": -19.79
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-508049428",
-      "name": "PAUD Pelita Hati",
-      "coords": {
-        "lat": -7.053995,
-        "lng": 110.436195
-      },
-      "projectedCoords": {
-        "x": -458.49,
-        "y": 297.41
-      },
-      "category": "kindergarten",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-508049448",
-      "name": "Masjid Nurul Hikmah",
-      "coords": {
-        "lat": -7.053801,
-        "lng": 110.43625
-      },
-      "projectedCoords": {
-        "x": -452.49,
-        "y": 275.93
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-508050147",
-      "name": "BRI",
-      "coords": {
-        "lat": -7.056227,
-        "lng": 110.439294
-      },
-      "projectedCoords": {
-        "x": -116.51,
-        "y": 545.61
-      },
-      "category": "bank",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-558962982",
-      "name": "Musholla Polines",
-      "coords": {
-        "lat": -7.051574,
-        "lng": 110.433292
-      },
-      "projectedCoords": {
-        "x": -778.86,
-        "y": 28.23
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-558963077",
-      "name": "NJ Guest House Tembalang",
-      "coords": {
-        "lat": -7.057077,
-        "lng": 110.433484
-      },
-      "projectedCoords": {
-        "x": -757.68,
-        "y": 640.17
-      },
-      "category": "landmark",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-565608574",
-      "name": "Klinik Pratama Diponegoro I",
-      "coords": {
-        "lat": -7.05467,
-        "lng": 110.433391
-      },
-      "projectedCoords": {
-        "x": -767.9,
-        "y": 372.53
-      },
-      "category": "clinic",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-573422707",
+      "id": "osm-lm-rsnd",
+      "osmId": "573422707",
       "name": "Rumah Sakit Nasional Diponegoro",
+      "matchedName": "Rumah Sakit Nasional Diponegoro",
       "coords": {
         "lat": -7.047685,
         "lng": 110.443403
@@ -176630,340 +180494,122 @@ export const campusMapData: CampusMapData = {
       "source": "osm"
     },
     {
-      "id": "osm-lm-573422781",
-      "name": "Musholla Al - Firdaus",
+      "id": "osm-lm-lab-terpadu",
+      "osmId": "573503194",
+      "name": "Laboratorium Terpadu Undip",
+      "matchedName": "Laboratorium Terpadu Undip",
       "coords": {
-        "lat": -7.050215,
-        "lng": 110.445521
+        "lat": -7.054598,
+        "lng": 110.439863
       },
       "projectedCoords": {
-        "x": 570.63,
-        "y": -122.9
+        "x": -53.76,
+        "y": 364.51
       },
-      "category": "place_of_worship",
+      "category": "laboratory",
       "source": "osm"
     },
     {
-      "id": "osm-lm-573503207",
-      "name": "Mushola Planologi-Arsitek",
-      "coords": {
-        "lat": -7.050868,
-        "lng": 110.438633
-      },
-      "projectedCoords": {
-        "x": -189.48,
-        "y": -50.27
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-573516763",
-      "name": "PAUD Mutiara Hati",
-      "coords": {
-        "lat": -7.057778,
-        "lng": 110.43952
-      },
-      "projectedCoords": {
-        "x": -91.63,
-        "y": 718.09
-      },
-      "category": "kindergarten",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-573516774",
-      "name": "TK III Pertiwi",
-      "coords": {
-        "lat": -7.05632,
-        "lng": 110.434272
-      },
-      "projectedCoords": {
-        "x": -670.74,
-        "y": 555.95
-      },
-      "category": "kindergarten",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-573516783",
-      "name": "Masjid Miftahurrohman",
-      "coords": {
-        "lat": -7.056643,
-        "lng": 110.437954
-      },
-      "projectedCoords": {
-        "x": -264.39,
-        "y": 591.88
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-573516798",
-      "name": "Masjid Al - Huda",
-      "coords": {
-        "lat": -7.055037,
-        "lng": 110.433339
-      },
-      "projectedCoords": {
-        "x": -773.7,
-        "y": 413.32
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-573516845",
-      "name": "Masjid Hijau LPPU",
-      "coords": {
-        "lat": -7.056338,
-        "lng": 110.439949
-      },
-      "projectedCoords": {
-        "x": -44.27,
-        "y": 557.94
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-573873536",
-      "name": "SD Negeri Tembalang",
-      "coords": {
-        "lat": -7.057945,
-        "lng": 110.434869
-      },
-      "projectedCoords": {
-        "x": -604.86,
-        "y": 736.69
-      },
-      "category": "school",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-577977135",
-      "name": "Masjid SMP Islam Nurus Sunnah",
-      "coords": {
-        "lat": -7.056951,
-        "lng": 110.447263
-      },
-      "projectedCoords": {
-        "x": 762.89,
-        "y": 626.13
-      },
-      "category": "place_of_worship",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-577977141",
-      "name": "SMP Islam Nurus Sunnah",
-      "coords": {
-        "lat": -7.056978,
-        "lng": 110.447187
-      },
-      "projectedCoords": {
-        "x": 754.54,
-        "y": 629.19
-      },
-      "category": "school",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-586561307",
-      "name": "SD Pedalangan 02",
-      "coords": {
-        "lat": -7.058217,
-        "lng": 110.434412
-      },
-      "projectedCoords": {
-        "x": -655.32,
-        "y": 766.89
-      },
-      "category": "school",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-17881971",
-      "name": "Politeknik Negeri Semarang",
-      "coords": {
-        "lat": -7.054191,
-        "lng": 110.435121
-      },
-      "projectedCoords": {
-        "x": -576.99,
-        "y": 319.2
-      },
-      "category": "college",
-      "source": "osm"
-    },
-    {
-      "id": "osm-lm-17881972",
-      "name": "Universitas Diponegoro",
-      "coords": {
-        "lat": -7.049844,
-        "lng": 110.43929
-      },
-      "projectedCoords": {
-        "x": -116.96,
-        "y": -164.13
-      },
-      "category": "university",
-      "source": "osm"
-    },
-    {
-      "id": "owner-lm-student-centre",
-      "name": "SC & Menara Undip",
-      "coords": {
-        "lat": -7.05312,
-        "lng": 110.43845
-      },
-      "projectedCoords": {
-        "x": -209.67,
-        "y": 200.15
-      },
-      "category": "landmark",
-      "source": "owner"
-    },
-    {
-      "id": "owner-lm-art-centre",
+      "id": "approx-lm-art-centre",
+      "osmId": null,
       "name": "Art Centre Undip",
+      "matchedName": "Art Centre Undip (Perkiraan)",
       "coords": {
-        "lat": -7.05235,
-        "lng": 110.43915
+        "lat": -7.05202,
+        "lng": 110.43875
       },
       "projectedCoords": {
-        "x": -132.42,
-        "y": 114.53
+        "x": -176.57,
+        "y": 77.84
       },
-      "category": "landmark",
-      "source": "owner"
+      "category": "arts_centre",
+      "source": "approx",
+      "distanceFromOwnerPointM": 0
     },
     {
-      "id": "owner-lm-gsg",
-      "name": "GSG Prof. Soedarto",
-      "coords": {
-        "lat": -7.05105,
-        "lng": 110.43918
-      },
-      "projectedCoords": {
-        "x": -129.11,
-        "y": -30.02
-      },
-      "category": "landmark",
-      "source": "owner"
-    },
-    {
-      "id": "owner-lm-bundaran-pertama",
-      "name": "Bundaran Pertama",
-      "coords": {
-        "lat": -7.05198,
-        "lng": 110.43985
-      },
-      "projectedCoords": {
-        "x": -55.18,
-        "y": 73.39
-      },
-      "category": "infrastructure",
-      "source": "owner"
-    },
-    {
-      "id": "owner-lm-taman-inspirasi",
+      "id": "approx-lm-taman-inspirasi",
+      "osmId": null,
       "name": "Taman Inspirasi",
+      "matchedName": "Taman Inspirasi (Perkiraan)",
       "coords": {
-        "lat": -7.05292,
-        "lng": 110.43968
+        "lat": -7.0527,
+        "lng": 110.4393
       },
       "projectedCoords": {
-        "x": -73.94,
-        "y": 177.91
+        "x": -115.87,
+        "y": 153.45
       },
-      "category": "landmark",
-      "source": "owner"
+      "category": "park",
+      "source": "approx",
+      "distanceFromOwnerPointM": 0
     },
     {
-      "id": "owner-lm-teknik-geologi",
-      "name": "Teknik Geologi",
+      "id": "approx-lm-bundaran-pertama",
+      "osmId": null,
+      "name": "Bundaran Pertama",
+      "matchedName": "Bundaran Pertama (Perkiraan)",
       "coords": {
-        "lat": -7.05275,
-        "lng": 110.44042
+        "lat": -7.0516,
+        "lng": 110.4395
       },
       "projectedCoords": {
-        "x": 7.72,
-        "y": 159.01
+        "x": -93.8,
+        "y": 31.13
       },
-      "category": "department",
-      "source": "owner"
+      "category": "traffic_circle",
+      "source": "approx",
+      "distanceFromOwnerPointM": 0
     },
     {
-      "id": "owner-lm-arsitektur-sipil-pwk",
-      "name": "Arsitektur/Sipil/PWK",
+      "id": "approx-lm-patung-kuda",
+      "osmId": null,
+      "name": "Patung Kuda Undip",
+      "matchedName": "Patung Kuda Undip (Perkiraan)",
       "coords": {
-        "lat": -7.05435,
-        "lng": 110.43948
+        "lat": -7.0511,
+        "lng": 110.4401
       },
       "projectedCoords": {
-        "x": -96.01,
-        "y": 336.92
+        "x": -27.59,
+        "y": -24.46
       },
-      "category": "department",
-      "source": "owner"
+      "category": "monument",
+      "source": "approx",
+      "distanceFromOwnerPointM": 0
     },
     {
-      "id": "owner-lm-komputer-geodesi-perkapalan",
-      "name": "Teknik Komputer/Geodesi/Perkapalan",
+      "id": "approx-lm-menara-undip",
+      "osmId": null,
+      "name": "Menara Undip",
+      "matchedName": "Menara Undip (Perkiraan)",
       "coords": {
-        "lat": -7.05395,
-        "lng": 110.44065
+        "lat": -7.0528,
+        "lng": 110.4379
       },
       "projectedCoords": {
-        "x": 33.11,
-        "y": 292.44
+        "x": -270.37,
+        "y": 164.57
       },
-      "category": "department",
-      "source": "owner"
+      "category": "tower",
+      "source": "approx",
+      "distanceFromOwnerPointM": 0
     },
     {
-      "id": "owner-lm-mesin-industri-lingkungan-kimia",
-      "name": "Mesin/Industri/Lingkungan/Kimia",
+      "id": "approx-lm-gerbang-utama",
+      "osmId": null,
+      "name": "Pintu Gerbang Utama Tembalang",
+      "matchedName": "Pintu Gerbang Utama Tembalang (Perkiraan)",
       "coords": {
-        "lat": -7.05538,
-        "lng": 110.44012
+        "lat": -7.0491,
+        "lng": 110.4393
       },
       "projectedCoords": {
-        "x": -25.38,
-        "y": 451.45
+        "x": -115.87,
+        "y": -246.85
       },
-      "category": "department",
-      "source": "owner"
-    },
-    {
-      "id": "owner-lm-pertigaan-timur",
-      "name": "Pertigaan Timur",
-      "coords": {
-        "lat": -7.05182,
-        "lng": 110.44115
-      },
-      "projectedCoords": {
-        "x": 88.28,
-        "y": 55.6
-      },
-      "category": "infrastructure",
-      "source": "owner"
-    },
-    {
-      "id": "owner-lm-rsnd",
-      "name": "RSND",
-      "coords": {
-        "lat": -7.05312,
-        "lng": 110.44638
-      },
-      "projectedCoords": {
-        "x": 665.43,
-        "y": 200.15
-      },
-      "category": "landmark",
-      "source": "owner"
+      "category": "gate",
+      "source": "approx",
+      "distanceFromOwnerPointM": 0
     }
   ]
 };

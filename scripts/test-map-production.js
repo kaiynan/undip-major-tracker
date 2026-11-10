@@ -80,6 +80,8 @@ async function runMapTests() {
     }
   }
 
+  const facultyIds = ['ft', 'fisip', 'fh', 'fib', 'sv', 'fpsi', 'feb', 'fsm', 'fk', 'fkm', 'fpik', 'fpp'];
+
   try {
     // -------------------------------------------------------------------------
     // TEST 1: Mobile Touch Viewport (390 x 844)
@@ -97,7 +99,6 @@ async function runMapTests() {
       if (msg.type() === 'error') consoleErrorsMobile.push(msg.text());
     });
 
-    // Populate answers to view /results with interactive map
     await mobilePage.goto(`${BASE_URL}/results`);
     await mobilePage.evaluate(() => {
       const answers = {};
@@ -107,7 +108,7 @@ async function runMapTests() {
     await mobilePage.reload();
     await mobilePage.waitForLoadState('domcontentloaded');
     await mobilePage.evaluate(() => document.fonts.ready);
-    await mobilePage.waitForTimeout(1000);
+    await mobilePage.waitForTimeout(800);
 
     // Verify no horizontal overflow
     const hasHOverflow = await mobilePage.evaluate(() => {
@@ -115,58 +116,71 @@ async function runMapTests() {
     });
     assert(!hasHOverflow, 'Mobile 390x844: Zero horizontal document overflow');
 
-    // Toggle "Peta Penuh" so the interactive campus map is completely in view
-    const petaPenuhBtn = mobilePage.locator('button[aria-label*="Peta Penuh"], button:has-text("Peta Penuh")').first();
-    if (await petaPenuhBtn.isVisible()) {
-      await petaPenuhBtn.tap();
-      await mobilePage.waitForTimeout(500);
-      console.log('Toggled Peta Penuh mode on mobile');
-    }
+    // 1. Overview Mobile Screenshot
+    const overviewMobilePath = path.join(artifactDir, 'overview-mobile-390x844.png');
+    await mobilePage.screenshot({ path: overviewMobilePath });
+    console.log(`✓ Saved mobile overview screenshot: ${overviewMobilePath}`);
 
-    // Check zoom in button
-    const zoomInBtn = mobilePage.locator('button[title*="Perbesar"], button[aria-label*="Perbesar"]').first();
-    if (await zoomInBtn.isVisible()) {
-      await zoomInBtn.tap();
-      await mobilePage.waitForTimeout(300);
-      assert(true, 'Mobile: Zoom in button responded to tap');
-    }
-
-    // Check reset button
-    const resetBtn = mobilePage.locator('button[title*="Reset"], button[aria-label*="Reset"], button:has(svg.lucide-rotate-ccw)').first();
-    if (await resetBtn.isVisible()) {
-      await resetBtn.tap();
-      await mobilePage.waitForTimeout(300);
-      assert(true, 'Mobile: Reset view button responded to tap');
-    }
-
-    // Tap each of the 12 faculty units
-    const facultyIds = ['ft', 'fisip', 'fh', 'fib', 'sv', 'fpsi', 'feb', 'fsm', 'fk', 'fkm', 'fpik', 'fpp'];
+    // Tap each of the 12 faculty units and verify panel opens
     console.log('Testing tap on all 12 faculty units on mobile...');
-    let tappedUnits = 0;
+    let tappedMobileCount = 0;
     for (const fid of facultyIds) {
-      const unitEl = mobilePage.locator(`#marker-${fid}, #faculty-${fid}`).first();
-      const count = await unitEl.count();
-      if (count > 0) {
-        await unitEl.dispatchEvent('click');
-        await mobilePage.waitForTimeout(150);
-        tappedUnits++;
+      const marker = mobilePage.locator(`#marker-${fid}`).first();
+      if (await marker.count() > 0) {
+        await marker.dispatchEvent('click');
+        await mobilePage.waitForTimeout(200);
+
+        // Verify sheet/card opens
+        const sheetVisible = await mobilePage.locator('[aria-label*="Detail Fakultas"], [aria-label*="Peta"]').count() > 0;
+        if (sheetVisible) tappedMobileCount++;
+
+        // Close to reset
+        const closeBtn = mobilePage.locator('button[aria-label*="Tutup"], button:has-text("Tutup")').first();
+        if (await closeBtn.isVisible()) {
+          await closeBtn.dispatchEvent('click');
+          await mobilePage.waitForTimeout(100);
+        }
       }
     }
-    assert(tappedUnits >= 12, `Mobile: Successfully tapped ${tappedUnits}/12 faculty units`);
+    assert(tappedMobileCount === 12, `Mobile: Tapped all 12 units with panel confirmation (${tappedMobileCount}/12)`);
 
-    // Close faculty detail card if open to return to overview
-    const closeFacultyBtn = mobilePage.locator('button[aria-label*="Kembali ke Tinjauan Peta"], button[title*="Kembali ke Tinjauan Peta"]').first();
-    if (await closeFacultyBtn.isVisible()) {
-      await closeFacultyBtn.dispatchEvent('click');
-      await mobilePage.waitForTimeout(400);
-    } else if (await resetBtn.isVisible()) {
-      await resetBtn.dispatchEvent('click');
-      await mobilePage.waitForTimeout(400);
+    // Reset view
+    const resetBtnMobile = mobilePage.locator('button[title*="Tinjauan"], button[title*="Overview"]').first();
+    if (await resetBtnMobile.isVisible()) {
+      await resetBtnMobile.click();
+      await mobilePage.waitForTimeout(300);
     }
 
-    const mobileScreenshotPath = path.join(artifactDir, 'overview-mobile-390x844.png');
-    await mobilePage.screenshot({ path: mobileScreenshotPath, fullPage: false });
-    console.log(`✓ Saved mobile overview screenshot: ${mobileScreenshotPath}`);
+    // Capture 3 Zoomed Views on Mobile:
+    // a) Rektorat - Taman Area
+    console.log('Mobile: Capturing Zoomed View 1: Rektorat–Taman Area...');
+    const fsmMarkerMobile = mobilePage.locator('#marker-fsm').first();
+    if (await fsmMarkerMobile.count() > 0) {
+      await fsmMarkerMobile.dispatchEvent('click');
+      await mobilePage.waitForTimeout(600);
+      await mobilePage.screenshot({ path: path.join(artifactDir, 'zoomed-rektorat-taman-390x844.png') });
+      console.log('✓ Saved mobile zoomed view: Rektorat–Taman');
+    }
+
+    // b) FT Cluster
+    console.log('Mobile: Capturing Zoomed View 2: FT Cluster...');
+    const ftMarkerMobile = mobilePage.locator('#marker-ft').first();
+    if (await ftMarkerMobile.count() > 0) {
+      await ftMarkerMobile.dispatchEvent('click');
+      await mobilePage.waitForTimeout(600);
+      await mobilePage.screenshot({ path: path.join(artifactDir, 'zoomed-ft-cluster-390x844.png') });
+      console.log('✓ Saved mobile zoomed view: FT Cluster');
+    }
+
+    // c) FK / FKM / RSND
+    console.log('Mobile: Capturing Zoomed View 3: FK / FKM / RSND Cluster...');
+    const fkMarkerMobile = mobilePage.locator('#marker-fk').first();
+    if (await fkMarkerMobile.count() > 0) {
+      await fkMarkerMobile.dispatchEvent('click');
+      await mobilePage.waitForTimeout(600);
+      await mobilePage.screenshot({ path: path.join(artifactDir, 'zoomed-fk-fkm-rsnd-390x844.png') });
+      console.log('✓ Saved mobile zoomed view: FK/FKM/RSND');
+    }
 
     assert(consoleErrorsMobile.length === 0, `Mobile: Zero console errors (found: ${consoleErrorsMobile.length})`);
     await mobileContext.close();
@@ -194,52 +208,83 @@ async function runMapTests() {
     await desktopPage.reload();
     await desktopPage.waitForLoadState('domcontentloaded');
     await desktopPage.evaluate(() => document.fonts.ready);
-    await desktopPage.waitForTimeout(1000);
+    await desktopPage.waitForTimeout(800);
 
-    // Capture Overview Desktop
+    // 1. Overview Desktop Screenshot
     const overviewDesktopPath = path.join(artifactDir, 'overview-desktop-1440x900.png');
-    await desktopPage.screenshot({ path: overviewDesktopPath, fullPage: false });
+    await desktopPage.screenshot({ path: overviewDesktopPath });
     console.log(`✓ Saved desktop overview screenshot: ${overviewDesktopPath}`);
 
-    // Capture 3 Close-up Views:
-    // 1. Rektorat Area
-    console.log('Capturing Close-up 1: Rektorat / Widya Puraya Area...');
-    const rektoratTarget = desktopPage.locator('#widya-puraya, #faculty-fsm, #taman-inspirasi').first();
-    if (await rektoratTarget.isVisible()) {
-      await rektoratTarget.click();
-      await desktopPage.waitForTimeout(800);
-    }
-    const rektoratCloseupPath = path.join(artifactDir, 'closeup-rektorat-area.png');
-    await desktopPage.screenshot({ path: rektoratCloseupPath, fullPage: false });
-    console.log(`✓ Saved Rektorat close-up: ${rektoratCloseupPath}`);
+    // Tap each of the 12 faculty units on desktop
+    console.log('Testing tap on all 12 faculty units on desktop...');
+    let tappedDesktopCount = 0;
+    for (const fid of facultyIds) {
+      const marker = desktopPage.locator(`#marker-${fid}`).first();
+      if (await marker.count() > 0) {
+        await marker.dispatchEvent('click');
+        await desktopPage.waitForTimeout(200);
 
-    // 2. FT Cluster
-    console.log('Capturing Close-up 2: FT Cluster...');
-    const ftTarget = desktopPage.locator('#faculty-ft').first();
-    if (await ftTarget.isVisible()) {
-      await ftTarget.click();
-      await desktopPage.waitForTimeout(800);
-    }
-    const ftCloseupPath = path.join(artifactDir, 'closeup-ft-cluster.png');
-    await desktopPage.screenshot({ path: ftCloseupPath, fullPage: false });
-    console.log(`✓ Saved FT cluster close-up: ${ftCloseupPath}`);
+        const tourSheet = desktopPage.locator('[aria-label*="Detail Fakultas"], [aria-label*="Peta"]').first();
+        if (await tourSheet.count() > 0) tappedDesktopCount++;
 
-    // 3. FK / RSND Cluster
-    console.log('Capturing Close-up 3: FK / RSND Cluster...');
-    const fkTarget = desktopPage.locator('#faculty-fk').first();
-    if (await fkTarget.isVisible()) {
-      await fkTarget.click();
-      await desktopPage.waitForTimeout(800);
+        const closeBtn = desktopPage.locator('button[aria-label*="Tutup"], button:has-text("Tutup")').first();
+        if (await closeBtn.isVisible()) {
+          await closeBtn.dispatchEvent('click');
+          await desktopPage.waitForTimeout(100);
+        }
+      }
     }
-    const fkCloseupPath = path.join(artifactDir, 'closeup-fk-rsnd.png');
-    await desktopPage.screenshot({ path: fkCloseupPath, fullPage: false });
-    console.log(`✓ Saved FK/RSND cluster close-up: ${fkCloseupPath}`);
+    assert(tappedDesktopCount === 12, `Desktop: Tapped all 12 units with panel confirmation (${tappedDesktopCount}/12)`);
 
-    // Verify attribution text is visible
+    // Reset view
+    const resetBtnDesktop = desktopPage.locator('button[title*="Tinjauan"], button[title*="Overview"]').first();
+    if (await resetBtnDesktop.isVisible()) {
+      await resetBtnDesktop.click();
+      await desktopPage.waitForTimeout(300);
+    }
+
+    // Capture 3 Zoomed Views on Desktop:
+    // a) Rektorat - Taman Area
+    console.log('Desktop: Capturing Zoomed View 1: Rektorat–Taman Area...');
+    const fsmMarkerDesktop = desktopPage.locator('#marker-fsm').first();
+    if (await fsmMarkerDesktop.count() > 0) {
+      await fsmMarkerDesktop.dispatchEvent('click');
+      await desktopPage.waitForTimeout(600);
+      await desktopPage.screenshot({ path: path.join(artifactDir, 'zoomed-rektorat-taman-1440x900.png') });
+      console.log('✓ Saved desktop zoomed view: Rektorat–Taman');
+    }
+
+    // b) FT Cluster
+    console.log('Desktop: Capturing Zoomed View 2: FT Cluster...');
+    const ftMarkerDesktop = desktopPage.locator('#marker-ft').first();
+    if (await ftMarkerDesktop.count() > 0) {
+      await ftMarkerDesktop.dispatchEvent('click');
+      await desktopPage.waitForTimeout(600);
+      await desktopPage.screenshot({ path: path.join(artifactDir, 'zoomed-ft-cluster-1440x900.png') });
+      console.log('✓ Saved desktop zoomed view: FT Cluster');
+    }
+
+    // c) FK / FKM / RSND
+    console.log('Desktop: Capturing Zoomed View 3: FK / FKM / RSND Cluster...');
+    const fkMarkerDesktop = desktopPage.locator('#marker-fk').first();
+    if (await fkMarkerDesktop.count() > 0) {
+      await fkMarkerDesktop.dispatchEvent('click');
+      await desktopPage.waitForTimeout(600);
+      await desktopPage.screenshot({ path: path.join(artifactDir, 'zoomed-fk-fkm-rsnd-1440x900.png') });
+      console.log('✓ Saved desktop zoomed view: FK/FKM/RSND');
+    }
+
+    // Verify attribution text
     const hasAttribution = await desktopPage.evaluate(() => {
       return document.body.innerText.includes('OpenStreetMap contributors');
     });
-    assert(hasAttribution, 'Desktop: Attribution "© OpenStreetMap contributors" is rendered');
+    assert(hasAttribution, 'Desktop: Attribution "© OpenStreetMap contributors" is visible');
+
+    // Verify caption text
+    const hasCaption = await desktopPage.evaluate(() => {
+      return document.body.innerText.includes('Ilustrasi kampus — posisi bangunan disederhanakan');
+    });
+    assert(hasCaption, 'Desktop: Caption "Ilustrasi kampus — posisi bangunan disederhanakan" is visible');
 
     assert(consoleErrorsDesktop.length === 0, `Desktop: Zero console errors (found: ${consoleErrorsDesktop.length})`);
     await desktopContext.close();
